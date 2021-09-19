@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block title %}Add Admin{% endblock %} {% block content
+    %}
+    <form method="POST">
+      <h3 align="center">Add new admin</h3>
+      <div class="form-group">
+        <label for="email">New admin's email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          placeholder="Enter email"
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Confirm with your password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          placeholder="Enter password"
+        />
+      </div>
+      <br />
+      <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+    {% endblock %}
