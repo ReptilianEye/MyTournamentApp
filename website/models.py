@@ -33,6 +33,7 @@ class Duo(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     
     participants = db.relationship('Participant')
+    
     round_id = db.Column(db.Integer,db.ForeignKey('round.id'))
 
 
