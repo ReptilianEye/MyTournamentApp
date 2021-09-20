@@ -81,8 +81,8 @@ def delete_user():
 
 @auth.route('/add-admin', methods=['POST', 'GET'])
 def add_admin():
-    if not current_user.admin:
-        return redirect(url_for("views.home"))
+    # if not current_user.admin:
+    #     return redirect(url_for("views.home"))
         
     if request.method == 'POST':
         email = request.form.get('email')
