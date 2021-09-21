@@ -17,16 +17,20 @@ views = Blueprint('views', __name__)
 @views.route('/',methods = ['GET','POST'])
 @login_required
 def home():
-
     return render_template("home.html",user=current_user)
 
 
-
-# TODO zrobic limit dodawania zawodnikow (aby ktos nie zrobil turnieju na niskonczona ilosc osob)
+# TODO zrobic limit dodawania zawodnikow (aby ktos nie zrobil turnieju na niskonczona ilosc osob)    
 @views.route('/generator',methods = ['GET','POST'])
 @login_required
-def GetPlayers():
+def CreateNewSchedule():
+    newTournament = Tournament(user_id=current_user.id)
+    db.session.add(newTournament)
+    db.session.commit()
+
+    players = []
     if request.method == 'POST':
+        
         name = request.form.get('name')
         if len(name) < 1:
             flash('Imie uczestnika za krotkie', category='error')
@@ -36,16 +40,9 @@ def GetPlayers():
             db.session.commit()
             flash('Uczestnik dodany!',category='success')
 
-    return render_template("generator.html",user=current_user)
 
-@views.route('/generate')
-@login_required
-def CreateNewSchedule():
-    newTournament = Tournament(user_id=current_user.id)
-    db.session.add(newTournament)
-    db.session.commit()
+    players = Player.query.filter_by(tournament_id = newTournament.id).all()
 
-    players = Player.query.filter_by(user_id=current_user.id).all()
     Schedule = WygenerujTermiarz(players)
 
     round_number = 0

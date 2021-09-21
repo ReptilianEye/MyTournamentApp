@@ -19,6 +19,7 @@ class User(db.Model,UserMixin):
 class Tournament(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     user_id = db.Column(db.Integer,db.ForeignKey('user.id'))
+    
     name = db.Column(db.String(150))
     date = db.Column(db.Date)
     location = db.Column(db.String(150))
@@ -26,14 +27,18 @@ class Tournament(db.Model):
     discipline = db.Column(db.String(150))
     type = db.Column(db.String(150))
 
+    players = db.relationship('Player')
+
 class Player(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     user_id = db.Column(db.Integer,db.ForeignKey('user.id'))
+    tournament_id = db.Column(db.Integer,db.ForeignKey('tournament.id'))
+
     name = db.Column(db.String(100000))
     email = db.Column(db.String(150),unique=True)   
 
-    duals = db.relationship('Dual')
     standing = db.relationship('Standing') 
+    
 
 
 class Dual(db.Model):
@@ -41,9 +46,11 @@ class Dual(db.Model):
     tournament_id = db.Column(db.Integer,db.ForeignKey('tournament.id'))
     
     player1_id = db.Column(db.Integer,db.ForeignKey('player.id'))
-    
     player2_id = db.Column(db.Integer,db.ForeignKey('player.id'))
     
+    player1 = db.relationship('Player', foreign_keys=[player1_id])
+    player2 = db.relationship('Player', foreign_keys=[player2_id])
+
     score_1 = db.Column(db.Integer,default=0)
     score_2 = db.Column(db.Integer,default=0)
 
