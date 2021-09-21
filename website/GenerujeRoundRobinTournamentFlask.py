@@ -24,13 +24,18 @@ def PrzygotowujeTerminarzDoWyswietlenia(terminarz):
 
     Terminarz = []
     numerRundy = 1
-    
-    
+    numerPary = 0
+
     for Runda in terminarz:
+        Terminarz.append(numerRundy)
         for para in Runda:
             if pauza in para:
                 continue
-            Terminarz.append(para)
+            Terminarz.append([])
+            Terminarz[numerPary].append(para[0])
+            Terminarz[numerPary].append(para[1])
+            numerPary += 1
+
         numerRundy += 1
     
     return Terminarz

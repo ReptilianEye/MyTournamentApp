@@ -5,7 +5,7 @@ from flask_login import login_user, login_required, logout_user, current_user
 from sqlalchemy.orm import query, session
 from sqlalchemy.sql.expression import true
 from werkzeug.utils import redirect
-from .models import Participant,Duo, Player, Round, User
+from .models import User, Tournament, Dual, Player, Standing 
 from . import db
 import json
 from .GenerujeRoundRobinTournamentFlask import *
@@ -40,30 +40,30 @@ def GetPlayers():
 
 @views.route('/generate')
 @login_required
-def Generuje():
-    delete_schedule()
-    uczestnicy = Player.query.filter_by(user_id=current_user.id).all()
-    Terminarz = WygenerujTermiarz(uczestnicy)
-    for duo in Terminarz:
-        
-        newRound = Round(user_id=current_user.id)
-        db.session.add(newRound)
-        db.session.commit()
-        
-        round_id = newRound.id
+def CreateNewSchedule():
+    newTournament = Tournament(user_id=current_user.id)
+    db.session.add(newTournament)
+    db.session.commit()
 
-        newDuo = Duo(round_id=round_id)
-        db.session.add(newDuo)
-        db.session.commit()
+    players = Player.query.filter_by(user_id=current_user.id).all()
+    Schedule = WygenerujTermiarz(players)
 
-        
-        duo_id = newDuo.id
-        for participant in duo:
-            newPartcip = Participant(name=participant,score=0,duo_id=duo_id)
-            db.session.add(newPartcip)
+    round_number = 0
+    for line in Schedule:
+        if type(line) == int:
+            round_number = line
+        else:
+            player1_name = line[0]
+            player2_name = line[1]
+
+            player1_id = Player.query.filter_by(name=player1_name).first()
+            player2_id = Player.query.filter_by(name=player2_name).first()
+
+            newDual = Dual(tournament_id=newTournament.id,player1_id=player1_id,player2_id=player2_id,round_number=round_number)
+
+            db.session.add(newDual)
             db.session.commit()
 
-    
     return redirect(url_for("views.Schedule"))
 
 @views.route('/schedule', methods = ['GET','POST'])
