@@ -14,7 +14,7 @@ class User(db.Model,UserMixin):
     password = db.Column(db.String(150))
     first_name = db.Column(db.String(150))
 
-    admin = db.Column(db.Boolean,default=False) #TODO zmienic na isAdmin - poniewaz boolean
+    is_admin = db.Column(db.Boolean,default=False) 
 
     players = db.relationship('Player')  
 
