@@ -20,8 +20,13 @@ def home():
     return render_template("home.html",user=current_user)
 
 
-# TODO zrobic limit dodawania zawodnikow (aby ktos nie zrobil turnieju na niskonczona ilosc osob)    
 @views.route('/generator',methods = ['GET','POST'])
+@login_required
+def Schedules():
+    return render_template("tournaments.html",user=current_user)    
+
+# TODO zrobic limit dodawania zawodnikow (aby ktos nie zrobil turnieju na niskonczona ilosc osob)    
+@views.route('/new-schedule',methods = ['GET','POST'])
 @login_required
 def CreateNewSchedule():
     if request.method == 'POST':
@@ -34,7 +39,8 @@ def CreateNewSchedule():
         newTournament = Tournament(user_id=current_user.id,name=tournamentName,date=date,location=location,discipline=discipline,type=type)
         db.session.add(newTournament)
         db.session.commit()
-        return GetPlayers(newTournament) 
+        GetPlayers(newTournament) 
+    return render_template("new_schedule.html",user=current_user)
 
 def GetPlayers(Tournament):
     if request.method == 'POST':
@@ -46,11 +52,13 @@ def GetPlayers(Tournament):
             db.session.add(newPlayer)
             db.session.commit()
             flash('Uczestnik dodany!',category='success')
-
+    return render_template("Get-Players.html",user=current_user) 
     
         
-def GenerateSchedule(Tournament):
-    players = Player.query.filter_by(tournament_id = Tournament.id).all()
+def GenerateSchedule():
+
+    tournament = Tournament.query.filter_by(user_id=current_user.id).last()
+    players = Player.query.filter_by(tournament_id = tournament.id).all()
     Schedule = WygenerujTermiarz(players)
     round_number = 0
     for line in Schedule:
