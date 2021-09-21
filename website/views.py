@@ -24,27 +24,34 @@ def home():
 @views.route('/generator',methods = ['GET','POST'])
 @login_required
 def CreateNewSchedule():
-    newTournament = Tournament(user_id=current_user.id)
-    db.session.add(newTournament)
-    db.session.commit()
-
-    players = []
     if request.method == 'POST':
-        
-        name = request.form.get('name')
+        tournamentName = request.form.get('name')
+        date = request.form.get('date')
+        location = request.form.get('location')
+        discipline = request.form.get('discipline')
+        type = request.form.get('type')
+         
+        newTournament = Tournament(user_id=current_user.id,name=tournamentName,date=date,location=location,discipline=discipline,type=type)
+        db.session.add(newTournament)
+        db.session.commit()
+        return GetPlayers(newTournament) 
+
+def GetPlayers(Tournament):
+    if request.method == 'POST':
+        name = request.form.get('player')
         if len(name) < 1:
             flash('Imie uczestnika za krotkie', category='error')
         else:
-            newPlayer = Player(name=name,user_id = current_user.id)
+            newPlayer = Player(tournament_id=Tournament.id,name=name )
             db.session.add(newPlayer)
             db.session.commit()
             flash('Uczestnik dodany!',category='success')
 
-
-    players = Player.query.filter_by(tournament_id = newTournament.id).all()
-
+    
+        
+def GenerateSchedule(Tournament):
+    players = Player.query.filter_by(tournament_id = Tournament.id).all()
     Schedule = WygenerujTermiarz(players)
-
     round_number = 0
     for line in Schedule:
         if type(line) == int:
@@ -56,7 +63,7 @@ def CreateNewSchedule():
             player1_id = Player.query.filter_by(name=player1_name).first()
             player2_id = Player.query.filter_by(name=player2_name).first()
 
-            newDual = Dual(tournament_id=newTournament.id,player1_id=player1_id,player2_id=player2_id,round_number=round_number)
+            newDual = Dual(tournament_id=Tournament.id,player1_id=player1_id,player2_id=player2_id,round_number=round_number)
 
             db.session.add(newDual)
             db.session.commit()

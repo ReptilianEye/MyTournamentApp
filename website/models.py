@@ -2,14 +2,11 @@ from . import db    #importuje zmienna 'db'
 from flask_login import UserMixin
 from sqlalchemy.sql import func
 
-
-
-
 class User(db.Model,UserMixin):
     id = db.Column(db.Integer,primary_key=True)
+    first_name = db.Column(db.String(150))
     email = db.Column(db.String(150),unique=True)       #150 is maxLenght of string
     password = db.Column(db.String(150))
-    first_name = db.Column(db.String(150))
 
     is_admin = db.Column(db.Boolean,default=False) 
 
@@ -23,19 +20,21 @@ class Tournament(db.Model):
     name = db.Column(db.String(150))
     date = db.Column(db.Date)
     location = db.Column(db.String(150))
-    status = db.Column(db.String(150))
-    discipline = db.Column(db.String(150))
+    discipline = db.Column(db.String(150))    
     type = db.Column(db.String(150))
 
+    status = db.Column(db.String(150), default="upcoming")
+
+    duals = db.relationship('Dual')
     players = db.relationship('Player')
+    standings = db.relationship('Standing')
+
 
 class Player(db.Model):
     id = db.Column(db.Integer,primary_key=True)
-    user_id = db.Column(db.Integer,db.ForeignKey('user.id'))
     tournament_id = db.Column(db.Integer,db.ForeignKey('tournament.id'))
 
     name = db.Column(db.String(100000))
-    email = db.Column(db.String(150),unique=True)   
 
     standing = db.relationship('Standing') 
     
