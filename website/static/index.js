@@ -14,3 +14,11 @@ function deleteUser(userId) {
         window.location.href = "/login";
     });
 }
+function getTournamentId(tournamentId) {
+    fetch('get_touornament_id', {
+        method: 'POST',
+        body: JSON.stringify({ tournamentId: tournamentId }),
+    }).then((_res) => {
+        window.location.href = "/new-players";
+    });
+}

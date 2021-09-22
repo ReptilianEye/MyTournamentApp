@@ -24,7 +24,7 @@ def PrzygotowujeTerminarzDoWyswietlenia(terminarz):
 
     Terminarz = []
     numerRundy = 1
-    numerPary = 0
+    numerPary = 1
 
     for Runda in terminarz:
         Terminarz.append(numerRundy)
@@ -34,7 +34,7 @@ def PrzygotowujeTerminarzDoWyswietlenia(terminarz):
             Terminarz.append([])
             Terminarz[numerPary].append(para[0])
             Terminarz[numerPary].append(para[1])
-            numerPary += 1
+            numerPary += 2
 
         numerRundy += 1
     

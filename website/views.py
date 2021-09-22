@@ -1,3 +1,4 @@
+from os import urandom
 from flask import Blueprint, render_template, request, flash, jsonify
 from flask.helpers import url_for
 from flask.json import jsonify
@@ -26,7 +27,6 @@ def home():
 def Schedules():
     return render_template("tournaments.html", user=current_user)
 
-# TODO zrobic limit dodawania zawodnikow (aby ktos nie zrobil turnieju na niskonczona ilosc osob)
 
 
 @views.route('/new-schedule', methods=['GET', 'POST'])
@@ -43,27 +43,30 @@ def CreateNewSchedule():
                                    date=date, location=location, discipline=discipline, type=type)
         db.session.add(newTournament)
         db.session.commit()
+        current_user.actual_tournament_id = newTournament.id
+        db.session.commit()
+        return redirect(url_for("views.GetPlayers"))
     return render_template("new_schedule.html", user=current_user)
 
-
+# TODO zrobic limit dodawania zawodnikow (aby ktos nie zrobil turnieju na niskonczona ilosc osob)
 @views.route('/new-players', methods=['GET', 'POST'])
 @login_required
-def GetPlayers(Tournament):
+def GetPlayers():
+    tournament = Tournament.query.filter_by(id=current_user.actual_tournament_id).first()
     if request.method == 'POST':
-        name = request.form.get('player')
-        if len(name) < 1:
+        newPlayerName = request.form.get('player')
+        if len(newPlayerName) < 1:
             flash('Imie uczestnika za krotkie', category='error')
         else:
-            newPlayer = Player(tournament_id=Tournament.id, name=name)
+            newPlayer = Player(tournament_id=tournament.id, name=newPlayerName)
             db.session.add(newPlayer)
             db.session.commit()
             flash('Uczestnik dodany!', category='success')
-    return render_template("new_players.html", user=current_user)
+    return render_template("new_players.html",user=current_user, tournament=tournament)
 
-
+@views.route('generate-new-schedule')
 def GenerateSchedule():
-
-    tournament = Tournament.query.filter_by(user_id=current_user.id).last()
+    tournament = Tournament.query.filter_by(id=current_user.actual_tournament_id).first()
     players = Player.query.filter_by(tournament_id=tournament.id).all()
     Schedule = WygenerujTermiarz(players)
     round_number = 0
@@ -74,11 +77,11 @@ def GenerateSchedule():
             player1_name = line[0]
             player2_name = line[1]
 
-            player1_id = Player.query.filter_by(name=player1_name).first()
-            player2_id = Player.query.filter_by(name=player2_name).first()
+            player1 = Player.query.filter_by(name=player1_name).first()
+            player2 = Player.query.filter_by(name=player2_name).first()
 
-            newDual = Dual(tournament_id=Tournament.id, player1_id=player1_id,
-                           player2_id=player2_id, round_number=round_number)
+            newDual = Dual(tournament_id=tournament.id, player1_id=player1.id,
+                           player2_id=player2.id, round_number=round_number)
 
             db.session.add(newDual)
             db.session.commit()
@@ -86,10 +89,15 @@ def GenerateSchedule():
     return redirect(url_for("views.Schedule"))
 
 
-@views.route('/schedule', methods=['GET', 'POST'])
+@views.route('/schedule')
 @login_required
 def Schedule():
+    tournament = Tournament.query.filter_by(id=current_user.actual_tournament_id).first()
+    return render_template("schedule.html", user=current_user,tournament=tournament)
 
+@views.route('update-schedule')
+@login_required
+def update_schedule():
     if request.method == 'POST':
         scores = request.form.getlist('score')
         for i in range(len(scores)):
@@ -104,8 +112,7 @@ def Schedule():
                         particip.score = scores[i]
                         db.session.commit()
                     i += 1
-
-    return render_template("schedule.html", user=current_user)
+    return render_template("update_schedule.html")
 
 
 @views.route('public-schedule')

@@ -1,11 +1,19 @@
-{% extends "base.html" %} {% block title %}Schedule Generator{% endblock %} {% block
-  content %}
-  <h1 align="center">New schedule</h1>
-  Dodac lokalizacje, date, typ turnieju, dyscypline 
-  <!-- Dodac lokalizacje, date, typ turnieju, dyscypline -->
-  <br/>
-  <br/>
-  <br/>
-  <a type="button" href="/new-players" class="btn btn-dark">Save</a>
-  {% endblock %}
-  
+{% extends "base.html" %} {% block title %}Schedule Generator{% endblock %} {%
+block content %}
+<h1 align="center">New schedule</h1>
+Dodac lokalizacje, date, typ turnieju, dyscypline
+<form method="POST">
+  <div class="form-group">
+    <input
+      class="form-control"
+      name="name"
+      placeholder="Enter name of new tournament"
+    />
+  </div>
+<br />
+<br />
+<br />
+<button type="submit" href="/new-players" class="btn btn-primary">Save</button>
+</form>
+
+{% endblock %}

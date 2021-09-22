@@ -9,6 +9,8 @@ class User(db.Model,UserMixin):
     password = db.Column(db.String(150))
 
     is_admin = db.Column(db.Boolean,default=False) 
+    
+    actual_tournament_id = db.Column(db.Integer)
 
     tournaments = db.relationship('Tournament')  
 
