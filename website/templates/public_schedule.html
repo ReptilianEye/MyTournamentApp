@@ -1,6 +1,6 @@
-{% extends "base.html" %} {% block title %}Schedule{% endblock %} {% block
+{% extends "base.html" %} {% block title %}Public Schedule{% endblock %} {% block
 content %}
-<h1 align="center">Schedule</h1>
+<h1 align="center">Public Schedule</h1>
 <ol class="list-group list-group-flush" id="pary">
   {% for dual in tournament.duals %}
 
@@ -18,9 +18,6 @@ content %}
 <br />
 
 <div align="right">
-  {% if user.is_admin %}
-  <a type="button" href="/publish-schedule" class="btn btn-primary">Publish</button>
-    {% endif %}
   <a type="button" href="/" class="btn btn-dark">Return home</a>
 </div>
 {% endblock %}

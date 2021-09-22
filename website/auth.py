@@ -93,7 +93,7 @@ def add_admin():
         if newAdmin:
             if check_password_hash(current_user.password, password):
                 flash('New admin added successfully!', category='success')
-                newAdmin.admin = True
+                newAdmin.is_admin = True
                 db.session.commit()
                 return redirect(url_for('views.home'))
             else:

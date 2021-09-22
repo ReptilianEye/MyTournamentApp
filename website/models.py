@@ -26,6 +26,7 @@ class Tournament(db.Model):
     type = db.Column(db.String(150))
 
     status = db.Column(db.String(150), default="upcoming")
+    is_public = db.Column(db.Boolean(),default=False)
 
     duals = db.relationship('Dual')
     players = db.relationship('Player')

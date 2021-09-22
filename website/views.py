@@ -52,8 +52,11 @@ def CreateNewSchedule():
 @views.route('/new-players', methods=['GET', 'POST'])
 @login_required
 def GetPlayers():
+    partizipantsNumberLimit = 100
     tournament = Tournament.query.filter_by(id=current_user.actual_tournament_id).first()
     if request.method == 'POST':
+        if len(tournament.players) > partizipantsNumberLimit:
+            flash(f'Limit uczestnikow wykorzystany. Limit: {partizipantsNumberLimit}', category='error')
         newPlayerName = request.form.get('player')
         if len(newPlayerName) < 1:
             flash('Imie uczestnika za krotkie', category='error')
@@ -118,23 +121,27 @@ def update_schedule():
 @views.route('public-schedule')
 @login_required
 def public_schedule():
-    Schedule = Round.query.filter_by(public=True).all()
-    return render_template("public_schedule.html", Schedule=Schedule, user=current_user)
+    tournament = Tournament.query.filter_by(is_public=True).first()
+    if tournament:
+        return render_template("public_schedule.html", tournament=tournament, user=current_user)
+    else:
+        flash('Unfortunately, there is no public shedule. Probably new is incoming...!', category='error')
+        return redirect(url_for("views.home"))
 
 
 @views.route('publish-schedule')
 @login_required
 def publish_schedule():
 
-    prevSchedule = Round.query.filter_by(public=True).all()
+    prevPublicTournament = Tournament.query.filter_by(is_public=True).first()
 
-    for prev in prevSchedule:
-        prev.public = False
+    if prevPublicTournament:
+        prevPublicTournament.is_public = False
         db.session.commit()
 
-    for round in current_user.rounds:
-        round.public = True
-        db.session.commit()
+    tournament = Tournament.query.filter_by(id=current_user.actual_tournament_id).first()
+    tournament.is_public = True
+    db.session.commit()
 
     return redirect(url_for("views.public_schedule"))
 
