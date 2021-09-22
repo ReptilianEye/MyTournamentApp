@@ -6,34 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Stick+No+Bills:wght@600&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="../static/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
     <title>{% block title %}Home{% endblock %}</title>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-        <div class="collapse navbar-collapse" id="navbar">
-            <div class="navbar-nav">
-                {% if user.is_authenticated %}
-                <a class="nav-item nav-link" id="home" href="/">Home</a>
-                <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
-                <a class="nav-item nav-link" href="/public-schedule">Public schedule</a> {% else %}
-                <a class="nav-item nav-link" id="login" href="/login">Login</a>
-                <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a> {% endif %}
-            </div>
+
+    <nav>
+        <div class="menu-icon">
+            <span class="fas fa-bars"></span></div>
+        <div class="logo" style="color: #5AA0BA;">
+            Liceum 31</div>
+        <div class="nav-items">
             {% if user.is_authenticated %}
-
+            <li><a class="linkbutton link-active" id="home" href="/">Home</a></li>
+            <li><a class="linkbutton" id="logout" href="/logout">Wyloguj</a></li>
+            <li><a class="linkbutton" href="/public-schedule">Public schedule</a></li>
+            {% else %}
+            <li><a class="linkbutton" id="login" href="/login">Zaloguj</a></li>
+            <li><a class="linkbutton" id="signUp" href="/sign-up">Zarejestruj się</a></li>
+            {% endif %}
         </div>
-        {% if user.is_admin %}
+        <a href="https://www.instagram.com/31lokrakow" target="_blank" rel="noopener noreferrer"> <img style="margin-right: 20px;" class="logo_social" src="../static/instragram-icon.png" width="35" height="35" alt="Instagram logo"></a>
+        <a href="https://www.facebook.com/31LOKrakow" target="_blank" rel="noopener noreferrer"> <img style="margin-right: 20px;" class="logo_social" src="../static/facebook-icon.png" width="35" height="35" alt="Facebook logo"></a>
+        <a href="https://www.lo31.krakow.pl/" target="_blank" rel="noopener noreferrer"> <img class="logo_social" src="../static/logo 31lo.png" width="35" height="35" alt="Oficjalna strona 31LO"></a>
+        {% if user.admin %}
         <a align="right" type="button" href="/add-admin" class="btn btn-dark">Add admin</a> {% endif %}
-
-        <button align="right" type="submit" class="btn-danger" onClick="deleteUser({{user.id}})">
-        Delete account
-      </button> {% endif %}
+        <button style="margin-left: 30px; margin-right: -60px;" align="right" type="submit" class="btn-danger_nav" onClick="deleteUser({{user.id}})">
+      Usuń konto
+    </button>
     </nav>
 
     {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %} {% if category == 'error' %}

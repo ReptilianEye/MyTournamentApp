@@ -14,7 +14,7 @@ class User(db.Model,UserMixin):
     password = db.Column(db.String(150))
     first_name = db.Column(db.String(150))
 
-    is_admin = db.Column(db.Boolean,default=False) 
+    admin = db.Column(db.Boolean,default=False) #TODO zmienic na isAdmin - poniewaz boolean
 
     players = db.relationship('Player')  
 
@@ -33,7 +33,6 @@ class Duo(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     
     participants = db.relationship('Participant')
-    
     round_id = db.Column(db.Integer,db.ForeignKey('round.id'))
 
 

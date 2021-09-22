@@ -71,7 +71,7 @@ def Generuje():
 def Schedule():
     
     if request.method == 'POST':
-        scores = request.form.getlist('score')
+        scores = request.form.getlist('wynik')
         for i in range(len(scores)):
             if scores[i] != '':
                 scores[i] = int(scores[i])

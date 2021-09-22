@@ -1,23 +1,8 @@
 import time
 import random
 import os
-import progressbar
 
 pauza = "pauza"
-
-def PasekLadowania():
-    widgets = [
-        "LOSOWANIE PAR: " ,
-        progressbar.Bar(),
-        progressbar.Percentage()
-    ]
-    for i in progressbar.progressbar(range(100), widgets=widgets):
-        if i == 99:
-            time.sleep(3)
-        time.sleep(0.05)
-    print("PARY WYLOSOWANE!")
-    time.sleep(2)
-    os.system('cls')
 
 def PrzygotowujeTerminarzDoWyswietlenia(terminarz):
     global pauza
