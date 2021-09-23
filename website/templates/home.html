@@ -1,12 +1,23 @@
-{% extends "base.html" %} {% block title %}Home page{% endblock %} {% block
-content %}
-<h1 align="center">Hello on the home page</h1>
-<h2 align="center">Choose what you want to do</h2>
+{% extends "base.html" %} {% block title %}Home page{% endblock %} {% block content %}
 
-<br />
-<form method="POST">
-  <div align="center">
-    <a type="button" href="/generator" class="btn btn-dark">Schedule Generator</a>
-  </div>
-</form>
+
+<section class="generate_box_container container_generate">
+    <div style="margin-bottom: 12px;">
+        <br>
+        <center><img src="../static/logo 31lo.png" width="240px"></center>
+        <h1 align="center">Witaj na stronie glownej!</h1>
+        <h2 align="center">Wybierz co chcesz zrobic!</h2>
+    </div>
+
+    <br />
+    <form method="POST">
+        <div align="center">
+            <a href="/generator">
+                <button type="button" class="btn-danger_nav_generate"> Generator</button>
+            </a>
+        </div>
+    </form>
+
+</section>
+
 {% endblock %}
