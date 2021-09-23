@@ -1,0 +1,36 @@
+{% extends "base.html" %} {% block title %}Terminarz{% endblock %} {% block
+content %}
+<h1 align="center">Terminarz</h1>
+<ol class="list-group list-group-flush" id="pary">
+<form method="POST">
+  {% for round in user.rounds %}
+
+  {% for duo in round.duos %}
+
+  <div align="center">
+    {% for particip in duo.participants %}
+    <ol class="badge badge-dark">
+      <div class="list-group-horizontal">{{particip.name}}: {{particip.score}} </div>
+      <input name="score" type="number" id="score[]" />
+    </ol>
+    {% endfor %}
+  </div>
+  {% endfor %}
+  <br />
+  {% endfor %}
+</ol>
+
+<br />
+
+<div align="center">
+  <button type="submit" class="btn btn-primary">Submit</button>
+</div>
+  <div align="right">
+    {% if user.admin %}
+    <a type="button" href="/publish-schedule" class="btn btn-primary">Publish</button>
+      {% endif %}
+    
+      <a type="button" href="/delete-schedule" class="btn btn-danger">Reset</a>
+    <a type="button" href="/" class="btn btn-dark">Return home</a>
+  </div>
+{% endblock %}

@@ -81,8 +81,8 @@ def delete_user():
 
 @auth.route('/add-admin', methods=['POST', 'GET'])
 def add_admin():
-    if not current_user.admin:
-        return redirect(url_for("views.home"))
+    # if not current_user.is_admin:
+    #     return redirect(url_for("views.home"))
         
     if request.method == 'POST':
         email = request.form.get('email')
@@ -93,7 +93,7 @@ def add_admin():
         if newAdmin:
             if check_password_hash(current_user.password, password):
                 flash('New admin added successfully!', category='success')
-                newAdmin.admin = True
+                newAdmin.is_admin = True
                 db.session.commit()
                 return redirect(url_for('views.home'))
             else:

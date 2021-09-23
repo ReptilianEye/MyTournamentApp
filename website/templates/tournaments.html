@@ -1,0 +1,26 @@
+{% extends "base.html" %} {% block title %}Schedules{% endblock %} {% block
+    content %}
+    <h1 align="center">Your Schedules</h1>
+    <ol class="list-group list-group-flush" id="pary">
+      {% for tournament in user.tournaments %}
+    
+      <div align="center">
+        <ol class="badge badge-dark">
+          <div  class="list-group-horizontal"><h3>{{tournament.name}} {{tournament.date}} {{tournament.location}}</h3> </div>
+        </ol>    
+      </div>
+      <br />
+      {% endfor %}
+    </ol>
+    
+    <br />
+    <div align="center">
+      <a type="button" href="/new-schedule" class="btn btn-dark">Generate new schedule</a>
+    </div>
+
+    <div align="right">
+      <a type="button" href="/" class="btn btn-dark">Return home</a>
+    
+    </div>
+    {% endblock %}
+    
