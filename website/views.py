@@ -91,16 +91,16 @@ def GenerateSchedule():
 
     return redirect(url_for("views.Schedule"))
     
-@views.route('/show-schedule')
+@views.route('/show-schedule',methods=['POST','GET'])
 @login_required
 def showSchedule():
     tournament = json.loads(request.data)
     tournamentId = tournament['tournamentId']
     if tournamentId:
-        if tournament.user_id == current_user.id:
-            current_user.actual_tournament_id = tournamentId
-            db.session.commit() 
-            return redirect(url_for("views.Schedule"))
+        current_user.actual_tournament_id = tournamentId
+        db.session.commit() 
+    return redirect(url_for("views.Schedule"))
+
 
 
 @views.route('/schedule')
