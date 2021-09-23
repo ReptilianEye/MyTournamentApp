@@ -22,7 +22,7 @@ def home():
     return render_template("home.html", user=current_user)
 
 
-@views.route('/generator', methods=['GET', 'POST'])
+@views.route('/tournaments', methods=['GET', 'POST'])
 @login_required
 def Schedules():
     return render_template("tournaments.html", user=current_user)
@@ -90,6 +90,17 @@ def GenerateSchedule():
             db.session.commit()
 
     return redirect(url_for("views.Schedule"))
+    
+@views.route('/show-schedule')
+@login_required
+def showSchedule():
+    tournament = json.loads(request.data)
+    tournamentId = tournament['tournamentId']
+    if tournamentId:
+        if tournament.user_id == current_user.id:
+            current_user.actual_tournament_id = tournamentId
+            db.session.commit() 
+            return redirect(url_for("views.Schedule"))
 
 
 @views.route('/schedule')

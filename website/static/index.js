@@ -15,10 +15,10 @@ function deleteUser(userId) {
     });
 }
 function getTournamentId(tournamentId) {
-    fetch('get_touornament_id', {
+    fetch('show-schedule', {
         method: 'POST',
         body: JSON.stringify({ tournamentId: tournamentId }),
     }).then((_res) => {
-        window.location.href = "/new-players";
+        window.location.href = "/show-schedule";
     });
 }
