@@ -2,6 +2,8 @@ body {
     background-image: url("../static/bgp.png");
     scroll-behavior: smooth;
     overflow: overlay;
+    background-repeat: no-repeat;
+    background-attachment: fixed
 }
 
 body::-webkit-scrollbar {
@@ -185,7 +187,7 @@ h3 {
 
 .container_generator {
     width: 900px;
-    height: 820px;
+    height: auto;
     margin: 0 auto;
     margin-top: 4%;
 }
