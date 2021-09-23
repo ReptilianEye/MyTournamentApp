@@ -3,7 +3,7 @@ function deletePlayer(playerId) {
         method: 'POST',
         body: JSON.stringify({ playerId: playerId }),
     }).then((_res) => {
-        window.location.href = "/generator";
+        window.location.href = "/new-players";
     });
 }
 function deleteUser(userId) {
@@ -19,6 +19,6 @@ function getTournamentId(tournamentId) {
         method: 'POST',
         body: JSON.stringify({ tournamentId: tournamentId }),
     }).then((_res) => {
-        window.location.href = "/show-schedule";
-    });
+        window.location.href = "/schedule";
+    }).catch(error=>{console.log(error)})
 }
