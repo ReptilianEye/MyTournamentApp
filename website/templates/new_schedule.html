@@ -1,47 +1,67 @@
 {% extends "base.html" %} {% block title %}Schedule Generator{% endblock %} {%
 block content %}
-<h1 align="center">New schedule</h1>
-<form method="POST">
-  <div class="form-group">
-    <input
-      class="form-control"
-      name="name"
-      placeholder="Enter name of new tournament"
-    />
-  <!-- </div>
+<section class="sign_box_container container_sign">
+  <br /><br />
+  <form method="POST">
+    <h3 align="center">New schedule</h3>
 
-  <div class="form-group">
-    <input
-      class="form-control"
-      name="date"
-      placeholder="Enter date of new tournament"
-    />
-  </div>
-  <div class="form-group">
-    <input
-      class="form-control"
-      name="location"
-      placeholder="Enter location of new tournament"
-    />
-  </div>
-  <div class="form-group">
-    <input
-      class="form-control"
-      name="discipline"
-      placeholder="Enter discipline of new tournament"
-    />
-  </div>
-  <div class="form-group">
-    <input
-      class="form-control"
-      name="type"
-      placeholder="Enter type of new tournament"
-    />
-  </div> -->
-<br />
-<br />
-<br />
-<button type="submit" href="/new-players" class="btn btn-primary">Save</button>
-</form>
+    <div class="form-group">
+      <input
+        type="text"
+        class="form_control"
+        name="name"
+        placeholder="Enter New Tournament Name"
+      />
+    </div>
+    <br />
+    <div class="form-group">
+      <input
+        type="date"
+        class="form_control"
+        name="date"
+        placeholder="Enter Date"
+      />
+    </div>
+    <br />
+    <div class="form-group">
+      <input
+        type="text"
+        class="form_control"
+        name="location"
+        placeholder="Enter Location"
+      />
+    </div>
+    <br />
+    <div>
+      <input
+        type="text"
+        class="form_control"
+        name="discipline"
+        placeholder="Enter Discipline"
+      />
+    </div>
+    <br />
+    <br />
+
+    <div>
+      <input
+        list="types"
+        name="type"
+        class="form_control"
+        placeholder="Select type"
+      />
+      <datalist id="types">
+        <option value="Round Robin (kazdy z kazdym)"></option>
+      </datalist>
+    </div>
+    
+    <br />
+    <br />
+    <center>
+      <button type="submit" class="btn-danger_nav_login">Zatwierdź</button>
+    </center>
+  </form>
+</section>
 
 {% endblock %}
+

@@ -10,6 +10,7 @@ from .models import User, Tournament, Dual, Player, Standing
 from . import db
 import json
 from .GenerujeRoundRobinTournamentFlask import *
+from datetime import datetime
 
 # blueprint - miejsce gdzie jest wiele stron
 
@@ -39,6 +40,8 @@ def CreateNewSchedule():
         discipline = request.form.get('discipline')
         type = request.form.get('type')
 
+        date = datetime.strptime(date, '%y/%m/%d')      #TODO zmienic format daty
+        
         newTournament = Tournament(user_id=current_user.id, name=tournamentName,
                                    date=date, location=location, discipline=discipline, type=type)
         db.session.add(newTournament)
@@ -67,7 +70,7 @@ def GetPlayers():
             flash('Uczestnik dodany!', category='success')
     return render_template("new_players.html",user=current_user, tournament=tournament)
 
-@views.route('generate-new-schedule')
+@views.route('generate-new-schedule', methods=['GET', 'POST'])
 def GenerateSchedule():
     tournament = Tournament.query.filter_by(id=current_user.actual_tournament_id).first()
     players = Player.query.filter_by(tournament_id=tournament.id).all()
