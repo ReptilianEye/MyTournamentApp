@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends "base.html" %} {% block title %}Schedule{% endblock %} {% block content %}
 <section class="schedule_box_container container_schedule">
     <br>
@@ -16,6 +17,24 @@
     </ol>
 
     <br />
+=======
+{% extends "base.html" %} {% block title %}Schedule{% endblock %} {% block
+content %}
+<h1 align="center">Schedule</h1>
+<ol class="list-group list-group-flush" id="pary">
+  {% for dual in tournament.duals %}
+
+  <div align="center">
+    <ol class="badge badge-dark">
+      <div class="list-group-horizontal">
+        <h3>{{dual.player2.name}}: {{dual.player1.name}}</h3>
+      </div>
+    </ol>
+  </div>
+  <br />
+  {% endfor %}
+</ol>
+>>>>>>> b947412f6b85781cb1ac6876b81b6515eb2805e3
 
     <div align="center">
         {% if user.is_admin %}
@@ -30,6 +49,18 @@
         </a>
         <br><br>
 
+<<<<<<< HEAD
     </div>
 </section>
 {% endblock %}
+=======
+<div align="right">
+  {% if user.is_admin %}
+  <a type="button" href="/publish-schedule" class="btn btn-primary">Publish</button>
+    {% endif %}
+  <a type="button" href="/tournaments" class="btn btn-dark">Back to Your Tournaments</a>
+  <a type="button" href="/" class="btn btn-dark">Return home</a>
+
+</div>
+{% endblock %}
+>>>>>>> b947412f6b85781cb1ac6876b81b6515eb2805e3
