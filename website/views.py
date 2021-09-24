@@ -99,7 +99,7 @@ def showSchedule():
     if tournamentId:
         current_user.actual_tournament_id = tournamentId
         db.session.commit() 
-    return redirect(url_for("views.Schedule"))
+        return redirect(url_for("views.Schedule"))
 
 
 
