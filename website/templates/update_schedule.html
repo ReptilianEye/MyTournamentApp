@@ -3,19 +3,16 @@ content %}
 <h1 align="center">Terminarz</h1>
 <ol class="list-group list-group-flush" id="pary">
 <form method="POST">
-  {% for round in user.rounds %}
-
-  {% for duo in round.duos %}
+  {% for dual in tournament.duals %}
 
   <div align="center">
-    {% for particip in duo.participants %}
     <ol class="badge badge-dark">
-      <div class="list-group-horizontal">{{particip.name}}: {{particip.score}} </div>
+        <h3>{{dual.player_1.name}} {{dual.score_1}}:{{dual.score_2}} {{dual.player_2.name}}</h3>
+
+      <input name="score" type="number" id="score[]" />
       <input name="score" type="number" id="score[]" />
     </ol>
-    {% endfor %}
   </div>
-  {% endfor %}
   <br />
   {% endfor %}
 </ol>
@@ -23,11 +20,11 @@ content %}
 <br />
 
 <div align="center">
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" href="/schedule" class="btn btn-primary">Save</button>
 </div>
   <div align="right">
-    {% if user.admin %}
-    <a type="button" href="/publish-schedule" class="btn btn-primary">Publish</button>
+    {% if user.is_admin %}
+    <a type="button" class="btn btn-primary">Save</button>
       {% endif %}
     
       <a type="button" href="/delete-schedule" class="btn btn-danger">Reset</a>

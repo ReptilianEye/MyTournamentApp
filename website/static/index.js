@@ -14,11 +14,19 @@ function deleteUser(userId) {
         window.location.href = "/login";
     });
 }
-function getTournamentId(tournamentId) {
+function showTournament(tournamentId) {
     fetch('show-tournament', {
         method: 'POST',
         body: JSON.stringify({ tournamentId: tournamentId }),
     }).then((_res) => {
         window.location.href = "/schedule";
+    });
+}
+function deleteTournament(tournamentId) {
+    fetch('delete-tournament', {
+        method: 'POST',
+        body: JSON.stringify({ tournamentId: tournamentId }),
+    }).then((_res) => {
+        window.location.href = "/tournaments";
     });
 }
