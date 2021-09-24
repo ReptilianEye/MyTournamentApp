@@ -1,4 +1,8 @@
+<<<<<<< HEAD
  {% extends "base.html" %} {% block title %}Schedules{% endblock %} {% block content %}
+=======
+{% extends "base.html" %} {% block title %}Schedules{% endblock %} {% block content %}
+>>>>>>> 1aa4c3fdc32c495da4cce660ee4158c74ee547bc
 <section class="tournaments_box_container container_tournaments">
     <br>
     <h3 align="center">Your Schedules</h3>
@@ -8,7 +12,7 @@
 
         <div align="center">
             <ol class="badge ">
-                <button class="btn-danger_nav_list_group" onClick="getTournamentId({{tournament.id}})"> <div> <h4>{{tournament.name}} {{tournament.date}} {{tournament.location}}</h4> </div></button>
+                <button class="btn-danger_nav_list_group" onClick="showTournament({{tournament.id}})"> <div> <h4>{{tournament.name}} {{tournament.date}} {{tournament.location}}</h4> </div></button>
             </ol>
         </div>
         <br /> {% endfor %}
@@ -25,4 +29,8 @@
     </div>
 </section>
 
+<<<<<<< HEAD
 {% endblock %}
+=======
+{% endblock %}
+>>>>>>> 1aa4c3fdc32c495da4cce660ee4158c74ee547bc

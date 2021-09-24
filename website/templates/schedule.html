@@ -1,4 +1,8 @@
+<<<<<<< HEAD
  {% extends "base.html" %} {% block title %}Schedule{% endblock %} {% block content %}
+=======
+{% extends "base.html" %} {% block title %}Schedule{% endblock %} {% block content %}
+>>>>>>> 1aa4c3fdc32c495da4cce660ee4158c74ee547bc
 <section class="schedule_box_container container_schedule">
     <br>
     <h3 align="center">Schedule</h3>
@@ -8,13 +12,22 @@
         <div align="center">
             <ol class="badge">
                 <div class="btn-danger_nav_list_group btn-danger_nav_list_group_schedule">
+<<<<<<< HEAD
                     <h2>{{dual.player2.name}}:{{dual.player1.name}}</h2>
+=======
+                    <h2>{{dual.player_1.name}} {{dual.score_1}}:{{dual.score_2}} {{dual.player_2.name}}</h2>
+>>>>>>> 1aa4c3fdc32c495da4cce660ee4158c74ee547bc
                 </div>
             </ol>
         </div>
         <br /> {% endfor %}
     </ol>
 
+<<<<<<< HEAD
+=======
+    <br />
+
+>>>>>>> 1aa4c3fdc32c495da4cce660ee4158c74ee547bc
     <div align="center">
         {% if user.is_admin %}
         <a href="/publish-schedule">
@@ -27,6 +40,23 @@
             <button type="button" class="btn-danger_nav_schedule">Return home</button>
         </a>
         <br><br>
+<<<<<<< HEAD
     </div>
 </section>
 {% endblock %}
+=======
+
+<a type="button" href="/update-schedule" class="btn btn-dark">Update scores</a>
+    </div>
+</section>
+<div align="right">
+  <button class="btn-danger" onClick="deleteTournament({{tournament.id}})"> <div>Delete Schedule</div></button>
+  {% if user.is_admin %}
+  <a type="button" href="/publish-schedule" class="btn btn-primary">Publish</button>
+    {% endif %}
+  <a type="button" href="/tournaments" class="btn btn-dark">Back to Your Tournaments</a>
+  <a type="button" href="/" class="btn btn-dark">Return home</a>
+
+</div>
+{% endblock %}
+>>>>>>> 1aa4c3fdc32c495da4cce660ee4158c74ee547bc
