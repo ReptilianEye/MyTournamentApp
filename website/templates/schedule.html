@@ -8,7 +8,7 @@
         <div align="center">
             <ol class="badge">
                 <div class="btn-danger_nav_list_group btn-danger_nav_list_group_schedule">
-                    <h2>{{dual.player2.name}} : {{dual.player1.name}}</h2>
+                    <h2>{{dual.player_2.name}} : {{dual.player_1.name}}</h2>
                 </div>
             </ol>
         </div>
@@ -33,7 +33,6 @@
 <a type="button" href="/update-schedule" class="btn btn-dark">Update scores</a>
     </div>
 </section>
-{% endblock %}
 <div align="right">
   <button class="btn-danger" onClick="deleteTournament({{tournament.id}})"> <div>Delete Schedule</div></button>
   {% if user.is_admin %}
