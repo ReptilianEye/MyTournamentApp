@@ -1,8 +1,4 @@
-<<<<<<< HEAD
  {% extends "base.html" %} {% block title %}Schedule Generator{% endblock %} {% block content %}
-=======
-{% extends "base.html" %} {% block title %}Schedule Generator{% endblock %} {% block content %}
->>>>>>> 1aa4c3fdc32c495da4cce660ee4158c74ee547bc
 <section class="newplayers_box_container container_newplayer">
     <br>
     <h3 align="center">Add Participants</h3>
@@ -29,29 +25,4 @@
         </div>
     </form>
 </section>
-<<<<<<< HEAD
-{% endblock %} {% extends "base.html" %} {% block title %}Schedule Generator{% endblock %} {% block content %}
-<h1 align="center">Add Participants</h1>
-Lista uczestników
-<ol class="list-group list-group-flush" id="notes">
-    {% for player in tournament.players %}
-    <li align="center" class="list-group-item">
-        {{player.name}}
-        <button type="button" class="close" onClick="deletePlayer({{player.id}})">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </li>
-    {% endfor %}
-</ol>
-<form method="POST">
-    <textarea name="player" class="form-control"></textarea>
-    <br />
-    <div align="center">
-        <button type="submit" class="btn btn-primary">Add participant</button>
-        <a type="button" href="/generate-new-schedule" class="btn btn-dark">Save</a>
-    </div>
-</form>
 {% endblock %}
-=======
-{% endblock %}
->>>>>>> 1aa4c3fdc32c495da4cce660ee4158c74ee547bc

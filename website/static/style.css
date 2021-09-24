@@ -6,6 +6,25 @@ body {
     background-attachment: fixed
 }
 
+.home_box_container_reklama {
+    background-color: #20242A;
+    /* height: 250px;
+    width: 700px; */
+    box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 100px;
+    top: 0;
+    position: -webkit-sticky;
+    position: sticky;
+}
+
+.container_home_reklama {
+    width: 300px;
+    height: 480px;
+    margin: 0 auto;
+    margin-top: -10%;
+    margin-left: -20%;
+}
+
 body::-webkit-scrollbar {
     width: 11px;
 }
@@ -235,10 +254,10 @@ h3 {
 }
 
 .container_schedule {
-    width: 900px;
+    width: 1100px;
     height: auto;
     margin: 0 auto;
-    margin-top: 4%;
+    margin-top: 3%;
 }
 
 
@@ -545,7 +564,7 @@ h4 {
 .btn-danger_nav_schedule {
     background-color: #202225;
     border: 0;
-    width: 250px;
+    width: 150px;
     height: 50px;
     border-radius: 15px;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -556,9 +575,8 @@ h4 {
     box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
     transition: 0.5s;
     backface-visibility: hidden;
-    margin-top: 1px;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-top: 5px;
+    margin: 20px;
 }
 
 .btn-danger_nav_schedule:hover {
@@ -577,7 +595,7 @@ h4 {
 .btn-danger_nav_schedule_home_white {
     background-color: whitesmoke;
     border: 0;
-    width: 180px;
+    width: 150px;
     height: 50px;
     border-radius: 15px;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
