@@ -1,23 +1,39 @@
-{% extends "base.html" %} {% block title %}Schedule{% endblock %} {% block
-content %}
-<h1 align="center">Schedule</h1>
-<ol class="list-group list-group-flush" id="pary">
-  {% for dual in tournament.duals %}
+{% extends "base.html" %} {% block title %}Schedule{% endblock %} {% block content %}
+<section class="schedule_box_container container_schedule">
+    <br>
+    <h3 align="center">Schedule</h3>
+    <ol class="list-group list-group-flush" id="pary">
+        {% for dual in tournament.duals %}
 
-  <div align="center">
-    <ol class="badge badge-dark">
-      <div class="list-group-horizontal">
-        <h3>{{dual.player_1.name}} {{dual.score_1}}:{{dual.score_2}} {{dual.player_2.name}}</h3>
-      </div>
+        <div align="center">
+            <ol class="badge">
+                <div class="btn-danger_nav_list_group btn-danger_nav_list_group_schedule">
+                    <h2>{{dual.player2.name}} : {{dual.player1.name}}</h2>
+                </div>
+            </ol>
+        </div>
+        <br /> {% endfor %}
     </ol>
-  </div>
-  <br />
-  {% endfor %}
-</ol>
 
-<br />
+    <br />
+
+    <div align="center">
+        {% if user.is_admin %}
+        <a href="/publish-schedule">
+            <button type="button" class="btn-danger_nav_schedule_home_white">Publish</button> {% endif %}
+        </a>
+        <a href="/tournaments">
+            <button type="button" class="btn-danger_nav_schedule">Back to Your Tournaments</button>
+        </a>
+        <a href="/">
+            <button type="button" class="btn-danger_nav_schedule">Return home</button>
+        </a>
+        <br><br>
 
 <a type="button" href="/update-schedule" class="btn btn-dark">Update scores</a>
+    </div>
+</section>
+{% endblock %}
 <div align="right">
   <button class="btn-danger" onClick="deleteTournament({{tournament.id}})"> <div>Delete Schedule</div></button>
   {% if user.is_admin %}
