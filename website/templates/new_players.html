@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-{% extends "base.html" %} {% block title %}Schedule Generator{% endblock %} {% block content %}
+ {% extends "base.html" %} {% block title %}Schedule Generator{% endblock %} {% block content %}
 <section class="newplayers_box_container container_newplayer">
     <br>
     <h3 align="center">Add Participants</h3>
@@ -26,30 +25,25 @@
         </div>
     </form>
 </section>
-{% endblock %}
-=======
-{% extends "base.html" %} {% block title %}Schedule Generator{% endblock %} {% block
-  content %}
-  <h1 align="center">Add Participants</h1>
-  Lista uczestników
-  <ol class="list-group list-group-flush" id="notes">
+{% endblock %} {% extends "base.html" %} {% block title %}Schedule Generator{% endblock %} {% block content %}
+<h1 align="center">Add Participants</h1>
+Lista uczestników
+<ol class="list-group list-group-flush" id="notes">
     {% for player in tournament.players %}
     <li align="center" class="list-group-item">
-     {{player.name}}
-      <button type="button" class="close" onClick="deletePlayer({{player.id}})">
+        {{player.name}}
+        <button type="button" class="close" onClick="deletePlayer({{player.id}})">
         <span aria-hidden="true">&times;</span>
       </button>
     </li>
     {% endfor %}
-  </ol>
-  <form method="POST">
+</ol>
+<form method="POST">
     <textarea name="player" class="form-control"></textarea>
     <br />
     <div align="center">
-      <button type="submit" class="btn btn-primary">Add participant</button>
-      <a type="button" href="/generate-new-schedule" class="btn btn-dark">Save</a>
+        <button type="submit" class="btn btn-primary">Add participant</button>
+        <a type="button" href="/generate-new-schedule" class="btn btn-dark">Save</a>
     </div>
-  </form>
-  {% endblock %}
-  
->>>>>>> b947412f6b85781cb1ac6876b81b6515eb2805e3
+</form>
+{% endblock %}
