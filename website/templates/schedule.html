@@ -7,7 +7,7 @@ content %}
   <div align="center">
     <ol class="badge badge-dark">
       <div class="list-group-horizontal">
-        <h3>{{dual.player2.name}}: {{dual.player1.name}}</h3>
+        <h3>{{dual.player_1.name}} {{dual.score_1}}:{{dual.score_2}} {{dual.player_2.name}}</h3>
       </div>
     </ol>
   </div>
@@ -17,7 +17,9 @@ content %}
 
 <br />
 
+<a type="button" href="/update-schedule" class="btn btn-dark">Update scores</a>
 <div align="right">
+  <button class="btn-danger" onClick="deleteTournament({{tournament.id}})"> <div>Delete Schedule</div></button>
   {% if user.is_admin %}
   <a type="button" href="/publish-schedule" class="btn btn-primary">Publish</button>
     {% endif %}
