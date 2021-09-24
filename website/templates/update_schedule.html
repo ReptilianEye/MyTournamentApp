@@ -7,10 +7,8 @@ content %}
 
   <div align="center">
     <ol class="badge badge-dark">
-      <div class="list-group-horizontal">
         <h3>{{dual.player_1.name}} {{dual.score_1}}:{{dual.score_2}} {{dual.player_2.name}}</h3>
 
-      </div>
       <input name="score" type="number" id="score[]" />
       <input name="score" type="number" id="score[]" />
     </ol>
@@ -22,11 +20,11 @@ content %}
 <br />
 
 <div align="center">
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" href="/schedule" class="btn btn-primary">Save</button>
 </div>
   <div align="right">
     {% if user.is_admin %}
-    <a type="button" href="/schedule" class="btn btn-primary">Save</button>
+    <a type="button" class="btn btn-primary">Save</button>
       {% endif %}
     
       <a type="button" href="/delete-schedule" class="btn btn-danger">Reset</a>

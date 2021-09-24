@@ -89,11 +89,11 @@ def GenerateSchedule():
             db.session.add(newDual)
             db.session.commit()
 
-    return redirect(url_for("views.Schedule"))
+    return redirect(url_for("views.schedule"))
     
-@views.route('/show-schedule',methods=['POST','GET'])
+@views.route('/show-tournament',methods=['POST','GET'])
 @login_required
-def showSchedule():
+def showTournament():
     tournament = json.loads(request.data)
     tournamentId = tournament['tournamentId']
     if tournamentId:
@@ -105,7 +105,7 @@ def showSchedule():
 
 @views.route('/schedule')
 @login_required
-def Schedule():
+def schedule():
     tournament = Tournament.query.filter_by(id=current_user.actual_tournament_id).first()
     return render_template("schedule.html", user=current_user,tournament=tournament)
 
@@ -125,7 +125,8 @@ def update_schedule():
                 dual.score_1 = scores[i]
                 dual.score_2 = scores[i+1]
                 db.session.commit()
-                i += 2
+            i += 2
+        return redirect(url_for("views.schedule"))
     return render_template("update_schedule.html",user=current_user,tournament=tournament)
 
 
@@ -167,11 +168,16 @@ def delete_schedule():
         if tournament.user_id == current_user.id:
             current_user.actual_tournament_id = current_user.tournaments[0].id
             for dual in tournament.duals:
-                db.session.delete(dual.player_1)
-                db.session.delete(dual.player_2)
                 db.session.delete(dual)
+
+            for player in tournament.players:
+                db.session.delete(player)
+            
+            for standing in tournament.standings:
+                db.session.delete(standing)
+
             db.session.delete(tournament)
-            db.session.commit() 
+            db.session.commit()                             
             return redirect(url_for("views.Tournaments"))
 
 

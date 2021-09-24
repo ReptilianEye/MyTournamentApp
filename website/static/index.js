@@ -14,7 +14,7 @@ function deleteUser(userId) {
         window.location.href = "/login";
     });
 }
-function ShowTournament(tournamentId) {
+function showTournament(tournamentId) {
     fetch('show-tournament', {
         method: 'POST',
         body: JSON.stringify({ tournamentId: tournamentId }),
