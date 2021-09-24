@@ -1,29 +1,23 @@
-{% extends "base.html" %} {% block title %}Terminarz{% endblock %} {% block
-    content %}
-    <h1 align="center">Terminarz</h1>
-    <ol class="list-group list-group-flush" id="pary">
-      {% for round in Schedule %}
-      {% for duo in round.duos %}
-    
-      <div align="center">
-        {% for particip in duo.participants %}
-        <ol class="badge badge-dark">
-          <div  class="list-group-horizontal"><h3>{{particip.name}}: {{particip.score}}</h3> </div>
-        </ol>    
-        {% endfor %}
-    
+{% extends "base.html" %} {% block title %}Public Schedule{% endblock %} {% block
+content %}
+<h1 align="center">Public Schedule</h1>
+<ol class="list-group list-group-flush" id="pary">
+  {% for dual in tournament.duals %}
+
+  <div align="center">
+    <ol class="badge badge-dark">
+      <div class="list-group-horizontal">
+        <h3>{{dual.player2.name}}: {{dual.player1.name}}</h3>
       </div>
-      {% endfor %}
-      <br />
-      
-      {% endfor %}
     </ol>
-    
-    <br />
-    
-    <div align="right">
-      <a type="button" href="/" class="btn btn-dark">Return home</a>
-    
-    </div>
-    {% endblock %}
-    
+  </div>
+  <br />
+  {% endfor %}
+</ol>
+
+<br />
+
+<div align="right">
+  <a type="button" href="/" class="btn btn-dark">Return home</a>
+</div>
+{% endblock %}

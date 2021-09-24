@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block title %}Schedule Generator{% endblock %} {% block content %}
+<section class="newplayers_box_container container_newplayer">
+    <br>
+    <h3 align="center">Add Participants</h3>
+    Lista uczestników
+    <ol class="list-group list-group-flush" id="notes">
+        {% for player in tournament.players %}
+        <li align="center" class="list-group-item">
+            {{player.name}}
+            <button type="button" class="close" onClick="deletePlayer({{player.id}})">
+        <span aria-hidden="true">&times;</span>
+      </button>
+        </li>
+        {% endfor %}
+    </ol>
+    <br>
+    <form method="POST">
+        <textarea name="player" class="form_control"></textarea>
+        <br />
+        <div align="center">
+            <button type="submit" class="btn-danger_nav_generator_home_white">Add participant</button>
+            <a href="/generate-new-schedule">
+                <button type="button" class="btn-danger_nav_generator_home">Save</button>
+            </a>
+        </div>
+    </form>
+</section>
+{% endblock %}

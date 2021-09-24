@@ -1,0 +1,47 @@
+{% extends "base.html" %} {% block title %}Schedule Generator{% endblock %} {%
+block content %}
+<h1 align="center">New schedule</h1>
+<form method="POST">
+  <div class="form-group">
+    <input
+      class="form-control"
+      name="name"
+      placeholder="Enter name of new tournament"
+    />
+  <!-- </div>
+
+  <div class="form-group">
+    <input
+      class="form-control"
+      name="date"
+      placeholder="Enter date of new tournament"
+    />
+  </div>
+  <div class="form-group">
+    <input
+      class="form-control"
+      name="location"
+      placeholder="Enter location of new tournament"
+    />
+  </div>
+  <div class="form-group">
+    <input
+      class="form-control"
+      name="discipline"
+      placeholder="Enter discipline of new tournament"
+    />
+  </div>
+  <div class="form-group">
+    <input
+      class="form-control"
+      name="type"
+      placeholder="Enter type of new tournament"
+    />
+  </div> -->
+<br />
+<br />
+<br />
+<button type="submit" href="/new-players" class="btn btn-primary">Save</button>
+</form>
+
+{% endblock %}

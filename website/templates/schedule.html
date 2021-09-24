@@ -1,43 +1,35 @@
-{% extends "base.html" %} {% block title %}Terminarz{% endblock %} {% block
-content %}
-<h1 align="center">Terminarz</h1>
-<ol class="list-group list-group-flush" id="pary">
-<form method="POST">
-  {% for round in user.rounds %}
+{% extends "base.html" %} {% block title %}Schedule{% endblock %} {% block content %}
+<section class="schedule_box_container container_schedule">
+    <br>
+    <h3 align="center">Schedule</h3>
+    <ol class="list-group list-group-flush" id="pary">
+        {% for dual in tournament.duals %}
 
-  {% for duo in round.duos %}
-
-  <div align="center">
-    {% for particip in duo.participants %}
-    <ol class="badge badge-dark">
-      <div class="list-group-horizontal">{{particip.name}}: {{particip.score}} </div>
-      <input name="wynik" type="number" id="wynik[]" />
-
-      <!-- <div><textarea class="col-2"></textarea></div> -->
+        <div align="center">
+            <ol class="badge">
+                <div class="btn-danger_nav_list_group btn-danger_nav_list_group_schedule">
+                    <h2>{{dual.player2.name}} : {{dual.player1.name}}</h2>
+                </div>
+            </ol>
+        </div>
+        <br /> {% endfor %}
     </ol>
-    
-    <!-- <textarea style="overflow:hidden;resize:none" rows="1" cols="1">    
-    </textarea> -->
-    {% endfor %}
 
-  </div>
-  {% endfor %}
-  <br />
-  
-  {% endfor %}
-</ol>
+    <br />
 
-<br />
+    <div align="center">
+        {% if user.is_admin %}
+        <a href="/publish-schedule">
+            <button type="button" class="btn-danger_nav_schedule_home_white">Publish</button> {% endif %}
+        </a>
+        <a href="/tournaments">
+            <button type="button" class="btn-danger_nav_schedule">Back to Your Tournaments</button>
+        </a>
+        <a href="/">
+            <button type="button" class="btn-danger_nav_schedule">Return home</button>
+        </a>
+        <br><br>
 
-<div align="center">
-  <button type="submit" class="btn btn-primary">Submit</button>
-</div>
-  <div align="right">
-    {% if user.admin %}
-    <a type="button" href="/publish-schedule" class="btn btn-primary">Publish</button>
-      {% endif %}
-    
-      <a type="button" href="/delete-schedule" class="btn btn-danger">Reset</a>
-    <a type="button" href="/" class="btn btn-dark">Return home</a>
-  </div>
+    </div>
+</section>
 {% endblock %}
