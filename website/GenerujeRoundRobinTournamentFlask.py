@@ -172,11 +172,6 @@ def DzieliNa2Teamy(ListaZawodników):
     lista1=[]
     lista2=[]
 
-    # i=int(input("ilośczadadasfdadwd"))
-    # for j in range (i):
-    #     imie=input("imoona ")
-    #     lista.append(imie)
-
     random.shuffle(ListaZawodników)
     n=1
     for imie in ListaZawodników:
@@ -185,11 +180,9 @@ def DzieliNa2Teamy(ListaZawodników):
         else:
             lista2.append(imie)
         n*=-1
-    Treminarz=[]
-    Treminarz.append(lista1)
-    Treminarz.append(lista2)
-    print(Treminarz)
-
-DzieliNa2Teamy(["Tomek", "Kamil", "piot","roit"])
+    Terminarz=[]
+    Terminarz.append(lista1)
+    Terminarz.append(lista2)
+    return Terminarz
 
 
