@@ -50,8 +50,8 @@ class Dual(db.Model):
     player1_id = db.Column(db.Integer,db.ForeignKey('player.id'))
     player2_id = db.Column(db.Integer,db.ForeignKey('player.id'))
     
-    player1 = db.relationship('Player', foreign_keys=[player1_id])
-    player2 = db.relationship('Player', foreign_keys=[player2_id])
+    player_1 = db.relationship('Player', foreign_keys=[player1_id])  
+    player_2 = db.relationship('Player', foreign_keys=[player2_id])  
 
     score_1 = db.Column(db.Integer,default=0)
     score_2 = db.Column(db.Integer,default=0)

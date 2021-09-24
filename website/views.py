@@ -24,7 +24,7 @@ def home():
 
 @views.route('/tournaments', methods=['GET', 'POST'])
 @login_required
-def Schedules():
+def Tournaments():
     return render_template("tournaments.html", user=current_user)
 
 
@@ -71,7 +71,7 @@ def GetPlayers():
 def GenerateSchedule():
     tournament = Tournament.query.filter_by(id=current_user.actual_tournament_id).first()
     players = Player.query.filter_by(tournament_id=tournament.id).all()
-    Schedule = WygenerujTermiarz(players)
+    Schedule = WygenerujTermiarzRoundRobin(players)
     round_number = 0
     for line in Schedule:
         if type(line) == int:
@@ -109,24 +109,24 @@ def Schedule():
     tournament = Tournament.query.filter_by(id=current_user.actual_tournament_id).first()
     return render_template("schedule.html", user=current_user,tournament=tournament)
 
-@views.route('update-schedule')
+@views.route('update-schedule',methods=['POST','GET'])
 @login_required
 def update_schedule():
+    tournament = Tournament.query.filter_by(id=current_user.actual_tournament_id).first()
     if request.method == 'POST':
-        scores = request.form.getlist('wynik')
+        scores = request.form.getlist('score')
         for i in range(len(scores)):
             if scores[i] != '':
                 scores[i] = int(scores[i])
 
         i = 0
-        for round in current_user.rounds:
-            for duo in round.duos:
-                for particip in duo.participants:
-                    if type(scores[i]) is int:
-                        particip.score = scores[i]
-                        db.session.commit()
-                    i += 1
-    return render_template("update_schedule.html")
+        for dual in tournament.duals:
+            if type(scores[i]) is int:
+                dual.score_1 = scores[i]
+                dual.score_2 = scores[i+1]
+                db.session.commit()
+                i += 2
+    return render_template("update_schedule.html",user=current_user,tournament=tournament)
 
 
 @views.route('public-schedule')
@@ -157,15 +157,23 @@ def publish_schedule():
     return redirect(url_for("views.public_schedule"))
 
 
-@views.route('/delete-schedule')
+@views.route('/delete-tournament',methods=['POST','GET'])
 @login_required
 def delete_schedule():
-    for round in current_user.rounds:
-        for duo in round.duos:
-            db.session.delete(duo)
-        db.session.delete(round)
-    db.session.commit()
-    return render_template("generator.html", user=current_user)
+    tournament = json.loads(request.data)
+    tournamentId = tournament['tournamentId']
+    tournament = Tournament.query.get(tournamentId)
+    if tournament:
+        if tournament.user_id == current_user.id:
+            current_user.actual_tournament_id = current_user.tournaments[0].id
+            for dual in tournament.duals:
+                db.session.delete(dual.player_1)
+                db.session.delete(dual.player_2)
+                db.session.delete(dual)
+            db.session.delete(tournament)
+            db.session.commit() 
+            return redirect(url_for("views.Tournaments"))
+
 
 
 @views.route('/delete-player', methods=['POST'])

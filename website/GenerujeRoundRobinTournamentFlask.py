@@ -141,7 +141,7 @@ def WyrownujeMeczeNaStronach(terminarz,n):
     return NowyTerminarz
 
 
-def WygenerujTermiarz(Uczestnicy):
+def WygenerujTermiarzRoundRobin(Uczestnicy):
     
     Terminarz = []
     global pauza
@@ -167,7 +167,7 @@ def WygenerujTermiarz(Uczestnicy):
     Terminarz = PrzygotowujeTerminarzDoWyswietlenia(Terminarz)
     return Terminarz
     
-def DzieliNa2Teamy(ListaZawodników):
+def WygenerujTerminarz2Teamy(ListaZawodników):
     lista1=[]
     lista2=[]
 
