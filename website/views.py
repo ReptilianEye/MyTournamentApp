@@ -40,16 +40,18 @@ def CreateNewSchedule():
         discipline = request.form.get('discipline')
         type = request.form.get('type')
 
-        y, m, d = date.split('-')
-        date = datetime(int(y), int(m), int(d))
-        
-        newTournament = Tournament(user_id=current_user.id, name=tournamentName,
-                                   date=date, location=location, discipline=discipline, type=type)
-        db.session.add(newTournament)
-        db.session.commit()
-        current_user.actual_tournament_id = newTournament.id
-        db.session.commit()
-        return redirect(url_for("views.GetPlayers"))
+        if not date:
+            flash(f'Wpisz date.', category='error')
+        else:
+            y, m, d = date.split('-')
+            date = datetime(int(y), int(m), int(d))
+            newTournament = Tournament(user_id=current_user.id, name=tournamentName,
+                                    date=date, location=location, discipline=discipline, type=type)
+            db.session.add(newTournament)
+            db.session.commit()
+            current_user.actual_tournament_id = newTournament.id
+            db.session.commit()
+            return redirect(url_for("views.GetPlayers"))
     return render_template("new_schedule.html", user=current_user)
 
 # TODO zrobic limit dodawania zawodnikow (aby ktos nie zrobil turnieju na niskonczona ilosc osob)
@@ -161,6 +163,11 @@ def publish_schedule():
 
     return redirect(url_for("views.public_schedule"))
 
+@views.route('standings')
+@login_required
+def prepareStandings():
+    tournament = Tournament.query.filter_by(id=current_user.actual_tournament_id).first()
+    #TODO wymyslic jak zliczac to jak najlepiej
 
 @views.route('/delete-tournament',methods=['POST','GET'])
 @login_required
