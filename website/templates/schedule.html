@@ -2,14 +2,14 @@
 
 <section class="schedule_box_container container_schedule">
     <br>
-    <h3 align="center">Schedule</h3>
+    <h3 align="center">{{tournament.name}}</h3>
     <ol class="list-group list-group-flush" id="pary">
         {% for dual in tournament.duals %}
 
         <div align="center">
             <ol class="badge">
                 <div class="btn-danger_nav_list_group btn-danger_nav_list_group_schedule">
-                    <h2>{{dual.player_2.name}}:{{dual.player_1.name}}</h2>
+                    <h2>{{dual.player_1.name}} {{dual.score_1}}:{{dual.score_2}} {{dual.player_2.name}}</h2>
                 </div>
             </ol>
         </div>
