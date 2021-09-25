@@ -40,7 +40,8 @@ def CreateNewSchedule():
         discipline = request.form.get('discipline')
         type = request.form.get('type')
 
-        date = datetime.strptime(date, '%y/%m/%d')      #TODO zmienic format daty
+        y, m, d = date.split('-')
+        date = datetime(int(y), int(m), int(d))
         
         newTournament = Tournament(user_id=current_user.id, name=tournamentName,
                                    date=date, location=location, discipline=discipline, type=type)
