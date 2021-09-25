@@ -6,25 +6,6 @@ body {
     background-attachment: fixed
 }
 
-.home_box_container_reklama {
-    background-color: #20242A;
-    /* height: 250px;
-    width: 700px; */
-    box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
-    border-radius: 100px;
-    top: 0;
-    position: -webkit-sticky;
-    position: sticky;
-}
-
-.container_home_reklama {
-    width: 300px;
-    height: 480px;
-    margin: 0 auto;
-    margin-top: -10%;
-    margin-left: -20%;
-}
-
 body::-webkit-scrollbar {
     width: 11px;
 }

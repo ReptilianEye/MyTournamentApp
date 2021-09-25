@@ -9,36 +9,12 @@
         <div align="center">
             <ol class="badge">
                 <div class="btn-danger_nav_list_group btn-danger_nav_list_group_schedule">
-                    <h2>{{dual.player_2.name}}:{{dual.player_1.name}}</h2>
+                    <h2>{{dual.player_2.name}} : {{dual.player_1.name}}</h2>
                 </div>
             </ol>
         </div>
         <br /> {% endfor %}
     </ol>
-    <!-- <div align="center">
-
-        <a href="/update-schedule">
-            <button style="background-color: rgb(55, 134, 81);" type="button" class="btn-danger_nav_schedule">Update scores</button>
-        </a>
-
-        <button style="background-color: #a03636;" class="btn-danger_nav_schedule" onClick="deleteTournament({{tournament.id}})"> <div>Delete Schedule</div></button> {% if user.is_admin %}
-
-        <a href="/tournaments">
-            <button style="width: 210px; background-color: #5AA0BA;" type="button" class="btn-danger_nav_schedule">Back to Your Tournaments</button>
-        </a>
-        <a href="/">
-            <button type="button" class="btn-danger_nav_schedule">Return home</button>
-        </a>
-
-    </div>
-    <div align="center" style="margin-top: 10px;">
-        <a href="/publish-schedule">
-            <button style="background-color: rgb(55, 65, 95);" type="button" class="btn-danger_nav_schedule_home_white">Publish</button> {% endif %}
-        </a>
-    </div> -->
-</section>
-<section class="home_box_container_reklama container_home_reklama">
-    <br>
     <div align="center">
 
         <a href="/update-schedule">
@@ -55,11 +31,10 @@
         </a>
 
     </div>
-    <div align="center">
+    <div align="right" style="margin-top: 10px;">
         <a href="/publish-schedule">
             <button style="background-color: rgb(55, 65, 95);" type="button" class="btn-danger_nav_schedule_home_white">Publish</button> {% endif %}
         </a>
     </div>
 </section>
-
 {% endblock %}
