@@ -20,9 +20,13 @@
         <a href="/update-schedule">
             <button style="background-color: rgb(55, 134, 81);" type="button" class="btn-danger_nav_schedule">Update scores</button>
         </a>
-
-        <button style="background-color: #a03636;" class="btn-danger_nav_schedule" onClick="deleteTournament({{tournament.id}})"> <div>Delete Schedule</div></button> {% if user.is_admin %}
-
+        <a href="/standings">
+            <button type="button" class="btn-danger_nav_schedule">Standings</button> 
+        </a>
+        <a href="delete-tournament">
+            <button style="background-color: #a03636;" class="btn-danger_nav_schedule" onClick="deleteTournament({{tournament.id}})"> <div>Delete Schedule</div></button> 
+        </a>
+        <br><br>
         <a href="/tournaments">
             <button style="width: 210px; background-color: #5AA0BA;" type="button" class="btn-danger_nav_schedule">Back to Your Tournaments</button>
         </a>
@@ -31,10 +35,13 @@
         </a>
 
     </div>
+    {% if user.is_admin %}
     <div align="right" style="margin-top: 10px;">
         <a href="/publish-schedule">
             <button style="background-color: rgb(55, 65, 95);" type="button" class="btn-danger_nav_schedule_home_white">Publish</button> {% endif %}
         </a>
     </div>
+    {% endif %}
+
 </section>
 {% endblock %}

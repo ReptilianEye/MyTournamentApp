@@ -184,3 +184,16 @@ def WygenerujTerminarz2Teamy(ListaZawodników):
     Terminarz.append(lista2)
     return Terminarz
 
+
+class PlayerInStanding:
+    def __init__(self,id,wins=0,loses=0,draws=0):
+        self.id = id
+        self.wins = wins
+        self.loses = loses
+        self.draws = draws
+
+#return index of player in a list
+def findPlayerInList(player_id,L):
+    for i in range(len(L)):
+        if L[i].id == player_id:
+            return i
