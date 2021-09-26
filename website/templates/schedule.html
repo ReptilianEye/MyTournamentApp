@@ -18,28 +18,28 @@
     <br />
 
     <div align="center">
+        
+        <a href="/update-schedule">
+            <button type="button" class="btn-danger_nav_schedule">Update scores</button> 
+        </a>
+        <a href="/standings">
+            <button type="button" class="btn-danger_nav_schedule">Standings</button> 
+        </a>
+        <br><br>
         {% if user.is_admin %}
         <a href="/publish-schedule">
-            <button type="button" class="btn-danger_nav_schedule_home_white">Publish</button> {% endif %}
+            <button type="button" class="btn-danger_nav_schedule_home_white">Publish</button> 
         </a>
+        {% endif %}
         <a href="/tournaments">
             <button type="button" class="btn-danger_nav_schedule">Back to Your Tournaments</button>
         </a>
-        <a href="/">
-            <button type="button" class="btn-danger_nav_schedule">Return home</button>
-        </a>
-        <br><br>
-
-<a type="button" href="/update-schedule" class="btn btn-dark">Update scores</a>
+        
     </div>
 </section>
 <div align="right">
-  <button class="btn-danger" onClick="deleteTournament({{tournament.id}})"> <div>Delete Schedule</div></button>
-  {% if user.is_admin %}
-  <a type="button" href="/publish-schedule" class="btn btn-primary">Publish</button>
-    {% endif %}
-  <a type="button" href="/tournaments" class="btn btn-dark">Back to Your Tournaments</a>
-  <a type="button" href="/" class="btn btn-dark">Return home</a>
-
+    <a href="/">
+        <button type="button" class="btn-danger_nav_schedule">Return home</button>
+    </a>
 </div>
 {% endblock %}

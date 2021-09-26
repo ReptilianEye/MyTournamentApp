@@ -1,0 +1,22 @@
+{% extends "base.html" %} {% block title %}Public Schedule{% endblock %} {% block
+    content %}
+    <h1 align="center">Standings</h1>
+    <ol class="list-group list-group-flush" id="pary">
+      {% for standing in standings %}
+    
+      <div align="center">
+        <ol class="badge badge-dark">
+            <h3>{{standing.player.name}} Wygrane:{{standing.wins}} Przegrane:{{standing.loses}} Punkty:{{standing.points}}</h3>
+        </ol>
+      </div>
+      <br />
+      {% endfor %}
+    </ol>
+    
+    <br />
+    
+    <div align="right">
+      <a type="button" href="/" class="btn btn-dark">Return home</a>
+    </div>
+    {% endblock %}
+    

@@ -65,10 +65,13 @@ class Standing(db.Model):
 
     tournament_id = db.Column(db.Integer,db.ForeignKey('tournament.id'))
     player_id = db.Column(db.Integer,db.ForeignKey('player.id'))
+    player = db.relationship('Player', foreign_keys=[player_id])  
 
-    player_point = db.Column(db.Integer)
-    matches_won = db.Column(db.Integer)
-    matches_lost = db.Column(db.Integer)
+
+    points = db.Column(db.Integer)
+    wins = db.Column(db.Integer)
+    loses = db.Column(db.Integer)
+    draws = db.Column(db.Integer)
 
 
     
