@@ -261,7 +261,8 @@ def delete_schedule():
 
             db.session.delete(tournament)
             db.session.commit()
-            return redirect(url_for("views.Tournaments"))
+    return jsonify({})
+
 
 
 @views.route('/delete-player', methods=['POST'])
