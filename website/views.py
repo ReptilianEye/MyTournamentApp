@@ -86,6 +86,7 @@ def getScheduleInfo():
             return redirect(url_for('views.getPlayers'))
     return render_template("new_schedule.html", user=current_user)
 
+
 @views.route('/new-players', methods=['GET', 'POST'])
 @login_required
 def getPlayers():
@@ -99,7 +100,7 @@ def getPlayers():
         newPlayerName = request.form.get('player')
         if len(newPlayerName) < 1:
             flash('Name to short', category='error')
-        elif Player.query.filter_by(name=newPlayerName,tournament_id=current_user.actual_tournament_id).first():
+        elif Player.query.filter_by(name=newPlayerName, tournament_id=current_user.actual_tournament_id).first():
             flash('Player already added', category='error')
         else:
             newPlayer = Player(tournament_id=tournament.id, name=newPlayerName)
@@ -180,8 +181,7 @@ def update_schedule():
     return render_template("update_schedule.html", user=current_user, tournament=tournament)
 
 
-
-#Functions to pubish schedule
+# Functions to pubish schedule
 @views.route('public-schedule')
 @login_required
 def public_schedule():
@@ -211,35 +211,38 @@ def publish_schedule():
     return redirect(url_for("views.public_schedule"))
 
 
-
-#Standings Functions
+# Standings Functions
 
 
 @views.route('/standings')
 @login_required
 def show_standings():
-    tournament = Tournament.query.filter_by(id=current_user.actual_tournament_id).first()
+    tournament = Tournament.query.filter_by(
+        id=current_user.actual_tournament_id).first()
     if not tournament.standings:
         prepareStandings(tournament)
     standings = db.session.query(Standing).order_by(Standing.points.desc())
-    return render_template("standing.html",user=current_user,standings=standings)
+    return render_template("standing.html", user=current_user, standings=standings)
+
 
 def prepareStandings(tournament):
     standings = generateStandings(tournament)
     for player in standings:
         newStanding = Standing(tournament_id=current_user.actual_tournament_id, player_id=player.id,
-                 wins=player.wins, loses=player.loses, points=player.wins+player.draws*0.5)
+                               wins=player.wins, loses=player.loses, points=player.wins+player.draws*0.5)
         db.session.add(newStanding)
     db.session.commit()
 
+
 def delete_standing():
-    tournament = Tournament.query.filter_by(id=current_user.actual_tournament_id).first()
+    tournament = Tournament.query.filter_by(
+        id=current_user.actual_tournament_id).first()
     for standing in tournament.standings:
         db.session.delete(standing)
     db.session.commit()
 
 
-#Delete Functions
+# Delete Functions
 
 @views.route('/delete-tournament', methods=['POST', 'GET'])
 @login_required
@@ -262,7 +265,6 @@ def delete_schedule():
             db.session.delete(tournament)
             db.session.commit()
     return jsonify({})
-
 
 
 @views.route('/delete-player', methods=['POST'])

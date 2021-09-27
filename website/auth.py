@@ -83,11 +83,11 @@ def delete_user():
 def add_admin():
     # if not current_user.is_admin:
     #     return redirect(url_for("views.home"))
-        
+
     if request.method == 'POST':
         email = request.form.get('email')
         newAdmin = User.query.filter_by(email=email).first()
-        
+
         password = request.form.get('password')
 
         if newAdmin:
