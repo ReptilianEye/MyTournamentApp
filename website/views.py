@@ -221,8 +221,19 @@ def show_standings():
         id=current_user.actual_tournament_id).first()
     if not tournament.standings:
         prepareStandings(tournament)
-    standings = db.session.query(Standing).order_by(Standing.points.desc())
+    standings = db.session.query(Standing).filter(Standing.tournament_id.like(tournament.id)).order_by(Standing.points.desc())
     return render_template("standing.html", user=current_user, standings=standings)
+
+@views.route('/public-standings')
+@login_required
+def show_public_standings():
+    tournament = Tournament.query.filter_by(
+        is_public=True).first()
+    if not tournament.standings:
+        prepareStandings(tournament)
+    standings = db.session.query(Standing).filter(Standing.tournament_id.like(tournament.id)).order_by(Standing.points.desc())
+    return render_template("standing.html", user=current_user, standings=standings)
+
 
 
 def prepareStandings(tournament):
