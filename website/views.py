@@ -238,9 +238,21 @@ def show_public_standings():
 
 def prepareStandings(tournament):
     standings = generateStandings(tournament)
+    if tournament.discipline in ["Chess"]:
+        multipleForWin = 1
+        multipleForLose = 0
+        multipleForDraw = 0.5
+    elif tournament.discipline in ["Basketball"]:
+        multipleForWin = 2
+        multipleForLose = 1
+    else:   #["volleyball","football","other"]
+        multipleForWin = 3
+        multipleForLose = 0
+        multipleForDraw = 1
+
     for player in standings:
         newStanding = Standing(tournament_id=current_user.actual_tournament_id, player_id=player.id,
-                               wins=player.wins, loses=player.loses, points=player.wins+player.draws*0.5)
+                 wins=player.wins, loses=player.loses, points=player.wins*multipleForWin+player.loses*multipleForLose+player.draws*multipleForDraw)
         db.session.add(newStanding)
     db.session.commit()
 
