@@ -5,20 +5,33 @@ content %}
   <br />
   <h3 align="center">{{tournament.name}}</h3>
   <ol class="list-group list-group-flush" id="pary">
-    {% for dual in tournament.duals %} 
+    {% for dual in tournament.duals %}
     <!-- {% if roundNumber != dual.round_number %}
     {% set roundNumber = dual.round_number %}
     <div style="color: white">numer: {{roundNumber}}</div>
     {% endif %} -->
-
     <div align="center">
       <ol class="badge">
         <div
           class="btn-danger_nav_list_group btn-danger_nav_list_group_schedule"
         >
           <h2>
-            {{dual.player_1.name}} {{dual.score_1}}:{{dual.score_2}}
-            {{dual.player_2.name}}
+            <!-- team 1 sie tutaj wyswietla -->
+            <div align="left" style="display: inline-block">
+              {% if tournament.type == '2Teams' %} {{dual.team_1.name}} {% endif
+              %} {% for player in dual.team_1.players %} {{player.name}} <br />
+              {% endfor %}
+            </div>
+            <!-- wynik -->
+            <div style="display: inline-block">
+              {{dual.score_1}}:{{dual.score_2}}
+            </div>
+            <!-- team 2 -->
+            <div align="right" style="display: inline-block">
+              {% if tournament.type == '2Teams' %} {{dual.team_2.name}} {% endif
+              %} {% for player in dual.team_2.players %} {{player.name}} <br />
+              {% endfor %}
+            </div>
           </h2>
         </div>
       </ol>
@@ -62,17 +75,16 @@ content %}
       <button type="button" class="btn-danger_nav_schedule">Return home</button>
     </a>
     {% if user.is_admin %}
-      <a href="/publish-schedule">
-        <button
-          style="background-color: rgb(55, 65, 95)"
-          type="button"
-          class="btn-danger_nav_schedule_home_white"
-        >
-          Publish
-        </button>
-      </a>
-    {% endif %}  
-</div>
-  
+    <a href="/publish-schedule">
+      <button
+        style="background-color: rgb(55, 65, 95)"
+        type="button"
+        class="btn-danger_nav_schedule_home_white"
+      >
+        Publish
+      </button>
+    </a>
+    {% endif %}
+  </div>
 </section>
 {% endblock %}

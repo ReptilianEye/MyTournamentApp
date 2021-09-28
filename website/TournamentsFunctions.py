@@ -6,7 +6,7 @@ def GenerateRoundRobin(ListaZawodnikow):
     return WygenerujTermiarzRoundRobin(ListaZawodnikow)
 
 
-def WygenerujTerminarz2Teamy(ListaZawodnikow):
+def Generate2Teams(ListaZawodnikow):
     lista1 = []
     lista2 = []
 
@@ -31,19 +31,20 @@ def printStandings(L):
 
 def generateStandings(tournament):
     Standings = []
+    print(tournament.duals)
     for dual in tournament.duals:
-        if findPlayerInList(dual.player1_id, Standings) == None:
-            Standings.append(PlayerInStanding(dual.player1_id))
-        if findPlayerInList(dual.player2_id, Standings) == None:
-            Standings.append(PlayerInStanding(dual.player2_id))
+        if findTeamInList(dual.team1_id, Standings) == None:
+            Standings.append(TeamInStanding(dual.team1_id))
+        if findTeamInList(dual.team2_id, Standings) == None:
+            Standings.append(TeamInStanding(dual.team2_id))
         if dual.score_1 > dual.score_2:
-            Standings[findPlayerInList(dual.player1_id, Standings)].wins += 1
-            Standings[findPlayerInList(dual.player2_id, Standings)].loses += 1
+            Standings[findTeamInList(dual.team1_id, Standings)].wins += 1
+            Standings[findTeamInList(dual.team2_id, Standings)].loses += 1
         elif dual.score_1 < dual.score_2:
-            Standings[findPlayerInList(dual.player1_id, Standings)].loses += 1
-            Standings[findPlayerInList(dual.player2_id, Standings)].wins += 1
+            Standings[findTeamInList(dual.team1_id, Standings)].loses += 1
+            Standings[findTeamInList(dual.team2_id, Standings)].wins += 1
         else:
-            Standings[findPlayerInList(dual.player1_id, Standings)].draws += 1
-            Standings[findPlayerInList(dual.player2_id, Standings)].draws += 1
-    #sorted(Standings,key=lambda Player: Player.wins, reverse=True)
+            Standings[findTeamInList(dual.team1_id, Standings)].draws += 1
+            Standings[findTeamInList(dual.team2_id, Standings)].draws += 1
+    #sorted(Standings,key=lambda team: team.wins, reverse=True)
     return Standings

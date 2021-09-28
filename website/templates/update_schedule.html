@@ -7,10 +7,10 @@ content %}
 
   <div align="center">
     <ol class="badge badge-dark">
-        <h3>{{dual.player_1.name}} {{dual.score_1}}:{{dual.score_2}} {{dual.player_2.name}}</h3>
+      <h3>{{dual.team_1.name}} {{dual.score_1}}:{{dual.score_2}} {{dual.team_2.name}}</h3>
 
-      <input name="score" type="number" id="score[]" />
-      <input name="score" type="number" id="score[]" />
+      <input name="score" type="number" placeholder="Type Score" id="score[]" />
+      <input name="score" type="number" placeholder="Type Score" id="score[]" />
     </ol>
   </div>
   <br />
@@ -21,13 +21,9 @@ content %}
 
 <div align="center">
   <button type="submit" href="/schedule" class="btn btn-primary">Save</button>
-</div>
-  <div align="right">
-    {% if user.is_admin %}
-    <a type="button" class="btn btn-primary">Save</button>
-      {% endif %}
-    
-      <a type="button" href="/delete-schedule" class="btn btn-danger">Reset</a>
-    <a type="button" href="/" class="btn btn-dark">Return home</a>
+</div> 
+<div align="right">
+  <a type="button" href="/delete-schedule" class="btn btn-danger">Reset</a>
+  <a type="button" href="/" class="btn btn-dark">Return home</a>
   </div>
 {% endblock %}

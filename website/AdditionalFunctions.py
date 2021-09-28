@@ -170,7 +170,7 @@ def WygenerujTermiarzRoundRobin(Uczestnicy):
     return Terminarz
 
 
-def WygenerujTerminarz2Teamy(ListaZawodników):
+def Generate2Teams(ListaZawodników):
     lista1 = []
     lista2 = []
 
@@ -188,7 +188,7 @@ def WygenerujTerminarz2Teamy(ListaZawodników):
     return Terminarz
 
 
-class PlayerInStanding:
+class TeamInStanding:
     def __init__(self, id, wins=0, loses=0, draws=0):
         self.id = id
         self.wins = wins
@@ -198,7 +198,7 @@ class PlayerInStanding:
 # return index of player in a list
 
 
-def findPlayerInList(player_id, L):
+def findTeamInList(player_id, L):
     for i in range(len(L)):
         if L[i].id == player_id:
             return i

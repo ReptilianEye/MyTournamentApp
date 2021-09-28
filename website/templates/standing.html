@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block title %}Public Schedule{% endblock %} {% block
+{% extends "base.html" %} {% block title %}Standing{% endblock %} {% block
     content %}
     <h1 align="center">Standings</h1>
     <ol class="list-group list-group-flush" id="pary">
@@ -6,7 +6,7 @@
     
       <div align="center">
         <ol class="badge badge-dark">
-            <h3>{{standing.player.name}} Wygrane:{{standing.wins}} Przegrane:{{standing.loses}} Punkty:{{standing.points}}</h3>
+            <h3>{{standing.team.name}} Wygrane:{{standing.wins}} Przegrane:{{standing.loses}} Punkty:{{standing.match_points}}</h3>
         </ol>
       </div>
       <br />
@@ -16,6 +16,12 @@
     <br />
     
     <div align="right">
+      {% if tournament.discipline != 'Chess' %}
+      <a href="/top-scorers">
+        <button style="width: 210px; background-color: #e6aff7;" type="button" class="btn-danger_nav_schedule">Top Scorers</button>
+    </a>
+    {% endif %}
+
       <a href="/tournaments">
         <button style="width: 210px; background-color: #5AA0BA;" type="button" class="btn-danger_nav_schedule">Back to Your Tournaments</button>
     </a>

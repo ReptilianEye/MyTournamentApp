@@ -30,16 +30,29 @@ class Tournament(db.Model):
 
     duals = db.relationship('Dual')
     players = db.relationship('Player')
+    teams = db.relationship('Team')
     standings = db.relationship('Standing')
+
+
+class Team(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    tournament_id = db.Column(db.Integer,db.ForeignKey('tournament.id'))
+    
+    name = db.Column(db.String(100000))
+    
+    players = db.relationship('Player')
+    standing = db.relationship('Standing') 
+
 
 
 class Player(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     tournament_id = db.Column(db.Integer,db.ForeignKey('tournament.id'))
-
+    team_id = db.Column(db.Integer,db.ForeignKey('team.id'))
+    
     name = db.Column(db.String(100000))
+    points_scored = db.Column(db.Integer,default=0)
 
-    standing = db.relationship('Standing') 
     
 
 
@@ -47,11 +60,11 @@ class Dual(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     tournament_id = db.Column(db.Integer,db.ForeignKey('tournament.id'))
     
-    player1_id = db.Column(db.Integer,db.ForeignKey('player.id'))
-    player2_id = db.Column(db.Integer,db.ForeignKey('player.id'))
+    team1_id = db.Column(db.Integer,db.ForeignKey('team.id'))
+    team2_id = db.Column(db.Integer,db.ForeignKey('team.id'))
     
-    player_1 = db.relationship('Player', foreign_keys=[player1_id])  
-    player_2 = db.relationship('Player', foreign_keys=[player2_id])  
+    team_1 = db.relationship('Team', foreign_keys=[team1_id])  
+    team_2 = db.relationship('Team', foreign_keys=[team2_id])  
 
     score_1 = db.Column(db.Integer,default=0)
     score_2 = db.Column(db.Integer,default=0)
@@ -64,11 +77,11 @@ class Standing(db.Model):
     id = db.Column(db.Integer,primary_key=True)
 
     tournament_id = db.Column(db.Integer,db.ForeignKey('tournament.id'))
-    player_id = db.Column(db.Integer,db.ForeignKey('player.id'))
-    player = db.relationship('Player', foreign_keys=[player_id])  
+    team_id = db.Column(db.Integer,db.ForeignKey('team.id'))
+    team = db.relationship('Team', foreign_keys=[team_id])  
 
 
-    points = db.Column(db.Integer)
+    match_points = db.Column(db.Integer)
     wins = db.Column(db.Integer)
     loses = db.Column(db.Integer)
     draws = db.Column(db.Integer)

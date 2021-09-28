@@ -1,3 +1,4 @@
+from logging import error
 from os import urandom
 from flask import Blueprint, render_template, request, flash, jsonify
 from flask.helpers import url_for
@@ -6,11 +7,10 @@ from flask_login import login_user, login_required, logout_user, current_user
 from sqlalchemy.orm import query, session
 from sqlalchemy.sql.expression import true
 from werkzeug.utils import redirect
-from .models import Player, User, Tournament, Dual, Player, Standing
+from .models import Player, User, Tournament, Dual, Player, Standing, Team
 from .import db
 import json
 from .TournamentsFunctions import *
-from .AdditionalFunctions import PlayerInStanding
 from datetime import datetime
 
 # blueprint - miejsce gdzie jest wiele stron
@@ -52,6 +52,7 @@ def tournaments():
 #     tournament.type = newTournament.type
 #     db.session.commit()
 #     return redirect(url_for('views.schedule'))
+tournamentTypes = ['RoundRobin','2Teams']
 
 @views.route('/new-schedule', methods=['GET', 'POST'])
 @login_required
@@ -90,6 +91,7 @@ def getScheduleInfo():
 @views.route('/new-players', methods=['GET', 'POST'])
 @login_required
 def getPlayers():
+    global tournamentTypes
     partizipantsNumberLimit = 100
     tournament = Tournament.query.filter_by(
         id=current_user.actual_tournament_id).first()
@@ -103,7 +105,13 @@ def getPlayers():
         elif Player.query.filter_by(name=newPlayerName, tournament_id=current_user.actual_tournament_id).first():
             flash('Player already added', category='error')
         else:
-            newPlayer = Player(tournament_id=tournament.id, name=newPlayerName)
+            team_id = 0
+            if tournament.type == tournamentTypes[0]:
+                newTeam = Team(tournament_id=tournament.id, name=newPlayerName)
+                db.session.add(newTeam)
+                db.session.commit()
+                team_id = newTeam.id
+            newPlayer = Player(tournament_id=tournament.id,team_id = team_id,name=newPlayerName)
             db.session.add(newPlayer)
             db.session.commit()
             flash('Uczestnik dodany!', category='success')
@@ -112,30 +120,54 @@ def getPlayers():
 
 @views.route('generate-new-schedule', methods=['GET', 'POST'])
 def generateSchedule():
+    global tournamentTypes
     tournament = Tournament.query.filter_by(
         id=current_user.actual_tournament_id).first()
     players = Player.query.filter_by(tournament_id=tournament.id).all()
-    Schedule = WygenerujTermiarzRoundRobin(players)
-    round_number = 0
-    for line in Schedule:
-        if type(line) == int:
-            round_number = line
-        else:
-            player1_name = line[0]
-            player2_name = line[1]
+    if tournament.type == tournamentTypes[0]:
+        Teams = WygenerujTermiarzRoundRobin(players)
+        round_number = 0
+        for line in Teams:
+            if type(line) == int:
+                round_number = line
+            else:
+                player1_name = line[0]
+                player2_name = line[1]
 
-            player1 = Player.query.filter_by(name=player1_name).first()
-            player2 = Player.query.filter_by(name=player2_name).first()
+                
+                player1 = Player.query.filter_by(name=player1_name,tournament_id=tournament.id).first()
+                player2 = Player.query.filter_by(name=player2_name,tournament_id=tournament.id).first()
 
-            newDual = Dual(tournament_id=tournament.id, player1_id=player1.id,
-                           player2_id=player2.id, round_number=round_number)
 
-            db.session.add(newDual)
+                newDual = Dual(tournament_id=tournament.id, team1_id=player1.team_id,
+                            team2_id=player2.team_id, round_number=round_number)
+
+                db.session.add(newDual)
+                db.session.commit()
+
+    elif tournament.type == tournamentTypes[1]:
+        Teams = Generate2Teams(players)
+        i = 1
+        teamsId = []
+        for team in Teams:
+            newTeam = Team(tournament_id=tournament.id,name=f"team {i}")
+            db.session.add(newTeam)
             db.session.commit()
+            teamsId.append(newTeam.id)
+            i += 1
+            for player in team:        #assign player to team
+                player.team_id = newTeam.id
+                db.session.commit()
+        newDual = Dual(tournament_id=tournament.id, team1_id=teamsId[0],
+                        team2_id=teamsId[1])
+        db.session.add(newDual)
+        db.session.commit()
+
+
 
     return redirect(url_for("views.schedule"))
 
-
+    
 @views.route('/show-tournament', methods=['POST', 'GET'])
 @login_required
 def showTournament():
@@ -144,6 +176,7 @@ def showTournament():
     if tournamentId:
         current_user.actual_tournament_id = tournamentId
         db.session.commit()
+        tournament = Tournament.query.filter_by(id=current_user.actual_tournament_id).first()
         return redirect(url_for("views.Schedule"))
 
 
@@ -211,6 +244,7 @@ def publish_schedule():
     return redirect(url_for("views.public_schedule"))
 
 
+
 # Standings Functions
 
 
@@ -221,8 +255,8 @@ def show_standings():
         id=current_user.actual_tournament_id).first()
     if not tournament.standings:
         prepareStandings(tournament)
-    standings = db.session.query(Standing).filter(Standing.tournament_id.like(tournament.id)).order_by(Standing.points.desc())
-    return render_template("standing.html", user=current_user, standings=standings)
+    standings = db.session.query(Standing).filter(Standing.tournament_id.like(tournament.id)).order_by(Standing.match_points.desc())
+    return render_template("standing.html", user=current_user, standings=standings, tournament=tournament)
 
 @views.route('/public-standings')
 @login_required
@@ -231,8 +265,8 @@ def show_public_standings():
         is_public=True).first()
     if not tournament.standings:
         prepareStandings(tournament)
-    standings = db.session.query(Standing).filter(Standing.tournament_id.like(tournament.id)).order_by(Standing.points.desc())
-    return render_template("standing.html", user=current_user, standings=standings)
+    standings = db.session.query(Standing).filter(Standing.tournament_id.like(tournament.id)).order_by(Standing.match_points.desc())
+    return render_template("standing.html", user=current_user, standings=standings, tournament=tournament)
 
 
 
@@ -250,9 +284,9 @@ def prepareStandings(tournament):
         multipleForLose = 0
         multipleForDraw = 1
 
-    for player in standings:
-        newStanding = Standing(tournament_id=current_user.actual_tournament_id, player_id=player.id,
-                 wins=player.wins, loses=player.loses, points=player.wins*multipleForWin+player.loses*multipleForLose+player.draws*multipleForDraw)
+    for team in standings:
+        newStanding = Standing(tournament_id=current_user.actual_tournament_id, team_id=team.id,
+                 wins=team.wins, loses=team.loses, match_points=team.wins*multipleForWin+team.loses*multipleForLose+team.draws*multipleForDraw)
         db.session.add(newStanding)
     db.session.commit()
 
@@ -264,6 +298,28 @@ def delete_standing():
         db.session.delete(standing)
     db.session.commit()
 
+@views.route('/top-scorers')
+@login_required
+def show_top_scorers():
+    tournament = Tournament.query.filter_by(
+        id=current_user.actual_tournament_id).first()
+    players = db.session.query(Player).filter(Player.tournament_id.like(tournament.id),Player.points_scored > 0).order_by(Standing.match_points.desc())
+    return render_template("top_scorers.html", user=current_user, players=players)
+
+@views.route('/get-scorers',methods = ['GET','POST'])
+@login_required
+def get_scorers():
+    if request.method == ['POST']:
+        name = request.form.get('name')
+        goals = request.form.get('goals')
+        player = Player.query.filter_by(tournament_id=current_user.actual_tournament_id,name=name).first()
+        if not player:
+            flash('Player not found',category='error')
+        else:
+            player.goals_scored += goals
+            db.session.commit()
+            flash("Player's goals updated",category='success')
+            return redirect(url_for("views.show_top_scorers"))
 
 # Delete Functions
 
@@ -281,6 +337,9 @@ def delete_schedule():
 
             for player in tournament.players:
                 db.session.delete(player)
+
+            for team in tournament.teams:
+                db.session.delete(team)
 
             for standing in tournament.standings:
                 db.session.delete(standing)
