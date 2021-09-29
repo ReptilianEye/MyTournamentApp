@@ -10,33 +10,43 @@ content %}
     {% set roundNumber = dual.round_number %}
     <div style="color: white">numer: {{roundNumber}}</div>
     {% endif %} -->
-    <div align="center">
-      <ol class="badge">
-        <div
-          class="btn-danger_nav_list_group btn-danger_nav_list_group_schedule"
-        >
-          <h2>
-            <!-- team 1 sie tutaj wyswietla -->
-            <div align="left" style="display: inline-block">
-              {% if tournament.type == '2Teams' %} {{dual.team_1.name}} {% endif
-              %} {% for player in dual.team_1.players %} {{player.name}} <br />
-              {% endfor %}
-            </div>
-            <!-- wynik -->
-            <div style="display: inline-block">
-              {{dual.score_1}}:{{dual.score_2}}
-            </div>
-            <!-- team 2 -->
-            <div align="right" style="display: inline-block">
-              {% if tournament.type == '2Teams' %} {{dual.team_2.name}} {% endif
-              %} {% for player in dual.team_2.players %} {{player.name}} <br />
-              {% endfor %}
-            </div>
-          </h2>
-        </div>
-      </ol>
-    </div>
-    <br />
+    <ol class="list-group list-group-flush" id="pary">
+      {% for tournament in user.tournaments %}
+
+      <div align="center">
+       
+          <ol class="badge">
+            <button
+              class="btn-danger_nav_list_group"
+              onClick="showTournament({{tournament.id}})"
+            >
+              <div align="left" style="display: inline-block">
+                <h4>
+                {% if tournament.type == '2Teams' %} {{dual.team_1.name}} {%
+                endif %} {% for player in dual.team_1.players %} {{player.name}}
+                <br />
+                {% endfor %}
+              </h4>
+              </div>
+              <!-- wynik -->
+              <div style="display: inline-block">
+                <h4>{{dual.score_1}}:{{dual.score_2}}</h4>
+              </div>
+              <!-- team 2 -->
+              <div align="right" style="display: inline-block">
+                <h4> {% if tournament.type == '2Teams' %} {{dual.team_2.name}} {%
+                endif %} {% for player in dual.team_2.players %} {{player.name}}
+                <br />
+                {% endfor %}</h4>
+              </div>
+            </button>
+          </ol>
+        </h4>
+      </div>
+      <br />
+      {% endfor %}
+    </ol>
+
     {% endfor %}
   </ol>
   <div align="center">
