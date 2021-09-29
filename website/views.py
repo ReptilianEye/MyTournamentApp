@@ -176,7 +176,6 @@ def showTournament():
     if tournamentId:
         current_user.actual_tournament_id = tournamentId
         db.session.commit()
-        tournament = Tournament.query.filter_by(id=current_user.actual_tournament_id).first()
         return redirect(url_for("views.Schedule"))
 
 
@@ -246,8 +245,6 @@ def publish_schedule():
 
 
 # Standings Functions
-
-
 @views.route('/standings')
 @login_required
 def show_standings():
@@ -255,6 +252,7 @@ def show_standings():
         id=current_user.actual_tournament_id).first()
     if not tournament.standings:
         prepareStandings(tournament)
+        #TODO znalesc jak zamiast like porownac dwa id
     standings = db.session.query(Standing).filter(Standing.tournament_id.like(tournament.id)).order_by(Standing.match_points.desc())
     return render_template("standing.html", user=current_user, standings=standings, tournament=tournament)
 
@@ -320,6 +318,7 @@ def get_scorers():
             db.session.commit()
             flash("Player's goals updated",category='success')
             return redirect(url_for("views.show_top_scorers"))
+    return render_template("get-scorers.html",user=current_user)
 
 # Delete Functions
 
