@@ -69,6 +69,9 @@ class Dual(db.Model):
     score_1 = db.Column(db.Integer,default=0)
     score_2 = db.Column(db.Integer,default=0)
 
+    date = db.Column(db.Datetime)
+
+
     round_number = db.Column(db.Integer)
 
 
