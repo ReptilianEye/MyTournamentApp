@@ -18,7 +18,7 @@ content %}
           <h2>
             <!-- team 1 sie tutaj wyswietla -->
             <div align="left" style="display: inline-block">
-              {% if tournament.type == '2Teams' %} {{dual.team_1.name}} {% endif
+              {% if dual.date %} {{dual.date}}{% endif %} {% if tournament.type == '2Teams' %} {{dual.team_1.name}} {% endif
               %} {% for player in dual.team_1.players %} {{player.name}} <br />
               {% endfor %}
             </div>
