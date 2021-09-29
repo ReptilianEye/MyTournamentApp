@@ -1,33 +1,34 @@
-{% extends "base.html" %} {% block title %}Standing{% endblock %} {% block
-    content %}
-    <h1 align="center">Standings</h1>
+{% extends "base.html" %} {% block title %}Standing{% endblock %} {% block content %}
+<section class="standings_box_container container_standings">
+    <br>
+    <h3 align="center">Standings</h3>
     <ol class="list-group list-group-flush" id="pary">
-      {% for standing in standings %}
-    
-      <div align="center">
-        <ol class="badge badge-dark">
-            <h3>{{standing.team.name}} Wygrane:{{standing.wins}} Przegrane:{{standing.loses}} Punkty:{{standing.match_points}}</h3>
-        </ol>
-      </div>
-      <br />
-      {% endfor %}
-    </ol>
-    
-    <br />
-    
-    <div align="right">
-      {% if tournament.discipline != 'Chess' %}
-      <a href="/top-scorers">
-        <button style="width: 210px; background-color: #e6aff7;" type="button" class="btn-danger_nav_schedule">Top Scorers</button>
-    </a>
-    {% endif %}
+        {% for standing in standings %}
 
-      <a href="/tournaments">
-        <button style="width: 210px; background-color: #5AA0BA;" type="button" class="btn-danger_nav_schedule">Back to Your Tournaments</button>
-    </a>
-    <a href="/">
-        <button type="button" class="btn-danger_nav_schedule">Return home</button>
-    </a>
+        <div align="center">
+            <ol class="badge">
+                <h2><span style="color: #5AA0BA; font-weight: 700;">{{standing.team.name}}</span> | <span style="color: #099204; font-weight: 600;">Wygrane: {{standing.wins}}</span> | <span style="color: #fc5858; font-weight: 600;">Przegrane: {{standing.loses}}</span>                    | Punkty: {{standing.match_points}}</h2>
+            </ol>
+        </div>
+        <br /> {% endfor %}
+    </ol>
+
+    <br />
+
+    <div align="center">
+        {% if tournament.discipline != 'Chess' %}
+        <a href="/top-scorers">
+            <button style="width: 210px; background-color: rgb(55, 65, 95);" type="button" class="btn-danger_nav_schedule">Top Scorers</button>
+        </a>
+        {% endif %}
+
+        <a href="/tournaments">
+            <button style="width: 210px; background-color: #5AA0BA;" type="button" class="btn-danger_nav_schedule">Back to Your Tournaments</button>
+        </a>
+        <a href="/">
+            <button type="button" class="btn-danger_nav_schedule">Return home</button>
+        </a>
     </div>
-    {% endblock %}
-    
+    <br>
+</section>
+{% endblock %}
