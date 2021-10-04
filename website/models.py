@@ -10,7 +10,7 @@ class User(db.Model,UserMixin):
 
     is_admin = db.Column(db.Boolean,default=False) 
     
-    actual_tournament_id = db.Column(db.Integer)
+    current_tournament_id = db.Column(db.Integer)
 
     tournaments = db.relationship('Tournament')  
 
@@ -27,44 +27,52 @@ class Tournament(db.Model):
 
     status = db.Column(db.String(150), default="upcoming")
     is_public = db.Column(db.Boolean(),default=False)
+    current_round_number = db.Column(db.Integer())
 
     duals = db.relationship('Dual')
-    players = db.relationship('Player')
-    teams = db.relationship('Team')
+    opponents = db.relationship('Opponent')
     standings = db.relationship('Standing')
 
 
-class Team(db.Model):
+# class Team(db.Model):
+#     id = db.Column(db.Integer,primary_key=True)
+#     tournament_id = db.Column(db.Integer,db.ForeignKey('tournament.id'))
+    
+#     name = db.Column(db.String(100000))
+    
+#     players = db.relationship('Player')
+#     standing = db.relationship('Standing') 
+
+
+
+class Opponent(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     tournament_id = db.Column(db.Integer,db.ForeignKey('tournament.id'))
+    # team_id = db.Column(db.Integer,db.ForeignKey('team.id'))
     
-    name = db.Column(db.String(100000))
-    
-    players = db.relationship('Player')
+
     standing = db.relationship('Standing') 
+    name = db.Column(db.String(100000))
+    # points_scored = db.Column(db.Integer,default=0)
 
-
-
-class Player(db.Model):
+    
+class Round(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     tournament_id = db.Column(db.Integer,db.ForeignKey('tournament.id'))
-    team_id = db.Column(db.Integer,db.ForeignKey('team.id'))
+    number = db.Column(db.Integer)
     
-    name = db.Column(db.String(100000))
-    points_scored = db.Column(db.Integer,default=0)
-
+    duals = db.relationship('Dual')
     
-
-
 class Dual(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     tournament_id = db.Column(db.Integer,db.ForeignKey('tournament.id'))
+    round_id = db.Column(db.Integer,db.ForeignKey('round.id'))
+
+    opponent1_id = db.Column(db.Integer,db.ForeignKey('opponent.id'))
+    opponent2_id = db.Column(db.Integer,db.ForeignKey('opponent.id'))
     
-    team1_id = db.Column(db.Integer,db.ForeignKey('team.id'))
-    team2_id = db.Column(db.Integer,db.ForeignKey('team.id'))
-    
-    team_1 = db.relationship('Team', foreign_keys=[team1_id])  
-    team_2 = db.relationship('Team', foreign_keys=[team2_id])  
+    opponent_1 = db.relationship('Opponent', foreign_keys=[opponent1_id])  
+    opponent_2 = db.relationship('Opponent', foreign_keys=[opponent2_id])  
 
     score_1 = db.Column(db.Integer,default=0)
     score_2 = db.Column(db.Integer,default=0)
@@ -77,8 +85,8 @@ class Standing(db.Model):
     id = db.Column(db.Integer,primary_key=True)
 
     tournament_id = db.Column(db.Integer,db.ForeignKey('tournament.id'))
-    team_id = db.Column(db.Integer,db.ForeignKey('team.id'))
-    team = db.relationship('Team', foreign_keys=[team_id])  
+    opponent_id = db.Column(db.Integer,db.ForeignKey('opponent.id'))
+    opponent = db.relationship('Opponent', foreign_keys=[opponent_id])  
 
 
     match_points = db.Column(db.Integer)

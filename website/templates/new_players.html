@@ -4,10 +4,10 @@
     <h3 align="center">Add Participants</h3>
     Lista uczestników
     <ol class="list-group list-group-flush" id="notes">
-        {% for player in tournament.players %}
+        {% for opponent in tournament.opponents %}
         <li align="center" class="list-group-item">
-            {{player.name}}
-            <button type="button" class="close" onClick="deletePlayer({{player.id}})">
+            {{opponent.name}}
+            <button type="button" class="close" onClick="deletePlayer({{opponent.id}})">
         <span aria-hidden="true">&times;</span>
       </button>
         </li>

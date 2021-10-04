@@ -1,7 +1,6 @@
 import random
 from .AdditionalFunctions import *
 
-
 def GenerateRoundRobin(ListaZawodnikow):
     return WygenerujTermiarzRoundRobin(ListaZawodnikow)
 
@@ -23,28 +22,23 @@ def Generate2Teams(ListaZawodnikow):
     Terminarz.append(lista2)
     return Terminarz
 
-
-def printStandings(L):
-    for el in L:
-        print(el.id)
-
-
-def generateStandings(tournament):
+def generateStandings(duals):
     Standings = []
-    print(tournament.duals)
-    for dual in tournament.duals:
-        if findTeamInList(dual.team1_id, Standings) == None:
-            Standings.append(TeamInStanding(dual.team1_id))
-        if findTeamInList(dual.team2_id, Standings) == None:
-            Standings.append(TeamInStanding(dual.team2_id))
-        if dual.score_1 > dual.score_2:
-            Standings[findTeamInList(dual.team1_id, Standings)].wins += 1
-            Standings[findTeamInList(dual.team2_id, Standings)].loses += 1
-        elif dual.score_1 < dual.score_2:
-            Standings[findTeamInList(dual.team1_id, Standings)].loses += 1
-            Standings[findTeamInList(dual.team2_id, Standings)].wins += 1
-        else:
-            Standings[findTeamInList(dual.team1_id, Standings)].draws += 1
-            Standings[findTeamInList(dual.team2_id, Standings)].draws += 1
+    for dual in duals:
+        if dual.was_played:
+            if findTeamInList(dual.team1_id, Standings) == None:
+                Standings.append(TeamInStanding(dual.team1_id))
+            if findTeamInList(dual.team2_id, Standings) == None:
+                Standings.append(TeamInStanding(dual.team2_id))
+            if dual.score_1 > dual.score_2:
+                Standings[findTeamInList(dual.team1_id, Standings)].wins += 1
+                Standings[findTeamInList(dual.team2_id, Standings)].loses += 1
+            elif dual.score_1 < dual.score_2:
+                Standings[findTeamInList(dual.team1_id, Standings)].loses += 1
+                Standings[findTeamInList(dual.team2_id, Standings)].wins += 1
+            else:
+                Standings[findTeamInList(dual.team1_id, Standings)].draws += 1
+                Standings[findTeamInList(dual.team2_id, Standings)].draws += 1
     #sorted(Standings,key=lambda team: team.wins, reverse=True)
     return Standings
+
