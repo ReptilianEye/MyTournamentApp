@@ -3,18 +3,17 @@ content %}
 <h1 align="center">Terminarz</h1>
 <ol class="list-group list-group-flush" id="pary">
 <form method="POST">
-  {% for dual in tournament.duals %}
 
   <div align="center">
     <ol class="badge badge-dark">
-      <h3>{{dual.team_1.name}} {{dual.score_1}}:{{dual.score_2}} {{dual.team_2.name}}</h3>
+      <h3>{{dual.opponent_1.name}} {{dual.score_1}}:{{dual.score_2}} {{dual.opponent_2.name}}</h3>
 
       <input name="score" type="number" placeholder="Type Score" id="score[]" />
       <input name="score" type="number" placeholder="Type Score" id="score[]" />
     </ol>
   </div>
   <br />
-  {% endfor %}
+  
 </ol>
 
 <br />

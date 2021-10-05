@@ -27,8 +27,11 @@ class Tournament(db.Model):
 
     status = db.Column(db.String(150), default="upcoming")
     is_public = db.Column(db.Boolean(),default=False)
-    current_round_number = db.Column(db.Integer())
+    current_round_number = db.Column(db.Integer(),default=0)
+    edited_dual_id = db.Column(db.Integer())
 
+
+    rounds = db.relationship('Round')
     duals = db.relationship('Dual')
     opponents = db.relationship('Opponent')
     standings = db.relationship('Standing')
@@ -74,8 +77,8 @@ class Dual(db.Model):
     opponent_1 = db.relationship('Opponent', foreign_keys=[opponent1_id])  
     opponent_2 = db.relationship('Opponent', foreign_keys=[opponent2_id])  
 
-    score_1 = db.Column(db.Integer,default=0)
-    score_2 = db.Column(db.Integer,default=0)
+    score_1 = db.Column(db.Integer)
+    score_2 = db.Column(db.Integer)
 
     round_number = db.Column(db.Integer)
 

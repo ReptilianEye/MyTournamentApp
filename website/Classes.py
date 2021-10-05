@@ -22,26 +22,45 @@ class TournamentController():
     def UploadPlayer(self, opponent):
         db.session.add(
             Opponent(tournament_id=self.tournament.id, name=opponent))
+    
+    def ChangeEditedDual(self,dual_id):
+        self.tournament.edited_dual_id = dual_id
+    
+    def GetChangedDual(self):
+        return Dual.query.filter_by(id = self.tournament.edited_dual_id).first()
 
-    def prepareNewRound(self):
-        return RoundRobinRS(self.tournament).getNewRound()
+    def UpdateScores(self,score1,score2):
+        dual = Dual.query.filter_by(id=self.tournament.edited_dual_id).first()
+        dual.score1 = score1
+        dual.score2 = score2
 
-    def prepareStanding(self):
+    def DeleteTournament(self):
+        pass
+
+
+    tournamentTypes = ['RoundRobin', '2Teams']
+    def PrepareNewRound(self):
+        if self.tournament.type == self.tournamentTypes[0]:
+            return RoundRobinRS(self.tournament).getNewRound()
+
+    def PrepareStanding(self):
         standing = generateStandings(self.tournament.duals)
         for opponent in standing:
             db.session.add(Standing(tournament_id=self.tournament.id, opponent_id=opponent.id,
                                     wins=opponent.wins, loses=opponent.loses, match_points=opponent.wins*self.multipleForWin+opponent.loses*self.multipleForLose+opponent.draws*self.multipleForDraw))
-        db.session.commit()
 
-    def showStanding(self):
+    def ShowStanding(self):
         if len(self.tournament.standings) == 0:
             self.prepareStandings()
         return self.tournament.standings
 
-    def delete_standing(self):
+    def DeleteStanding(self):
         for standing in self.tournament.standings:
             db.session.delete(standing)
         self.Save()
+
+    def DeleteTournament(self):
+        pass
 
 
 class ChessTournament(TournamentController):
@@ -63,13 +82,15 @@ class FootballStanding(TournamentController):
 
 
 class RoundStrategy():
+    
+
     def __init__(self, tournament):
         self.tournament = tournament
 
     def getNewRound(self):
         pass
 
-    def __createNewRound(self, round_number):
+    def createNewRound(self, round_number):
         newRund = Round(tournament_id=self.tournament.id, number=round_number)
         db.session.add(newRund)
         db.session.commit()
@@ -84,7 +105,7 @@ class RoundRobinRS(RoundStrategy):
         for line in schedule:
             if type(line) is int:
                 round_number = line
-                newRundId = self.__createNewRound(round_number)
+                newRundId = self.createNewRound(round_number)
             else:
                 opponent1 = Opponent.query.filter_by(
                     name=line[0], tournament_id=self.tournament.id).first()
@@ -95,10 +116,12 @@ class RoundRobinRS(RoundStrategy):
                                     opponent2_id=opponent2.id, round_number=round_number))
         db.session.commit()  # TODO czy da sie to zrobic lepiej - z funkcja Save()
 
+        
+
     def getNewRound(self):
         if len(self.tournament.duals) == 0:
             self.__generateSchedule()
-        else:
-            nextRoundNumber = self.tournament.current_round_number+1
-            rounda = Round.query.filter_by(tournament_id=self.tournament.id,number=nextRoundNumber).first()
-            return rounda
+        
+        self.tournament.current_round_number+=1
+        db.session.commit()
+    

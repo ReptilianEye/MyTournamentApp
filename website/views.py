@@ -1,6 +1,7 @@
 from logging import error
 from os import urandom
 from flask import Blueprint, render_template, request, flash, jsonify
+import flask
 from flask.helpers import url_for
 from flask.json import jsonify
 from flask_login import login_user, login_required, logout_user, current_user
@@ -57,7 +58,6 @@ def tournaments():
 #     tournament.type = newTournament.type
 #     db.session.commit()
 #     return redirect(url_for('views.schedule'))
-tournamentTypes = ['RoundRobin', '2Teams']
 
 
 @views.route('/new-schedule', methods=['GET', 'POST'])
@@ -121,48 +121,10 @@ def getPlayers():
 
 @views.route('generate-new-round', methods=['GET', 'POST'])
 def generateNewRound():
-    global tournamentTypes
     tournamentDTO = TournamentController()
     tournamentDTO.Load(current_user.current_tournament_id)
 
-    if tournamentDTO.tournament.type == tournamentTypes[0]:
-        round = tournamentDTO.prepareNewRound()
-    #     round_number = 0
-    #     for line in Teams:
-    #         if type(line) == int:
-    #             round_number = line
-    #         else:
-    #             player1_name = line[0]
-    #             player2_name = line[1]
-
-    #             player1 = Opponent.query.filter_by(
-    #                 name=player1_name, tournament_id=tournament.id).first()
-    #             player2 = Opponent.query.filter_by(
-    #                 name=player2_name, tournament_id=tournament.id).first()
-
-    #             newDual = Dual(tournament_id=tournament.id, team1_id=player1.team_id,
-    #                            team2_id=player2.team_id, round_number=round_number)
-
-    #             db.session.add(newDual)
-    #             db.session.commit()
-
-    # elif tournament.type == tournamentTypes[1]:
-    #     Teams = Generate2Teams(opponents)
-    #     i = 1
-    #     teamsId = []
-    #     for team in Teams:
-    #         newTeam = Team(tournament_id=tournament.id, name=f"team {i}")
-    #         db.session.add(newTeam)
-    #         db.session.commit()
-    #         teamsId.append(newTeam.id)
-    #         i += 1
-    #         for player in team:  # assign player to team
-    #             player.team_id = newTeam.id
-    #             db.session.commit()
-    #     newDual = Dual(tournament_id=tournament.id, team1_id=teamsId[0],
-    #                    team2_id=teamsId[1])
-    #     db.session.add(newDual)
-    #     db.session.commit()
+    tournamentDTO.PrepareNewRound()
 
     return redirect(url_for("views.schedule"))
 
@@ -173,7 +135,7 @@ def showTournament():
     tournament = json.loads(request.data)
     tournamentId = tournament['tournamentId']
     if tournamentId:
-        current_user.current_tournament_id = tournamentId
+        current_user.current_tournament_id = tournamentId      #TODO czy przerobic na obiekty?
         db.session.commit()
         return redirect(url_for("views.Schedule"))
 
@@ -181,36 +143,46 @@ def showTournament():
 @views.route('/schedule')
 @login_required
 def schedule():
-    tournament = Tournament.query.filter_by(
-        id=current_user.current_tournament_id).first()
-    return render_template("schedule.html", user=current_user, tournament=tournament)
+    tournamentDTO = TournamentController()
+    tournamentDTO.Load(current_user.current_tournament_id)
+
+    return render_template("schedule.html", user=current_user, tournament=tournamentDTO.tournament)
 
 
-@views.route('update-schedule', methods=['POST', 'GET'])
+@views.route('/get-dual-id',methods=['POST', 'GET'])
 @login_required
-def update_schedule():
-    tournament = Tournament.query.filter_by(
-        id=current_user.current_tournament_id).first()
+def change_current_dual():
+    tournamentDTO = TournamentController()
+    tournamentDTO.Load(current_user.current_tournament_id)
+
+    dualId = json.loads(request.data)
+    dualId = dualId['dualId']
+    
+    if dualId:
+        tournamentDTO.ChangeEditedDual(dualId)
+        tournamentDTO.Save()
+    
+    return jsonify({})
+    
+@views.route('update-dual', methods=['POST', 'GET'])
+@login_required
+def update_dual():
+    tournamentDTO = TournamentController()
+    tournamentDTO.Load(current_user.current_tournament_id)
+
     if request.method == 'POST':
-        scores = request.form.getlist('score')
-        for i in range(len(scores)):
-            if scores[i] != '':
-                scores[i] = int(scores[i])
-
-        i = 0
-        for dual in tournament.duals:
-            if type(scores[i]) is int:
-                dual.score_1 = scores[i]
-            i += 1
-            if type(scores[i]) is int:
-                dual.score_2 = scores[i]
-                db.session.commit()
-            i += 1
-
-        #delete_standing()
-        prepareStandings(tournament)
+        score1 = request.form.get('score1')
+        score2 = request.form.get('score2')
+        if score1 is None or score2 is None:
+            flash('Score cannot be empty')
+        else:
+            tournamentDTO.UpdateScores(score1,score2)
+            tournamentDTO.DeleteStanding()
+            tournamentDTO.PrepareStanding()
+            tournamentDTO.Save()
         return redirect(url_for("views.schedule"))
-    return render_template("update_schedule.html", user=current_user, tournament=tournament)
+    dual = tournamentDTO.GetChangedDual()
+    return render_template("update_dual.html", user=current_user,dual=dual)
 
 
 # Functions to pubish schedule
@@ -249,7 +221,7 @@ def publish_schedule():
 def show_standings():
     tournamentDTO = ChessTournament()
     tournamentDTO.Load(current_user.current_tournament_id)
-    return render_template("standing.html", user=current_user, standings=tournamentDTO.showStanding(), tournament=tournamentDTO)
+    return render_template("standing.html", user=current_user, standings=tournamentDTO.ShowStanding(), tournament=tournamentDTO)
 
 
 @views.route('/public-standings')
