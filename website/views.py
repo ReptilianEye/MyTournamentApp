@@ -137,7 +137,7 @@ def showTournament():
     if tournamentId:
         current_user.current_tournament_id = tournamentId      #TODO czy przerobic na obiekty?
         db.session.commit()
-        return redirect(url_for("views.Schedule"))
+        return redirect(url_for("views.schedule"))
 
 
 @views.route('/schedule')
@@ -284,24 +284,13 @@ def prepareStandings(tournament):
 def delete_schedule():
     tournament = json.loads(request.data)
     tournamentId = tournament['tournamentId']
-    tournament = Tournament.query.get(tournamentId)
-    if tournament:
-        if tournament.user_id == current_user.id:
+    tournamentDTO = ChessTournament()
+    tournamentDTO.Load(tournamentId)
+    if tournamentDTO.tournament:
+        if tournamentDTO.tournament.user_id == current_user.id:
             current_user.current_tournament_id = current_user.tournaments[0].id
-            for dual in tournament.duals:
-                db.session.delete(dual)
-
-            for player in tournament.opponents:
-                db.session.delete(player)
-
-            for team in tournament.teams:
-                db.session.delete(team)
-
-            for standing in tournament.standings:
-                db.session.delete(standing)
-
-            db.session.delete(tournament)
-            db.session.commit()
+            tournamentDTO.DeleteTournament()
+            tournamentDTO.Save()
     return jsonify({})
 
 
