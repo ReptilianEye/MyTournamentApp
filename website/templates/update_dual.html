@@ -6,10 +6,15 @@ content %}
 
   <div align="center">
     <ol class="badge badge-dark">
-      <h3>{{dual.opponent_1.name}} {{dual.score_1}}:{{dual.score_2}} {{dual.opponent_2.name}}</h3>
+        {% if dual.score_1 is none or dual.score_1 is none %} 
+        <h4>{{dual.opponent_1.name}} - {{dual.opponent_2.name}}</h4>
+        {% else %}
+        <h4>{{dual.opponent_1.name}} {{dual.score_1}}:{{dual.score_2}} {{dual.opponent_2.name}}</h4>
+        {% endif %}
 
-      <input name="score" type="number" placeholder="Type Score" id="score[]" />
-      <input name="score" type="number" placeholder="Type Score" id="score[]" />
+
+      <input name="score1" type="number" placeholder="Type Score" />
+      <input name="score2" type="number" placeholder="Type Score" />
     </ol>
   </div>
   <br />

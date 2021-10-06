@@ -169,19 +169,21 @@ def change_current_dual():
 def update_dual():
     tournamentDTO = TournamentController()
     tournamentDTO.Load(current_user.current_tournament_id)
+    dual = tournamentDTO.GetChangedDual()
 
     if request.method == 'POST':
         score1 = request.form.get('score1')
         score2 = request.form.get('score2')
         if score1 is None or score2 is None:
-            flash('Score cannot be empty')
+            flash('Score cannot be empty',category='error')
+ 
         else:
-            tournamentDTO.UpdateScores(score1,score2)
+            dual.score_1, dual.score_2 = int(score1),int(score2)
+            tournamentDTO.Save()
             tournamentDTO.DeleteStanding()
             tournamentDTO.PrepareStanding()
             tournamentDTO.Save()
-        return redirect(url_for("views.schedule"))
-    dual = tournamentDTO.GetChangedDual()
+            return redirect(url_for("views.schedule"))
     return render_template("update_dual.html", user=current_user,dual=dual)
 
 

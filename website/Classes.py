@@ -51,7 +51,7 @@ class TournamentController():
 
     def ShowStanding(self):
         if len(self.tournament.standings) == 0:
-            self.prepareStandings()
+            self.PrepareStanding()
         return self.tournament.standings
 
     def DeleteStanding(self):
@@ -67,18 +67,24 @@ class ChessTournament(TournamentController):
     multipleForWin = 1
     multipleForLose = 0
     multipleForDraw = 0.5
+    def PrepareStanding(self):
+        pass
 
 
 class BasketballStanding(TournamentController):
     multipleForWin = 2
     multipleForLose = 1
     multipleForDraw = 1
+    def PrepareStanding(self):
+            return super().PrepareStanding()
 
 
 class FootballStanding(TournamentController):
     multipleForWin = 3
     multipleForLose = 0
     multipleForDraw = 1
+    def PrepareStanding(self):
+            return super().PrepareStanding()
 
 
 class RoundStrategy():

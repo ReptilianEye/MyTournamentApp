@@ -25,20 +25,20 @@ def Generate2Teams(ListaZawodnikow):
 def generateStandings(duals):
     Standings = []
     for dual in duals:
-        if not (dual.score1 is None and dual.score2 is None):
-            if findTeamInList(dual.team1_id, Standings) == None:
-                Standings.append(TeamInStanding(dual.team1_id))
-            if findTeamInList(dual.team2_id, Standings) == None:
-                Standings.append(TeamInStanding(dual.team2_id))
+        if not (dual.score_1 is None and dual.score_2 is None):
+            if findOpponentInList(dual.opponent1_id, Standings) == None:
+                Standings.append(OpponentInStanding(dual.opponent1_id))
+            if findOpponentInList(dual.opponent2_id, Standings) == None:
+                Standings.append(OpponentInStanding(dual.opponent2_id))
             if dual.score_1 > dual.score_2:
-                Standings[findTeamInList(dual.team1_id, Standings)].wins += 1
-                Standings[findTeamInList(dual.team2_id, Standings)].loses += 1
+                Standings[findOpponentInList(dual.opponent1_id, Standings)].wins += 1
+                Standings[findOpponentInList(dual.opponent2_id, Standings)].loses += 1
             elif dual.score_1 < dual.score_2:
-                Standings[findTeamInList(dual.team1_id, Standings)].loses += 1
-                Standings[findTeamInList(dual.team2_id, Standings)].wins += 1
+                Standings[findOpponentInList(dual.opponent1_id, Standings)].loses += 1
+                Standings[findOpponentInList(dual.opponent2_id, Standings)].wins += 1
             else:
-                Standings[findTeamInList(dual.team1_id, Standings)].draws += 1
-                Standings[findTeamInList(dual.team2_id, Standings)].draws += 1
+                Standings[findOpponentInList(dual.opponent1_id, Standings)].draws += 1
+                Standings[findOpponentInList(dual.opponent2_id, Standings)].draws += 1
     #sorted(Standings,key=lambda team: team.wins, reverse=True)
     return Standings
 
