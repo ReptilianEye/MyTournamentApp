@@ -1,47 +1,95 @@
 {% extends "base.html" %} {% block title %}Schedule{% endblock %} {% block content %}
 
 <section class="schedule_box_container container_schedule">
-    <br />
-    <h3 align="center">{{tournament.name}}</h3>
+  <br />
+  <h3 align="center">{{tournament.name}}</h3>
+  <ol class="list-group list-group-flush" id="pary">
+    {% for round in tournament.rounds %}
+    {% if round.number <= tournament.current_round_number %}
+    <div class="btn-danger_nav_list_group" >Runda: {{round.number}}</div>
+
+    {% for dual in round.duals %}
+
     <ol class="list-group list-group-flush" id="pary">
-        {% for dual in tournament.duals %}
-        <!-- {% if roundNumber != dual.round_number %}
-    {% set roundNumber = dual.round_number %}
-    <div style="color: white">numer: {{roundNumber}}</div>
-    {% endif %} -->
-        <div align="center">
-            <ol class="badge">
-                <button style="background-color: #5AA0BA;" class="btn-danger_nav_list_group btn-danger_nav_list_group_schedule">
-                    <h2 style="color: #2B2E32;">
-                        <!-- team 1 sie tutaj wyswietla -->
-                        <div align="left" style="display: inline-block">
-                            {% if dual.date %} {{dual.date}}{% endif %} {% if tournament.type == '2Teams' %} {{dual.team_1.name}} {% endif %} {% for player in dual.team_1.players %} {{player.name}} <br /> {% endfor %}
-                        </div>
-                        <!-- wynik -->
-                        <div align="center" style="display: inline-block; color: whitesmoke; font-weight: 700;">
-                            {{dual.score_1}} : {{dual.score_2}}
-                        </div>
-                        <!-- team 2 -->
-                        <div align=" right " style="display: inline-block ">
-                            {% if tournament.type == '2Teams' %} {{dual.team_2.name}} {% endif %} {% for player in dual.team_2.players %} {{player.name}} <br /> {% endfor %}
-                        </div>
-                    </h2>
-                </button>
-            </ol>
-        </div>
-        <br /> {% endfor %}
+      <div align="center">
+       
+          <ol class="badge">
+            <button
+              class="btn-danger_nav_list_group"
+              onClick="showDual({{dual.id}})"
+            >
+              <div align="left" style="display: inline-block">
+                <h4>
+                {{dual.opponent_1.name}}
+                <br />
+              </h4>
+              </div>
+              <!-- wynik -->
+              <div style="display: inline-block">
+                {% if dual.score_1 is none or dual.score_1 is none %} 
+                <h4> - </h4>
+                {% else %}
+                <h4>{{dual.score_1}}:{{dual.score_2}}</h4>
+                {% endif %}
+
+              </div>
+              <div align="right" style="display: inline-block">
+                <h4> {{dual.opponent_2.name}}
+                <br />
+                </h4>
+
+              </div>
+            </button>
+            
+            {% endfor %}
+
+          </ol>
+        </h4>
+      </div>
+      <br />
     </ol>
-    <div align="center ">
-        <a href="/update-schedule ">
-            <button style="background-color: rgb(55, 134, 81) " type="button " class="btn-danger_nav_schedule ">
-        Update scores
+  </ol>
+  
+  {% endif %}
+  {% endfor %}
+  {% if tournament.current_round_number == 0 or tournament.current_round_number < (tournament.rounds)|length %}
+  <div align="center">
+  <a href="/generate-new-round">
+    <button
+      style="background-color: rgb(55, 134, 81)"
+      type="button"
+      class="btn-danger_nav_schedule"
+    >
+      newRund work
+    </button>
+  </a>
+
+</div>
+
+  {% endif %}
+
+  <div align="center">
+
+    <!-- <a href="/update-schedule"> -->
+      <!-- <a href="/generate-new-round">
+      <button
+        style="background-color: rgb(55, 134, 81)"
+        type="button"
+        class="btn-danger_nav_schedule"
+      >
+        newRund work
       </button>
-        </a>
-        <a href="/standings ">
-            <button type="button " class="btn-danger_nav_schedule ">Standings</button>
-        </a>
-        <a href="delete-tournament ">
-            <button style="background-color: #a03636 " class="btn-danger_nav_schedule " onClick="deleteTournament({{tournament.id}}) ">
+    </a> -->
+    
+    <a href="/standings">
+      <button type="button" class="btn-danger_nav_schedule">Standings</button>
+    </a>
+    <a href="delete-tournament">
+      <button
+        style="background-color: #a03636"
+        class="btn-danger_nav_schedule"
+        onClick="deleteTournament({{tournament.id}})"
+      >
         <div>Delete Schedule</div>
       </button>
         </a>

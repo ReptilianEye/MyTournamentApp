@@ -1,4 +1,5 @@
 import random
+from .models import Tournament
 
 pauza = "pauza"
 
@@ -188,7 +189,7 @@ def Generate2Teams(ListaZawodników):
     return Terminarz
 
 
-class TeamInStanding:
+class OpponentInStanding:
     def __init__(self, id, wins=0, loses=0, draws=0):
         self.id = id
         self.wins = wins
@@ -198,7 +199,7 @@ class TeamInStanding:
 # return index of player in a list
 
 
-def findTeamInList(player_id, L):
+def findOpponentInList(player_id, L):
     for i in range(len(L)):
         if L[i].id == player_id:
             return i

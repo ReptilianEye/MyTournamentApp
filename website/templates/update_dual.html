@@ -1,0 +1,39 @@
+{% extends "base.html" %} {% block title %}Terminarz{% endblock %} {% block
+content %}
+<h1 align="center">Terminarz</h1>
+<ol class="list-group list-group-flush" id="pary">
+<form method="POST">
+
+  <div align="center">
+    <ol class="badge badge-dark">
+        {% if dual.score_1 is none or dual.score_1 is none %} 
+        <h4>{{dual.opponent_1.name}} - {{dual.opponent_2.name}}</h4>
+        {% else %}
+        <h4>{{dual.opponent_1.name}} {{dual.score_1}}:{{dual.score_2}} {{dual.opponent_2.name}}</h4>
+        {% endif %}
+
+
+      <input name="score1" type="number" placeholder="Type Score" />
+      <input name="score2" type="number" placeholder="Type Score" />
+    </ol>
+  </div>
+  <br />
+  
+</ol>
+
+    <br />
+
+    <div align="center">
+        <button style="background-color: #3a5c39;" type="submit" href="/schedule" class="btn-danger_nav_schedule">Save</button>
+
+        <a href="/delete-schedule">
+            <button style="background-color: #fc5858;" type="button" class="btn-danger_nav_schedule">Reset</button>
+        </a>
+        <a href="/">
+            <button style="background-color: #5AA0BA;" type="button" class="btn-danger_nav_schedule">Return home</button>
+        </a>
+
+
+    </div>
+</section>
+{% endblock %}
