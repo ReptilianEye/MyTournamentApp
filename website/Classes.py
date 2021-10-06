@@ -14,7 +14,7 @@ class TournamentController():
         return self.tournament.id
 
     def Load(self, id):
-        self.tournament = Tournament.query.filter_by(id=id).first()
+        self.tournament = Tournament.query.get(id)
 
     def Save(self):  # self is always required as a argument
         db.session.commit()
@@ -35,7 +35,19 @@ class TournamentController():
         dual.score2 = score2
 
     def DeleteTournament(self):
-        pass
+        for round in self.rounds:
+            db.session.delete(round)
+
+        for dual in self.duals:
+            db.session.delete(dual)
+
+        for player in self.opponents:
+            db.session.delete(player)
+        
+        for standing in self.standings:
+            db.session.delete(standing)
+
+        db.session.delete(self)
 
 
     tournamentTypes = ['RoundRobin', '2Teams']
@@ -45,13 +57,22 @@ class TournamentController():
 
     def PrepareStanding(self):
         standing = generateStandings(self.tournament.duals)
-        for opponent in standing:
-            db.session.add(Standing(tournament_id=self.tournament.id, opponent_id=opponent.id,
-                                    wins=opponent.wins, loses=opponent.loses, match_points=opponent.wins*self.multipleForWin+opponent.loses*self.multipleForLose+opponent.draws*self.multipleForDraw))
+        if self.tournament.discipline == self.disciplines[0]:
+            Tournament = ChessTournament()
+        elif self.tournament.discipline == self.disciplines[1]:
+            Tournament = BasketballTournament()
+        else:
+            Tournament = FootballTournament()
+        Tournament.Load(self.tournament.id)
 
+        for opponent in standing:
+            db.session.add(Standing(tournament_id=Tournament.tournament.id, opponent_id=opponent.id,
+                                    wins=opponent.wins, loses=opponent.loses, match_points=opponent.wins*Tournament.multipleForWin+opponent.loses*Tournament.multipleForLose+opponent.draws*Tournament.multipleForDraw))
+
+    disciplines = ['Chess', 'Basketball', 'Football']
     def ShowStanding(self):
         if len(self.tournament.standings) == 0:
-            self.PrepareStanding()
+            Tournament.PrepareStanding()
         return self.tournament.standings
 
     def DeleteStanding(self):
@@ -71,7 +92,7 @@ class ChessTournament(TournamentController):
         pass
 
 
-class BasketballStanding(TournamentController):
+class BasketballTournament(TournamentController):
     multipleForWin = 2
     multipleForLose = 1
     multipleForDraw = 1
@@ -79,7 +100,7 @@ class BasketballStanding(TournamentController):
             return super().PrepareStanding()
 
 
-class FootballStanding(TournamentController):
+class FootballTournament(TournamentController):
     multipleForWin = 3
     multipleForLose = 0
     multipleForDraw = 1

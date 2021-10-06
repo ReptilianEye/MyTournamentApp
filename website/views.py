@@ -284,7 +284,7 @@ def prepareStandings(tournament):
 def delete_schedule():
     tournament = json.loads(request.data)
     tournamentId = tournament['tournamentId']
-    tournamentDTO = ChessTournament()
+    tournamentDTO = TournamentController()
     tournamentDTO.Load(tournamentId)
     if tournamentDTO.tournament:
         if tournamentDTO.tournament.user_id == current_user.id:
