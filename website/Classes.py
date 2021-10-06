@@ -35,19 +35,20 @@ class TournamentController():
         dual.score2 = score2
 
     def DeleteTournament(self):
-        for round in self.rounds:
+
+        for round in self.tournament.rounds:
             db.session.delete(round)
 
-        for dual in self.duals:
+        for dual in self.tournament.duals:
             db.session.delete(dual)
 
-        for player in self.opponents:
-            db.session.delete(player)
+        for opponent in self.tournament.opponents:
+            db.session.delete(opponent)
         
-        for standing in self.standings:
+        for standing in self.tournament.standings:
             db.session.delete(standing)
 
-        db.session.delete(self)
+        db.session.delete(self.tournament)
 
 
     tournamentTypes = ['RoundRobin', '2Teams']
@@ -79,9 +80,6 @@ class TournamentController():
         for standing in self.tournament.standings:
             db.session.delete(standing)
         self.Save()
-
-    def DeleteTournament(self):
-        pass
 
 
 class ChessTournament(TournamentController):

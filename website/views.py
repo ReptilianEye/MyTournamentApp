@@ -229,28 +229,11 @@ def show_standings():
 @views.route('/public-standings')
 @login_required
 def show_public_standings():
-
+    tournamentDTO = ChessTournament()
+    tournamentDTO.Load(current_user.current_tournament_id)
     tournament = Tournament.query.filter_by(is_public=True).first()
-    return render_template("standing.html", user=current_user, standings=tournament.standing, tournament=tournamentDTO)
+    return render_template("standing.html", user=current_user, standings=tournament.standings, tournament=tournamentDTO)
 
-
-def prepareStandings(tournament):
-    standings = generateStandings(tournament)
-    if tournament.discipline in ["Chess"]:
-        pass
-    elif tournament.discipline in ["Basketball"]:
-        multipleForWin = 2
-        multipleForLose = 1
-    else:  # ["volleyball","football","other"]
-        multipleForWin = 3
-        multipleForLose = 0
-        multipleForDraw = 1
-
-    for team in standings:
-        newStanding = Standing(tournament_id=current_user.current_tournament_id, team_id=team.id,
-                               wins=team.wins, loses=team.loses, match_points=team.wins*multipleForWin+team.loses*multipleForLose+team.draws*multipleForDraw)
-        db.session.add(newStanding)
-    db.session.commit()
 
 # @views.route('/top-scorers')
 # @login_required
@@ -281,18 +264,24 @@ def prepareStandings(tournament):
 
 @views.route('/delete-tournament', methods=['POST', 'GET'])
 @login_required
-def delete_schedule():
+def delete_tournament():
     tournament = json.loads(request.data)
     tournamentId = tournament['tournamentId']
+    
     tournamentDTO = TournamentController()
     tournamentDTO.Load(tournamentId)
+    
     if tournamentDTO.tournament:
         if tournamentDTO.tournament.user_id == current_user.id:
-            current_user.current_tournament_id = current_user.tournaments[0].id
+            current_user.actual_tournament_id = current_user.tournaments[0].id
             tournamentDTO.DeleteTournament()
             tournamentDTO.Save()
+            
     return jsonify({})
 
+    
+
+    
 
 @views.route('/delete-player', methods=['POST'])
 @login_required
