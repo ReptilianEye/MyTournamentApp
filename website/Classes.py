@@ -68,12 +68,12 @@ class TournamentController():
 
         for opponent in standing:
             db.session.add(Standing(tournament_id=Tournament.tournament.id, opponent_id=opponent.id,
-                                    wins=opponent.wins, loses=opponent.loses, match_points=opponent.wins*Tournament.multipleForWin+opponent.loses*Tournament.multipleForLose+opponent.draws*Tournament.multipleForDraw))
+                                    wins=opponent.wins, loses=opponent.loses, draws=opponent.draws, match_points=opponent.wins*Tournament.multipleForWin+opponent.loses*Tournament.multipleForLose+opponent.draws*Tournament.multipleForDraw))
 
     disciplines = ['Chess', 'Basketball', 'Football']
     def ShowStanding(self):
         if len(self.tournament.standings) == 0:
-            Tournament.PrepareStanding()
+            self.PrepareStanding()
         return self.tournament.standings
 
     def DeleteStanding(self):

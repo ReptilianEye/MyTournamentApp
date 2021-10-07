@@ -221,7 +221,7 @@ def publish_schedule():
 @views.route('/standings')
 @login_required
 def show_standings():
-    tournamentDTO = ChessTournament()
+    tournamentDTO = TournamentController()
     tournamentDTO.Load(current_user.current_tournament_id)
     return render_template("standing.html", user=current_user, standings=tournamentDTO.ShowStanding(), tournament=tournamentDTO)
 
