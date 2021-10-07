@@ -89,7 +89,7 @@ def getScheduleInfo():
             id = newTournament.CreateNew(
                 current_user.id, name, date, location, discipline, type)
             current_user.current_tournament_id = id
-            db.session.commit()
+            db.session.commit() #TODO SAVE
 
             return redirect(url_for('views.getPlayers'))
     return render_template("new_schedule.html", user=current_user)
@@ -125,17 +125,18 @@ def generateNewRound():
     tournamentDTO.Load(current_user.current_tournament_id)
 
     tournamentDTO.PrepareNewRound()
+    tournamentDTO.Save()
 
     return redirect(url_for("views.schedule"))
 
 
-@views.route('/show-tournament', methods=['POST', 'GET'])
+@views.route('/show-tournament', methods=['POST', 'GET'])       #TODO zmienic url na set-tournamnet-id
 @login_required
 def showTournament():
     tournament = json.loads(request.data)
     tournamentId = tournament['tournamentId']
     if tournamentId:
-        current_user.current_tournament_id = tournamentId      #TODO czy przerobic na obiekty?
+        current_user.current_tournament_id = tournamentId      
         db.session.commit()
         return redirect(url_for("views.schedule"))
 
@@ -208,6 +209,7 @@ def publish_schedule():
     if prevPublicTournament:
         prevPublicTournament.is_public = False
         db.session.commit()
+        
     tournament = Tournament.query.filter_by(
         id=current_user.current_tournament_id).first()
     tournament.is_public = True
