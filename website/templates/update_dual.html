@@ -1,25 +1,25 @@
-{% extends "base.html" %} {% block title %}Terminarz{% endblock %} {% block
-content %}
-<h1 align="center">Terminarz</h1>
-<ol class="list-group list-group-flush" id="pary">
-<form method="POST">
+{% extends "base.html" %} {% block title %}Terminarz{% endblock %} {% block content %}
+<section class="update_dual_box_container container_update_dual">
+    <br>
+    <h3 align="center">Terminarz</h3>
+    <ol class="list-group list-group-flush" id="pary">
+        <form method="POST">
 
-  <div align="center">
-    <ol class="badge badge-dark">
-        {% if dual.score_1 is none or dual.score_1 is none %} 
-        <h4>{{dual.opponent_1.name}} - {{dual.opponent_2.name}}</h4>
-        {% else %}
-        <h4>{{dual.opponent_1.name}} {{dual.score_1}}:{{dual.score_2}} {{dual.opponent_2.name}}</h4>
-        {% endif %}
+            <div align="center">
+                <ol class="badge">
+                    <br> {% if dual.score_1 is none or dual.score_1 is none %} {% else %}
+                    <h3 style="color: #5AA0BA;" align="center">{{dual.score_1}}:{{dual.score_2}}</h3>
+                    {% endif %}
+                    <br>
 
+                    <input class="type_score" name="score1" type="number" placeholder="{{dual.opponent_1.name}}" />
+                    <span style="color: whitesmoke; font-size: 30px;">|</span>
+                    <input class="type_score" name="score2" type="number" placeholder="{{dual.opponent_2.name}}" />
+                </ol>
+            </div>
+            <br />
 
-      <input name="score1" type="number" placeholder="Type Score" />
-      <input name="score2" type="number" placeholder="Type Score" />
     </ol>
-  </div>
-  <br />
-  
-</ol>
 
     <br />
 
