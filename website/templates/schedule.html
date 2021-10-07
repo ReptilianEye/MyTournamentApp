@@ -1,23 +1,19 @@
 {% extends "base.html" %} {% block title %}Schedule{% endblock %} {% block content %}
 
 <section class="schedule_box_container container_schedule">
-  <br />
-  <h3 align="center">{{tournament.name}}</h3>
-  <ol class="list-group list-group-flush" id="pary">
-    {% for round in tournament.rounds %}
-    {% if round.number <= tournament.current_round_number %}
-    <div class="btn-danger_nav_list_group" >Runda: {{round.number}}</div>
-
-    {% for dual in round.duals %}
-
+    <br />
+    <h3 align="center">{{tournament.name}}</h3>
     <ol class="list-group list-group-flush" id="pary">
-      <div align="center">
-       
-          <ol class="badge">
-            <button
-              class="btn-danger_nav_list_group"
-              onClick="showDual({{dual.id}})"
-            >
+        <br> {% for round in tournament.rounds %} {% if round.number
+        <=tournament.current_round_number %} <h4 align="center" class="h4_round">Runda: {{round.number}}</h4>
+            {% for dual in round.duals %}
+
+            <ol class="list-group list-group-flush" id="pary">
+                <div align="center">
+
+                    <ol class="badge">
+                        <br>
+                        <button class="btn-danger_nav_list_group_schedule" onClick="showDual({{dual.id}})">
               <div align="left" style="display: inline-block">
                 <h4>
                 {{dual.opponent_1.name}}
@@ -39,39 +35,31 @@
                 </h4>
 
               </div>
-            </button>
-            
-            {% endfor %}
+            </button> {% endfor %}
 
-          </ol>
-        </h4>
-      </div>
-      <br />
+                    </ol>
+                    </h4>
+                </div>
+                <br />
+            </ol>
     </ol>
-  </ol>
-  
-  {% endif %}
-  {% endfor %}
-  {% if tournament.current_round_number == 0 or tournament.current_round_number < (tournament.rounds)|length %}
-  <div align="center">
-  <a href="/generate-new-round">
-    <button
-      style="background-color: rgb(55, 134, 81)"
-      type="button"
-      class="btn-danger_nav_schedule"
-    >
+
+    {% endif %} {% endfor %} {% if tournament.current_round_number == 0 or tournament.current_round_number
+    < (tournament.rounds)|length %} <div align="center">
+        <a href="/generate-new-round">
+            <button style="background-color: rgb(55, 134, 81)" type="button" class="btn-danger_nav_schedule">
       newRund work
     </button>
-  </a>
+        </a>
 
-</div>
+        </div>
 
-  {% endif %}
+        {% endif %}
 
-  <div align="center">
+        <div align="center">
 
-    <!-- <a href="/update-schedule"> -->
-      <!-- <a href="/generate-new-round">
+            <!-- <a href="/update-schedule"> -->
+            <!-- <a href="/generate-new-round">
       <button
         style="background-color: rgb(55, 134, 81)"
         type="button"
@@ -80,35 +68,31 @@
         newRund work
       </button>
     </a> -->
-    
-    <a href="/standings">
-      <button type="button" class="btn-danger_nav_schedule">Standings</button>
-    </a>
-    <a href="delete-tournament">
-      <button
-        style="background-color: #a03636"
-        class="btn-danger_nav_schedule"
-        onClick="deleteTournament({{tournament.id}})"
-      >
+
+            <a href="/standings">
+                <button type="button" class="btn-danger_nav_schedule">Standings</button>
+            </a>
+            <a href="delete-tournament">
+                <button style="background-color: #a03636" class="btn-danger_nav_schedule" onClick="deleteTournament({{tournament.id}})">
         <div>Delete Schedule</div>
       </button>
-        </a>
-        <br /><br />
-        <a href="/tournaments ">
-            <button style="width: 210px; background-color: #5aa0ba " type="button " class="btn-danger_nav_schedule ">
+            </a>
+            <br /><br />
+            <a href="/tournaments ">
+                <button style="width: 210px; background-color: #5aa0ba " type="button " class="btn-danger_nav_schedule ">
         Back to Your Tournaments
       </button>
-        </a>
-        <a href="/ ">
-            <button type="button " class="btn-danger_nav_schedule ">Return home</button>
-        </a>
-        {% if user.is_admin %}
-        <a href="/publish-schedule ">
-            <button style="background-color: rgb(55, 65, 95) " type="button " class="btn-danger_nav_schedule_home_white ">
+            </a>
+            <a href="/ ">
+                <button type="button " class="btn-danger_nav_schedule ">Return home</button>
+            </a>
+            {% if user.is_admin %}
+            <a href="/publish-schedule ">
+                <button style="background-color: rgb(55, 65, 95) " type="button " class="btn-danger_nav_schedule_home_white ">
         Publish
       </button>
-        </a>
-        {% endif %}
-    </div>
+            </a>
+            {% endif %}
+        </div>
 </section>
 {% endblock %}

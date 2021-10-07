@@ -79,13 +79,16 @@ body::-webkit-scrollbar-thumb {
 }
 
 .type_score {
-    background-color: #20242A;
+    background-color: whitesmoke;
     border: none;
-    font-size: 18px;
+    font-size: 25px;
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.2);
     border-radius: 6px;
-    color: whitesmoke;
+    color: #20242A;
     text-align: center;
+    font-weight: 800;
+    width: 250px;
+    height: 40px;
 }
 
 nav {
@@ -169,6 +172,25 @@ h3 {
 }
 
 .container_home {
+    width: 900px;
+    height: 480px;
+    margin: 0 auto;
+    margin-top: 17%;
+}
+
+
+/* Update dual BOX */
+
+.update_dual_box_container {
+    background-color: #20242A;
+    height: 250px;
+    width: 700px;
+    /* width: 600px; */
+    box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 100px;
+}
+
+.container_update_dual {
     width: 900px;
     height: 480px;
     margin: 0 auto;
@@ -283,7 +305,7 @@ h3 {
 }
 
 .container_standings {
-    width: 900px;
+    width: auto;
     height: auto;
     margin: 0 auto;
     margin-top: 5%;
@@ -395,6 +417,13 @@ h2 {
 
 h4 {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.h4_round {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #5AA0BA;
+    font-size: 25px;
+    font-weight: 700;
 }
 
 
@@ -515,6 +544,27 @@ h4 {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-weight: bold;
     padding: 5px;
+}
+
+.btn-danger_nav_list_group_schedule {
+    /* background-color: whitesmoke; */
+    border: 0;
+    width: 550px;
+    height: 50px;
+    border-radius: 15px;
+    outline: none;
+    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+    transition: 0.5s;
+    backface-visibility: hidden;
+    margin-top: 1px;
+}
+
+.btn-danger_nav_list_group_schedule h4 {
+    color: #202225;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    padding: 5px;
+    text-align: center;
 }
 
 
