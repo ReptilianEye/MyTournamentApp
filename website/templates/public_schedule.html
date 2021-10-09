@@ -1,12 +1,15 @@
-{% extends "base.html" %} {% block title %}Public Schedule{% endblock %} {% block
-content %}
-<h1 align="center">{{tournament.name}}</h1>
+{% extends "base.html" %} {% block title %}Public Schedule{% endblock %} {%
+block content %}
+<h1 style="margin-top: 20px" align="center">{{tournament.name}}</h1>
 <ol class="list-group list-group-flush" id="pary">
   {% for dual in tournament.duals %}
 
   <div align="center">
     <ol class="badge badge-dark">
-        <h3>{{dual.opponent_1.name}} {{dual.score_1}}:{{dual.score_2}} {{dual.opponent_2.name}}</h3>
+      <h3>
+        {{dual.opponent_1.name}} {{dual.score_1}}:{{dual.score_2}}
+        {{dual.opponent_2.name}}
+      </h3>
     </ol>
   </div>
   <br />
@@ -14,11 +17,15 @@ content %}
 </ol>
 
 <br />
-<a href="/public-standings">
-  <button type="button" class="btn-danger_nav_schedule">Standings</button>
-</a>
 
-<div align="right">
-  <a type="button" href="/" class="btn btn-dark">Return home</a>
+<div class="public_standings_buttons">
+  <a href="/public-standings">
+    <button type="button" class="btn-danger_nav_schedule">Standings</button>
+  </a>
+
+  <div align="right">
+    <a type="button" href="/" class="btn btn-dark">Return home</a>
+  </div>
 </div>
+
 {% endblock %}

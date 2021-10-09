@@ -6,4 +6,4 @@ app = create_app()
 # zabezpiecza to przypadek w ktorym bym importowal 'main.py' a ta by sie chciala wystartowac
 if __name__ == '__main__':
     # debug = true - za kazdym razem kiedy wprowadze zmiane w kodzie serwer sie zresetuje i pokaze zmiany
-    app.run(debug=True)
+    app.run(debug=True, host="192.168.12.53")

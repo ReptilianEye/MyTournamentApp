@@ -11,10 +11,12 @@
                     <h3 style="color: #5AA0BA;" align="center">{{dual.score_1}}:{{dual.score_2}}</h3>
                     {% endif %}
                     <br>
-
-                    <input class="type_score" name="score1" type="number" placeholder="{{dual.opponent_1.name}}" />
-                    <span style="color: whitesmoke; font-size: 30px;">|</span>
-                    <input class="type_score" name="score2" type="number" placeholder="{{dual.opponent_2.name}}" />
+                    <div class="score_inputs">
+                       <input class="type_score" name="score1" type="number" placeholder="{{dual.opponent_1.name}}" />
+                    <span class="score-separator" style="color: whitesmoke; font-size: 30px;">|</span>
+                    <input class="type_score" name="score2" type="number" placeholder="{{dual.opponent_2.name}}" /> 
+                    </div>
+                    
                 </ol>
             </div>
             <br />

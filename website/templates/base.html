@@ -1,69 +1,163 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Stick+No+Bills:wght@600&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="../static/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Stick+No+Bills:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="shortcut icon"
+      href="../static/favicon.ico"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
 
     <title>{% block title %}Home{% endblock %}</title>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <nav>
+      <div class="logo-container">
         <div class="menu-icon">
-            <span class="fas fa-bars"></span></div>
-        <div class="logo" style="color: #5AA0BA; font-weight: 700;">
-            Liceum 31</div>
-        <div class="nav-items">
-            {% if user.is_authenticated %}
-            <li><a class="linkbutton link-active" id="home" href="/">Home</a></li>
-            <li><a class="linkbutton" id="logout" href="/logout">Wyloguj</a></li>
-            <li><a class="linkbutton" href="/public-schedule">Public schedule</a></li>
-            {% else %}
-            <li><a class="linkbutton" id="login" href="/login">Zaloguj</a></li>
-            <li><a class="linkbutton" id="signUp" href="/sign-up">Zarejestruj się</a></li>
-            {% endif %}
+          <span class="fas fa-bars"></span>
         </div>
-        <a href="https://www.instagram.com/31lokrakow" target="_blank" rel="noopener noreferrer"> <img style="margin-right: 20px;" class="logo_social" src="../static/instragram-icon.png" width="35" height="35" alt="Instagram logo"></a>
-        <a href="https://www.facebook.com/31LOKrakow" target="_blank" rel="noopener noreferrer"> <img style="margin-right: 20px;" class="logo_social" src="../static/facebook-icon.png" width="35" height="35" alt="Facebook logo"></a>
-        <a href="https://www.lo31.krakow.pl/" target="_blank" rel="noopener noreferrer"> <img class="logo_social" src="../static/logo 31lo.png" width="35" height="35" alt="Oficjalna strona 31LO"></a>
+        <div class="logo" style="color: #5aa0ba; font-weight: 700">
+          Liceum 31
+        </div>
+      </div>
+
+      <div class="nav-items">
+        {% if user.is_authenticated %}
+        <li><a class="linkbutton link-active" id="home" href="/">Home</a></li>
+        <li><a class="linkbutton" id="logout" href="/logout">Wyloguj</a></li>
+        <li>
+          <a class="linkbutton" href="/public-schedule">Public schedule</a>
+        </li>
+        {% else %}
+        <li><a class="linkbutton" id="login" href="/login">Zaloguj</a></li>
+        <li>
+          <a class="linkbutton" id="signUp" href="/sign-up">Zarejestruj się</a>
+        </li>
+        {% endif %}
+      </div>
+      <div class="social-items">
+        <a
+          href="https://www.instagram.com/31lokrakow"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            style="margin-right: 20px"
+            class="logo_social"
+            src="../static/instragram-icon.png"
+            alt="Instagram logo"
+        /></a>
+        <a
+          href="https://www.facebook.com/31LOKrakow"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            style="margin-right: 20px"
+            class="logo_social"
+            src="../static/facebook-icon.png"
+            alt="Facebook logo"
+        /></a>
+        <a
+          href="https://www.lo31.krakow.pl/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            class="logo_social"
+            src="../static/logo 31lo.png"
+            alt="Oficjalna strona 31LO"
+        /></a>
+      </div>
+
+      <div class="account-options">
         {% if user.admin %}
-        <a align="right" type="button" href="/add-admin" class="btn btn-dark">Add admin</a> {% endif %}
-        <button style="margin-left: 30px; margin-right: -60px;" align="right" type="submit" class="btn-danger_nav" onClick="deleteUser({{user.id}})">
-      Usuń konto
-    </button>
+        <a align="right" type="button" href="/add-admin" class="btn btn-dark"
+          >Add admin</a
+        >
+        {% endif %} {% if user.is_authenticated %}
+        <button
+          align="right"
+          type="submit"
+          class="btn-danger_nav"
+          onClick="deleteUser({{user.id}})"
+        >
+          Usuń konto
+        </button>
+        <button
+          align="right"
+          type="submit"
+          class="btn-danger_nav"
+          onClick="deleteUser({{user.id}})"
+        >
+          Usuń konto
+        </button>
+
+        {% endif %}
+      </div>
     </nav>
 
-    {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %} {% if category == 'error' %}
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %} {% for category, message in messages %} {% if category ==
+    'error' %}
     <div class="alert alert-danger alert-dismissable fade show" role="alert">
-        {{ message }}
-        <button type="button" class="close" data-dismiss="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     {% else %}
     <div class="alert alert-success alert-dismissable fade show" role="alert">
-        {{ message }}
-        <button type="button" class="close" data-dismiss="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     {% endif %} {% endfor %} {% endif %} {% endwith %}
 
     <div class="container">{% block content %} {% endblock %}</div>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
 
-    <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
-</body>
-
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='index.js') }}"
+    ></script>
+  </body>
 </html>

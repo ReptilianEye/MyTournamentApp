@@ -1,22 +1,25 @@
-{% extends "base.html" %} {% block title %}Home page{% endblock %} {% block content %}
-
+{% extends "base.html" %} {% block title %}Home page{% endblock %} {% block
+content %}
 
 <section class="home_box_container container_home">
-    <div>
-        <center><img src="../static/logo 31lo.png" width="250px"></center>
-        <h1 align="center">Witaj na stronie glownej!</h1>
-        <h2 align="center">Wybierz co chcesz zrobic!</h2>
+  <div>
+    <center>
+      <img src="../static/logo 31lo.png" class="home-container-logo" />
+    </center>
+    <h1 align="center">Witaj na stronie glownej!</h1>
+    <h2 align="center">Wybierz co chcesz zrobic!</h2>
+  </div>
+
+  <br />
+  <form method="POST">
+    <div align="center">
+      <a href="/tournaments">
+        <button type="button" class="btn-danger_nav_generate">
+          Your tournaments
+        </button>
+      </a>
     </div>
-
-    <br />
-    <form method="POST">
-        <div align="center">
-            <a href="/tournaments">
-                <button type="button" class="btn-danger_nav_generate">Your tournaments</button>
-            </a>
-        </div>
-    </form>
-
+  </form>
 </section>
 
 {% endblock %}
