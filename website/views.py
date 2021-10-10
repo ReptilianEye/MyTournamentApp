@@ -130,9 +130,9 @@ def generateNewRound():
     return redirect(url_for("views.schedule"))
 
 
-@views.route('/show-tournament', methods=['POST', 'GET'])       #TODO zmienic url na set-tournamnet-id
+@views.route('/set-tournament-id', methods=['POST', 'GET'])      
 @login_required
-def showTournament():
+def setTournamentId():
     tournament = json.loads(request.data)
     tournamentId = tournament['tournamentId']
     if tournamentId:

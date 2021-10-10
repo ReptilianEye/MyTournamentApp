@@ -15,7 +15,7 @@ function showDual(dualId) {
     });
 }
 function showTournament(tournamentId) {
-    fetch(window.location.origin + '/show-tournament', {
+    fetch(window.location.origin + '/set-tournament-id', {
         method: 'POST',
         body: JSON.stringify({ tournamentId: tournamentId }),
     }).then((_res) => {
