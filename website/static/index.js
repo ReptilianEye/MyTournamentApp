@@ -1,5 +1,5 @@
 function deleteUser(userId) {
-    fetch('delete-user', {
+    fetch(window.location.origin + '/delete-user', {
         method: 'POST',
         body: JSON.stringify({ userId: userId }),
     }).then((_res) => {
@@ -7,7 +7,7 @@ function deleteUser(userId) {
     });
 }
 function showDual(dualId) {
-    fetch('get-dual-id', {
+    fetch(window.location.origin + '/get-dual-id', {
         method: 'POST',
         body: JSON.stringify({ dualId: dualId }),
     }).then((_res) => {
@@ -15,15 +15,15 @@ function showDual(dualId) {
     });
 }
 function showTournament(tournamentId) {
-    fetch('show-tournament', {
+    fetch(window.location.origin + '/show-tournament', {
         method: 'POST',
         body: JSON.stringify({ tournamentId: tournamentId }),
     }).then((_res) => {
-        window.location.href = "/schedule";
+        window.location.href = "schedule";
     });
 }
 function deleteTournament(tournamentId) {
-    fetch('delete-tournament', {
+    fetch(window.location.origin + '/delete-tournament', {
         method: 'POST',
         body: JSON.stringify({ tournamentId: tournamentId }),
     }).then((_res) => {
@@ -31,7 +31,7 @@ function deleteTournament(tournamentId) {
     });
 }
 function deletePlayer(playerId) {
-    fetch('delete-player', {
+    fetch(window.location.origin + '/delete-player', {
         method: 'POST',
         body: JSON.stringify({ playerId: playerId }),
     }).then((_res) => {
