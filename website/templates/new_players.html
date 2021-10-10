@@ -1,28 +1,37 @@
- {% extends "base.html" %} {% block title %}Schedule Generator{% endblock %} {% block content %}
+{% extends "base.html" %} {% block title %}Schedule Generator{% endblock %} {%
+block content %}
 <section class="newplayers_box_container container_newplayer">
-    <br>
-    <h3 align="center">Add Participants</h3>
-    Lista uczestników
-    <ol class="list-group list-group-flush" id="notes">
-        {% for opponent in tournament.opponents %}
-        <li align="center" class="list-group-item">
-            {{opponent.name}}
-            <button type="button" class="close" onClick="deletePlayer({{opponent.id}})">
+  <br />
+  <h3 align="center">Add Participants</h3>
+  Lista uczestników
+  <ol class="list-group list-group-flush" id="notes">
+    {% for opponent in tournament.opponents %}
+    <li align="center" class="list-group-item">
+      {{opponent.name}}
+      <button
+        type="button"
+        class="close"
+        onClick="deletePlayer({{opponent.id}})"
+      >
         <span aria-hidden="true">&times;</span>
       </button>
-        </li>
-        {% endfor %}
-    </ol>
-    <br>
-    <form method="POST">
-        <textarea name="player" class="form_control"></textarea>
-        <br />
-        <div align="center">
-            <button type="submit" class="btn-danger_nav_generator_home_white">Add participant</button>
-            <a href="/schedule">
-                <button type="button" class="btn-danger_nav_generator_home">Create</button>
-            </a>
-        </div>
-    </form>
+    </li>
+    {% endfor %}
+  </ol>
+  <br />
+  <form method="POST">
+    <textarea name="player" class="form_control"></textarea>
+    <br />
+    <div align="center">
+      <button type="submit" class="btn-danger_nav_generator_home_white">
+        Add participant
+      </button>
+      <a href="/schedule">
+        <button type="button" class="btn-danger_nav_generator_home">
+          Create
+        </button>
+      </a>
+    </div>
+  </form>
 </section>
 {% endblock %}
