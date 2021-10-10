@@ -3,7 +3,7 @@ function deleteUser(userId) {
         method: 'POST',
         body: JSON.stringify({ userId: userId }),
     }).then((_res) => {
-        window.location.href = "/login";
+        window.location.href = window.location.origin + "/login";
     });
 }
 function showDual(dualId) {
@@ -11,7 +11,7 @@ function showDual(dualId) {
         method: 'POST',
         body: JSON.stringify({ dualId: dualId }),
     }).then((_res) => {
-        window.location.href = "/update-dual";
+        window.location.href = window.location.origin + "/update-dual";
     });
 }
 function showTournament(tournamentId) {
@@ -19,7 +19,7 @@ function showTournament(tournamentId) {
         method: 'POST',
         body: JSON.stringify({ tournamentId: tournamentId }),
     }).then((_res) => {
-        window.location.href = "schedule";
+        window.location.href = window.location.origin + "/schedule";
     });
 }
 function deleteTournament(tournamentId) {
@@ -27,7 +27,7 @@ function deleteTournament(tournamentId) {
         method: 'POST',
         body: JSON.stringify({ tournamentId: tournamentId }),
     }).then((_res) => {
-        window.location.href = "/tournaments";
+        window.location.href = window.location.origin + "/tournaments";
     });
 }
 function deletePlayer(playerId) {
@@ -35,6 +35,6 @@ function deletePlayer(playerId) {
         method: 'POST',
         body: JSON.stringify({ playerId: playerId }),
     }).then((_res) => {
-        window.location.href = "/new-players";
+        window.location.href = window.location.origin + "/new-players";
     });
 }

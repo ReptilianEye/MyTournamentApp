@@ -138,7 +138,7 @@ def showTournament():
     if tournamentId:
         current_user.current_tournament_id = tournamentId      
         db.session.commit()
-        return redirect(url_for("views.schedule"))
+        return jsonify({})
 
 
 @views.route('/schedule')
