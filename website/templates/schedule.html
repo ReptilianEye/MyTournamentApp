@@ -48,7 +48,7 @@
     < (tournament.rounds)|length %} <div align="center">
         <a href="/generate-new-round">
             <button style="background-color: rgb(55, 134, 81)" type="button" class="btn-danger_nav_schedule">
-      newRund work
+      New Round
     </button>
         </a>
 
@@ -57,35 +57,21 @@
         {% endif %}
 
         <div align="center">
-
-            <!-- <a href="/update-schedule"> -->
-            <!-- <a href="/generate-new-round">
-      <button
-        style="background-color: rgb(55, 134, 81)"
-        type="button"
-        class="btn-danger_nav_schedule"
-      >
-        newRund work
-      </button>
-    </a> -->
-
             <a href="/standings">
                 <button type="button" class="btn-danger_nav_schedule">Standings</button>
             </a>
             <a href="delete-tournament">
                 <button style="background-color: #a03636" class="btn-danger_nav_schedule" onClick="deleteTournament({{tournament.id}})">
-        <div>Delete Schedule</div>
-      </button>
+        Delete Schedule
+                </button>
             </a>
             <br /><br />
-            <a href="/tournaments ">
+        <a href="/tournaments">
                 <button style="width: 210px; background-color: #5aa0ba " type="button " class="btn-danger_nav_schedule ">
-        Back to Your Tournaments
+                  Back
       </button>
-            </a>
-            <a href="/ ">
-                <button type="button " class="btn-danger_nav_schedule ">Return home</button>
-            </a>
+    </a>
+
             {% if user.is_admin %}
             <a href="/publish-schedule ">
                 <button style="background-color: rgb(55, 65, 95) " type="button " class="btn-danger_nav_schedule_home_white ">

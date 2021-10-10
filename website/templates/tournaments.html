@@ -1,14 +1,14 @@
  {% extends "base.html" %} {% block title %}Schedules{% endblock %} {% block content %}
 <section class="tournaments_box_container container_tournaments">
     <br>
-    <h3 align="center">Your Schedules</h3>
+    <h3 align="center">Your Tournaments</h3>
     <br>
     <ol class="list-group list-group-flush" id="pary">
         {% for tournament in user.tournaments %}
 
         <div align="center">
             <ol class="badge ">
-                <button class="btn-danger_nav_list_group" onClick="showTournament({{tournament.id}})"><h4>{{tournament.name}} {{tournament.date}} {{tournament.location}}</h4> </button>
+                <button class="btn-danger_nav_list_group" onClick="showTournament({{tournament.id}})"><h4>{{tournament.name}}; Players: {{tournament.opponents|length}}; {{tournament.date}}; {{tournament.location}}</h4> </button>
             </ol>
         </div>
         <br /> {% endfor %}
@@ -16,12 +16,12 @@
 
     <br />
     <div align="center">
-        <a href="/new-schedule">
-            <button type="button" class="btn-danger_nav_tournaments_blue">Generate new schedule</button>
+        <a href="/new-tournament">
+            <button type="button" style="width: 210px; background-color: #022633" class="btn-danger_nav_tournaments_blue">Generate new schedule</button>
         </a>
-        <a href="/" style="margin-left: 25px;">
-            <button type="button" class="btn-danger_nav_tournaments">Return home</button>
-        </a>
+        
+        <button  style="width: 210px; background-color: #5aa0ba" type="button " class="btn-danger_nav_schedule ">Back</button>
+
     </div>
 </section>
 

@@ -1,3 +1,6 @@
+function goBack() {
+    window.history.back()
+}
 function deleteUser(userId) {
     fetch(window.location.origin + '/delete-user', {
         method: 'POST',

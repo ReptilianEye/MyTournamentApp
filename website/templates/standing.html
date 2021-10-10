@@ -16,18 +16,7 @@
     <br />
 
     <div align="center">
-        {% if tournament.discipline != 'Chess' %}
-        <a href="/top-scorers">
-            <button style="width: 210px; background-color: rgb(55, 65, 95);" type="button" class="btn-danger_nav_schedule">Top Scorers</button>
-        </a>
-        {% endif %}
-
-        <a href="/tournaments">
-            <button style="width: 210px; background-color: #5AA0BA;" type="button" class="btn-danger_nav_schedule">Back to Your Tournaments</button>
-        </a>
-        <a href="/">
-            <button type="button" class="btn-danger_nav_schedule">Return home</button>
-        </a>
+            <button onclick="goBack()" style="width: 210px; background-color: #5AA0BA;" type="button" class="btn-danger_nav_schedule">Back</button>
     </div>
     <br>
 </section>

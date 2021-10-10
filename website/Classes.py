@@ -74,7 +74,7 @@ class TournamentController():
     def ShowStanding(self):
         if len(self.tournament.standings) == 0:
             self.PrepareStanding()
-        return self.tournament.standings
+        return sorted(self.tournament.standings, key=lambda standing: (standing.match_points,standing.wins,standing.draws),reverse=True)
 
     def DeleteStanding(self):
         for standing in self.tournament.standings:
@@ -139,7 +139,7 @@ class RoundRobinRS(RoundStrategy):
 
                 db.session.add(Dual(tournament_id=self.tournament.id, round_id=newRundId, opponent1_id=opponent1.id,
                                     opponent2_id=opponent2.id, round_number=round_number))
-        db.session.commit()  # TODO czy da sie to zrobic lepiej - z funkcja Save()
+        db.session.commit() 
 
         
 
