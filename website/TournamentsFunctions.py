@@ -42,3 +42,52 @@ def generateStandings(duals):
     #sorted(Standings,key=lambda team: team.wins, reverse=True)
     return Standings
 
+
+def GenerateFirstRoundSwiss(T):
+
+    import random
+    import copy
+
+    #1)losowanie listy runda 1
+
+    losowanie = copy.deepcopy(T)
+
+    #0 sprawdZanie parzystości
+
+    if len(losowanie) % 2 == 1:
+        losowanie.append('Bye')
+    
+    random.shuffle(losowanie)
+
+    #2) pairingi runda 1
+
+    pary = []
+
+    i = 0
+
+    while i <len(losowanie):
+        para = []
+        para.append(losowanie[i])
+        para.append(losowanie[i+1])
+        pary.append(para)
+        i+=2
+
+    return pary
+
+
+def GenerateRoundSwiss(Wyniki, Standing):
+    Standing=sorted(Standing, key=lambda standing: (standing.wins,standing.draws),reverse=True)
+    #idzie po kolei xd
+    Pary=[]
+    for i in range(len(Standing)):
+        if len(Standing) == 0:
+            return Pary
+        if len(Standing) == 1:
+            Pary.append([Standing[i].opponent_id, 'Bye' ])
+            return Pary  
+        for j in range(i+1,Standing):
+            if sprawdzankoGraczy(Wyniki,Standing[i].opponent_id,Standing[j].opponent_id):
+                Pary.append([Standing[i].opponent_id,Standing[j].opponent_id])
+                Standing.remove(j)
+                Standing.remove(i)
+                break

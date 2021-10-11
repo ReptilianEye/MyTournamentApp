@@ -1,4 +1,4 @@
-import re
+
 from .TournamentsFunctions import *
 from .import db
 from .models import Opponent, User, Tournament, Dual, Opponent, Standing, Round
@@ -150,3 +150,40 @@ class RoundRobinRS(RoundStrategy):
         self.tournament.current_round_number+=1
         db.session.commit()
     
+class SwissRS(RoundStrategy):
+    def saveRound(self,duel,round_number):
+        newRundId = self.createNewRound(round_number)
+        opponent1 = Opponent.query.filter_by(
+            name=duel[0], tournament_id=self.tournament.id).first()
+        opponent2 = Opponent.query.filter_by(
+            name=duel[1], tournament_id=self.tournament.id).first()
+
+        db.session.add(Dual(tournament_id=self.tournament.id, round_id=newRundId, opponent1_id=opponent1.id,
+                            opponent2_id=opponent2.id, round_number=1))
+        db.session.commit() 
+
+        
+    def GenerateFirstRound(self):
+        schedule=GenerateFirstRoundSwiss(self.tournament.opponents)
+        newRundId = self.createNewRound(1)
+        for line in schedule:
+            opponent1 = Opponent.query.filter_by(
+                name=line[0], tournament_id=self.tournament.id).first()
+            opponent2 = Opponent.query.filter_by(
+                name=line[1], tournament_id=self.tournament.id).first()
+
+            db.session.add(Dual(tournament_id=self.tournament.id, round_id=newRundId, opponent1_id=opponent1.id,
+                                opponent2_id=opponent2.id, round_number=1))
+        db.session.commit() 
+
+
+    def getNewRound(self):
+        if len(self.tournament.duals) == 0:
+            self.GenerateFirstRoundSwiss()
+        else:
+            self.tournament.current_round_number+=1
+            db.session.commit()
+            round = GenerateRoundSwiss(self.tournament.duals ,self.tournament.standings )
+            for duel in round:
+                self.saveRound(duel,self.tournament.current_round_number)
+        return round

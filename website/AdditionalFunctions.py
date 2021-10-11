@@ -203,3 +203,13 @@ def findOpponentInList(player_id, L):
     for i in range(len(L)):
         if L[i].id == player_id:
             return i
+
+
+
+def sprawdzankoGraczy(Wyniki,Gracz1,Gracz2):
+    for el in Wyniki:
+        para=[el.opponent1_id, el.opponent2_id]
+        if Gracz1 in para and Gracz2 in para:
+           return False
+    return True
+
