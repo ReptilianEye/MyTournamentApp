@@ -1,5 +1,7 @@
 import random
+import copy
 from .AdditionalFunctions import *
+
 
 def GenerateRoundRobin(ListaZawodnikow):
     return WygenerujTermiarzRoundRobin(ListaZawodnikow)
@@ -22,6 +24,7 @@ def Generate2Teams(ListaZawodnikow):
     Terminarz.append(lista2)
     return Terminarz
 
+
 def generateStandings(duals):
     Standings = []
     for dual in duals:
@@ -31,63 +34,61 @@ def generateStandings(duals):
             if findOpponentInList(dual.opponent2_id, Standings) == None:
                 Standings.append(OpponentInStanding(dual.opponent2_id))
             if dual.score_1 > dual.score_2:
-                Standings[findOpponentInList(dual.opponent1_id, Standings)].wins += 1
-                Standings[findOpponentInList(dual.opponent2_id, Standings)].loses += 1
+                Standings[findOpponentInList(
+                    dual.opponent1_id, Standings)].wins += 1
+                Standings[findOpponentInList(
+                    dual.opponent2_id, Standings)].loses += 1
             elif dual.score_1 < dual.score_2:
-                Standings[findOpponentInList(dual.opponent1_id, Standings)].loses += 1
-                Standings[findOpponentInList(dual.opponent2_id, Standings)].wins += 1
+                Standings[findOpponentInList(
+                    dual.opponent1_id, Standings)].loses += 1
+                Standings[findOpponentInList(
+                    dual.opponent2_id, Standings)].wins += 1
             else:
-                Standings[findOpponentInList(dual.opponent1_id, Standings)].draws += 1
-                Standings[findOpponentInList(dual.opponent2_id, Standings)].draws += 1
+                Standings[findOpponentInList(
+                    dual.opponent1_id, Standings)].draws += 1
+                Standings[findOpponentInList(
+                    dual.opponent2_id, Standings)].draws += 1
     #sorted(Standings,key=lambda team: team.wins, reverse=True)
     return Standings
 
 
 def GenerateFirstRoundSwiss(T):
 
-    import random
-    import copy
-
-    #1)losowanie listy runda 1
-
+    
     losowanie = copy.deepcopy(T)
 
-    #0 sprawdZanie parzystości
-
-    if len(losowanie) % 2 == 1:
-        losowanie.append('Bye')
-    
     random.shuffle(losowanie)
-
-    #2) pairingi runda 1
 
     pary = []
 
     i = 0
-
-    while i <len(losowanie):
+    n = len(losowanie)
+    if n % 2 == 1:
+        n -= 1
+    while i < n:
         para = []
         para.append(losowanie[i])
         para.append(losowanie[i+1])
         pary.append(para)
-        i+=2
+        i += 2
 
     return pary
 
 
 def GenerateRoundSwiss(Wyniki, Standing):
-    Standing=sorted(Standing, key=lambda standing: (standing.wins,standing.draws),reverse=True)
-    #idzie po kolei xd
-    Pary=[]
+    Standing = sorted(Standing, key=lambda standing: (
+        standing.wins, standing.draws), reverse=True)
+    # idzie po kolei xd
+    Pary = []
     for i in range(len(Standing)):
         if len(Standing) == 0:
             return Pary
         if len(Standing) == 1:
-            Pary.append([Standing[i].opponent_id, 'Bye' ])
-            return Pary  
-        for j in range(i+1,Standing):
-            if sprawdzankoGraczy(Wyniki,Standing[i].opponent_id,Standing[j].opponent_id):
-                Pary.append([Standing[i].opponent_id,Standing[j].opponent_id])
+            Pary.append([Standing[i].opponent_id, 'Bye'])
+            return Pary
+        for j in range(i+1, Standing):
+            if sprawdzankoGraczy(Wyniki, Standing[i].opponent_id, Standing[j].opponent_id):
+                Pary.append([Standing[i].opponent_id, Standing[j].opponent_id])
                 Standing.remove(j)
                 Standing.remove(i)
                 break

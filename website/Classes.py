@@ -22,14 +22,14 @@ class TournamentController():
     def UploadPlayer(self, opponent):
         db.session.add(
             Opponent(tournament_id=self.tournament.id, name=opponent))
-    
-    def ChangeEditedDual(self,dual_id):
-        self.tournament.edited_dual_id = dual_id
-    
-    def GetChangedDual(self):
-        return Dual.query.filter_by(id = self.tournament.edited_dual_id).first()
 
-    def UpdateScores(self,score1,score2):
+    def ChangeEditedDual(self, dual_id):
+        self.tournament.edited_dual_id = dual_id
+
+    def GetChangedDual(self):
+        return Dual.query.filter_by(id=self.tournament.edited_dual_id).first()
+
+    def UpdateScores(self, score1, score2):
         dual = Dual.query.filter_by(id=self.tournament.edited_dual_id).first()
         dual.score1 = score1
         dual.score2 = score2
@@ -44,14 +44,14 @@ class TournamentController():
 
         for opponent in self.tournament.opponents:
             db.session.delete(opponent)
-        
+
         for standing in self.tournament.standings:
             db.session.delete(standing)
 
         db.session.delete(self.tournament)
 
-
     tournamentTypes = ['RoundRobin', 'Swiss']
+
     def PrepareNewRound(self):
         if self.tournament.type == self.tournamentTypes[0]:
             return RoundRobinRS(self.tournament).getNewRound()
@@ -73,10 +73,11 @@ class TournamentController():
                                     wins=opponent.wins, loses=opponent.loses, draws=opponent.draws, match_points=opponent.wins*Tournament.multipleForWin+opponent.loses*Tournament.multipleForLose+opponent.draws*Tournament.multipleForDraw))
 
     disciplines = ['Chess', 'Basketball', 'Football']
+
     def ShowStanding(self):
         if len(self.tournament.standings) == 0:
             self.PrepareStanding()
-        return sorted(self.tournament.standings, key=lambda standing: (standing.match_points,standing.wins,standing.draws),reverse=True)
+        return sorted(self.tournament.standings, key=lambda standing: (standing.match_points, standing.wins, standing.draws), reverse=True)
 
     def DeleteStanding(self):
         for standing in self.tournament.standings:
@@ -88,6 +89,7 @@ class ChessTournament(TournamentController):
     multipleForWin = 1
     multipleForLose = 0
     multipleForDraw = 0.5
+
     def PrepareStanding(self):
         pass
 
@@ -96,20 +98,21 @@ class BasketballTournament(TournamentController):
     multipleForWin = 2
     multipleForLose = 1
     multipleForDraw = 1
+
     def PrepareStanding(self):
-            return super().PrepareStanding()
+        return super().PrepareStanding()
 
 
 class FootballTournament(TournamentController):
     multipleForWin = 3
     multipleForLose = 0
     multipleForDraw = 1
+
     def PrepareStanding(self):
-            return super().PrepareStanding()
+        return super().PrepareStanding()
 
 
 class RoundStrategy():
-    
 
     def __init__(self, tournament):
         self.tournament = tournament
@@ -141,19 +144,18 @@ class RoundRobinRS(RoundStrategy):
 
                 db.session.add(Dual(tournament_id=self.tournament.id, round_id=newRundId, opponent1_id=opponent1.id,
                                     opponent2_id=opponent2.id, round_number=round_number))
-        db.session.commit() 
-
-        
+        db.session.commit()
 
     def getNewRound(self):
         if len(self.tournament.duals) == 0:
             self.__generateSchedule()
-        
-        self.tournament.current_round_number+=1
+
+        self.tournament.current_round_number += 1
         db.session.commit()
-    
+
+
 class SwissRS(RoundStrategy):
-    def saveRound(self,duel,round_number):
+    def saveRound(self, duel, round_number):
         newRundId = self.createNewRound(round_number)
         opponent1 = Opponent.query.filter_by(
             name=duel[0], tournament_id=self.tournament.id).first()
@@ -162,30 +164,25 @@ class SwissRS(RoundStrategy):
 
         db.session.add(Dual(tournament_id=self.tournament.id, round_id=newRundId, opponent1_id=opponent1.id,
                             opponent2_id=opponent2.id, round_number=1))
-        db.session.commit() 
+        db.session.commit()
 
-        
     def GenerateFirstRound(self):
-        schedule=GenerateFirstRoundSwiss(self.tournament.opponents)
+        schedule = GenerateFirstRoundSwiss(self.tournament.opponents)
         newRundId = self.createNewRound(1)
         for line in schedule:
-            opponent1 = Opponent.query.filter_by(
-                name=line[0], tournament_id=self.tournament.id).first()
-            opponent2 = Opponent.query.filter_by(
-                name=line[1], tournament_id=self.tournament.id).first()
 
-            db.session.add(Dual(tournament_id=self.tournament.id, round_id=newRundId, opponent1_id=opponent1.id,
-                                opponent2_id=opponent2.id, round_number=1))
-        db.session.commit() 
-
+            db.session.add(Dual(tournament_id=self.tournament.id, round_id=newRundId, opponent1_id=line[0].id,
+                                opponent2_id=line[1].id, round_number=1))
+        db.session.commit()
 
     def getNewRound(self):
         if len(self.tournament.duals) == 0:
-            self.GenerateFirstRoundSwiss()
+            self.GenerateFirstRound()
         else:
-            self.tournament.current_round_number+=1
+            self.tournament.current_round_number += 1
             db.session.commit()
-            round = GenerateRoundSwiss(self.tournament.duals ,self.tournament.standings )
+            round = GenerateRoundSwiss(
+                self.tournament.duals, self.tournament.standings)
             for duel in round:
-                self.saveRound(duel,self.tournament.current_round_number)
-        return round
+                self.saveRound(duel, self.tournament.current_round_number)
+        
