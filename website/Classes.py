@@ -51,10 +51,12 @@ class TournamentController():
         db.session.delete(self.tournament)
 
 
-    tournamentTypes = ['RoundRobin', '2Teams']
+    tournamentTypes = ['RoundRobin', 'Swiss']
     def PrepareNewRound(self):
         if self.tournament.type == self.tournamentTypes[0]:
             return RoundRobinRS(self.tournament).getNewRound()
+        if self.tournament.type == self.tournamentTypes[1]:
+            return SwissRS(self.tournament).getNewRound()
 
     def PrepareStanding(self):
         standing = generateStandings(self.tournament.duals)
