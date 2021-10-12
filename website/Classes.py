@@ -49,13 +49,15 @@ class TournamentController():
 
         db.session.delete(self.tournament)
 
-    tournamentTypes = ['RoundRobin', 'Swiss']
+    tournamentTypes = ['RoundRobin', 'Swiss', 'Tree']
 
     def PrepareNewRound(self):
         if self.tournament.type == self.tournamentTypes[0]:
             return RoundRobinRS(self.tournament).getNewRound()
         if self.tournament.type == self.tournamentTypes[1]:
             return SwissRS(self.tournament).getNewRound()
+        if self.tournament.type == self.tournamentTypes[2]:
+            return TreeRS(self.tournament).getNewRound()
 
     def PrepareStanding(self):
         standing = generateStandings(self.tournament.duals)
@@ -167,7 +169,7 @@ class SwissRS(RoundStrategy):
    
 
 
-    def GenerateFirstRound(self):
+    def generateFirstRound(self):
         firstRound = GenerateFirstRoundSwiss(self.tournament.opponents)
         self.saveRound(firstRound,1)
 
@@ -176,7 +178,7 @@ class SwissRS(RoundStrategy):
         self.tournament.current_round_number += 1
         db.session.commit()
         if len(self.tournament.duals) == 0:
-            self.GenerateFirstRound()
+            self.generateFirstRound()
             self.tournament.max_rounds = 5
         else:
             if checkIfScoresAreWritten(self.tournament.duals):
@@ -190,17 +192,17 @@ class SwissRS(RoundStrategy):
 class TreeRS(RoundStrategy):
     
 
-    def firstRound(self, duels):
-        potegaWiekszej = math.floor(math.log2(len(duels)))
+    def generateFirstRound(self, players):
+        potegaWiekszej = math.floor(math.log2(len(players)))
         potegaDwojki = pow(2, potegaWiekszej)
-        liczbaDuelsWPierwszej = len(duels) - potegaDwojki
-        return self.getNewRound(duels, liczbaDuelsWPierwszej)
+        liczbaDuelsWPierwszej = len(players) - potegaDwojki
+        return self.getNewRound(players, liczbaDuelsWPierwszej)
 
     def getNewRound(self):
         self.tournament.current_round_number += 1
         db.session.commit()
         if len(self.tournament.duals) == 0:
-            self.GenerateFirstRound()
+            self.generateFirstRound(self.tournament.duals)
             
             if checkIfScoresAreWritten(self.tournament.duals):
                 if checkIfScoresAreDecided(self.tournament.duals):
