@@ -213,3 +213,20 @@ def sprawdzankoGraczy(Wyniki,Gracz1,Gracz2):
            return False
     return True
 
+def whoWins(opponent1, opponent2):
+    if opponent1.score_1 > opponent2.score_2:
+        return opponent1
+    else:
+        return opponent2
+
+def checkIfScoresAreWritten(duels):
+    for duel in duels:
+        if duel.score_1 is None or duel.score_2 is None:
+            return False
+    return True
+
+def checkIfScoresAreDecided(duels):
+    for duel in duels:
+        if duel.score_1 == duel.score_2:
+            return False
+    return True
