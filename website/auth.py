@@ -48,19 +48,21 @@ def sign_up():
             flash('Email already exists', category='error')
         else:
             if len(email) < 4:
-                flash("Twoj email musi miec wiecej znakow niz 3", category='error')
+                flash("Email has to be longer than 3 characters", category='error')
+            elif '@' not in email:
+                flash("Please include @ in your email", category='error')
             elif len(first_name) < 2:
-                flash("Twoje imie musi miec wiecej znakow niz 1", category='error')
+                flash("Name has to be longer than 1 character", category='error')
             elif password1 != password2:
-                flash("Hasla sie roznia od siebie", category='error')
+                flash("Passwords not match", category='error')
             elif len(password1) < 7:
-                flash("Haslo musi miec co najmniej 6 znakow", category='error')
+                flash("Password has to be longet than 1 character", category='error')
             else:
                 new_user = User(email=email, first_name=first_name, password=generate_password_hash(
                     password1, method='sha256'))
                 db.session.add(new_user)
                 db.session.commit()
-                flash("Konto zalozone pomyslnie", category='success')
+                flash("Account has been successfully created", category='success')
                 login_user(new_user, remember=True)
                 return redirect(url_for('views.home'))
 

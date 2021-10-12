@@ -43,14 +43,14 @@ def getScheduleInfo():
         type = request.form.get('type')
 
         if len(name) < 3:
-            flash(f'Tournaments name too short (at least 3 characters).',
+            flash(f"Tournament's name is too short (at least 3 characters).",
                   category='error')
         elif not date:
             flash(f'Select date.', category='error')
         elif not location:
-            flash(f'Type location.', category='error')
+            flash(f"Type in tournament's location.", category='error')
         elif not discipline:
-            flash(f'Type discypline.', category='error')
+            flash(f"Type in tournament's discypline.", category='error')
         elif not type:
             flash(f'Select type.', category='error')
         else:
@@ -76,17 +76,17 @@ def getPlayers():
     if request.method == 'POST':
         if len(tournamentDTO.tournament.opponents) > partizipantsNumberLimit:
             flash(
-                f'Too many players. Max: {partizipantsNumberLimit}', category='error')
+                f'Too many participants. Max: {partizipantsNumberLimit}', category='error')
         newPlayerName = request.form.get('player')
         if len(newPlayerName) < 1:
-            flash('Name to short', category='error')
+            flash('The name is too short! D:', category='error')
         elif Opponent.query.filter_by(name=newPlayerName, tournament_id=current_user.current_tournament_id).first():
-            flash('Player already added', category='error')
+            flash('Participant has been already added', category='error')
         else:
             tournamentDTO.UploadPlayer(newPlayerName)
             tournamentDTO.Save()
 
-            flash('Uczestnik dodany!', category='success')
+            flash('Participant has been added! :)', category='success')
     return render_template("new_players.html", user=current_user, tournament=tournamentDTO.tournament)
 
 @views.route('generate-new-round', methods=['GET', 'POST'])
@@ -183,7 +183,7 @@ def public_schedule():
     if tournament:
         return render_template("public_schedule.html", tournament=tournament, user=current_user)
     else:
-        flash('Unfortunately, there is no public shedule. Probably new is incoming...!', category='error')
+        flash('Unfortunately, there is no public schedule for now.', category='error')
         return redirect(url_for("views.home"))
 
 
@@ -235,6 +235,8 @@ def delete_tournament():
             tournamentDTO.DeleteTournament()
             tournamentDTO.Save()
             
+    #TODO tournament has been deleted
+ 
     return jsonify({})
 
 @views.route('/delete-player', methods=['POST'])

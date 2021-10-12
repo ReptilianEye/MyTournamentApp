@@ -42,12 +42,12 @@
       <div class="nav-items">
         {% if user.is_authenticated %}
         <li><a class="linkbutton link-active" id="home" href="/">Home</a></li>
-        <li><a class="linkbutton" id="logout" href="/logout">Logout</a></li>
+        <li><a class="linkbutton" id="logout" href="/logout">Log out</a></li>
         <li>
           <a class="linkbutton" href="/public-schedule">Public schedule</a>
         </li>
         {% else %}
-        <li><a class="linkbutton" id="login" href="/login">Login</a></li>
+        <li><a class="linkbutton" id="login" href="/login">Log in</a></li>
         <li><a class="linkbutton" id="signUp" href="/sign-up">Sign up</a></li>
         {% endif %}
       </div>
