@@ -54,7 +54,6 @@ def generateStandings(duals):
 
 def GenerateFirstRoundSwiss(T):
 
-    
     losowanie = copy.deepcopy(T)
 
     random.shuffle(losowanie)
@@ -94,3 +93,25 @@ def GenerateRoundSwiss(Wyniki, Standing):
                 Standing.remove(opponent1)
                 Standing.remove(opponent2)
                 break
+    i == 0
+    while len(Standing) > 0:
+        opponent1 = Standing[0]
+        pairFound = False
+        while i <= len(Standing):
+            if sprawdzankoGraczy(Wyniki, opponent1.opponent_id, opponent2.opponent_id):
+                Pary.append([opponent1.opponent_id, opponent2.opponent_id])
+                Standing.remove(opponent1)
+                Standing.remove(opponent2)
+                pairFound = True
+                break
+            i += 1
+        if not pairFound:
+            break
+    if len(Standing) == 0:
+        return Pary
+    else:
+        i = 0
+        while i < len(Standing):
+            Pary.append([Standing[i],Standing[i+1]])
+            i += 2-            
+    
