@@ -94,8 +94,11 @@ def generateNewRound():
     tournamentDTO = TournamentController()
     tournamentDTO.Load(current_user.current_tournament_id)
 
-    tournamentDTO.PrepareNewRound()
-    tournamentDTO.Save()
+    result = tournamentDTO.PrepareNewRound()
+    if result is not None:
+        flash(result,category="error")
+    else:
+        tournamentDTO.Save()
 
     return redirect(url_for("views.schedule"))
 

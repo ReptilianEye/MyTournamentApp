@@ -81,14 +81,16 @@ def GenerateRoundSwiss(Wyniki, Standing):
     # idzie po kolei xd
     Pary = []
     for i in range(len(Standing)):
+        opponent1 = Standing[i]
         if len(Standing) == 0:
             return Pary
         if len(Standing) == 1:
-            Pary.append([Standing[i].opponent_id, 'Bye'])
+            Pary.append([opponent1.opponent_id, 'Bye'])
             return Pary
-        for j in range(i+1, Standing):
-            if sprawdzankoGraczy(Wyniki, Standing[i].opponent_id, Standing[j].opponent_id):
-                Pary.append([Standing[i].opponent_id, Standing[j].opponent_id])
-                Standing.remove(j)
-                Standing.remove(i)
+        for j in range(i+1, len(Standing)):
+            opponent2 = Standing[j]
+            if sprawdzankoGraczy(Wyniki, opponent1.opponent_id, opponent2.opponent_id):
+                Pary.append([opponent1.opponent_id, opponent2.opponent_id])
+                Standing.remove(opponent1)
+                Standing.remove(opponent2)
                 break

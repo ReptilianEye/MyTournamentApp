@@ -45,7 +45,7 @@
     </ol>
 
     {% endif %} {% endfor %} {% if tournament.current_round_number == 0 or tournament.current_round_number
-    < (tournament.rounds)|length %} <div align="center">
+    < tournament.max_rounds %} <div align="center">
         <a href="/generate-new-round">
             <button style="background-color: rgb(55, 134, 81)" type="button" class="btn-danger_nav_schedule">
       New Round

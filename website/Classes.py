@@ -1,4 +1,3 @@
-
 from .TournamentsFunctions import *
 from .import db
 from .models import Opponent, User, Tournament, Dual, Opponent, Standing, Round
@@ -145,44 +144,47 @@ class RoundRobinRS(RoundStrategy):
                 db.session.add(Dual(tournament_id=self.tournament.id, round_id=newRundId, opponent1_id=opponent1.id,
                                     opponent2_id=opponent2.id, round_number=round_number))
         db.session.commit()
-
+    
     def getNewRound(self):
         if len(self.tournament.duals) == 0:
             self.__generateSchedule()
+            self.tournament.max_rounds = len(self.tournament.rounds)
 
         self.tournament.current_round_number += 1
         db.session.commit()
 
 
 class SwissRS(RoundStrategy):
-    def saveRound(self, duel, round_number):
-        newRundId = self.createNewRound(round_number)
-        opponent1 = Opponent.query.filter_by(
-            name=duel[0], tournament_id=self.tournament.id).first()
-        opponent2 = Opponent.query.filter_by(
-            name=duel[1], tournament_id=self.tournament.id).first()
+    
 
-        db.session.add(Dual(tournament_id=self.tournament.id, round_id=newRundId, opponent1_id=opponent1.id,
-                            opponent2_id=opponent2.id, round_number=1))
+    def saveRound(self, round, round_number):
+        newRundId = self.createNewRound(round_number)
+        for duel in round:
+            db.session.add(Dual(tournament_id=self.tournament.id, round_id=newRundId, opponent1_id=duel[0].id,
+                            opponent2_id=duel[1].id, round_number=1))
         db.session.commit()
+
+    def checkIfScoresAreWritten(self):
+        for dual in self.tournament.duals:
+            if dual.score_1 is None or dual.score_2 is None:
+                return False
+        return True
+
 
     def GenerateFirstRound(self):
-        schedule = GenerateFirstRoundSwiss(self.tournament.opponents)
-        newRundId = self.createNewRound(1)
-        for line in schedule:
-
-            db.session.add(Dual(tournament_id=self.tournament.id, round_id=newRundId, opponent1_id=line[0].id,
-                                opponent2_id=line[1].id, round_number=1))
-        db.session.commit()
+        firstRound = GenerateFirstRoundSwiss(self.tournament.opponents)
+        self.saveRound(firstRound,1)
 
     def getNewRound(self):
+        self.tournament.current_round_number += 1
+        db.session.commit()
         if len(self.tournament.duals) == 0:
             self.GenerateFirstRound()
+            self.tournament.max_rounds = 5
         else:
-            self.tournament.current_round_number += 1
-            db.session.commit()
-            round = GenerateRoundSwiss(
-                self.tournament.duals, self.tournament.standings)
-            for duel in round:
-                self.saveRound(duel, self.tournament.current_round_number)
-        
+            if self.checkIfScoresAreWritten():
+                newRound = GenerateRoundSwiss(
+                    self.tournament.duals, self.tournament.standings)
+                self.saveRound(newRound, self.tournament.current_round_number)
+            else:
+                return "Your have to fill all scores"
