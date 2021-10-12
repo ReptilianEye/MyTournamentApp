@@ -94,3 +94,14 @@ def GenerateRoundSwiss(Wyniki, Standing):
                 Standing.remove(opponent1)
                 Standing.remove(opponent2)
                 break
+def GenerateRoundTree(duels, limit=10000):
+    winners = []
+    i = 0
+    while i < len(duels):
+        if len(winners) == limit:
+            return winners
+        firstInDual = whoWins(duels[i].opponent1, duels[i].opponent2)
+        secoundInDual = whoWins(duels[i + 1].opponent1, duels[i + 1].opponent2)
+        winners.append([firstInDual, secoundInDual])
+        i += 2
+    return winners  
