@@ -166,9 +166,6 @@ class SwissRS(RoundStrategy):
                             opponent2_id=duel[1].id, round_number=1))
         db.session.commit()
 
-   
-
-
     def generateFirstRound(self):
         firstRound = GenerateFirstRoundSwiss(self.tournament.opponents)
         self.saveRound(firstRound,1)
@@ -183,7 +180,7 @@ class SwissRS(RoundStrategy):
         else:
             if checkIfScoresAreWritten(self.tournament.duals):
                 newRound = GenerateRoundSwiss(
-                    self.tournament.duals, self.tournament.standings)
+                    self.tournament.opponents, self.tournament.standings,self.tournament.duals)
                 self.saveRound(newRound, self.tournament.current_round_number)
             else:
                 return "Your have to fill all scores"
@@ -191,7 +188,6 @@ class SwissRS(RoundStrategy):
 
 class TreeRS(RoundStrategy):
     
-
     def generateFirstRound(self, players):
         potegaWiekszej = math.floor(math.log2(len(players)))
         potegaDwojki = pow(2, potegaWiekszej)

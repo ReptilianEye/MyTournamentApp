@@ -74,48 +74,39 @@ def GenerateFirstRoundSwiss(T):
     return pary
 
 
-def GenerateRoundSwiss(Wyniki, Standing):
-    Standing = sorted(Standing, key=lambda standing: (
-        standing.wins, standing.draws), reverse=True)
+def GenerateRoundSwiss(opponents, standings, duels):
+    PlayersList =  prepareListToSwiss(opponents, standings)
+    
+    PlayersList = sorted(PlayersList, key=lambda opponent: (
+        opponent.wins, opponent.draws), reverse=True)
+
     # idzie po kolei xd
+
     Pary = []
-    # for i in range(len(Standing)):
-    #     opponent1 = Standing[i]
-    #     if len(Standing) == 0:
-    #         return Pary
-    #     if len(Standing) == 1:
-    #         Pary.append([opponent1.opponent_id, 'Bye'])
-    #         return Pary
-    #     for j in range(i+1, len(Standing)):
-    #         opponent2 = Standing[j]
-    #         if sprawdzankoGraczy(Wyniki, opponent1.opponent_id, opponent2.opponent_id):
-    #             Pary.append([opponent1.opponent_id, opponent2.opponent_id])
-    #             Standing.remove(opponent1)
-    #             Standing.remove(opponent2)
-    #             break
     pauza = 'Bye'
-    if len(Standing) % 2 == 1:
-        Standing.append(pauza)
-    i = 0
-    while len(Standing) > 0:
-        opponent1 = Standing[0]
+    if len(PlayersList) % 2 == 1:
+        PlayersList.append(pauza)
+    while len(PlayersList) > 0:
+        opponent1 = PlayersList[0]
         pairFound = False
-        while i <= len(Standing):
-            opponent2 = Standing[i]
-            if sprawdzankoGraczy(Wyniki, opponent1, opponent2):
-                Pary.append([opponent1, opponent2])
-                Standing.remove(opponent1)
-                Standing.remove(opponent2)
-                pairFound = True
+        i = 1
+        while i <= len(PlayersList):
+            opponent2 = PlayersList[i]
+            if sprawdzankoGraczy(duels, opponent1, opponent2):
+                if opponent1 != pauza and opponent2 != pauza:
+                    Pary.append([opponent1, opponent2])
+                    pairFound = True
+                PlayersList.remove(opponent1)
+                PlayersList.remove(opponent2)
                 break
             i += 1
         if not pairFound:
             break
-    if len(Standing) != 0:
+    if len(PlayersList) != 0:
         i = 0
-        while i < len(Standing):
-            if Standing[i] != pauza and Standing[i+1] != pauza: 
-                Pary.append([Standing[i],Standing[i+1]])
+        while i < len(duels):
+            if PlayersList[i] != pauza and PlayersList[i+1] != pauza: 
+                Pary.append([PlayersList[i],PlayersList[i+1]])
             i += 2            
     return Pary
     
