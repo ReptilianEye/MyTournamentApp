@@ -1,0 +1,20 @@
+{% extends "base.html" %} {% block title %}Home page{% endblock %} {% block content %}
+
+
+<section class="home_box_container container_home">
+    <div>
+        <center><img style="margin-right: 10px;" src="../static/logo 31lo.png" width="300px"></center>
+        <h1 align="center">Welcome at the home page!!!</h1>
+    </div>
+
+    <br />
+    <form method="POST">
+        <div align="center">
+            <a href="/tournaments">
+                <button type="button" class="btn-danger_nav_generate">Your tournaments</button>
+            </a>
+        </div>
+    </form>
+</section>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "base.html" %} {% block title %}Public Schedule{% endblock %} {% block content %}
+
+<section class="public_schedule_box_container container_schedule_public">
+    <br />
+    <h3 align="center">{{tournament.name}}</h3>
+    <ol class="list-group list-group-flush" id="pary">
+        <br> {% for round in tournament.rounds %} {% if round.number
+        <=tournament.current_round_number %} <h4 align="center" class="h4_round">Runda: {{round.number}}</h4>
+            {% for dual in round.duals %}
+
+            <ol class="list-group list-group-flush" id="pary">
+                <div align="center">
+
+                    <ol class="badge">
+                        <br>
+                        <button disabled class="btn-danger_nav_list_group_schedule_public">
+              <div align="left" style="display: inline-block">
+                <h4>
+                {{dual.opponent_1.name}} |
+                <br />
+              </h4>
+              </div>
+              <!-- wynik -->
+              <div style="display: inline-block">
+                {% if dual.score_1 is none or dual.score_1 is none %} 
+                <h4 style="color: #a03636; font-weight: 700;"> 0 - 0 </h4>
+                {% else %}
+                <h4 style="color: #5aa0ba; font-weight: 700;">{{dual.score_1}}:{{dual.score_2}}</h4>
+                {% endif %}
+
+              </div>
+              <div align="right" style="display: inline-block">
+                <h4>| {{dual.opponent_2.name}}
+                <br />
+                </h4>
+
+              </div>
+            </button> {% endfor %}
+
+                    </ol>
+                    </h4>
+                </div>
+                <br />
+            </ol>
+    </ol>
+
+    </div>
+    {% endif %} {% endfor %}
+
+    <div align="center">
+
+        <br /><br />
+        <button onclick="goBack()" style="background-color: #5aa0ba " type="button " class="btn-danger_nav_schedule ">
+        Back
+      </button>
+        <a href="/standings">
+            <button type="button" class="btn-danger_nav_schedule">Standings</button>
+        </a>
+    </div>
+    <br>
+</section>
+{% endblock %}
