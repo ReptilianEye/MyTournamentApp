@@ -8,16 +8,16 @@
         <=tournament.current_round_number %} <h4 align="center" class="h4_round">Round: {{round.number}}</h4>
             {% for dual in round.duals %}
 
-            <tbody class="list-group list-group-flush" id="pary">
+            <tr class="list-group list-group-flush" id="pary">
                 <div align="center">
                     <td class="badge">
                         <button class="btn-danger_nav_list_group_schedule" onClick="showDual({{dual.id}})">
-              <div align="left" style="display: inline-block">
+            <div align="left" style="display: inline-block">
                 <h4>
                 {{dual.opponent_1.name}} |
                 <br />
               </h4>
-              </div>
+            </div>
               <!-- wynik -->
               <div style="display: inline-block">
                 {% if dual.score_1 is none or dual.score_1 is none %} 
@@ -40,7 +40,7 @@
                     <br>
                 </div>
                 <br />
-            </tbody>
+            </tr>
     </tbody>
     <br> {% endif %} {% endfor %} {% if tournament.current_round_number == 0 or tournament.current_round_number
     < tournament.max_rounds %} <br>
@@ -60,7 +60,7 @@
                 </button>
             </a>
             <a href="/tournaments">
-                <button style="width: 210px; background-color: #5aa0ba " type="button " class="btn-danger_nav_schedule ">
+                <button style="background-color: #5aa0ba " type="button " class="btn-danger_nav_schedule">
                   Back
       </button>
             </a>
