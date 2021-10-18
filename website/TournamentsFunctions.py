@@ -1,5 +1,7 @@
+from _typeshed import Self
 import random
 import copy
+import math
 from .AdditionalFunctions import *
 
 
@@ -94,6 +96,25 @@ def GenerateRoundSwiss(Wyniki, Standing):
                 Standing.remove(opponent1)
                 Standing.remove(opponent2)
                 break
+
+def generateFirstRoundTree(players, wildcard):
+    potegaWiekszej = math.ceil(math.log2(len(players)))
+    potegaDwojki = pow(2, potegaWiekszej)
+    liczbaWildcard = potegaDwojki - len(players)
+
+    pary=[]
+    e=0
+    while e < liczbaWildcard:
+        gracz=random.choice(players)
+        pary.append([gracz, wildcard])
+        players.remove(gracz)
+        e+=1
+    p=0
+    random.shuffle(players)
+    while p < len(players):
+        pary.append([players[p], players[p+1]])
+        p+=2
+
 def GenerateRoundTree(duels, limit=10000):
     winners = []
     i = 0
