@@ -56,6 +56,7 @@ def generateStandings(duals):
 
 def GenerateFirstRoundSwiss(T):
 
+    
     losowanie = copy.deepcopy(T)
 
     random.shuffle(losowanie)
@@ -76,43 +77,26 @@ def GenerateFirstRoundSwiss(T):
     return pary
 
 
-def GenerateRoundSwiss(opponents, standings, duels):
-    PlayersList =  prepareListToSwiss(opponents, standings)
-    
-    PlayersList = sorted(PlayersList, key=lambda opponent: (
-        opponent.wins, opponent.draws), reverse=True)
-
+def GenerateRoundSwiss(Wyniki, Standing):
+    Standing = sorted(Standing, key=lambda standing: (
+        standing.wins, standing.draws), reverse=True)
     # idzie po kolei xd
-
     Pary = []
-    pauza = 'Bye'
-    if len(PlayersList) % 2 == 1:
-        PlayersList.append(pauza)
-    while len(PlayersList) > 0:
-        opponent1 = PlayersList[0]
-        pairFound = False
-        i = 1
-        while i <= len(PlayersList):
-            opponent2 = PlayersList[i]
-            if sprawdzankoGraczy(duels, opponent1, opponent2):
-                if opponent1 != pauza and opponent2 != pauza:
-                    Pary.append([opponent1, opponent2])
-                    pairFound = True
-                PlayersList.remove(opponent1)
-                PlayersList.remove(opponent2)
+    for i in range(len(Standing)):
+        opponent1 = Standing[i]
+        if len(Standing) == 0:
+            return Pary
+        if len(Standing) == 1:
+            Pary.append([opponent1.opponent_id, 'Bye'])
+            return Pary
+        for j in range(i+1, len(Standing)):
+            opponent2 = Standing[j]
+            if sprawdzankoGraczy(Wyniki, opponent1.opponent_id, opponent2.opponent_id):
+                Pary.append([opponent1.opponent_id, opponent2.opponent_id])
+                Standing.remove(opponent1)
+                Standing.remove(opponent2)
                 break
 
-            i += 1
-        if not pairFound:
-            break
-    if len(PlayersList) != 0:
-        i = 0
-        while i < len(duels):
-            if PlayersList[i] != pauza and PlayersList[i+1] != pauza: 
-                Pary.append([PlayersList[i],PlayersList[i+1]])
-            i += 2            
-    return Pary
-    
 def generateFirstRoundTree(players, wildcard):
     potegaWiekszej = math.ceil(math.log2(len(players)))
     potegaDwojki = pow(2, potegaWiekszej)
@@ -130,7 +114,6 @@ def generateFirstRoundTree(players, wildcard):
     while p < len(players):
         pary.append([players[p], players[p+1]])
         p+=2
-
 
 def GenerateRoundTree(duels, limit=10000):
     winners = []

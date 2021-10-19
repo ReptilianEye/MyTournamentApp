@@ -179,7 +179,7 @@ class SwissRS(RoundStrategy):
         else:
             if checkIfScoresAreWritten(self.tournament.duals):
                 newRound = GenerateRoundSwiss(
-                    self.tournament.opponents, self.tournament.standings,self.tournament.duals)
+                    self.tournament.duals, self.tournament.standings)
                 self.saveRound(newRound, self.tournament.current_round_number)
             else:
                 return "Your have to fill all scores"
@@ -187,7 +187,6 @@ class SwissRS(RoundStrategy):
 
 class TreeRS(RoundStrategy):
     wildcard="Wildcard"
-    
     def saveRound(self, round, round_number):
         newRundId = self.createNewRound(round_number)
         for duel in round:

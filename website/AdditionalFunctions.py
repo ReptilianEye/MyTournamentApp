@@ -204,11 +204,6 @@ def findOpponentInList(player_id, L):
         if L[i].id == player_id:
             return i
 
-def getOpponentPoints(player_id, S):
-    for i in range(len(S)):
-        if S[i].opponent_id == player_id:
-            return S[i].match_points
-    return 0
 
 
 def sprawdzankoGraczy(Wyniki,Gracz1,Gracz2):
@@ -217,21 +212,6 @@ def sprawdzankoGraczy(Wyniki,Gracz1,Gracz2):
         if Gracz1 in para and Gracz2 in para:
            return False
     return True
-
-def prepareListToSwiss(players,standings):
-    pointsTable = []
-    visited = {}
-    for el in standings:
-        pointsTable.append(OpponentInStanding(el.opponent_id,el.wins,el.loses,el.draws))
-        visited.update({el.opponent_id:True})
-    if len(players) != len(standings):
-        for player in players:
-            result = visited.get(player.id)
-            if result is None:
-                pointsTable.append(OpponentInStanding(player.id,draws=1))
-    return pointsTable
-
-
 
 def whoWins(opponent1, opponent2):
     if opponent1.score_1 > opponent2.score_2:
