@@ -1,4 +1,3 @@
-from _typeshed import Self
 import random
 import copy
 import math
@@ -130,6 +129,7 @@ def generateFirstRoundTree(players, wildcard):
     while p < len(players):
         pary.append([players[p], players[p+1]])
         p+=2
+    return pary
 
 
 def GenerateRoundTree(duels, limit=10000):

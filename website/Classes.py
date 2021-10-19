@@ -3,7 +3,6 @@ from .import db
 from .models import Opponent, User, Tournament, Dual, Opponent, Standing, Round
 import math
 
-
 class TournamentController():
 
     def CreateNew(self, user_Id, name, date, location, discipline, type):
@@ -147,7 +146,7 @@ class RoundRobinRS(RoundStrategy):
                 db.session.add(Dual(tournament_id=self.tournament.id, round_id=newRundId, opponent1_id=opponent1.id,
                                     opponent2_id=opponent2.id, round_number=round_number))
         db.session.commit()
-
+    
     def getNewRound(self):
         if len(self.tournament.duals) == 0:
             self.__generateSchedule()
@@ -158,17 +157,22 @@ class RoundRobinRS(RoundStrategy):
 
 
 class SwissRS(RoundStrategy):
+    
 
     def saveRound(self, round, round_number):
         newRundId = self.createNewRound(round_number)
         for duel in round:
             db.session.add(Dual(tournament_id=self.tournament.id, round_id=newRundId, opponent1_id=duel[0].id,
-                                opponent2_id=duel[1].id, round_number=1))
+                            opponent2_id=duel[1].id, round_number=1))
         db.session.commit()
+
+   
+
 
     def generateFirstRound(self):
         firstRound = GenerateFirstRoundSwiss(self.tournament.opponents)
-        self.saveRound(firstRound, 1)
+        self.saveRound(firstRound,1)
+
 
     def getNewRound(self):
         self.tournament.current_round_number += 1
@@ -197,22 +201,24 @@ class TreeRS(RoundStrategy):
         db.session.commit()
 
     def generateFirstRound(self, players):
-    
-        round = generateFirstRoundTree(players, self.wildcard)
-        self.saveRound(round, 1)
+        potegaWiekszej = math.floor(math.log2(len(players)))
+        potegaDwojki = pow(2, potegaWiekszej)
+        liczbaDuelsWPierwszej = len(players) - potegaDwojki
+        return self.getNewRound(players, liczbaDuelsWPierwszej)
 
     def getNewRound(self):
         self.tournament.current_round_number += 1
         db.session.commit()
         if len(self.tournament.duals) == 0:
             self.generateFirstRound(self.tournament.duals)
-
+            
             if checkIfScoresAreWritten(self.tournament.duals):
                 if checkIfScoresAreDecided(self.tournament.duals):
                     newRound = GenerateRoundTree(self.tournament.duals)
-                    self.saveRound(
-                        newRound, self.tournament.current_round_number)
+                    self.saveRound(newRound, self.tournament.current_round_number)
                 else:
                     return "None of the scores can be tied"
             else:
                 return "Your have to fill all scores"
+        
+       
