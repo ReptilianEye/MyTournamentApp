@@ -1,0 +1,70 @@
+{% extends "base.html" %} {% block title %}Schedule Generator{% endblock %} {%
+  block content %}
+  <section class="sign_box_container container_sign">
+    <br /><br />
+    <form method="POST">
+      <h3 align="center">New Tournament</h3>
+  
+      <div class="form-group">
+        <input
+          type="text"
+          class="form_control"
+          name="name"
+          placeholder="Enter New Tournament Name"
+        />
+      </div>
+      <br />
+      <div class="form-group">
+        <input
+          type="date"
+          class="form_control"
+          name="date"
+          placeholder="Enter Date"
+        />
+      </div>
+      <br />
+      <div class="form-group">
+        <input
+          type="text"
+          class="form_control"
+          name="location"
+          placeholder="Enter Location"
+        />
+      </div>
+      <br />
+      <div>
+        <select
+        name="discipline"
+        class="form_control"
+        placeholder="Select discipline">
+          <option value="Football">Football</option>
+          <option value="Basketball">Basketball</option>
+          <option value="Volleyball">Volleyball</option>
+          <option value="Chess">Chess</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <br />
+      <br />
+  
+        <div>
+          <select
+          name="type"
+          class="form_control"
+          placeholder="Select type">
+          <option value="RoundRobin">Round Robin (kazdy z kazdym)</option>
+          <option value="2Teams">Divide to 2 Teams</option>
+          </select>
+        </div>
+      
+      <br />
+      <br />
+      <center>
+        <button type="submit" class="btn-danger_nav_login">Zatwierdź</button>
+      </center>
+    </form>
+  </section>
+  
+  {% endblock %}
+  
+  
