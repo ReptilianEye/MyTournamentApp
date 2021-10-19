@@ -4,7 +4,7 @@
     <br />
     <h3 align="center">{{tournament.name}}</h3>
     <ol class="list-group list-group-flush" id="pary">
-        {% for round in tournament.rounds %} {% if round.number
+        <br> {% for round in tournament.rounds %} {% if round.number
         <=tournament.current_round_number %} <h4 align="center" class="h4_round">Runda: {{round.number}}</h4>
             {% for dual in round.duals %}
 
