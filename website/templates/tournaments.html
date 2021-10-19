@@ -1,4 +1,4 @@
- {% extends "base.html" %} {% block title %}Schedules{% endblock %} {% block content %}
+ {% extends "base.html" %} {% block title %}Your Tournaments{% endblock %} {% block content %}
 <section class="tournaments_box_container container_tournaments">
     <br>
     <h3 align="center">Your Tournaments</h3>
@@ -8,7 +8,7 @@
 
         <div align="center">
             <ol class="badge ">
-                <button class="btn-danger_nav_list_group" onClick="showTournament({{tournament.id}})"><h4>{{tournament.name}}; Players: {{tournament.opponents|length}}; {{tournament.date}}; {{tournament.location}}</h4> </button>
+                <button class="btn-danger_nav_list_group" onClick="showTournament({{tournament.id}})"><img style="margin-top: -20px;" class="logo_social_tournaments" align="left" src="../static/logo 31lo.png" width="70px" height="70px"><h4 style="margin-right: 20px;">{{tournament.name}} | Players: {{tournament.opponents|length}} | {{tournament.date}} | {{tournament.location}}</h4> </button>
             </ol>
         </div>
         <br /> {% endfor %}
@@ -17,12 +17,13 @@
     <br />
     <div align="center">
         <a href="/new-tournament">
-            <button type="button" style="width: 210px; background-color: #022633" class="btn-danger_nav_tournaments_blue">Add New Tournament</button>
+            <button type="button" class="btn-danger_nav_tournaments">Generate new schedule</button>
         </a>
-        
-        <!-- <button  style="width: 210px; background-color: #5aa0ba" type="button " class="btn-danger_nav_schedule ">Back</button> -->
-
+        <a href="#">
+            <button onclick="goBack()" style="background-color: #5aa0ba" type="button " class="btn-danger_nav_schedule">Back</button>
+        </a>
     </div>
+    <br>
 </section>
 
 {% endblock %}
