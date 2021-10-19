@@ -3,60 +3,54 @@
 <section class="schedule_box_container container_schedule">
     <br />
     <h3 align="center">{{tournament.name}}</h3>
-    <ol class="list-group list-group-flush" id="pary">
-        <br> {% for round in tournament.rounds %} {% if round.number
+    <tbody class="list-group list-group-flush" id="pary">
+        {% for round in tournament.rounds %} {% if round.number
         <=tournament.current_round_number %} <h4 align="center" class="h4_round">Round: {{round.number}}</h4>
             {% for dual in round.duals %}
 
-            <ol class="list-group list-group-flush" id="pary">
+            <tr class="list-group list-group-flush" id="pary">
                 <div align="center">
-
-                    <ol class="badge">
-                        <br>
+                    <td class="badge">
                         <button class="btn-danger_nav_list_group_schedule" onClick="showDual({{dual.id}})">
-              <div align="left" style="display: inline-block">
+            <div align="left" style="display: inline-block">
                 <h4>
-                {{dual.opponent_1.name}}
+                {{dual.opponent_1.name}} |
                 <br />
               </h4>
-              </div>
+            </div>
               <!-- wynik -->
               <div style="display: inline-block">
                 {% if dual.score_1 is none or dual.score_1 is none %} 
-                <h4> - </h4>
+                <h4 style="color: #a03636; font-weight: 700;"> 0 - 0 </h4>
                 {% else %}
-                <h4>{{dual.score_1}}:{{dual.score_2}}</h4>
+                <h4 style="color: #5aa0ba; font-weight: 700;">{{dual.score_1}}:{{dual.score_2}}</h4>
                 {% endif %}
 
               </div>
               <div align="right" style="display: inline-block">
-                <h4> {{dual.opponent_2.name}}
+                <h4>| {{dual.opponent_2.name}}
                 <br />
                 </h4>
 
               </div>
-            </button> {% endfor %}
+              </button> {% endfor %}
 
-                    </ol>
+                    </td>
                     </h4>
+                    <br>
                 </div>
                 <br />
-            </ol>
-    </ol>
-
-    {% endif %} {% endfor %} {% if tournament.current_round_number == 0 or tournament.current_round_number
-    < tournament.max_rounds %} <div align="center">
-        <a href="/generate-new-round">
-            <button style="background-color: rgb(55, 134, 81)" type="button" class="btn-danger_nav_schedule">
+            </tr>
+    </tbody>
+    <br> {% endif %} {% endfor %} {% if tournament.current_round_number == 0 or tournament.current_round_number
+    < tournament.max_rounds %} <br>
+        <div align="center">
+            <a href="/generate-new-round">
+                <button style="background-color: rgb(55, 134, 81)" type="button" class="btn-danger_nav_schedule">
       New Round
     </button>
-        </a>
-
-        </div>
-
-        {% endif %}
-
-        <div align="center">
+            </a>
+            {% endif %}
             <a href="/standings">
                 <button type="button" class="btn-danger_nav_schedule">Standings</button>
             </a>
@@ -65,20 +59,20 @@
         Delete Schedule
                 </button>
             </a>
-            <br /><br />
-        <a href="/tournaments">
-                <button style="width: 210px; background-color: #5aa0ba " type="button " class="btn-danger_nav_schedule ">
+            <a href="/tournaments">
+                <button style="background-color: #5aa0ba " type="button " class="btn-danger_nav_schedule">
                   Back
       </button>
-    </a>
+            </a>
 
             {% if user.is_admin %}
             <a href="/publish-schedule ">
-                <button style="background-color: rgb(55, 65, 95) " type="button " class="btn-danger_nav_schedule_home_white ">
+                <button style="background-color: rgb(55, 65, 95) " type="button " class="btn-danger_nav_schedule">
         Publish
       </button>
             </a>
             {% endif %}
         </div>
+        <br>
 </section>
 {% endblock %}
