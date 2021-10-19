@@ -1,0 +1,60 @@
+1. nawigacja
+(posrodku) homepage: "do czego ta aplikacja sluzy"
+(posrodku) homepage: autorzy, strona zostala stworzona w 31 lo 
+(na dole) homepage: wiecej info: social media
+
+nav-bar: home   my tournaments  public tournaments                                              log out delete account
+
+----------------------------------------
+/tournaments:
+dodac 'x' do kasowania tournamentu w kazdym wierszu (z potwierdzeniem)
+zweryfikowac informacje dla tournamentu i sposob wyswietlania tabelki; wyswietlic status turnieju; 
+przesunac 'add tournament' do naglowka
+
+
+----------------------------------------
+/new-tournament
+dodac labele ktore opisuja pola do wpisywania opcji
+dodawanie graczy na tej samej stronie (dodanie /new-players)
+text box - jednolinijkowy
+add paricipant na wysokosci textboxa
+
+dodawani zawodnicy sa renamowani
+
+create -> Save
+----------------------------------------
+/schedule
+/schedule ->rename /tournament
+usunac 'delete schedule'
+usunac 'back; (sciezka w nav-bar)
+'standings' do naglowka turnieju
+tytul turnieju jest linkiem do /tournament
+
+dorobic strony do edycji tournamentu (dodac nowych graczy, zmienic ustawienia turnieju, zmienic wyniki)
+
+
+----------------------------------------
+/update dual:
+dual -> rename duel
+
+tytul ten sam co wczesniej w tym samym miejscu (link)
+centracja nazw zawodnikow i pol do wpisywania wzgledem kolumny 
+usunac 'back'
+zmienic napis za wynikiem na 'wpisz wynik' lub na nic
+reset -> clear
+
+----------------------------------------
+/standings
+
+tytul ten sam co wczesniej w tym samym miejscu (link)
+centracja nazw zawodnikow i pol do wpisywania wzgledem kolumny (imiona do lewej, numery do prawej)
+zmiana widoku tabelki na header + dane poniezej (zwykla tabelka)
+usunac 'back'
+
+2. grafika
+
+
+
+
+
+3. algorytmy
