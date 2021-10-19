@@ -1,4 +1,3 @@
-from _typeshed import Self
 import random
 import copy
 import math
