@@ -6,6 +6,11 @@
 nav-bar: home   my tournaments  public tournaments                                              log out delete account
 
 ----------------------------------------
+/base
+niech tworcy beda tylko na /home
+zmienic copyright na 'pod patronatem' - nie chcemy oddawać wszystkich praw szkole 
+
+----------------------------------------
 /tournaments:
 dodac 'x' do kasowania tournamentu w kazdym wierszu (z potwierdzeniem)
 zweryfikowac informacje dla tournamentu i sposob wyswietlania tabelki; wyswietlic status turnieju; 
