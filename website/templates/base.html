@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8" />
@@ -16,6 +16,7 @@
 </head>
 
 <body>
+    <button onclick="topFunction()" id="myBtn" title="Go to top"><img src="../static/arrow.png" height="40px"></button>
     <nav>
         <div class="menu-icon">
             <span class="fas fa-bars"></span>
@@ -30,17 +31,30 @@
             {% endif %}
             <li><a class="linkbutton" href="/tournaments">My Tournaments</a></li>
             <li><a class="linkbutton" href="/public-schedule">Public schedule</a></li>
-            <li><a class="linkbutton not-active" href="/">Video</a></li disabled>
+            <li><a class="linkbutton not-active" href="/">Video</a></li>
 
         </div>
-        <div class="nav-items">
+        <!-- <div class="nav-items">
             <li style="margin-left: 86%;"><a class="linkbutton" id="logout" href="/logout">Log out</a></li>
-        </div>
+        </div> -->
+        <ul>
+            <li><a href="#">Konto</a>
+                <ul>
+                    <hr class="konto_hr">
+                    <section>
+                        <li><a id="logout" href="/logout">Log out</a></li>
+                        <li><a style="color: #a03636" href="#" onClick="deleteUser({{user.id}})">Delete account</a>
+                    </section>
+                </ul>
+                </li>
+        </ul>
         {% if user.admin %}
-        <a align="right" type="button" href="/add-admin" class="btn btn-dark">Add admin</a> > {% endif %}
-        <button style="margin-left: 30px; margin-right: -60px" align="right" type="submit" class="btn-danger_nav" onClick="deleteUser({{user.id}})">
+        <a>
+            <button href="/add-admin" type="button" class="btn btn-dark">Add admin</button>
+        </a> > {% endif %}
+        <!-- <button style="margin-left: 30px; margin-right: -60px" align="right" type="submit" class="btn-danger_nav" onClick="deleteUser({{user.id}})">
         Delete account
-      </button>
+      </button> -->
     </nav>
 
     {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %} {% if category == 'error' %}
@@ -60,20 +74,30 @@
     {% endif %} {% endfor %} {% endif %} {% endwith %}
 
     <div class="container">{% block content %} {% endblock %}</div>
-    <footer align="center" class="sticky-footer ">
 
-        <p style="color: #5AA0BA; text-align: center; "> © Copyright 31 Liceum Ogólnokształcące.ggg</p>
-        <p style="color: #5AA0BA; text-align: center; ">Twórcy: <strong class="author">Piotr Rzadkowski</strong> | <strong class="author">Jakub Błaszczyk</strong></p>
-        <p style="color: #5AA0BA; text-align: center; ">Pomoc: <strong class="author">Marek Rzadkowski</strong> | <strong class="author">Piotr Zapała</strong> | <strong class="author">Ira Puchkova</strong></p>
-        <hr style="width: 20%;">
+    <script>
+        //Get the button
+        var mybutton = document.getElementById("myBtn");
 
-        <a href="https://www.instagram.com/31lokrakow" target="_blank" rel="noopener noreferrer">
-            <img style="margin-right: 20px" class="logo_social" src="../static/instragram-icon.png" width="35" height="35" alt="Instagram logo" /></a>
-        <a href="https://www.facebook.com/31LOKrakow" target="_blank" rel="noopener noreferrer">
-            <img style="margin-right: 20px" class="logo_social" src="../static/facebook-icon.png" width="35" height="35" alt="Facebook logo" /></a>
-        <a href="https://www.lo31.krakow.pl/" target="_blank" rel="noopener noreferrer">
-            <img class="logo_social" src="../static/logo 31lo.png" width="35" height="35" alt="Oficjalna strona 31LO" /></a>
-    </footer>
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function() {
+            scrollFunction()
+        };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

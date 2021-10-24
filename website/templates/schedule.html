@@ -4,6 +4,11 @@
     <br />
     <h3 align="center">{{tournament.name}}</h3>
     <tbody class="list-group list-group-flush" id="pary">
+        <div>
+            <a href="/standings">
+                <button type="button" class="btn-danger_nav_schedule">Standings</button>
+            </a>
+        </div>
         {% for round in tournament.rounds %} {% if round.number
         <=tournament.current_round_number %} <h4 align="center" class="h4_round">Round: {{round.number}}</h4>
             {% for dual in round.duals %}
@@ -11,29 +16,38 @@
             <tr class="list-group list-group-flush" id="pary">
                 <div align="center">
                     <td class="badge">
-                        <button class="btn-danger_nav_list_group_schedule" onClick="showDual({{dual.id}})">
-            <div align="left" style="display: inline-block">
-                <h4>
-                {{dual.opponent_1.name}} |
-                <br />
-              </h4>
+                        <button class="btn_schedule_list" onClick="showDual({{dual.id}})">
+
+
+          <div class="btn-danger_nav_list_group_schedule_nick_one" align="left" style="display: inline-block">
+              <h4>
+              {{dual.opponent_1.name}}
+              <br />
+            </h4>
+          </div>
+
+
+
+            <!-- wynik -->
+            <div class="btn-danger_nav_list_group_schedule_point" style="display: inline-block">
+              {% if dual.score_1 is none or dual.score_1 is none %} 
+              <h4 style="color: #a03636; font-weight: 700;"> 0 : 0 </h4>
+              {% else %}
+              <h4 style="color: #5aa0ba; font-weight: 700;">{{dual.score_1}} : {{dual.score_2}}</h4>
+              {% endif %}
+
             </div>
-              <!-- wynik -->
-              <div style="display: inline-block">
-                {% if dual.score_1 is none or dual.score_1 is none %} 
-                <h4 style="color: #a03636; font-weight: 700;"> 0 - 0 </h4>
-                {% else %}
-                <h4 style="color: #5aa0ba; font-weight: 700;">{{dual.score_1}}:{{dual.score_2}}</h4>
-                {% endif %}
 
-              </div>
-              <div align="right" style="display: inline-block">
-                <h4>| {{dual.opponent_2.name}}
-                <br />
-                </h4>
 
-              </div>
-              </button> {% endfor %}
+            <div class="btn-danger_nav_list_group_schedule_nick_two" align="right" style="display: inline-block">
+              <h4>{{dual.opponent_2.name}}
+              <br />
+              </h4>
+
+            </div>
+
+
+            </button> {% endfor %}
 
                     </td>
                     </h4>
@@ -51,13 +65,13 @@
     </button>
             </a>
             {% endif %}
-            <a href="/standings">
+            <!-- <a href="/standings">
                 <button type="button" class="btn-danger_nav_schedule">Standings</button>
-            </a>
-            <a href="delete-tournament">
-                <button style="background-color: #a03636" class="btn-danger_nav_schedule" onClick="deleteTournament({{tournament.id}})">
+            </a> -->
+            <!-- <a href="delete-tournament">
+                < <button style="background-color: #a03636" class="btn-danger_nav_schedule" onClick="deleteTournament({{tournament.id}})">
         Delete Schedule
-                </button>
+                </button> -->
             </a>
             <a href="/tournaments">
                 <button style="background-color: #5aa0ba " type="button " class="btn-danger_nav_schedule">

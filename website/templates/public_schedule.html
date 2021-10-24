@@ -13,15 +13,15 @@
 
                     <ol class="badge">
                         <br>
-                        <button disabled class="btn-danger_nav_list_group_schedule_public">
-              <div align="left" style="display: inline-block">
+                        <button disabled class="btn_schedule_list">
+              <div class="btn-danger_nav_list_group_schedule_nick_one"  align="left" style="display: inline-block">
                 <h4>
-                {{dual.opponent_1.name}} |
+                {{dual.opponent_1.name}}
                 <br />
               </h4>
               </div>
               <!-- wynik -->
-              <div style="display: inline-block">
+              <div class="btn-danger_nav_list_group_schedule_point" style="display: inline-block">
                 {% if dual.score_1 is none or dual.score_1 is none %} 
                 <h4 style="color: #a03636; font-weight: 700;"> 0 - 0 </h4>
                 {% else %}
@@ -29,8 +29,8 @@
                 {% endif %}
 
               </div>
-              <div align="right" style="display: inline-block">
-                <h4>| {{dual.opponent_2.name}}
+              <div class="btn-danger_nav_list_group_schedule_nick_two" align="right" style="display: inline-block">
+                <h4>{{dual.opponent_2.name}}
                 <br />
                 </h4>
 

@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% block title %}Update dual{% endblock %} {% block content %}
+<section class="update_dual_box_container container_update_dual">
+    <br>
+    <h3 align="center">{{dual.opponent_1.name}} <span style="color: #5AA0BA; font-weight: 700;">{{dual.score_1}}</span> vs <span style="color: #5AA0BA; font-weight: 700;">{{dual.score_2}}</span> {{dual.opponent_2.name}}</h3>
+    <ol class="list-group list-group-flush" id="pary">
+        <form method="POST">
+
+            <div align="center">
+                <ol class="badge">
+                    <!-- <br> {% if dual.score_1 is none or dual.score_1 is none %} {% else %}
+                    <h3 style="color: #5AA0BA;" align="center">{{dual.score_1}}:{{dual.score_2}}</h3>
+                    {% endif %} -->
+                    <br>
+
+                    <input class="type_score" name="score1" type="number" placeholder="{{dual.opponent_1.name}}" />
+                    <input class="type_score" name="score2" type="number" placeholder="{{dual.opponent_2.name}}" />
+                </ol>
+            </div>
+            <br />
+
+    </ol>
+    <div align="center">
+        <button style="background-color: #3a5c39;" type="submit" class="btn-danger_nav_schedule">Save</button>
+
+        <a href="/reset-dual">
+            <button style="background-color: #a03636;" type="button" class="btn-danger_nav_schedule">Reset</button>
+        </a>
+        <button onclick="goBack()" style="background-color: #5AA0BA;" type="button" class="btn-danger_nav_schedule">Back</button>
+    </div>
+</section>
+{% endblock %}
