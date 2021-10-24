@@ -19,19 +19,39 @@ block content %}
     {% endfor %}
   </ol>
   <br />
+
   <form method="POST">
-    <textarea name="player" class="form_control"></textarea>
-    <br />
-    <div align="center">
+    <div align="left">
+      <input
+        style="display: inline-block"
+        name="player"
+        class="form_control"
+        type="text"
+      />
       <button type="submit" class="btn-danger_nav_generator_home_white">
         Add participant
       </button>
+    </div>
+
+      <!-- <form method="POST">
+    <div align="center">
+    <div><input name="player"  class="form_control"> type="text"/></div>
+    <div><button type="submit" class="btn-danger_nav_generator_home_white">
+      Add participant
+    </div>
+  </div>
+    <br />
+    -->
+      <br />
+<div align="center">
       <a href="/schedule">
-        <button type="button" class="btn-danger_nav_generator_home">
-          Create
+          
+          <button type="button" onclick="return clicked();" class="btn-danger_nav_generator_home">
+          Save
         </button>
       </a>
-    </div>
   </form>
+</div>
+  <!-- </form> -->
 </section>
 {% endblock %}
