@@ -1,73 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      crossorigin="anonymous"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Stick+No+Bills:wght@600&display=swap" rel="stylesheet" />
-    <link rel="shortcut icon" href="../static/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Stick+No+Bills:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="shortcut icon"
+      href="../static/favicon.ico"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
 
     <title>{% block title %}Home{% endblock %}</title>
-</head>
+  </head>
 
-<body>
-    <button onclick="topFunction()" id="myBtn" title="Go to top"><img src="../static/arrow.png" height="40px"></button>
+  <body>
+    <button onclick="topFunction()" id="myBtn" title="Go to top">
+      <img src="../static/arrow.png" height="40px" />
+    </button>
     <nav>
-        <div class="menu-icon">
-            <span class="fas fa-bars"></span>
-        </div>
-        <div class="logo" style="color: #5aa0ba; font-weight: 700">Liceum 31</div>
-        <div class="nav-items">
-            {% if user.is_authenticated %}
-            <li><a class="linkbutton link-active" id="home" href="/">Home</a></li>
-            {% else %}
-            <li><a class="linkbutton" id="login" href="/login">Log in</a></li>
-            <li><a class="linkbutton" id="signUp" href="/sign-up">Sign up</a></li>
-            {% endif %}
-            <li><a class="linkbutton" href="/tournaments">My Tournaments</a></li>
-            <li><a class="linkbutton" href="/public-schedule">Public schedule</a></li>
-            <li><a class="linkbutton not-active" href="/">Video</a></li>
-
-        </div>
-        <!-- <div class="nav-items">
+      <div class="menu-icon">
+        <span class="fas fa-bars"></span>
+      </div>
+      <div class="logo" style="color: #5aa0ba; font-weight: 700">Liceum 31</div>
+      <div class="nav-items">
+        {% if user.is_authenticated %}
+        <li><a class="linkbutton link-active" id="home" href="/">Home</a></li>
+        {% else %}
+        <li><a class="linkbutton" id="login" href="/login">Log in</a></li>
+        <li><a class="linkbutton" id="signUp" href="/sign-up">Sign up</a></li>
+        {% endif %}
+        <li><a class="linkbutton" href="/tournaments">My Tournaments</a></li>
+        <li>
+          <a class="linkbutton" href="/public-schedule">Public tournament</a>
+        </li>
+        <li><a class="linkbutton not-active" href="/">Video</a></li>
+      </div>
+      <!-- <div class="nav-items">
             <li style="margin-left: 86%;"><a class="linkbutton" id="logout" href="/logout">Log out</a></li>
         </div> -->
-        <ul>
-            <li><a href="#">Konto</a>
-                <ul>
-                    <hr class="konto_hr">
-                    <section>
-                        <li><a id="logout" href="/logout">Log out</a></li>
-                        <li><a style="color: #a03636" href="#" onClick="deleteUser({{user.id}})">Delete account</a>
-                    </section>
-                </ul>
-                </li>
-        </ul>
-        {% if user.admin %}
-        <a>
-            <button href="/add-admin" type="button" class="btn btn-dark">Add admin</button>
-        </a> > {% endif %}
-        <!-- <button style="margin-left: 30px; margin-right: -60px" align="right" type="submit" class="btn-danger_nav" onClick="deleteUser({{user.id}})">
+      <ul>
+        <li>
+          <a href="#">Konto</a>
+          <ul>
+            <hr class="konto_hr" />
+            <section>
+              <li><a id="logout" href="/logout">Log out</a></li>
+              <li>
+                <a
+                  style="color: #a03636"
+                  href="#"
+                  onClick="deleteUser({{user.id}})"
+                  >Delete account</a
+                >
+              </li>
+            </section>
+          </ul>
+        </li>
+      </ul>
+      {% if user.admin %}
+      <a>
+        <button href="/add-admin" type="button" class="btn btn-dark">
+          Add admin
+        </button>
+      </a>
+      > {% endif %}
+      <!-- <button style="margin-left: 30px; margin-right: -60px" align="right" type="submit" class="btn-danger_nav" onClick="deleteUser({{user.id}})">
         Delete account
       </button> -->
     </nav>
 
-    {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %} {% if category == 'error' %}
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %} {% for category, message in messages %} {% if category ==
+    'error' %}
     <div class="alert alert-danger alert-dismissable fade show" role="alert">
-        <strong>Error!</strong> {{ message }}
-        <button type="button" class="close" data-dismiss="alert">
+      <strong>Error!</strong> {{ message }}
+      <button type="button" class="close" data-dismiss="alert">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     {% else %}
     <div class="alert alert-success alert-dismissable fade show" role="alert">
-        {{ message }}
-        <button type="button" class="close" data-dismiss="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
@@ -76,34 +110,51 @@
     <div class="container">{% block content %} {% endblock %}</div>
 
     <script>
-        //Get the button
-        var mybutton = document.getElementById("myBtn");
+      //Get the button
+      var mybutton = document.getElementById("myBtn");
 
-        // When the user scrolls down 20px from the top of the document, show the button
-        window.onscroll = function() {
-            scrollFunction()
-        };
+      // When the user scrolls down 20px from the top of the document, show the button
+      window.onscroll = function () {
+        scrollFunction();
+      };
 
-        function scrollFunction() {
-            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-                mybutton.style.display = "block";
-            } else {
-                mybutton.style.display = "none";
-            }
+      function scrollFunction() {
+        if (
+          document.body.scrollTop > 200 ||
+          document.documentElement.scrollTop > 200
+        ) {
+          mybutton.style.display = "block";
+        } else {
+          mybutton.style.display = "none";
         }
+      }
 
-        // When the user clicks on the button, scroll to the top of the document
-        function topFunction() {
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
-        }
+      // When the user clicks on the button, scroll to the top of the document
+      function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+      }
     </script>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
 
-    <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
-</body>
-
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='index.js') }}"
+    ></script>
+  </body>
 </html>
