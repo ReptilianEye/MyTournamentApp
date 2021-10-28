@@ -1,7 +1,32 @@
 {% extends "base.html" %} {% block title %}Update dual{% endblock %} {% block content %}
 <section class="update_dual_box_container container_update_dual">
     <br>
-    <h3 align="center">{{dual.opponent_1.name}} <span style="color: #5AA0BA; font-weight: 700;">{{dual.score_1}}</span> vs <span style="color: #5AA0BA; font-weight: 700;">{{dual.score_2}}</span> {{dual.opponent_2.name}}</h3>
+
+    <section align="center">
+        <div class="btn-danger_nav_list_group_schedule_nick_one" style="display: inline-block">
+            <h4>
+                {{dual.opponent_1.name}}
+                <br />
+            </h4>
+        </div>
+
+        <div class="btn-danger_nav_list_group_schedule_point" style="display: inline-block">
+            {% if dual.score_1 is none or dual.score_1 is none %}
+            <h4 style="color: #a03636; font-weight: 700;"> 0 : 0 </h4>
+            {% else %}
+            <h4 style="color: #5aa0ba; font-weight: 700;">{{dual.score_1}} : {{dual.score_2}}</h4>
+            {% endif %}
+
+        </div>
+
+        <div class="btn-danger_nav_list_group_schedule_nick_two" style="display: inline-block">
+            <h4>{{dual.opponent_2.name}}
+                <br />
+            </h4>
+
+        </div>
+    </section>
+
     <ol class="list-group list-group-flush" id="pary">
         <form method="POST">
 
@@ -12,8 +37,8 @@
                     {% endif %} -->
                     <br>
 
-                    <input class="type_score" name="score1" type="number" placeholder="{{dual.opponent_1.name}}" />
-                    <input class="type_score" name="score2" type="number" placeholder="{{dual.opponent_2.name}}" />
+                    <input class="type_score" name="score1" type="number" placeholder=" {{dual.opponent_1.name}}" />
+                    <input class="type_score" name="score2" type="number" placeholder=" {{dual.opponent_2.name}}" />
                 </ol>
             </div>
             <br />

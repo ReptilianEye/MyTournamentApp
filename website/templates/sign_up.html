@@ -1,27 +1,27 @@
 {% extends "base.html" %} {% block title %}Sign Up{% endblock %} {% block content %}
 <section class="sign_box_container container_sign">
-    <br><br>
     <form method="POST">
+        <br>
         <h3 align="center">Sign up</h3>
         <div class="form-group">
-            <br>
+            <label class="label_login" for="email">Email Address</label>
             <input type="email" class="form_control" id="email" name="email" placeholder="Enter email" />
         </div>
         <div class="form-group">
-            <br>
+            <label class="label_login" for="firstName">First Name</label>
             <input type="text" class="form_control" id="firstName" name="firstName" placeholder="Enter first name" />
         </div>
         <div class="form-group">
-            <br>
+            <label class="label_login" for="password1">Password</label>
             <input type="password" class="form_control" id="password1" name="password1" placeholder="Enter password" />
         </div>
         <div class="form-group">
-            <br>
+            <label class="label_login" for="password2">Password (Confirm)</label>
             <input type="password" class="form_control" id="password2" name="password2" placeholder="Confirm password" />
         </div>
         <br />
         <center>
-            <button type="submit" class="btn-danger_nav_login">Save</button>
+            <button id="btn" type="submit" class="btn-danger_nav_login">Save</button>
         </center>
     </form>
 </section>
