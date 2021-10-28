@@ -3,7 +3,6 @@ from .import db
 from .models import Opponent, User, Tournament, Dual, Opponent, Standing, Round
 import math
 
-
 class TournamentController():
 
     def CreateNew(self, user_Id, name, date, location, discipline, type):
@@ -131,13 +130,12 @@ class RoundStrategy():
 
 class RoundRobinRS(RoundStrategy):
 
-    def __generateSchedule(self, max_rounds=math.inf):       # "__" means private method
+    def __generateSchedule(self):       # "__" means private method
         schedule = GenerateRoundRobin(self.tournament.opponents)
+        round_number = 0
         for line in schedule:
             if type(line) is int:
                 round_number = line
-                if round_number > max_rounds:
-                    break
                 newRundId = self.createNewRound(round_number)
             else:
                 opponent1 = Opponent.query.filter_by(
@@ -148,7 +146,7 @@ class RoundRobinRS(RoundStrategy):
                 db.session.add(Dual(tournament_id=self.tournament.id, round_id=newRundId, opponent1_id=opponent1.id,
                                     opponent2_id=opponent2.id, round_number=round_number))
         db.session.commit()
-
+    
     def getNewRound(self):
         if len(self.tournament.duals) == 0:
             self.__generateSchedule()
@@ -159,17 +157,19 @@ class RoundRobinRS(RoundStrategy):
 
 
 class SwissRS(RoundStrategy):
+    
 
     def saveRound(self, round, round_number):
         newRundId = self.createNewRound(round_number)
         for duel in round:
             db.session.add(Dual(tournament_id=self.tournament.id, round_id=newRundId, opponent1_id=duel[0].id,
-                                opponent2_id=duel[1].id, round_number=1))
+                            opponent2_id=duel[1].id, round_number=1))
         db.session.commit()
 
     def generateFirstRound(self):
         firstRound = GenerateFirstRoundSwiss(self.tournament.opponents)
-        self.saveRound(firstRound, 1)
+        self.saveRound(firstRound,1)
+
 
     def getNewRound(self):
         self.tournament.current_round_number += 1
@@ -180,13 +180,14 @@ class SwissRS(RoundStrategy):
         else:
             if checkIfScoresAreWritten(self.tournament.duals):
                 newRound = GenerateRoundSwiss(
-                    self.tournament.opponents, self.tournament.standings, self.tournament.duals)
+                    self.tournament.opponents, self.tournament.standings,self.tournament.duals)
                 self.saveRound(newRound, self.tournament.current_round_number)
             else:
                 return "Your have to fill all scores"
 
 
 class TreeRS(RoundStrategy):
+    
     def generateFirstRound(self, players):
         potegaWiekszej = math.floor(math.log2(len(players)))
         potegaDwojki = pow(2, potegaWiekszej)
@@ -198,13 +199,14 @@ class TreeRS(RoundStrategy):
         db.session.commit()
         if len(self.tournament.duals) == 0:
             self.generateFirstRound(self.tournament.duals)
-
+            
             if checkIfScoresAreWritten(self.tournament.duals):
                 if checkIfScoresAreDecided(self.tournament.duals):
                     newRound = GenerateRoundTree(self.tournament.duals)
-                    self.saveRound(
-                        newRound, self.tournament.current_round_number)
+                    self.saveRound(newRound, self.tournament.current_round_number)
                 else:
                     return "None of the scores can be tied"
             else:
                 return "Your have to fill all scores"
+        
+       

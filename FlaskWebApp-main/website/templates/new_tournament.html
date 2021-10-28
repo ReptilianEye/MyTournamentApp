@@ -1,8 +1,9 @@
 {% extends "base.html" %} {% block title %}Create Tournament{% endblock %} {% block content %}
-<section class="sign_box_container container_sign">
+<section class="new_tournaments_box_container container_tournaments_new">
     <br /><br />
     <form method="POST">
         <h3 align="center">New Tournament</h3>
+        <br>
 
         <div class="form-group">
             <input type="text" class="form_control" name="name" placeholder="Enter New Tournament Name" />
@@ -40,7 +41,7 @@
         <br />
         <br />
         <center>
-            <button id="btn" type="submit" class="btn-danger_nav_login">Create</button>
+            <button type="submit" class="btn-danger_nav_login">Create</button>
         </center>
     </form>
 </section>
