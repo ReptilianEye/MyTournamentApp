@@ -1,74 +1,82 @@
 {% extends "base.html" %} {% block title %}Your Tournaments{% endblock %} {%
 block content %}
 <section class="tournaments_box_container container_tournaments">
-  <br />
-  <h3 align="center">Your Tournaments</h3>
-  <br />
-  <table>
-    <tbody>
-      <tr>
-        <div align="center">
-          <th>Name</th>
-          <th>Number Of Players</th>
-          <th>Date</th>
-          <th>Location</th>
-        </div>
-      </tr>
-      {% for tournament in user.tournaments %}
-      <tr onClick="showTournament({{tournament.id}})">
-        <td>{{tournament.name}}</td>
-        <td>Players: {{tournament.opponents|length}}</td>
-        <td>{{tournament.date}}</td>
-        <td>{{tournament.location}}</td>
-        <!-- <h4 style="margin-right: 20px">
-            {{tournament.name}} | Players: {{tournament.opponents|length}} |
-            {{tournament.date}} | {{tournament.location}}
-          </h4> -->
-      </tr>
-      {% endfor %}
-      <br />
-    </tbody>
-  </table>
+    <br />
+    <h3 align="center">Your Tournaments</h3>
+    <table style="margin: auto;">
+        <tbody style="display: flex; margin-bottom: 15px; margin-top: 15px;">
+            <tr class="btn-danger_nav_list_group_tournaments ">
+                <div align="center ">
+                    <td>Name</td>
+                </div>
+            </tr>
+            <tr class="btn-danger_nav_list_group_tournaments ">
+                <div align="center ">
+                    <td>Number Of Players</td>
+                </div>
+            </tr>
+            <tr class="btn-danger_nav_list_group_tournaments ">
+                <div align="center ">
+                    <td>Date</td>
+                </div>
+            </tr>
+            <tr class="btn-danger_nav_list_group_tournaments ">
+                <div align="center ">
+                    <td>Location</td>
+                </div>
+            </tr>
+        </tbody>
 
-  <!-- <ol class="list-group list-group-flush" id="pary">
+        {% for tournament in user.tournaments %}
+        <table style="margin: auto;">
+            <tbody class="btn_tournaments_list" onClick="showTournament({{tournament.id}}) " style="display: flex; margin-bottom: 15px;">
+                <button id="button_close" class="close_tournaments"><span onClick="deleteTournament({{tournament.id}})" aria-hidden="true">&times;</span></button>
+                <tr class="btn-danger_nav_list_group_tournaments_name " align="center ">
+                    <td>{{tournament.name}}</td>
+                </tr>
+                <tr class="btn-danger_nav_list_group_tournaments_name " align="center ">
+                    <td>Players: {{tournament.opponents|length}}</td>
+                </tr>
+                <tr class="btn-danger_nav_list_group_tournaments_name " align="center ">
+                    <td>{{tournament.date}}</td>
+                </tr>
+                <tr class="btn-danger_nav_list_group_tournaments_name " align="center ">
+                    <td>{{tournament.location}}</td>
+                </tr>
+            </tbody>
+        </table>
+        {% endfor %}
+        <br />
+    </table>
+
+    <!-- <ol class="list-group list-group-flush " id="pary ">
     {% for tournament in user.tournaments %}
 
-    <div align="center">
-      <ol class="badge">
+    <div align="center ">
+      <ol class="badge ">
         <button
-          class="btn-danger_nav_list_group"
-          onClick="showTournament({{tournament.id}})"
+          class="btn-danger_nav_list_group "
+          onClick="showTournament({{tournament.id}}) "
         >
-          <h4 style="margin-right: 20px">
+          <h4 style="margin-right: 20px ">
             {{tournament.name}} | Players: {{tournament.opponents|length}} |
             {{tournament.date}} | {{tournament.location}}
           </h4>
         </button>
-      </ol>
-    </div>
-    <br />
-    {% endfor %}
-  </ol> -->
+        </ol>
+        </div>
+        <br /> {% endfor %}
+        </ol> -->
 
-  <br />
-  <div align="center">
-    <a href="/new-tournament">
-      <button type="button" class="btn-danger_nav_tournaments">
+    <br />
+    <div align="center ">
+        <a href="/new-tournament ">
+            <button id="btn" type="button " class="btn-danger_nav_tournaments ">
         Generate new schedule
       </button>
-    </a>
-    <a href="#">
-      <button
-        onclick="goBack()"
-        style="background-color: #5aa0ba"
-        type="button "
-        class="btn-danger_nav_schedule"
-      >
-        Back
-      </button>
-    </a>
-  </div>
-  <br />
+        </a>
+    </div>
+    <br />
 </section>
 
 {% endblock %}

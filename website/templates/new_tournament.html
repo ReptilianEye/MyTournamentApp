@@ -1,6 +1,5 @@
-{% extends "base.html" %} {% block title %}Create Tournament{% endblock %} {%
-  block content %}
-  <section class="sign_box_container container_sign">
+{% extends "base.html" %} {% block title %}Create Tournament{% endblock %} {% block content %}
+<section class="sign_box_container container_sign">
     <br /><br />
     <form method="POST">
       <h3 align="center">New Tournament</h3>
@@ -43,10 +42,10 @@
           <option value="Chess">Chess</option>
           <option value="Other">Other</option>
         </select>
-      </div>
-      <br />
-      <br />
-  
+        </div>
+        <br />
+        <br />
+
         <div>
           <select
           name="type"
@@ -59,15 +58,13 @@
 
           </select>
         </div>
-      
-      <br />
-      <br />
-      <center>
-        <button type="submit" class="btn-danger_nav_login">Create</button>
-      </center>
+
+        <br />
+        <br />
+        <center>
+            <button id="btn" type="submit" class="btn-danger_nav_login">Create</button>
+        </center>
     </form>
-  </section>
-  
-  {% endblock %}
-  
-  
+</section>
+
+{% endblock %}
