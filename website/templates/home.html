@@ -1,35 +1,81 @@
-{% extends "base.html" %} {% block title %}Home page{% endblock %} {% block content %}
-
+{% extends "base.html" %} {% block title %}Home page{% endblock %} {% block
+content %}
 
 <section class="home_box_container container_home">
-    <div>
-        <center><img src="../static/logo 31lo.png" width="250px"></center>
-        <h1 align="center">Welcome at the home page!!!</h1>
+  <div>
+    <center><img src="../static/logo 31lo.png" width="250px" /></center>
+    <h1 align="center">Welcome at the home page!!!</h1>
+    <!-- <h5 align="center" style="color: white; ">
+      You can use that website to create your own tournaments, generate rounds using
+      various algorithms and track public tournament made by other students.
+      Have fun!
+    </h5> -->
+  </div>
+
+  <br />
+  <form method="POST">
+    <div align="center">
+      <a href="/tournaments">
+        <button id="btn" type="button" class="btn-danger_nav_generate">
+          Your tournaments
+        </button>
+      </a>
     </div>
-
-    <br />
-    <form method="POST">
-        <div align="center">
-            <a href="/tournaments">
-                <button id="btn" type="button" class="btn-danger_nav_generate">Your tournaments</button>
-            </a>
-        </div>
-    </form>
-
+  </form>
 </section>
-<footer align="center" class="sticky-footer ">
+<footer align="center" class="sticky-footer">
+  <p style="color: #5aa0ba; text-align: center">
+    © Patronat 31 Liceum Ogólnokształcące.
+  </p>
+  <p style="color: #5aa0ba; text-align: center">
+    Twórcy: <strong class="author">Piotr Rzadkowski</strong> |
+    <strong class="author">Jakub Błaszczyk</strong>
+  </p>
+  <p style="color: #5aa0ba; text-align: center">
+    Pomoc: <strong class="author">Marek Rzadkowski</strong> |
+    <strong class="author">Piotr Zapała</strong> |
+    <strong class="author">Ira Puchkova</strong>
+  </p>
+  <hr style="width: 20%" />
 
-    <p style="color: #5AA0BA; text-align: center; "> © Patronat 31 Liceum Ogólnokształcące.</p>
-    <p style="color: #5AA0BA; text-align: center; ">Twórcy: <strong class="author">Piotr Rzadkowski</strong> | <strong class="author">Jakub Błaszczyk</strong></p>
-    <p style="color: #5AA0BA; text-align: center; ">Pomoc: <strong class="author">Marek Rzadkowski</strong> | <strong class="author">Piotr Zapała</strong> | <strong class="author">Ira Puchkova</strong></p>
-    <hr style="width: 20%;">
-
-    <a href="https://www.instagram.com/31lokrakow" target="_blank" rel="noopener noreferrer">
-        <img style="margin-right: 20px" class="logo_social" src="../static/instragram-icon.png" width="35" height="35" alt="Instagram logo" /></a>
-    <a href="https://www.facebook.com/31LOKrakow" target="_blank" rel="noopener noreferrer">
-        <img style="margin-right: 20px" class="logo_social" src="../static/facebook-icon.png" width="35" height="35" alt="Facebook logo" /></a>
-    <a href="https://www.lo31.krakow.pl/" target="_blank" rel="noopener noreferrer">
-        <img class="logo_social" src="../static/logo 31lo.png" width="35" height="35" alt="Oficjalna strona 31LO" /></a>
+  <a
+    href="https://www.instagram.com/31lokrakow"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <img
+      style="margin-right: 20px"
+      class="logo_social"
+      src="../static/instragram-icon.png"
+      width="35"
+      height="35"
+      alt="Instagram logo"
+  /></a>
+  <a
+    href="https://www.facebook.com/31LOKrakow"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <img
+      style="margin-right: 20px"
+      class="logo_social"
+      src="../static/facebook-icon.png"
+      width="35"
+      height="35"
+      alt="Facebook logo"
+  /></a>
+  <a
+    href="https://www.lo31.krakow.pl/"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <img
+      class="logo_social"
+      src="../static/logo 31lo.png"
+      width="35"
+      height="35"
+      alt="Oficjalna strona 31LO"
+  /></a>
 </footer>
 
 {% endblock %}

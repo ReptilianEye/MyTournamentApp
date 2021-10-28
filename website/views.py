@@ -218,7 +218,8 @@ def show_public_standings():
     tournamentDTO = ChessTournament()
     tournamentDTO.Load(current_user.current_tournament_id)
     tournament = Tournament.query.filter_by(is_public=True).first()
-    return render_template("standing.html", user=current_user, standings=tournament.standings, tournament=tournamentDTO)
+    standings = sorted(tournament.standings, key=lambda standing: (standing.match_points, standing.wins, standing.draws), reverse=True)
+    return render_template("standing.html", user=current_user, standings=standings, tournament=tournamentDTO)
 
 @views.route('/delete-tournament', methods=['POST', 'GET'])
 @login_required
