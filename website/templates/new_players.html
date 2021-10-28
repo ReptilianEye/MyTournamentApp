@@ -10,25 +10,20 @@
             <button type="button" class="close" onClick="deletePlayer({{opponent.id}})">
         <span aria-hidden="true">&times;</span>
       </button>
-    </li>
-    {% endfor %}
-  </ol>
-  <br />
+        </li>
+        {% endfor %}
+    </ol>
+    <br />
 
-  <form method="POST">
-    <div align="left">
-      <input
-        style="display: inline-block"
-        name="player"
-        class="form_control"
-        type="text"
-      />
-      <button type="submit" class="btn-danger_nav_generator_home_white">
+    <form method="POST">
+        <div align="left">
+            <input style="display: inline-block" name="player" class="form_control" type="text" />
+            <button id="btn" type="submit" class="btn-add">
         Add participant
       </button>
-    </div>
+        </div>
 
-      <!-- <form method="POST">
+        <!-- <form method="POST">
     <div align="center">
     <div><input name="player"  class="form_control"> type="text"/></div>
     <div><button type="submit" class="btn-danger_nav_generator_home_white">
@@ -37,16 +32,16 @@
   </div>
     <br />
     -->
-            <br />
-            <div align="center">
-                <a href="/schedule">
+        <br />
+        <div align="center">
+            <a href="/schedule">
 
-                    <button id="btn" type="button" onclick="return clicked();" class="btn-danger_nav_generator_home">
+                <button id="btn" type="button" onclick="return clicked();" class="btn-danger_nav_generator_home">
           Save
         </button>
-                </a>
-        </form>
-        </div>
-        <!-- </form> -->
+            </a>
+    </form>
+    </div>
+    <!-- </form> -->
 </section>
 {% endblock %}

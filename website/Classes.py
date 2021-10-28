@@ -187,6 +187,7 @@ class SwissRS(RoundStrategy):
 
 
 class TreeRS(RoundStrategy):
+
     def generateFirstRound(self, players):
         potegaWiekszej = math.floor(math.log2(len(players)))
         potegaDwojki = pow(2, potegaWiekszej)

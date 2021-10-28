@@ -82,11 +82,12 @@
         <button href="/add-admin" type="button" class="btn btn-dark">
           Add admin
         </button>
-      </a> > {% endif %}
-                                <!-- <button style="margin-left: 30px; margin-right: -60px" align="right" type="submit" class="btn-danger_nav" onClick="deleteUser({{user.id}})">
+      </a>
+      > {% endif %}
+      <!-- <button style="margin-left: 30px; margin-right: -60px" align="right" type="submit" class="btn-danger_nav" onClick="deleteUser({{user.id}})">
         Delete account
       </button> -->
-        </nav>
+    </nav>
 
     {% with messages = get_flashed_messages(with_categories=true) %} {% if
     messages %} {% for category, message in messages %} {% if category ==
@@ -103,10 +104,10 @@
       <button type="button" class="close" data-dismiss="alert">
         <span aria-hidden="true">&times;</span>
       </button>
-        </div>
-        {% endif %} {% endfor %} {% endif %} {% endwith %}
+    </div>
+    {% endif %} {% endfor %} {% endif %} {% endwith %}
 
-        <div class="container">{% block content %} {% endblock %}</div>
+    <div class="container">{% block content %} {% endblock %}</div>
 
     <script>
       //Get the button
