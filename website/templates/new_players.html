@@ -2,7 +2,7 @@
 <section class="newplayers_box_container container_newplayer">
     <br />
     <h3 align="center">Add Participants</h3>
-    <h3 align="center">Type in every of them one by one :)</h3>
+    <h4 class="h4_main" align="center">Type in every of them one by one :)</h4>
     <ol class="list-group list-group-flush" id="notes">
         {% for opponent in tournament.opponents %}
         <li align="center" class="list-group-item">
@@ -14,20 +14,34 @@
         {% endfor %}
     </ol>
     <br />
+
     <form method="POST">
-        <textarea name="player" class="form_control"></textarea>
-        <br />
-        <div align="center">
-            <button type="submit" class="btn-danger_nav_generator_home_white">
+        <div align="left">
+            <input style="display: inline-block" name="player" class="form_control" type="text" />
+            <button id="btn" type="submit" class="btn-add">
         Add participant
       </button>
+        </div>
+
+        <!-- <form method="POST">
+    <div align="center">
+    <div><input name="player"  class="form_control"> type="text"/></div>
+    <div><button type="submit" class="btn-danger_nav_generator_home_white">
+      Add participant
+    </div>
+  </div>
+    <br />
+    -->
+        <br />
+        <div align="center">
             <a href="/schedule">
-                <button type="button" class="btn-danger_nav_generator_home">
-          Create
+
+                <button id="btn" type="button" onclick="return clicked();" class="btn-danger_nav_generator_home">
+          Save
         </button>
             </a>
-        </div>
-        <br>
     </form>
+    </div>
+    <!-- </form> -->
 </section>
 {% endblock %}

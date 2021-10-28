@@ -1,6 +1,5 @@
 import random
 import copy
-import math
 from .AdditionalFunctions import *
 
 
@@ -100,7 +99,6 @@ def GenerateRoundSwiss(opponents, standings, duels):
                 PlayersList.remove(opponent1)
                 PlayersList.remove(opponent2)
                 break
-
             i += 1
         if not pairFound:
             break
@@ -112,25 +110,6 @@ def GenerateRoundSwiss(opponents, standings, duels):
             i += 2            
     return Pary
     
-def generateFirstRoundTree(players, wildcard):
-    potegaWiekszej = math.ceil(math.log2(len(players)))
-    potegaDwojki = pow(2, potegaWiekszej)
-    liczbaWildcard = potegaDwojki - len(players)
-
-    pary=[]
-    e=0
-    while e < liczbaWildcard:
-        gracz=random.choice(players)
-        pary.append([gracz, wildcard])
-        players.remove(gracz)
-        e+=1
-    p=0
-    random.shuffle(players)
-    while p < len(players):
-        pary.append([players[p], players[p+1]])
-        p+=2
-    return pary
-
 
 def GenerateRoundTree(duels, limit=10000):
     winners = []
