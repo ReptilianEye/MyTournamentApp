@@ -4,6 +4,11 @@
     <br />
     <h3 align="center">{{tournament.name}}</h3>
     <ol class="list-group list-group-flush" id="pary">
+        <div style="margin-right: 30px;" align="right">
+            <a href="/standings">
+                <button id="btn" type="button" class="btn-add">Standings</button>
+            </a>
+        </div>
         {% for round in tournament.rounds %} {% if round.number
         <=tournament.current_round_number %} <h4 align="center" class="h4_round">Runda: {{round.number}}</h4>
             {% for dual in round.duals %}
@@ -46,17 +51,6 @@
 
     </div>
     {% endif %} {% endfor %}
-
-    <div align="center">
-
-        <br /><br />
-        <button onclick="goBack()" style="background-color: #5aa0ba " type="button " class="btn-danger_nav_schedule ">
-        Back
-      </button>
-        <a href="/standings">
-            <button type="button" class="btn-danger_nav_schedule">Standings</button>
-        </a>
-    </div>
     <br>
 </section>
 {% endblock %}

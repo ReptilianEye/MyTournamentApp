@@ -4,9 +4,9 @@
     <br />
     <h3 align="center">{{tournament.name}}</h3>
     <tbody class="list-group list-group-flush" id="pary">
-        <div align="center">
+        <div style="margin-right: 30px;" align="right">
             <a href="/standings">
-                <button type="button" class="btn-danger_nav_schedule">Standings</button>
+                <button id="btn" type="button" class="btn-add">Standings</button>
             </a>
         </div>
         {% for round in tournament.rounds %} {% if round.number

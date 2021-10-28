@@ -117,7 +117,7 @@ button.close_tournaments {
 }
 
 .close_tournaments:hover {
-    color: #5aa0ba;
+    color: #a03636;
 }
 
 .alert-danger {
@@ -698,8 +698,24 @@ h4 {
 .h4_main {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     color: #5AA0BA;
-    font-size: 22px;
+    font-size: 25px;
     font-weight: 700;
+    margin: 20px;
+}
+
+.h4_main_email {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: whitesmoke;
+    font-size: 13px;
+    font-weight: 500;
+    margin: 20px;
+}
+
+.h4_main_admin {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(216, 184, 0);
+    font-size: 15px;
+    font-weight: 500;
     margin: 20px;
 }
 
@@ -979,14 +995,14 @@ h4 :hover {
 .btn-danger_nav_list_group_standings {
     background-color: #5AA0BA;
     border: 0;
-    width: 200px;
+    width: 180px;
     height: 50px;
     border-radius: 15px;
     outline: none;
     box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
     transition: 0.5s;
     backface-visibility: hidden;
-    margin: 10px;
+    margin: 4px;
     text-align: -webkit-center;
 }
 
@@ -1001,14 +1017,14 @@ h4 :hover {
 .btn-danger_nav_list_group_standings_name {
     background-color: #20242A;
     border: 0;
-    width: 200px;
+    width: 180px;
     height: 50px;
     border-radius: 15px;
     outline: none;
     box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
     transition: 0.5s;
     backface-visibility: hidden;
-    margin: 10px;
+    margin: 4px;
     text-align: -webkit-center;
 }
 
@@ -1072,6 +1088,11 @@ h4 :hover {
     border: 0;
     border-radius: 20px;
     cursor: pointer;
+}
+
+.btn_tournaments_list:hover {
+    background-color: #5AA0BA;
+    transition: 0.3s;
 }
 
 
