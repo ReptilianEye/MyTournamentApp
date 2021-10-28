@@ -27,6 +27,18 @@ body::-webkit-scrollbar-thumb {
     background: linear-gradient(whitesmoke, whitesmoke);
 }
 
+#button_close:active,
+#button_close:focus {
+    -moz-outline: none;
+    outline: none;
+}
+
+#btn:active,
+#btn:focus {
+    -moz-outline: none;
+    outline: none;
+}
+
 
 /* Scroll up */
 
@@ -84,6 +96,28 @@ footer {
     color: whitesmoke;
     background-color: #5AA0BA;
     border-color: #5AA0BA;
+}
+
+button.close_tournaments {
+    margin-top: 8px;
+    margin-left: -250px;
+    border-color: transparent;
+    background-color: transparent;
+}
+
+.close_tournaments {
+    float: right;
+    font-size: 2.5rem;
+    font-weight: 900;
+    line-height: 1;
+    color: whitesmoke;
+    opacity: 90%;
+    text-shadow: 0 1px 0 #171c24;
+    margin-right: auto;
+}
+
+.close_tournaments:hover {
+    color: #5aa0ba;
 }
 
 .alert-danger {
@@ -421,7 +455,7 @@ hr {
 }
 
 .container_tournaments_new {
-    width: 900px;
+    width: 800px;
     height: 640px;
     margin: 0 auto;
     margin-top: 5%;
@@ -440,7 +474,7 @@ hr {
 }
 
 .container_tournaments {
-    width: 950px;
+    width: 1000px;
     height: auto;
     margin: 0 auto;
     margin-top: 5%;
@@ -661,6 +695,14 @@ h4 {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.h4_main {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #5AA0BA;
+    font-size: 22px;
+    font-weight: 700;
+    margin: 20px;
+}
+
 .h4_konto {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: 15px;
@@ -677,37 +719,28 @@ h4 {
 
 /* Przycisk NAV */
 
-.bg-dark_nav {
-    background-color: #171c24;
-}
-
-.btn-danger_nav {
-    background-color: #202225;
+.btn-add {
+    background-color: transparent;
     border: 0;
     width: 130px;
-    height: 40px;
-    border-radius: 15px;
+    height: 36px;
+    border-radius: .25rem;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    color: white;
+    color: whitesmoke;
     font-size: 13px;
     font-weight: bold;
     outline: none;
     box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
     transition: 0.5s;
     backface-visibility: hidden;
+    border: 1px solid whitesmoke;
+    margin-left: 10px;
 }
 
-.btn-danger_nav:hover {
-    transition: 0.5s;
+.btn-add:hover {
     cursor: pointer;
-    transform: perspective(1px) scale(1.1);
     background-color: whitesmoke;
     color: #2B2E32;
-}
-
-.btn-danger_nav a {
-    width: 100%;
-    height: 100%;
 }
 
 
@@ -941,6 +974,107 @@ h4 :hover {
 } */
 
 
+/* Standing list */
+
+.btn-danger_nav_list_group_standings {
+    background-color: #5AA0BA;
+    border: 0;
+    width: 200px;
+    height: 50px;
+    border-radius: 15px;
+    outline: none;
+    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+    transition: 0.5s;
+    backface-visibility: hidden;
+    margin: 10px;
+    text-align: -webkit-center;
+}
+
+.btn-danger_nav_list_group_standings td {
+    color: whitesmoke;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    padding: 13px;
+    text-align: center;
+}
+
+.btn-danger_nav_list_group_standings_name {
+    background-color: #20242A;
+    border: 0;
+    width: 200px;
+    height: 50px;
+    border-radius: 15px;
+    outline: none;
+    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+    transition: 0.5s;
+    backface-visibility: hidden;
+    margin: 10px;
+    text-align: -webkit-center;
+}
+
+.btn-danger_nav_list_group_standings_name td {
+    color: whitesmoke;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    padding: 13px;
+    text-align: center;
+}
+
+
+/* Tournaments list */
+
+.btn-danger_nav_list_group_tournaments {
+    background-color: #5AA0BA;
+    border: 0;
+    width: 200px;
+    height: 50px;
+    border-radius: 15px;
+    outline: none;
+    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+    transition: 0.5s;
+    backface-visibility: hidden;
+    margin: 10px;
+    text-align: -webkit-center;
+}
+
+.btn-danger_nav_list_group_tournaments td {
+    color: whitesmoke;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    padding: 13px;
+    text-align: center;
+}
+
+.btn-danger_nav_list_group_tournaments_name {
+    background-color: #20242A;
+    border: 0;
+    width: 200px;
+    height: 50px;
+    border-radius: 15px;
+    outline: none;
+    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+    transition: 0.5s;
+    backface-visibility: hidden;
+    margin: 10px;
+    text-align: -webkit-center;
+}
+
+.btn-danger_nav_list_group_tournaments_name td {
+    color: whitesmoke;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    padding: 13px;
+    text-align: center;
+}
+
+.btn_tournaments_list {
+    background-color: whitesmoke;
+    border: 0;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+
 /* Przycisk tournaments  */
 
 .btn-danger_nav_tournaments_blue {
@@ -1115,6 +1249,7 @@ h4 :hover {
     backface-visibility: hidden;
     margin-top: 1px;
     margin-left: 15px;
+    margin-bottom: 10px;
 }
 
 .btn-danger_nav_generator_home:hover {
