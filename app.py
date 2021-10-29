@@ -7,3 +7,4 @@ app = create_app()
 if __name__ == '__main__':
     # debug = true - za kazdym razem kiedy wprowadze zmiane w kodzie serwer sie zresetuje i pokaze zmiany
     app.run(debug=True)
+# hello
