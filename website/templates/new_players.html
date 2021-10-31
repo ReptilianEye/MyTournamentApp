@@ -2,7 +2,7 @@
 <section class="newplayers_box_container container_newplayer">
     <br />
     <h3 align="center">Add Participants</h3>
-    <h4 class="h4_main" align="center">Type in every of them one by one :)</h4>
+    <h4 class="h4_main" align="center">Type in each of them one by one :)</h4>
     <ol class="list-group list-group-flush" id="notes">
         {% for opponent in tournament.opponents %}
         <li align="center" class="list-group-item">
@@ -17,7 +17,7 @@
 
     <form method="POST">
         <div align="left">
-            <input style="display: inline-block" name="player" class="form_control" type="text" />
+            <input style="display: inline-block" name="player" class="form_control" placeholder="Type name and click 'Add participant'" type="text" />
             <button id="btn" type="submit" class="btn-add">
         Add participant
       </button>
