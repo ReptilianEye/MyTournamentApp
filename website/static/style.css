@@ -1605,6 +1605,10 @@ h4 :hover {
       footer {
         font-size: 0.7rem;
       }
+      .type_score {
+        width: 120px;
+        height: 40px;
+      }
     }
   }
 }
