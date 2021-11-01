@@ -1445,7 +1445,8 @@ h4 :hover {
   .public_schedule_box_container,
   .sign_box_container,
   .login_box_container,
-  .update_dual_box_container {
+  .update_dual_box_container,
+  .admin_box_container {
     width: 100%;
     margin: 5% auto;
   }
@@ -1459,7 +1460,8 @@ h4 :hover {
   .container_schedule_public,
   .container_sign,
   .container_login,
-  .container_update_dual {
+  .container_update_dual,
+  .container_admin {
     width: 97%;
     height: auto;
     padding-bottom: 20px;
