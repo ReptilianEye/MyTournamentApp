@@ -1,1040 +1,1024 @@
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 body {
-    background-image: url("../static/bgp.png");
-    scroll-behavior: smooth;
-    overflow: overlay;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+  background-image: url("../static/bgp.png");
+  scroll-behavior: smooth;
+  overflow: overlay;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 body::-webkit-scrollbar {
-    width: 9px;
-    height: 12px;
+  width: 9px;
+  height: 12px;
 }
 
 body::-webkit-scrollbar-track {
-    background: #20242A;
-    border-radius: 0px;
-    box-shadow: inset 0 0 13px #20242A;
+  background: #20242a;
+  border-radius: 0px;
+  box-shadow: inset 0 0 13px #20242a;
 }
 
 body::-webkit-scrollbar-thumb {
-    border-radius: 0px;
-    box-shadow: inset 0 0 13px whitesmoke;
-    background: linear-gradient(whitesmoke, whitesmoke);
+  border-radius: 0px;
+  box-shadow: inset 0 0 13px whitesmoke;
+  background: linear-gradient(whitesmoke, whitesmoke);
 }
 
 #button_close:active,
 #button_close:focus {
-    -moz-outline: none;
-    outline: none;
+  -moz-outline: none;
+  outline: none;
 }
 
 #btn:active,
 #btn:focus {
-    -moz-outline: none;
-    outline: none;
+  -moz-outline: none;
+  outline: none;
 }
-
 
 /* Scroll up */
 
 #myBtn {
-    display: none;
-    position: fixed;
-    bottom: 15px;
-    right: 30px;
-    z-index: 99;
-    border: none;
-    outline: none;
-    background-color: whitesmoke;
-    color: white;
-    cursor: pointer;
-    padding: 2px;
-    border-radius: 10px;
-    height: 45px;
-    width: 50px;
-    box-shadow: 0 0.25em 0.25em rgb(0 0 0 / 30%);
+  display: none;
+  position: fixed;
+  bottom: 15px;
+  right: 30px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: whitesmoke;
+  color: white;
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 10px;
+  height: 45px;
+  width: 50px;
+  box-shadow: 0 0.25em 0.25em rgb(0 0 0 / 30%);
 }
 
 #myBtn:hover {
-    border-radius: 5px;
-    box-shadow: 0 0.35em 0.35em rgb(0 0 0 / 50%);
+  border-radius: 5px;
+  box-shadow: 0 0.35em 0.35em rgb(0 0 0 / 50%);
 }
-
 
 /* Scroll up */
 
 footer {
-    width: 100%;
-    background-color: transparent;
-    color: #fff;
-    place-items: center;
-    padding: 30px;
-    font-size: 1.2rem;
+  width: 100%;
+  background-color: transparent;
+  color: #fff;
+  place-items: center;
+  padding: 30px;
+  font-size: 1.2rem;
 }
 
 .author {
-    color: whitesmoke;
+  color: whitesmoke;
+}
+
+.alert-wrapper {
+  width: 100%;
+  margin-top: 10px;
+  position: absolute;
 }
 
 .alert {
-    position: absolute;
-    padding: .75rem 1.25rem;
-    margin-bottom: 1rem;
-    border: 3px solid #20242A;
-    border-radius: 8px;
-    /* width: 45%; */
-    width: 600px;
-    margin-left: 35%;
-    font-weight: 500;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 3px solid #20242a;
+  border-radius: 8px;
+  width: 600px;
+  margin: auto;
+  font-weight: 500;
 }
 
 .alert-success {
-    color: whitesmoke;
-    background-color: #5AA0BA;
-    border-color: #5AA0BA;
+  color: whitesmoke;
+  background-color: #5aa0ba;
+  border-color: #5aa0ba;
 }
 
 button.close_tournaments {
-    margin-top: 8px;
-    margin-left: -250px;
-    border-color: transparent;
-    background-color: transparent;
+  border-color: transparent;
+  background-color: transparent;
+  position: absolute;
+  left: -50px;
+  top: 10px;
 }
 
 .close_tournaments {
-    float: right;
-    font-size: 2.5rem;
-    font-weight: 900;
-    line-height: 1;
-    color: whitesmoke;
-    opacity: 90%;
-    text-shadow: 0 1px 0 #171c24;
-    margin-right: auto;
+  /* float: right; */
+  font-size: 2.5rem;
+  font-weight: 900;
+  line-height: 1;
+  color: whitesmoke;
+  /* color: #20242a; */
+  opacity: 90%;
+  text-shadow: 0 1px 0 #171c24;
+  margin-right: auto;
 }
 
 .close_tournaments:hover {
-    color: #a03636;
+  color: #a03636;
 }
 
 .alert-danger {
-    color: #202225;
-    background-color: #F8D7DA;
-    border-color: #F8D7DA;
-    border: 3px solid #20242A;
+  color: #202225;
+  background-color: #f8d7da;
+  border-color: #f8d7da;
+  border: 3px solid #20242a;
 }
 
 .close {
-    float: right;
-    font-size: 1.7rem;
-    font-weight: 900;
-    line-height: 1;
-    color: #202225;
-    text-shadow: 0 1px 0 #fff;
-    opacity: 90%;
-    margin-top: -2px;
+  float: right;
+  font-size: 1.7rem;
+  font-weight: 900;
+  line-height: 1;
+  color: #202225;
+  text-shadow: 0 1px 0 #fff;
+  opacity: 90%;
+  margin-top: -2px;
 }
 
 .list-group {
-    display: flex;
-    flex-direction: column;
-    padding-left: 0;
-    margin-bottom: 0;
-    font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: 0;
+  font-weight: 700;
 }
 
 .list-group-flush .list-group-item:first-child {
-    border-top-width: 0;
+  border-top-width: 0;
 }
 
 .list-group-flush .list-group-item {
-    border-right-width: 0;
-    border-left-width: 0;
-    border-radius: 8px;
-    width: 50%;
-    margin-left: 25%;
-    margin-top: 6px;
+  border-right-width: 0;
+  border-left-width: 0;
+  border-radius: 8px;
+  width: 50%;
+  margin-left: 25%;
+  margin-top: 6px;
 }
 
 .type_score {
-    background-color: #20242A;
-    border: none;
-    font-size: 22px;
-    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.2);
-    border: 1px solid;
-    opacity: 95%;
-    border-color: whitesmoke;
-    border-radius: 15px;
-    color: whitesmoke;
-    text-align: center;
-    font-weight: 800;
-    width: 200px;
-    height: 50px;
-    margin: 10px;
+  background-color: #20242a;
+  border: none;
+  font-size: 22px;
+  box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid;
+  opacity: 95%;
+  border-color: whitesmoke;
+  border-radius: 15px;
+  color: whitesmoke;
+  text-align: center;
+  font-weight: 800;
+  width: 200px;
+  height: 50px;
+  margin: 10px;
 }
-
 
 /* Dropdown menu */
 
 .btn-add-account {
-    background-color: whitesmoke;
-    border: 0;
-    width: 110px;
-    height: 40px;
-    border-radius: .55rem;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    color: #202225;
-    font-size: 12px;
-    font-weight: bold;
-    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
-    transition: 0.5s;
-    backface-visibility: hidden;
-    border: 1px solid whitesmoke;
-    margin-left: 10px;
-    outline: none;
+  background-color: whitesmoke;
+  border: 0;
+  width: 110px;
+  height: 40px;
+  border-radius: 0.55rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #202225;
+  font-size: 12px;
+  font-weight: bold;
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+  transition: 0.5s;
+  backface-visibility: hidden;
+  border: 1px solid whitesmoke;
+  margin-left: 10px;
+  outline: none;
 }
 
 .btn-add-account a {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .btn-add-account:hover {
-    transition: 0.5s;
-    cursor: pointer;
-    transform: perspective(1px) scale(1.1);
-    background-color: #5aa0ba;
-    border: 1px solid #5aa0ba;
-    color: whitesmoke;
+  transition: 0.5s;
+  cursor: pointer;
+  transform: perspective(1px) scale(1.1);
+  background-color: #5aa0ba;
+  border: 1px solid #5aa0ba;
+  color: whitesmoke;
 }
-
 
 /* ACCOUNT DELETE */
 
 .btn-add-account_delete {
-    background-color: whitesmoke;
-    border: 0;
-    width: 110px;
-    height: 40px;
-    border-radius: .55rem;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    color: #202225;
-    font-size: 12px;
-    font-weight: bold;
-    outline: none;
-    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
-    transition: 0.5s;
-    backface-visibility: hidden;
-    border: 1px solid whitesmoke;
-    margin-left: 10px;
+  background-color: whitesmoke;
+  border: 0;
+  width: 110px;
+  height: 40px;
+  border-radius: 0.55rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #202225;
+  font-size: 12px;
+  font-weight: bold;
+  outline: none;
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+  transition: 0.5s;
+  backface-visibility: hidden;
+  border: 1px solid whitesmoke;
+  margin-left: 10px;
 }
 
 .btn-add-account_delete a {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .btn-add-account_delete:hover {
-    transition: 0.5s;
-    cursor: pointer;
-    transform: perspective(1px) scale(1.1);
-    background-color: #a03636;
-    border: 1px solid #a03636;
-    color: whitesmoke;
+  transition: 0.5s;
+  cursor: pointer;
+  transform: perspective(1px) scale(1.1);
+  background-color: #a03636;
+  border: 1px solid #a03636;
+  color: whitesmoke;
+}
+
+#account-btn-icon {
+  display: none;
 }
 
 ul {
-    list-style: none;
-    float: left;
-    margin-top: 18px;
+  list-style: none;
+  float: left;
+  margin-top: 18px;
 }
 
-ul>li {
-    margin: 0;
-    padding: 0;
-    float: left;
-    position: relative;
+ul > li {
+  margin: 0;
+  padding: 0;
+  float: left;
+  position: relative;
 }
 
-ul>li>a {
-    color: whitesmoke;
-    text-decoration: none;
-    padding-bottom: 20px;
+ul > li > a {
+  color: whitesmoke;
+  text-decoration: none;
+  padding-bottom: 20px;
 }
 
-ul>li>a:hover,
-ul>li:hover>a {
-    color: #5aa0ba;
-    text-decoration: none;
+ul > li > a:hover,
+ul > li:hover > a {
+  color: #5aa0ba;
+  text-decoration: none;
 }
 
-ul>li ul {
-    padding: 0;
-    position: absolute;
-    left: -89px;
-    top: 28px;
-    width: 250px;
-    text-align: left;
-    background-color: #171c24;
-    border: 0;
-    border-radius: 7px;
-    box-shadow: 0 8px 50px 0 rgba(0, 0, 0, 0.2);
-    transform: scaleY(0);
-    /* zwijamy cały element */
-    -webkit-transform: scaleY(0);
-    transform-origin: 50% 0;
-    /* ustawiamy punkt zwijania względem środka górnej krawędzi */
-    -webkit-transform-origin: 50% 0;
-    transition: 200ms;
-    /* wydłużamy wykonywanie stylów */
+ul > li ul {
+  padding: 0;
+  position: absolute;
+  left: -130px;
+  top: 28px;
+  width: 250px;
+  text-align: left;
+  background-color: #171c24;
+  border: 0;
+  border-radius: 7px;
+  box-shadow: 0 8px 50px 0 rgba(0, 0, 0, 0.2);
+  transform: scaleY(0);
+  /* zwijamy cały element */
+  -webkit-transform: scaleY(0);
+  transform-origin: 50% 0;
+  /* ustawiamy punkt zwijania względem środka górnej krawędzi */
+  -webkit-transform-origin: 50% 0;
+  transition: 200ms;
+  /* wydłużamy wykonywanie stylów */
 }
 
-ul li:hover>ul {
-    visibility: visible;
-    transform: scaleY(1);
-    /* rozwijamy element do całej jego wysokości */
-    -webkit-transform: scaleY(1);
+ul li:hover > ul {
+  visibility: visible;
+  transform: scaleY(1);
+  /* rozwijamy element do całej jego wysokości */
+  -webkit-transform: scaleY(1);
 }
 
-ul>li ul ul {
-    left: 200px;
-    top: -1px;
+ul > li ul ul {
+  left: 200px;
+  top: -1px;
 }
 
-ul>li ul li {
-    margin: 0;
-    padding: 0;
-    position: relative;
-    float: none;
-    height: auto;
+ul > li ul li {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  float: none;
+  height: auto;
 }
 
-ul>li ul li a {
-    padding: 13px 20px;
-    color: whitesmoke;
-    text-decoration: none;
-    display: block;
-    border-radius: 5px;
-    font-size: 16px;
+ul > li ul li a {
+  padding: 13px 20px;
+  color: whitesmoke;
+  text-decoration: none;
+  display: block;
+  border-radius: 5px;
+  font-size: 16px;
 }
 
-ul>li ul li a:hover,
-ul>li ul li:hover>a {
-    text-decoration: none;
-    color: #fff;
-    border-bottom: 1px solid;
+ul > li ul li a:hover,
+ul > li ul li:hover > a {
+  text-decoration: none;
+  color: #fff;
+  border-bottom: 1px solid;
 }
 
 a {
-    color: #fff;
-    font-size: 18px;
-    font-weight: 500;
-    text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  text-decoration: none;
 }
 
 a:not([href]) {
-    color: whitesmoke;
-    text-decoration: none;
+  color: whitesmoke;
+  text-decoration: none;
 }
 
 a:hover {
-    text-decoration: none;
-    color: #5AA0BA;
+  text-decoration: none;
+  color: #5aa0ba;
 }
-
 
 /* nawigacja */
 
 nav {
-    background: #171c24;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    height: 70px;
-    padding: 0 100px;
-    box-shadow: 0 5px 7px 0 #5aa0ba;
+  background: #171c24;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 70px;
+  padding: 0 100px;
+  box-shadow: 0 5px 7px 0 #5aa0ba;
 }
 
 nav .logo {
-    color: #fff;
-    font-size: 30px;
-    font-weight: 600;
-    letter-spacing: -1px;
-    text-decoration: none;
+  color: #fff;
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -1px;
+  text-decoration: none;
+  text-align: center;
 }
 
 nav .nav-items {
-    display: flex;
-    flex: 1;
-    padding: 0 0 0 50px;
-    margin-top: 4px;
+  display: flex;
+  flex: 1;
+  padding: 0 0 0 50px;
+  margin-top: 4px;
 }
 
 nav .nav-items li {
-    list-style: none;
-    padding: 0 15px;
+  list-style: none;
+  padding: 0 15px;
 }
 
 nav .nav-items li a {
-    font-size: 18px;
-    font-weight: 500;
-    text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  text-decoration: none;
 }
 
 nav .nav-items li a:hover {
-    color: #5AA0BA;
+  color: #5aa0ba;
 }
 
 .not-active {
-    pointer-events: none;
-    cursor: default;
-    color: #5AA0BA;
+  pointer-events: none;
+  cursor: default;
+  color: #5aa0ba;
 }
 
 .link-active {
-    border-bottom: 2px solid #5AA0BA;
+  border-bottom: 2px solid #5aa0ba;
 }
 
 .logo_social_tournaments {
-    border-radius: 17px;
-    background-color: #20242A;
+  border-radius: 17px;
+  background-color: #20242a;
 }
 
 .logo_social {
-    border-radius: 10px;
-    background-color: whitesmoke;
-    box-shadow: 0 0.25em 0.25em rgb(0 0 0 / 30%);
-    transition: all .3s ease-out;
-    border: 3px solid #20242A;
+  border-radius: 10px;
+  background-color: whitesmoke;
+  box-shadow: 0 0.25em 0.25em rgb(0 0 0 / 30%);
+  transition: all 0.3s ease-out;
+  border: 3px solid #20242a;
 }
 
 .logo_social:hover {
-    background-color: #5AA0BA;
-    transform: perspective(1px) scale(1.2);
-    box-shadow: 0 0.35em 0.35em rgb(0 0 0 / 50%);
+  background-color: #5aa0ba;
+  transform: perspective(1px) scale(1.2);
+  box-shadow: 0 0.35em 0.35em rgb(0 0 0 / 50%);
 }
 
 .home_box_container h1 {
-    color: #5AA0BA;
-    font-family: 'Stick No Bills', sans-serif;
-    font-size: 45px;
+  color: #5aa0ba;
+  font-family: "Stick No Bills", sans-serif;
+  font-size: 45px;
 }
 
 .home_box_container h2 {
-    color: whitesmoke;
-    font-family: 'Stick No Bills', sans-serif;
+  color: whitesmoke;
+  font-family: "Stick No Bills", sans-serif;
 }
 
 h3 {
-    color: whitesmoke;
-    font-family: 'Stick No Bills', sans-serif;
-    font-size: 60px;
+  color: whitesmoke;
+  font-family: "Stick No Bills", sans-serif;
+  font-size: 60px;
 }
 
 hr {
-    background-color: whitesmoke;
-    height: 2px;
+  background-color: whitesmoke;
+  height: 2px;
 }
 
 .konto_hr {
-    background-color: whitesmoke;
-    height: 1px;
-    margin: 1rem .4rem;
+  background-color: whitesmoke;
+  height: 1px;
+  margin: 1rem 0.4rem;
 }
 
 .container {
-    width: 1800px;
+  width: 1800px;
 }
 
 .label_login {
-    display: block;
-    text-align: center;
-    color: #5AA0BA;
-    margin-bottom: 10px;
+  display: block;
+  text-align: center;
+  color: #5aa0ba;
+  margin-bottom: 10px;
 }
-
 
 /* ADMIN BOX */
 
 .admin_box_container {
-    background-color: #20242A;
-    height: 250px;
-    width: 700px;
-    /* width: 600px; */
-    box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
-    border-radius: 40px;
+  background-color: #20242a;
+  height: 250px;
+  width: 700px;
+  /* width: 600px; */
+  box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 40px;
 }
 
 .container_admin {
-    width: 900px;
-    height: 400px;
-    margin: 0 auto;
-    margin-top: 5%;
+  width: 900px;
+  height: 400px;
+  margin: 0 auto;
+  margin-top: 5%;
 }
-
 
 /* HOME BOX */
 
 .home_box_container {
-    background-color: #20242A;
-    height: 250px;
-    width: 1600px;
-    /* width: 600px; */
-    box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
-    border-radius: 40px;
+  background-color: #20242a;
+  height: 250px;
+  width: 1600px;
+  /* width: 600px; */
+  box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 40px;
 }
 
 .container_home {
-    width: 950px;
-    height: 470px;
-    margin: 0 auto;
-    margin-top: 5%;
+  width: 950px;
+  height: 470px;
+  margin: 0 auto;
+  margin-top: 5%;
 }
-
 
 /* Update dual BOX */
 
 .update_dual_box_container {
-    background-color: #20242A;
-    height: 250px;
-    width: 700px;
-    /* width: 600px; */
-    box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
-    border-radius: 40px;
+  background-color: #20242a;
+  height: 250px;
+  width: 700px;
+  /* width: 600px; */
+  box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 40px;
 }
 
 .container_update_dual {
-    width: 950px;
-    height: 280px;
-    margin: 0 auto;
-    margin-top: 10%;
+  width: 950px;
+  height: 280px;
+  margin: 0 auto;
+  margin-top: 10%;
 }
-
 
 /* NEW TOURNAMENTS BOX */
 
 .new_tournaments_box_container {
-    background-color: #20242A;
-    height: 300px;
-    width: 700px;
-    /* width: 600px; */
-    box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
-    border-radius: 40px;
+  background-color: #20242a;
+  height: 300px;
+  width: 700px;
+  /* width: 600px; */
+  box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 40px;
 }
 
 .container_tournaments_new {
-    width: 800px;
-    height: 640px;
-    margin: 0 auto;
-    margin-top: 5%;
+  width: 800px;
+  height: 640px;
+  margin: 0 auto;
+  margin-top: 5%;
 }
-
 
 /* TOURNAMENTS BOX */
 
 .tournaments_box_container {
-    background-color: #20242A;
-    height: 300px;
-    width: 700px;
-    /* width: 600px; */
-    box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
-    border-radius: 40px;
+  background-color: #20242a;
+  height: 300px;
+  width: 700px;
+  /* width: 600px; */
+  box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 40px;
 }
 
 .container_tournaments {
-    width: 1000px;
-    height: auto;
-    margin: 0 auto;
-    margin-top: 5%;
+  width: 1000px;
+  height: auto;
+  margin: 0 auto;
+  margin-top: 5%;
 }
-
 
 /* new-players BOX */
 
 .newplayers_box_container {
-    background-color: #20242A;
-    height: 250px;
-    width: 700px;
-    /* width: 600px; */
-    box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
-    border-radius: 40px;
+  background-color: #20242a;
+  height: 250px;
+  width: 700px;
+  /* width: 600px; */
+  box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 40px;
 }
 
 .container_newplayer {
-    width: 900px;
-    height: auto;
-    margin: 0 auto;
-    margin-top: 5%;
+  width: 900px;
+  height: auto;
+  margin: 0 auto;
+  margin-top: 5%;
 }
-
 
 /* update schedule BOX */
 
 .update_schedule_box_container {
-    background-color: #20242A;
-    height: 250px;
-    width: 700px;
-    /* width: 600px; */
-    box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
-    border-radius: 40px;
+  background-color: #20242a;
+  height: 250px;
+  width: 700px;
+  /* width: 600px; */
+  box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 40px;
 }
 
 .container_update_schedule {
-    width: 1100px;
-    height: auto;
-    margin: 0 auto;
-    margin-top: 5%;
+  width: 1100px;
+  height: auto;
+  margin: 0 auto;
+  margin-top: 5%;
 }
-
 
 /* schedule BOX */
 
 .schedule_box_container {
-    background-color: #20242A;
-    height: 250px;
-    width: 700px;
-    /* width: 600px; */
-    box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
-    border-radius: 40px;
+  background-color: #20242a;
+  height: 250px;
+  width: 700px;
+  /* width: 600px; */
+  box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 40px;
 }
 
 .container_schedule {
-    width: 950px;
-    height: auto;
-    margin: 0 auto;
-    margin-top: 5%;
+  width: 950px;
+  height: auto;
+  margin: 0 auto;
+  margin-top: 5%;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
 }
-
 
 /* public_schedule BOX */
 
 .public_schedule_box_container {
-    background-color: #20242A;
-    height: 250px;
-    width: 700px;
-    /* width: 600px; */
-    box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
-    border-radius: 40px;
+  background-color: #20242a;
+  height: 250px;
+  width: 700px;
+  /* width: 600px; */
+  box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 40px;
 }
 
 .container_schedule_public {
-    width: 950px;
-    height: auto;
-    margin: 0 auto;
-    margin-top: 5%;
+  width: 950px;
+  height: auto;
+  margin: 0 auto;
+  margin-top: 5%;
 }
-
 
 /* STANDINGS BOX */
 
 .standings_box_container {
-    background-color: #20242A;
-    height: 250px;
-    width: 700px;
-    /* width: 600px; */
-    box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
-    border-radius: 40px;
+  background-color: #20242a;
+  height: 250px;
+  width: 700px;
+  /* width: 600px; */
+  box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 40px;
 }
 
 .container_standings {
-    width: auto;
-    height: auto;
-    margin: 0 auto;
-    margin-top: 5%;
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+  margin-top: 5%;
 }
-
 
 /* Generator BOX */
 
 .generator_box_container {
-    background-color: #20242A;
-    height: 250px;
-    width: 700px;
-    /* width: 600px; */
-    box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
-    border-radius: 40px;
+  background-color: #20242a;
+  height: 250px;
+  width: 700px;
+  /* width: 600px; */
+  box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 40px;
 }
 
 .container_generator {
-    width: 900px;
-    height: auto;
-    margin: 0 auto;
-    margin-top: 4%;
+  width: 900px;
+  height: auto;
+  margin: 0 auto;
+  margin-top: 4%;
 }
-
 
 /* SIGNUP BOX */
 
 .sign_box_container {
-    background-color: #20242A;
-    height: 250px;
-    width: 700px;
-    /* width: 600px; */
-    box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
-    border-radius: 40px;
+  background-color: #20242a;
+  height: 250px;
+  width: 700px;
+  /* width: 600px; */
+  box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 40px;
 }
 
 .container_sign {
-    width: 800px;
-    height: 575px;
-    margin: 0 auto;
-    margin-top: 5%;
+  width: 800px;
+  height: 575px;
+  margin: 0 auto;
+  margin-top: 5%;
 }
-
 
 /* LOGIN BOX */
 
 .login_box_container {
-    background-color: #20242A;
-    height: 250px;
-    width: 700px;
-    /* width: 600px; */
-    box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
-    border-radius: 40px;
+  background-color: #20242a;
+  height: 250px;
+  width: 700px;
+  /* width: 600px; */
+  box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 40px;
 }
 
 .container_login {
-    width: 800px;
-    height: 400px;
-    margin: 0 auto;
-    margin-top: 5%;
+  width: 800px;
+  height: 400px;
+  margin: 0 auto;
+  margin-top: 5%;
 }
-
 
 /* LOGIN FORM */
 
 .form_control {
-    display: block;
-    width: 40%;
-    height: calc(1.5em + .75rem +2 px);
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: whitesmoke;
-    background-color: #20242A;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: .25rem;
-    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-    margin-left: 30%;
+  display: block;
+  width: 40%;
+  height: calc(1.5em + 0.75rem +2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: whitesmoke;
+  background-color: #20242a;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  margin: auto;
 }
 
 textarea {
-    resize: none
+  resize: none;
 }
-
 
 /* GENERATOR FORM */
 
 .form_control_generator {
-    display: block;
-    width: 60%;
-    height: calc(1.5em + .75rem +2 px);
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: whitesmoke;
-    background-color: #20242A;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: .25rem;
-    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-    margin-left: 20%;
+  display: block;
+  width: 60%;
+  height: calc(1.5em + 0.75rem +2 px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: whitesmoke;
+  background-color: #20242a;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  margin-left: 20%;
 }
 
 .nav-link {
-    display: block;
-    padding: .5rem 1rem;
+  display: block;
+  padding: 0.5rem 1rem;
 }
 
 h1 {
-    color: whitesmoke;
-    font-family: 'Gluten', cursive;
+  color: whitesmoke;
+  font-family: "Gluten", cursive;
 }
 
 h2 {
-    color: whitesmoke;
-    font-family: 'Gluten', cursive;
+  color: whitesmoke;
+  font-family: "Gluten", cursive;
 }
 
 h4 {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .h4_main {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    color: #5AA0BA;
-    font-size: 30px;
-    font-weight: 700;
-    margin: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #5aa0ba;
+  font-size: 30px;
+  font-weight: 700;
+  margin: 20px;
 }
 
 .h4_main_email {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    color: whitesmoke;
-    font-size: 13px;
-    font-weight: 500;
-    margin: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: whitesmoke;
+  font-size: 13px;
+  font-weight: 500;
+  margin: 20px;
 }
 
 .h4_main_admin {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    color: #a03636;
-    font-size: 15px;
-    font-weight: 500;
-    margin: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #a03636;
+  font-size: 15px;
+  font-weight: 500;
+  margin: 20px;
 }
 
 .h4_konto {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 15px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 15px;
 }
 
 .h4_round {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    color: #5AA0BA;
-    font-size: 25px;
-    font-weight: 700;
-    margin: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #5aa0ba;
+  font-size: 25px;
+  font-weight: 700;
+  margin: 20px;
 }
-
 
 /* Przycisk NAV */
 
 .btn-add {
-    background-color: transparent;
-    border: 0;
-    width: 130px;
-    height: 36px;
-    border-radius: .25rem;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    color: whitesmoke;
-    font-size: 13px;
-    font-weight: bold;
-    outline: none;
-    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
-    transition: 0.5s;
-    backface-visibility: hidden;
-    border: 1px solid whitesmoke;
-    margin-left: 10px;
+  background-color: transparent;
+  border: 0;
+  width: 130px;
+  height: 36px;
+  border-radius: 0.25rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: whitesmoke;
+  font-size: 13px;
+  font-weight: bold;
+  outline: none;
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+  transition: 0.5s;
+  backface-visibility: hidden;
+  border: 1px solid whitesmoke;
+  margin-left: 10px;
 }
 
 .btn-add:hover {
-    cursor: pointer;
-    background-color: whitesmoke;
-    color: #2B2E32;
+  cursor: pointer;
+  background-color: whitesmoke;
+  color: #2b2e32;
 }
-
 
 /* Przycisk tournaments horizontal  */
 
 .list-group-horizontal_tournaments {
-    background-color: whitesmoke;
-    border: none;
-    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
-    color: #202225;
-    width: 380px;
-    height: 50px;
-    border-radius: 10px;
-    margin-top: 1px;
+  background-color: whitesmoke;
+  border: none;
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+  color: #202225;
+  width: 380px;
+  height: 50px;
+  border-radius: 10px;
+  margin-top: 1px;
 }
 
 .list-group-horizontal_tournaments h4 {
-    font-family: 'Gemunu Libre', sans-serif;
-    font-weight: 700;
+  font-family: "Gemunu Libre", sans-serif;
+  font-weight: 700;
 }
 
 .list-group-horizontal_tournaments:hover {
-    cursor: pointer;
-    transform: perspective(1px) scale(1.1);
+  cursor: pointer;
+  transform: perspective(1px) scale(1.1);
 }
 
 .list-group-horizontal {
-    background-color: whitesmoke;
-    border: none;
-    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
-    color: #202225;
-    width: 380px;
-    height: 50px;
-    border-radius: 10px;
-    margin-top: 1px;
+  background-color: whitesmoke;
+  border: none;
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+  color: #202225;
+  width: 380px;
+  height: 50px;
+  border-radius: 10px;
+  margin-top: 1px;
 }
 
 .list-group-horizontal h1 {
-    text-align: center;
-    color: #202225;
-    font-size: 35px;
-    font-family: 'Gemunu Libre', sans-serif;
-    font-weight: 700;
+  text-align: center;
+  color: #202225;
+  font-size: 35px;
+  font-family: "Gemunu Libre", sans-serif;
+  font-weight: 700;
 }
-
 
 /* Przycisk schedule / tournaments  */
 
 .btn-danger_nav_list_group_schedule h2 {
-    color: whitesmoke;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: bold;
-    padding: 5px;
+  color: whitesmoke;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  padding: 5px;
 }
 
 .btn-danger_nav_list_group_schedule h2:hover {
-    /* color: #202225; */
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: bold;
-    padding: 5px;
+  /* color: #202225; */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  padding: 5px;
 }
-
 
 /* ----------- */
 
 .btn-danger_nav_list_group {
-    background-color: whitesmoke;
-    border: 0;
-    width: 750px;
-    height: 80px;
-    border-radius: 15px;
-    outline: none;
-    color: #202225;
-    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
-    transition: 0.5s;
-    backface-visibility: hidden;
-    margin-top: 1px;
+  background-color: whitesmoke;
+  border: 0;
+  width: 750px;
+  height: 80px;
+  border-radius: 15px;
+  outline: none;
+  color: #202225;
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+  transition: 0.5s;
+  backface-visibility: hidden;
+  margin-top: 1px;
 }
 
 .btn-danger_nav_list_group:hover {
-    transition: 0.5s;
-    background-color: #5AA0BA;
-    color: #202225;
+  transition: 0.5s;
+  background-color: #5aa0ba;
+  color: #202225;
 }
 
 .btn-danger_nav_list_group h4 {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 .btn-danger_nav_list_group,
 h4 :hover {
-    color: #202225;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    padding: 25px;
+  color: #202225;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding: 25px;
 }
-
 
 /* PUBLIC Schedule */
 
 .btn-danger_nav_list_group_schedule_public {
-    background-color: #20242A;
-    border: 0;
-    width: 550px;
-    height: 50px;
-    border-radius: 15px;
-    outline: none;
-    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
-    transition: 0.5s;
-    backface-visibility: hidden;
-    margin: 8px;
+  background-color: #20242a;
+  border: 0;
+  width: 550px;
+  height: 50px;
+  border-radius: 15px;
+  outline: none;
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+  transition: 0.5s;
+  backface-visibility: hidden;
+  margin: 8px;
 }
 
 .btn-danger_nav_list_group_schedule_public h4 {
-    color: whitesmoke;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: bold;
-    padding: 5px;
-    text-align: center;
+  color: whitesmoke;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  padding: 5px;
+  text-align: center;
 }
-
 
 /* Schedule Point */
 
 .btn-danger_nav_list_group_schedule_point {
-    background-color: #20242A;
-    border: 0;
-    width: 150px;
-    height: 50px;
-    border-radius: 15px;
-    outline: none;
-    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
-    transition: 0.5s;
-    backface-visibility: hidden;
-    margin: 8px;
+  background-color: #20242a;
+  border: 0;
+  width: 150px;
+  height: 50px;
+  border-radius: 15px;
+  outline: none;
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+  transition: 0.5s;
+  backface-visibility: hidden;
+  margin: 8px;
 }
 
 .btn-danger_nav_list_group_schedule_point h4 {
-    color: whitesmoke;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: bold;
-    padding: 9px;
-    text-align: center;
+  color: whitesmoke;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  padding: 9px;
+  text-align: center;
 }
-
 
 /* Schedule Nick 1 */
 
 .btn-danger_nav_list_group_schedule_nick_one {
-    background-color: #20242A;
-    border: 0;
-    width: 200px;
-    height: 50px;
-    border-radius: 15px;
-    outline: none;
-    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
-    transition: 0.5s;
-    backface-visibility: hidden;
-    margin: 8px;
+  background-color: #20242a;
+  border: 0;
+  width: 200px;
+  height: 50px;
+  border-radius: 15px;
+  outline: none;
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+  transition: 0.5s;
+  backface-visibility: hidden;
+  margin: 8px;
 }
 
 .btn-danger_nav_list_group_schedule_nick_one h4 {
-    color: whitesmoke;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: bold;
-    padding: 9px;
-    text-align: center;
+  color: whitesmoke;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  padding: 9px;
+  text-align: center;
 }
-
 
 /* Schedule Nick 2 */
 
 .btn-danger_nav_list_group_schedule_nick_two {
-    background-color: #20242A;
-    border: 0;
-    width: 200px;
-    height: 50px;
-    border-radius: 15px;
-    outline: none;
-    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
-    transition: 0.5s;
-    backface-visibility: hidden;
-    margin: 8px;
+  background-color: #20242a;
+  border: 0;
+  width: 200px;
+  height: 50px;
+  border-radius: 15px;
+  outline: none;
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+  transition: 0.5s;
+  backface-visibility: hidden;
+  margin: 8px;
 }
 
 .btn-danger_nav_list_group_schedule_nick_two h4 {
-    color: whitesmoke;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: bold;
-    padding: 9px;
-    text-align: center;
+  color: whitesmoke;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  padding: 9px;
+  text-align: center;
 }
-
 
 /* Schedule Box */
 
 .btn_schedule_list {
-    background-color: transparent;
-    border: 0;
-    margin: 9px;
-    border-radius: 20px;
+  background-color: transparent;
+  border: 0;
+  margin: 9px 0;
+  border-radius: 20px;
+  max-width: 100%;
 }
 
-
 /* Schedule */
-
 
 /* .btn-danger_nav_list_group_schedule {
     background-color: #20242A;
@@ -1062,368 +1046,563 @@ h4 :hover {
     transform: perspective(1px) scale(1.1);
 } */
 
-
 /* Standing list */
 
 .btn-danger_nav_list_group_standings {
-    background-color: #5AA0BA;
-    border: 0;
-    width: 180px;
-    height: 50px;
-    border-radius: 15px;
-    outline: none;
-    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
-    transition: 0.5s;
-    backface-visibility: hidden;
-    margin: 4px;
-    text-align: -webkit-center;
+  background-color: #5aa0ba;
+  border: 0;
+  width: 180px;
+  height: 50px;
+  border-radius: 15px;
+  outline: none;
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+  transition: 0.5s;
+  backface-visibility: hidden;
+  margin: 4px;
+  text-align: -webkit-center;
 }
 
 .btn-danger_nav_list_group_standings td {
-    color: whitesmoke;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: bold;
-    padding: 13px;
-    text-align: center;
+  color: whitesmoke;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  padding: 13px;
+  text-align: center;
 }
 
 .btn-danger_nav_list_group_standings_name {
-    background-color: #20242A;
-    border: 0;
-    width: 180px;
-    height: 50px;
-    border-radius: 15px;
-    outline: none;
-    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
-    transition: 0.5s;
-    backface-visibility: hidden;
-    margin: 4px;
-    text-align: -webkit-center;
+  background-color: #20242a;
+  border: 0;
+  width: 180px;
+  height: 50px;
+  border-radius: 15px;
+  outline: none;
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+  transition: 0.5s;
+  backface-visibility: hidden;
+  margin: 4px;
+  text-align: -webkit-center;
 }
 
 .btn-danger_nav_list_group_standings_name td {
-    color: whitesmoke;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: bold;
-    padding: 13px;
-    text-align: center;
+  color: whitesmoke;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  padding: 13px;
+  text-align: center;
 }
-
 
 /* Tournaments list */
 
 .btn-danger_nav_list_group_tournaments {
-    background-color: #5AA0BA;
-    border: 0;
-    width: 200px;
-    height: 50px;
-    border-radius: 15px;
-    outline: none;
-    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
-    transition: 0.5s;
-    backface-visibility: hidden;
-    margin: 10px;
-    text-align: -webkit-center;
+  background-color: #5aa0ba;
+  border: 0;
+  width: 200px;
+  height: 50px;
+  border-radius: 15px;
+  outline: none;
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+  transition: 0.5s;
+  backface-visibility: hidden;
+  margin: 10px;
+  text-align: -webkit-center;
 }
 
 .btn-danger_nav_list_group_tournaments td {
-    color: whitesmoke;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: bold;
-    padding: 13px;
-    text-align: center;
+  color: whitesmoke;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  padding: 13px;
+  text-align: center;
 }
 
 .btn-danger_nav_list_group_tournaments_name {
-    background-color: #20242A;
-    border: 0;
-    width: 200px;
-    height: 50px;
-    border-radius: 15px;
-    outline: none;
-    box-shadow: 0 0.25em 0.25em rgb(0 0 0 / 30%);
-    transition: 0.5s;
-    backface-visibility: hidden;
-    margin: 10px;
-    text-align: -webkit-center;
+  background-color: #20242a;
+  border: 0;
+  width: 200px;
+  height: 50px;
+  border-radius: 15px;
+  outline: none;
+  box-shadow: 0 0.25em 0.25em rgb(0 0 0 / 30%);
+  transition: 0.5s;
+  backface-visibility: hidden;
+  margin: 10px;
+  text-align: -webkit-center;
 }
 
 .btn-danger_nav_list_group_tournaments_name td {
-    color: whitesmoke;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: bold;
-    padding: 13px;
-    text-align: center;
+  color: whitesmoke;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  padding: 13px;
+  text-align: center;
 }
 
 .btn_tournaments_list {
-    background-color: whitesmoke;
-    border: 0;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all .3s ease-out;
+  background-color: whitesmoke;
+  border: 0;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
 }
 
 .btn_tournaments_list:hover {
-    background-color: #5AA0BA;
-    transition: 0.3s;
-    box-shadow: 0 0.35em 0.35em rgb(0 0 0 / 50%);
+  background-color: #5aa0ba;
+  transition: 0.3s;
+  box-shadow: 0 0.35em 0.35em rgb(0 0 0 / 50%);
 }
-
 
 /* Przycisk tournaments  */
 
 .btn-danger_nav_tournaments_blue {
-    background-color: #5AA0BA;
-    border: 0;
-    width: 250px;
-    height: 50px;
-    border-radius: 15px;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    color: whitesmoke;
-    font-size: 15px;
-    font-weight: bold;
-    outline: none;
-    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
-    transition: 0.5s;
-    backface-visibility: hidden;
-    margin-top: 1px;
+  background-color: #5aa0ba;
+  border: 0;
+  width: 250px;
+  height: 50px;
+  border-radius: 15px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: whitesmoke;
+  font-size: 15px;
+  font-weight: bold;
+  outline: none;
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+  transition: 0.5s;
+  backface-visibility: hidden;
+  margin-top: 1px;
 }
 
 .btn-danger_nav_tournaments_blue:hover {
-    transition: 0.5s;
-    cursor: pointer;
-    transform: perspective(1px) scale(1.1);
-    background-color: whitesmoke;
-    color: #202225;
+  transition: 0.5s;
+  cursor: pointer;
+  transform: perspective(1px) scale(1.1);
+  background-color: whitesmoke;
+  color: #202225;
 }
 
 .btn-danger_nav_tournaments_blue a {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .btn-danger_nav_tournaments {
-    background-color: whitesmoke;
-    border: 0;
-    width: 200px;
-    height: 50px;
-    border-radius: .55rem;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    color: #202225;
-    font-size: 13px;
-    font-weight: bold;
-    outline: none;
-    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
-    transition: 0.5s;
-    backface-visibility: hidden;
-    border: 1px solid whitesmoke;
-    margin-left: 10px;
+  background-color: whitesmoke;
+  border: 0;
+  width: 200px;
+  height: 50px;
+  border-radius: 0.55rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #202225;
+  font-size: 13px;
+  font-weight: bold;
+  outline: none;
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+  transition: 0.5s;
+  backface-visibility: hidden;
+  border: 1px solid whitesmoke;
+  margin-left: 10px;
 }
 
 .btn-danger_nav_tournaments:hover {
-    transition: 0.5s;
-    cursor: pointer;
-    transform: perspective(1px) scale(1.1);
-    background-color: transparent;
-    color: whitesmoke;
+  transition: 0.5s;
+  cursor: pointer;
+  transform: perspective(1px) scale(1.1);
+  background-color: transparent;
+  color: whitesmoke;
 }
 
 .btn-danger_nav_tournaments a {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
-
 
 /* Przycisk SCHEDULE */
 
 .btn-danger_nav_schedule {
-    background-color: #202225;
-    border: 0;
-    width: 150px;
-    height: 50px;
-    border-radius: 15px;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    color: whitesmoke;
-    font-size: 15px;
-    font-weight: bold;
-    outline: none;
-    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
-    transition: 0.5s;
-    backface-visibility: hidden;
-    margin-top: 20px;
-    margin: 6px;
+  background-color: #202225;
+  border: 0;
+  width: 150px;
+  height: 50px;
+  border-radius: 15px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: whitesmoke;
+  font-size: 15px;
+  font-weight: bold;
+  outline: none;
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+  transition: 0.5s;
+  backface-visibility: hidden;
+  margin-top: 20px;
+  margin: 6px;
 }
 
 .btn-danger_nav_schedule:hover {
-    transition: 0.5s;
-    cursor: pointer;
-    transform: perspective(1px) scale(1.1);
-    background-color: whitesmoke;
-    color: #202225;
+  transition: 0.5s;
+  cursor: pointer;
+  transform: perspective(1px) scale(1.1);
+  background-color: whitesmoke;
+  color: #202225;
 }
 
 .btn-danger_nav_schedule a {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .btn-danger_nav_schedule_home_white {
-    background-color: whitesmoke;
-    border: 0;
-    width: 150px;
-    height: 50px;
-    border-radius: 15px;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    color: #202225;
-    font-size: 14px;
-    font-weight: bold;
-    outline: none;
-    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
-    transition: 0.5s;
-    backface-visibility: hidden;
-    margin-top: 1px;
+  background-color: whitesmoke;
+  border: 0;
+  width: 150px;
+  height: 50px;
+  border-radius: 15px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #202225;
+  font-size: 14px;
+  font-weight: bold;
+  outline: none;
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+  transition: 0.5s;
+  backface-visibility: hidden;
+  margin-top: 1px;
 }
 
 .btn-danger_nav_schedule_home_white:hover {
-    transition: 0.5s;
-    cursor: pointer;
-    background-color: #202225;
-    color: whitesmoke;
+  transition: 0.5s;
+  cursor: pointer;
+  background-color: #202225;
+  color: whitesmoke;
 }
 
 .btn-danger_nav_schedule_home_white a {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
-
 
 /* Przycisk HOME GENERATOR */
 
 .btn-danger_nav_generator_home_white {
-    background-color: whitesmoke;
-    border: 0;
-    width: 180px;
-    height: 50px;
-    border-radius: 15px;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    color: #202225;
-    font-size: 14px;
-    font-weight: bold;
-    outline: none;
-    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
-    transition: 0.5s;
-    backface-visibility: hidden;
-    margin-top: 1px;
+  background-color: whitesmoke;
+  border: 0;
+  width: 180px;
+  height: 50px;
+  border-radius: 15px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #202225;
+  font-size: 14px;
+  font-weight: bold;
+  outline: none;
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+  transition: 0.5s;
+  backface-visibility: hidden;
+  margin-top: 1px;
 }
 
 .btn-danger_nav_generator_home_white:hover {
-    transition: 0.5s;
-    cursor: pointer;
-    background-color: #202225;
-    color: whitesmoke;
+  transition: 0.5s;
+  cursor: pointer;
+  background-color: #202225;
+  color: whitesmoke;
 }
 
 .btn-danger_nav_generator_home_white a {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .btn-danger_nav_generator_home {
-    background-color: whitesmoke;
-    border: 0;
-    width: 200px;
-    height: 50px;
-    border-radius: .55rem;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    color: #202225;
-    font-size: 13px;
-    font-weight: bold;
-    outline: none;
-    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
-    transition: 0.5s;
-    backface-visibility: hidden;
-    border: 1px solid whitesmoke;
-    margin-left: 10px;
-    margin-bottom: 15px;
+  background-color: whitesmoke;
+  border: 0;
+  width: 200px;
+  height: 50px;
+  border-radius: 0.55rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #202225;
+  font-size: 13px;
+  font-weight: bold;
+  outline: none;
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+  transition: 0.5s;
+  backface-visibility: hidden;
+  border: 1px solid whitesmoke;
+  margin-left: 10px;
+  margin-bottom: 15px;
 }
 
 .btn-danger_nav_generator_home:hover {
-    cursor: pointer;
-    transform: perspective(1px) scale(1.1);
-    background-color: transparent;
-    color: whitesmoke;
+  cursor: pointer;
+  transform: perspective(1px) scale(1.1);
+  background-color: transparent;
+  color: whitesmoke;
 }
 
 .btn-danger_nav_generator_home a {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
-
 
 /* Przycisk Generate */
 
 .btn-danger_nav_generate {
-    background-color: whitesmoke;
-    border: 0;
-    width: 250px;
-    height: 60px;
-    border-radius: 15px;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    color: #202225;
-    font-size: 16px;
-    font-weight: bold;
-    outline: none;
-    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
-    transition: 0.5s;
-    backface-visibility: hidden;
-    margin-left: auto;
-    margin-right: auto;
+  background-color: whitesmoke;
+  border: 0;
+  width: 250px;
+  height: 60px;
+  border-radius: 15px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #202225;
+  font-size: 16px;
+  font-weight: bold;
+  outline: none;
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+  transition: 0.5s;
+  backface-visibility: hidden;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .btn-danger_nav_generate a {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .btn-danger_nav_generate:hover {
-    transition: 0.5s;
-    cursor: pointer;
-    transform: perspective(1px) scale(1.1);
-    background-color: whitesmoke;
-    color: #202225;
+  transition: 0.5s;
+  cursor: pointer;
+  transform: perspective(1px) scale(1.1);
+  background-color: whitesmoke;
+  color: #202225;
 }
-
 
 /* Przycisk LOGIN */
 
 .btn-danger_nav_login {
-    background-color: whitesmoke;
-    border: 0;
-    width: 200px;
-    height: 50px;
-    border-radius: .55rem;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    color: #202225;
-    font-size: 13px;
-    font-weight: bold;
-    outline: none;
-    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
-    transition: 0.5s;
-    backface-visibility: hidden;
-    border: 1px solid whitesmoke;
-    margin-left: 10px;
+  background-color: whitesmoke;
+  border: 0;
+  width: 200px;
+  height: 50px;
+  border-radius: 0.55rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #202225;
+  font-size: 13px;
+  font-weight: bold;
+  outline: none;
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+  transition: 0.5s;
+  backface-visibility: hidden;
+  border: 1px solid whitesmoke;
+  margin-left: 10px;
 }
 
 .btn-danger_nav_login a {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .btn-danger_nav_login:hover {
-    transition: 0.5s;
-    cursor: pointer;
-    transform: perspective(1px) scale(1.1);
-    background-color: transparent;
-    color: whitesmoke;
+  transition: 0.5s;
+  cursor: pointer;
+  transform: perspective(1px) scale(1.1);
+  background-color: transparent;
+  color: whitesmoke;
+}
+
+/* Responsivity */
+
+/* -----> Tablet <------ */
+@media (max-width: 1023px) {
+  nav #home {
+    order: 1;
+    text-align: center;
+  }
+
+  nav .nav-items {
+    padding: 0;
+    order: 3;
+  }
+
+  #account-btn {
+    order: 2;
+  }
+  ul > a {
+    font-size: 15px;
+  }
+
+  nav .nav-items {
+    min-width: 585px;
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+
+  nav .nav-items li a {
+    font-size: 15px;
+  }
+
+  .container,
+  .tournaments_box_container,
+  .new_tournaments_box_containe,
+  .containernewplayers_box_container,
+  .schedule_box_container,
+  .standings_box_container,
+  .public_schedule_box_container,
+  .sign_box_container,
+  .login_box_container,
+  .update_dual_box_container {
+    width: 100%;
+    margin: 5% auto;
+  }
+
+  .container_home,
+  .container_tournaments,
+  .container_tournaments_new,
+  .container_newplayer,
+  .container_schedule,
+  .container_standings,
+  .container_schedule_public,
+  .container_sign,
+  .container_login,
+  .container_update_dual {
+    width: 97%;
+    height: auto;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+  }
+
+  .responsive-table {
+    overflow-x: scroll;
+  }
+
+  .form_control {
+    width: 50%;
+  }
+
+  /* ----> Smartphone <----- */
+
+  @media (max-width: 767px) {
+    body {
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    nav {
+      justify-content: space-between;
+      padding: 0 30px;
+    }
+
+    ul > li ul {
+      left: -200px;
+    }
+    nav .nav-items {
+      flex-wrap: wrap;
+      align-items: center;
+      min-width: 100%;
+      gap: 10px;
+      flex-direction: column;
+    }
+
+    h3 {
+      font-size: 1.7rem;
+    }
+
+    .list-group-flush .list-group-item {
+      width: 80%;
+      margin: 5px auto;
+    }
+
+    .btn-add {
+      margin-top: 10px;
+    }
+
+    .h4_main {
+      font-size: 1.6rem;
+    }
+
+    .alert {
+      width: 80%;
+    }
+
+    #account-btn {
+      padding-inline-start: 10px;
+    }
+
+    #account-btn-caption {
+      display: none;
+    }
+    #account-btn-icon {
+      display: initial;
+    }
+
+    .home_box_container h1 {
+      font-size: 35px;
+    }
+
+    .form_control {
+      width: 80%;
+    }
+
+    nav .nav-items li a {
+      font-size: 17px;
+      text-align: center;
+      margin: auto;
+    }
+
+    .container {
+      width: 100%;
+    }
+
+    .container h5 {
+      font-size: 18px;
+    }
+
+    .container_home {
+      width: 100%;
+      height: 600px;
+    }
+    .btn-danger_nav_list_group_standings td {
+      font-size: 0.7rem;
+    }
+
+    .btn-danger_nav_list_group_tournaments_name td {
+      font-size: 0.7rem;
+    }
+
+    footer {
+      font-size: 0.8rem;
+    }
+
+    .btn-danger_nav_list_group_schedule_nick_one,
+    .btn-danger_nav_list_group_schedule_nick_two {
+      height: 40px;
+    }
+
+    .btn-danger_nav_list_group_schedule_nick_one h4,
+    .btn-danger_nav_list_group_schedule_nick_two h4 {
+      font-size: 15px;
+      padding: auto;
+    }
+
+    .badge {
+      display: flex;
+      justify-content: space-around;
+      flex-direction: row;
+      align-items: center;
+      flex-wrap: nowrap;
+    }
+
+    .type_score {
+      width: 150px;
+    }
+
+    @media (max-width: 410px) {
+      nav .nav-items {
+        flex-direction: column;
+      }
+
+      #account-btn {
+        padding-inline-start: 0px;
+      }
+      footer {
+        font-size: 0.7rem;
+      }
+    }
+  }
 }
