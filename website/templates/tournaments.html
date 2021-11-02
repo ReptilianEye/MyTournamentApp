@@ -4,86 +4,84 @@ block content %}
   <br />
   <h3 align="center">Your Tournaments</h3>
   <!-- {% if user.tournaments|length > 0 %} -->
-  <div class="responsive-table" style="padding-left: 60px">
-    <table style="margin: auto">
-      <thead style="display: flex; margin-bottom: 15px; margin-top: 15px">
-        <tr>
-          <div align="center ">
-            <td></td>
-          </div>
-        </tr>
-        <tr class="btn-danger_nav_list_group_tournaments">
-          <div align="center ">
-            <td>Name</td>
-          </div>
-        </tr>
-        <tr class="btn-danger_nav_list_group_tournaments">
-          <div align="center ">
-            <td>Number Of Players</td>
-          </div>
-        </tr>
-        <tr class="btn-danger_nav_list_group_tournaments">
-          <div align="center ">
-            <td>Date</td>
-          </div>
-        </tr>
-        <tr class="btn-danger_nav_list_group_tournaments">
-          <div align="center ">
-            <td>Location</td>
-          </div>
-        </tr>
-      </thead>
 
-      {% for tournament in user.tournaments %}
-      <!-- <table style="margin: auto"> -->
+  <table style="margin: auto">
+    <thead style="display: flex; margin-bottom: 15px; margin-top: 15px">
+      <tr>
+        <div align="center ">
+          <td></td>
+        </div>
+      </tr>
+      <tr class="btn-danger_nav_list_group_tournaments">
+        <div align="center ">
+          <td>Name</td>
+        </div>
+      </tr>
+      <tr class="btn-danger_nav_list_group_tournaments">
+        <div align="center ">
+          <td>Number Of Players</td>
+        </div>
+      </tr>
+      <tr class="btn-danger_nav_list_group_tournaments">
+        <div align="center ">
+          <td>Date</td>
+        </div>
+      </tr>
+      <tr class="btn-danger_nav_list_group_tournaments">
+        <div align="center ">
+          <td>Location</td>
+        </div>
+      </tr>
+    </thead>
 
-      <!-- <button id="button_close" class="close_tournaments">
+    {% for tournament in user.tournaments %}
+    <!-- <table style="margin: auto"> -->
+
+    <!-- <button id="button_close" class="close_tournaments">
         <span onClick="deleteTournament({{tournament.id}})" aria-hidden="true"
           >&times;</span
         >
       </button> -->
-      <tbody
-        class="btn_tournaments_list"
-        onClick="showTournament({{tournament.id}}) "
-        style="display: flex; margin-bottom: 15px; position: relative"
-      >
-        <tr>
-          <td>
-            <button id="button_close" class="close_tournaments">
-              <span
-                onClick="deleteTournament({{tournament.id}})"
-                aria-hidden="true"
-                >&times;</span
-              >
-            </button>
-          </td>
-        </tr>
-        <tr class="btn-danger_nav_list_group_tournaments_name" align="center ">
-          <td>{{tournament.name}}</td>
-        </tr>
-        <tr class="btn-danger_nav_list_group_tournaments_name" align="center ">
-          <td>Players: {{tournament.opponents|length}}</td>
-        </tr>
-        <tr class="btn-danger_nav_list_group_tournaments_name" align="center ">
-          <td>{{tournament.date}}</td>
-        </tr>
-        <tr class="btn-danger_nav_list_group_tournaments_name" align="center ">
-          <td>{{tournament.location}}</td>
-        </tr>
-      </tbody>
 
-      <!-- </table> -->
-      {% endfor %}
-      <br />
-    </table>
-  </div>
+    <tbody
+      class="btn_tournaments_list"
+      onClick="showTournament({{tournament.id}}) "
+      style="display: flex; margin-bottom: 15px; position: relative"
+    >
+      <tr>
+        <td>
+          <button id="button_close" class="close_tournaments">
+            <p onClick="deleteTournament({{tournament.id}})" aria-hidden="true">
+              &times;
+            </p>
+          </button>
+        </td>
+      </tr>
+      <tr class="btn-danger_nav_list_group_tournaments_name" align="center ">
+        <td>{{tournament.name}}</td>
+      </tr>
+      <tr class="btn-danger_nav_list_group_tournaments_name" align="center ">
+        <td>Players: {{tournament.opponents|length}}</td>
+      </tr>
+      <tr class="btn-danger_nav_list_group_tournaments_name" align="center ">
+        <td>{{tournament.date}}</td>
+      </tr>
+      <tr class="btn-danger_nav_list_group_tournaments_name" align="center ">
+        <td>{{tournament.location}}</td>
+      </tr>
+    </tbody>
+
+    <!-- </table> -->
+    {% endfor %}
+    <br />
+  </table>
 
   <!-- {% else %} -->
   <!-- <h5 style="color: white;" align="center">Eventually your have no active tournaments.</h5> -->
   <!-- {% endif %} -->
 
   <br />
-  <div align="center ">
+  <div align="center">
     <a href="/new-tournament ">
       <button id="btn" type="button " class="btn-danger_nav_tournaments">
         Generate new schedule

@@ -95,18 +95,48 @@ footer {
   font-weight: 500;
 }
 
+.badge {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
 .alert-success {
   color: whitesmoke;
   background-color: #5aa0ba;
   border-color: #5aa0ba;
 }
+.close_tournaments_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 button.close_tournaments {
   border-color: transparent;
-  background-color: transparent;
+  background-color: #5aa0ba;
   position: absolute;
-  left: -50px;
-  top: 10px;
+  width: 30px;
+  height: 30px;
+  right: -10px;
+  top: -10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+button.close_tournaments p {
+  width: 30px;
+  height: 33px;
+  text-align: center;
+}
+
+.td_helper {
+  width: 2.5rem;
 }
 
 .close_tournaments {
@@ -545,6 +575,10 @@ hr {
   /* width: 600px; */
   box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
   border-radius: 40px;
+  /* padding-left: 60px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .container_tournaments {
@@ -1447,7 +1481,7 @@ h4 :hover {
   .login_box_container,
   .update_dual_box_container,
   .admin_box_container {
-    width: 100%;
+    min-width: 100% !important;
     margin: 5% auto;
   }
 
@@ -1469,14 +1503,31 @@ h4 :hover {
     border-radius: 10px;
   }
 
-  .responsive-table {
-    overflow-x: scroll;
-  }
-
   .form_control {
     width: 50%;
   }
 
+  .tournaments_box_container .btn-danger_nav_list_group_tournaments,
+  .btn-danger_nav_list_group_tournaments_name {
+    padding: 10px 5px;
+    height: auto;
+    width: 19vw;
+  }
+
+  .tournaments_box_container .btn-danger_nav_list_group_tournaments td,
+  .btn-danger_nav_list_group_tournaments_name td {
+    font-size: 13px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .standings_box_container tr {
+    width: 17vw;
+  }
+
+  button.close_tournaments {
+    top: -3px;
+  }
   /* ----> Smartphone <----- */
 
   @media (max-width: 767px) {
@@ -1508,6 +1559,10 @@ h4 :hover {
     .list-group-flush .list-group-item {
       width: 80%;
       margin: 5px auto;
+    }
+
+    .container {
+      width: 100%;
     }
 
     .btn-add {
@@ -1547,10 +1602,6 @@ h4 :hover {
       margin: auto;
     }
 
-    .container {
-      width: 100%;
-    }
-
     .container h5 {
       font-size: 18px;
     }
@@ -1578,20 +1629,61 @@ h4 :hover {
 
     .btn-danger_nav_list_group_schedule_nick_one h4,
     .btn-danger_nav_list_group_schedule_nick_two h4 {
-      font-size: 15px;
+      font-size: 13px;
       padding: auto;
+      overflow-x: scroll;
     }
 
-    .badge {
-      display: flex;
-      justify-content: space-around;
-      flex-direction: row;
-      align-items: center;
-      flex-wrap: nowrap;
+    .btn_tournaments_list {
+      border-radius: 0;
+      background-color: transparent;
+    }
+    .tournaments_box_container {
+      padding-left: 0;
+    }
+    .tournaments_box_container .btn-danger_nav_list_group_tournaments,
+    .btn-danger_nav_list_group_tournaments_name {
+      padding: 2px;
+      height: 35px;
+      width: 23vw;
+      margin: 0 1px;
+      border-radius: 0;
+    }
+
+    .tournaments_box_container .btn-danger_nav_list_group_tournaments td,
+    .btn-danger_nav_list_group_tournaments_name td {
+      font-size: 10px;
+      height: 100%;
+      display: block;
+      padding-top: 5%;
+      overflow-x: scroll;
+    }
+
+    .standings_box_container tr {
+      margin: 0;
+      border-radius: 0;
+      width: 19vw;
+      box-shadow: inset 0px -1px 4px 0px rgb(0 0 0 / 20%);
+    }
+    .container {
+      padding: 0;
     }
 
     .type_score {
       width: 150px;
+    }
+
+    button.close_tournaments {
+      width: 17px;
+      height: 17px;
+      top: -10px;
+      right: -2px;
+    }
+
+    button.close_tournaments p {
+      width: 17px;
+      height: 2px;
+      font-size: 18px;
     }
 
     @media (max-width: 410px) {
@@ -1608,6 +1700,62 @@ h4 :hover {
       .type_score {
         width: 120px;
         height: 40px;
+      }
+
+      .btn-danger_nav_tournaments {
+        width: 150px;
+        margin-top: 10px;
+        font-size: 14px;
+      }
+
+      .tournaments_box_container .btn-danger_nav_list_group_tournaments,
+      .btn-danger_nav_list_group_tournaments_name {
+        padding: 1px;
+        height: 35px;
+        width: 23vw;
+        margin: 0px;
+        border-radius: 0;
+      }
+
+      .tournaments_box_container .btn-danger_nav_list_group_tournaments td,
+      .btn-danger_nav_list_group_tournaments_name td {
+        font-size: 10px;
+      }
+
+      .type_score {
+        width: 150px;
+      }
+
+      .your_tournaments_wrapper {
+        padding-left: 30px;
+      }
+
+      .standings_box_container td {
+        padding-top: auto;
+        padding-left: 0px;
+        padding-right: 0;
+      }
+
+      .btn-danger_nav_list_group_schedule_point,
+      .btn-danger_nav_list_group_schedule_nick_one,
+      .btn-danger_nav_list_group_schedule_nick_two {
+        border-radius: 5px;
+      }
+
+      @media (max-width: 300px) {
+        .tournaments_box_container .btn-danger_nav_list_group_tournaments,
+        .btn-danger_nav_list_group_tournaments_name {
+          padding: 0;
+          height: 35px;
+          width: 20vw;
+          margin: 0;
+          border-radius: 0;
+        }
+
+        .tournaments_box_container .btn-danger_nav_list_group_tournaments td,
+        .btn-danger_nav_list_group_tournaments_name td {
+          font-size: 9px;
+        }
       }
     }
   }

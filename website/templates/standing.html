@@ -13,58 +13,57 @@ content %}
         </div>
         <br /> {% endfor %}
     </ol> -->
-  <div class="responsive-table">
-    <table style="margin: auto">
-      <tbody style="display: flex; margin-bottom: 15px; margin-top: 15px">
-        <tr class="btn-danger_nav_list_group_standings">
-          <div align="center ">
-            <td>Imie</td>
-          </div>
-        </tr>
-        <tr class="btn-danger_nav_list_group_standings">
-          <div align="center ">
-            <td>Wygrane</td>
-          </div>
-        </tr>
-        <tr class="btn-danger_nav_list_group_standings">
-          <div align="center ">
-            <td>Przegrane</td>
-          </div>
-        </tr>
-        <tr class="btn-danger_nav_list_group_standings">
-          <div align="center ">
-            <td>Remisy</td>
-          </div>
-        </tr>
-        <tr class="btn-danger_nav_list_group_standings">
-          <div align="center ">
-            <td>Punkty</td>
-          </div>
-        </tr>
-      </tbody>
-    </table>
-    {% for standing in standings %}
-    <table style="margin: auto">
-      <tbody style="display: flex; margin-bottom: 15px">
-        <tr class="btn-danger_nav_list_group_standings_name" align="center ">
-          <td>{{standing.opponent.name}}</td>
-        </tr>
-        <tr class="btn-danger_nav_list_group_standings_name" align="center ">
-          <td>{{standing.wins}}</td>
-        </tr>
-        <tr class="btn-danger_nav_list_group_standings_name" align="center ">
-          <td>{{standing.loses}}</td>
-        </tr>
-        <tr class="btn-danger_nav_list_group_standings_name" align="center ">
-          <td>{{standing.draws}}</td>
-        </tr>
-        <tr class="btn-danger_nav_list_group_standings_name" align="center ">
-          <td>{{standing.match_points}}</td>
-        </tr>
-      </tbody>
-    </table>
-    {% endfor %}
-  </div>
+
+  <table style="margin: auto">
+    <tbody style="display: flex; margin-bottom: 15px; margin-top: 15px">
+      <tr class="btn-danger_nav_list_group_standings">
+        <div align="center ">
+          <td>Imie</td>
+        </div>
+      </tr>
+      <tr class="btn-danger_nav_list_group_standings">
+        <div align="center ">
+          <td>Wygrane</td>
+        </div>
+      </tr>
+      <tr class="btn-danger_nav_list_group_standings">
+        <div align="center ">
+          <td>Przegrane</td>
+        </div>
+      </tr>
+      <tr class="btn-danger_nav_list_group_standings">
+        <div align="center ">
+          <td>Remisy</td>
+        </div>
+      </tr>
+      <tr class="btn-danger_nav_list_group_standings">
+        <div align="center ">
+          <td>Punkty</td>
+        </div>
+      </tr>
+    </tbody>
+  </table>
+  {% for standing in standings %}
+  <table style="margin: auto">
+    <tbody style="display: flex; margin-bottom: 15px">
+      <tr class="btn-danger_nav_list_group_standings_name" align="center ">
+        <td>{{standing.opponent.name}}</td>
+      </tr>
+      <tr class="btn-danger_nav_list_group_standings_name" align="center ">
+        <td>{{standing.wins}}</td>
+      </tr>
+      <tr class="btn-danger_nav_list_group_standings_name" align="center ">
+        <td>{{standing.loses}}</td>
+      </tr>
+      <tr class="btn-danger_nav_list_group_standings_name" align="center ">
+        <td>{{standing.draws}}</td>
+      </tr>
+      <tr class="btn-danger_nav_list_group_standings_name" align="center ">
+        <td>{{standing.match_points}}</td>
+      </tr>
+    </tbody>
+  </table>
+  {% endfor %}
 
   <br />
 
