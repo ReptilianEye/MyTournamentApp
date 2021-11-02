@@ -121,28 +121,37 @@ def GenerateFirstRoundTree(opponents, ileGraczy):
     return firstRound
 
 
-def GenerateSecondRoundTree(opponents, firstRound):
-    secondRound = []
-    for duel in firstRound:
-        whoIsOut = whoWins(duel, True)
-        opponents.remove(whoIsOut)
+# def GenerateSecondRoundTree(opponents, firstRound):
+#     secondRound = []
+#     for duel in firstRound:
+#         whoIsOut = whoWins(duel, True)
+#         opponents.remove(whoIsOut)
 
-    random.shuffle(opponents)
+#     random.shuffle(opponents)
+#     i = 0
+#     while i < len(opponents):
+#         secondRound.append([opponents[i], opponents[i+1]])
+#         i += 1
+#     return secondRound
+
+
+def GenerateRoundTreeWithRest(prevRound, rest):
+    winners = []
+    for duel in prevRound:
+        rest.append(whoWins(duel))
     i = 0
-    while i < len(opponents):
-        secondRound.append([opponents[i], opponents[i+1]])
-        i += 1
-    return secondRound
+    while i < len(rest):
+        winners.append([rest[i], rest[i+1]])
+        i += 2
+    return winners
 
 
-def GenerateRoundTree(duels, limit=10000):
+def GenerateRoundTreeWithoutRest(prevRound):
     winners = []
     i = 0
-    while i < len(duels):
-        if len(winners) == limit:
-            return winners
-        firstInDual = whoWins(duels[i])
-        secoundInDual = whoWins(duels[i+1])
+    while i < len(prevRound):
+        firstInDual = whoWins(prevRound[i])
+        secoundInDual = whoWins(prevRound[i+1])
         winners.append([firstInDual, secoundInDual])
         i += 2
     return winners

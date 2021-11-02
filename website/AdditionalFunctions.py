@@ -250,3 +250,15 @@ def checkIfScoresAreDecided(duels):
         if duel.score_1 == duel.score_2:
             return False
     return True
+
+def checkIfEveryonePlayed(opponents,duels):
+    for duel in duels:
+        if duel.opponent_1 in opponents:
+            opponents.remove(duel.opponent_1)
+        if duel.opponent_2 in opponents:
+            opponents.remove(duel.opponent_2)
+    if len(opponents) == 0:
+        return []
+    else:
+        return opponents
+        
