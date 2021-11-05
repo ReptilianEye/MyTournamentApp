@@ -2,19 +2,23 @@
 <section class="login_box_container container_login">
     <form method="POST">
         <br>
-        <h3 align="center">Log in</h3>
+        <h3 style="margin-bottom: 25px;" align="center">Log in</h3>
         <div class="form-group">
-            <label class="label_login" for="email">Email Address</label>
-            <input type="email" class="form_control" id="email" name="email" placeholder="Enter email" />
+            <label class="label_login" for="email">Email Address<a class="signup_label" title="Need an account?" id="signUp" href="/sign-up">Sign up</a></label>
+            <input type="email" class="form_control" id="email" name="email" />
         </div>
         <div class="form-group">
             <label class="label_login" for="password">Password</label>
-            <input type="password" class="form_control" id="password" name="password" placeholder="Enter password" />
+            <input type="password" class="form_control" id="password" name="password" />
         </div>
-        <br />
+        <br>
         <center>
-            <button id="btn" type="submit" class="btn-danger_nav_login">Login</button>
+            <button id="btn" type="submit" class="btn-danger_nav_login">Log in</button>
         </center>
     </form>
+</section>
+<br>
+<section align="center">
+    <label class="h4_signup_footer">© 2021 Patronat <a style="font-size: 15px; text-decoration: underline; font-weight: 700;" href="https://www.lo31.krakow.pl/">31 Liceum Ogólnokształcące</a>. All rights reserved.</label>
 </section>
 {% endblock %}

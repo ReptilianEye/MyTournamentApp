@@ -2,27 +2,31 @@
 <section class="sign_box_container container_sign">
     <form method="POST">
         <br>
-        <h3 align="center">Sign up</h3>
+        <h3 style="margin-bottom: 25px;" align="center">Sign up</h3>
         <div class="form-group">
-            <label class="label_login" for="email">Email Address</label>
-            <input type="email" class="form_control" id="email" name="email" placeholder="Enter email" />
+            <label class="label_login" for="email">Email Address<a style="margin-left: 170px;" class="signup_label" title="Already have an account?" id="login" href="/login">Log in</a></label>
+            <input type="email" class="form_control" id="email" name="email" />
         </div>
         <div class="form-group">
             <label class="label_login" for="firstName">First Name</label>
-            <input type="text" class="form_control" id="firstName" name="firstName" placeholder="Enter first name" />
+            <input type="text" class="form_control" id="firstName" name="firstName" />
         </div>
         <div class="form-group">
             <label class="label_login" for="password1">Password</label>
-            <input type="password" class="form_control" id="password1" name="password1" placeholder="Enter password" />
+            <input type="password" class="form_control" id="password1" name="password1" />
         </div>
         <div class="form-group">
             <label class="label_login" for="password2">Password (Confirm)</label>
-            <input type="password" class="form_control" id="password2" name="password2" placeholder="Confirm password" />
+            <input type="password" class="form_control" id="password2" name="password2" />
         </div>
         <br />
         <center>
-            <button id="btn" type="submit" class="btn-danger_nav_login">Save</button>
+            <button id="btn" type="submit" class="btn-danger_nav_login">Sign up for free</button>
         </center>
     </form>
+
 </section>
+<div align="center" style="margin-top: 15px;">
+    <label class="h4_signup_footer">By clicking the <strong style="font-weight: 700; color: #5aa0ba; ">"Sign up for free"</strong> button, you are creating an account, </br> and agree to Terms of Service and Privacy Policy.</label>
+</div>
 {% endblock %}

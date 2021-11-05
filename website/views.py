@@ -27,6 +27,11 @@ views = Blueprint('views', __name__)
 def home():
     return render_template("home.html", user=current_user)
 
+@views.route('/video', methods=['GET', 'POST'])
+@login_required
+def video():
+    return render_template("video.html", user=current_user)
+
 @views.route('/tournaments', methods=['GET', 'POST'])
 @login_required
 def tournaments():
@@ -211,6 +216,8 @@ def show_standings():
     tournamentDTO = TournamentController()
     tournamentDTO.Load(current_user.current_tournament_id)
     return render_template("standing.html", user=current_user, standings=tournamentDTO.ShowStanding(), tournament=tournamentDTO)
+
+
 
 @views.route('/public-standings')
 @login_required
