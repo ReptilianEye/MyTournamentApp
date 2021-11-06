@@ -1,129 +1,146 @@
-{% extends "base.html" %} {% block title %}Your Tournaments{% endblock %} {% block content %}
+{% extends "base.html" %} {% block title %}Your Tournaments{% endblock %} {%
+block content %}
 <section class="tournaments_box_container container_tournaments">
-    <br />
-    <h3 align="center">Your Tournaments</h3>
-    <!-- {% if user.tournaments|length > 0 %} -->
+  <br />
+  <h3 align="center">Your Tournaments</h3>
+  <!-- {% if user.tournaments|length > 0 %} -->
+  <table style="margin: auto">
+    <tbody style="display: flex; margin-top: 15px">
+      <tr class="btn-danger_nav_list_group_tournaments">
+        <div align="center ">
+          <td>Name</td>
+        </div>
+      </tr>
+      <tr class="btn-danger_nav_list_group_tournaments">
+        <div align="center ">
+          <td>Number Of Players</td>
+        </div>
+      </tr>
+      <tr class="btn-danger_nav_list_group_tournaments">
+        <div align="center ">
+          <td>Date</td>
+        </div>
+      </tr>
+      <tr class="btn-danger_nav_list_group_tournaments">
+        <div align="center ">
+          <td>Location</td>
+        </div>
+      </tr>
+    </tbody>
+
+    <!-- Modal wymaga poprawy CSS, modal jest otwierany dla każego tournament w tym samym miejscu (absolute) co powoduje wzajemne przykrywanie/zasłanianie -->
+
+    {% for tournament in user.tournaments %}
     <table style="margin: auto">
-        <tbody style="display: flex;  margin-top: 15px">
-            <tr class="btn-danger_nav_list_group_tournaments">
-                <div align="center ">
-                    <td>Name</td>
-                </div>
-            </tr>
-            <tr class="btn-danger_nav_list_group_tournaments">
-                <div align="center ">
-                    <td>Number Of Players</td>
-                </div>
-            </tr>
-            <tr class="btn-danger_nav_list_group_tournaments">
-                <div align="center ">
-                    <td>Date</td>
-                </div>
-            </tr>
-            <tr class="btn-danger_nav_list_group_tournaments">
-                <div align="center ">
-                    <td>Location</td>
-                </div>
-            </tr>
-        </tbody>
+      <tbody
+        class="btn_tournaments_list"
+        onClick="showTournament({{tournament.id}}) "
+        style="display: flex; margin-bottom: 15px"
+      >
+        <button
+          style="float: right; margin-top: 35px; margin-bottom: -55px"
+          id="myBtnSettings-{{loop.index}}"
+          class="icon_settings"
+        >
+          <img src="../static/pngegg.png" width="30" height="30" />
+        </button>
 
+        <div
+          style="float: right"
+          id="settings_modal-{{loop.index}}"
+          class="modal hidden"
+        >
+          <!-- Modal content -->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2>Settings</h2>
+              <span class="close_settings">&times;</span>
+            </div>
+            <div class="modal-body">
+              <a href="#">
+                <button
+                  style="float: right; margin-right: 10px; margin: 15px"
+                  id="btn"
+                  class="btn-add-settings"
+                >
+                  Edit
+                </button>
+              </a>
+              <a href="#" onClick="deleteTournament({{tournament.id}})">
+                <button
+                  style="float: left; margin-left: 10px; margin: 15px"
+                  id="btn"
+                  class="btn-add-settings_delete"
+                >
+                  Delete
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
 
-
-        {% for tournament in user.tournaments %}
-        <table style="margin: auto">
-            <tbody class="btn_tournaments_list" onClick="showTournament({{tournament.id}}) " style="display: flex; margin-bottom: 15px">
-
-
-                <button style=" float: right; margin-top: 35px; margin-bottom: -55px;" id="myBtnSettings" class="icon_settings">
-                      <img  src="../static/pngegg.png" width="30" height="30">
-                    </button>
-
-
-
-                <div style="float: right;" id="myModal" class="modal">
-
-                    <!-- Modal content -->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h2>Settings</h2>
-                            <span class="close_settings">&times;</span>
-                        </div>
-                        <div class="modal-body">
-                            <a href="#">
-                                <button style="float: right; margin-right: 10px; margin: 15px;" id="btn" class="btn-add-settings">Edit</button>
-                            </a>
-                            <a href="#" onClick="deleteTournament({{tournament.id}})">
-                                <button style="float: left; margin-left: 10px; margin: 15px;" id="btn" class="btn-add-settings_delete">Delete</button>
-                            </a>
-                        </div>
-                    </div>
-
-                </div>
-
-
-
-
-                <tr class="btn-danger_nav_list_group_tournaments_name" align="center ">
-                    <td>{{tournament.name}}</td>
-                </tr>
-                <tr class="btn-danger_nav_list_group_tournaments_name" align="center ">
-                    <td>Players: {{tournament.opponents|length}}</td>
-                </tr>
-                <tr class="btn-danger_nav_list_group_tournaments_name" align="center ">
-                    <td>{{tournament.date}}</td>
-                </tr>
-                <tr class="btn-danger_nav_list_group_tournaments_name" align="center ">
-                    <td>{{tournament.location}}</td>
-                </tr>
-            </tbody>
-        </table>
-        {% endfor %}
-        <br />
+        <tr class="btn-danger_nav_list_group_tournaments_name" align="center ">
+          <td>{{tournament.name}}</td>
+        </tr>
+        <tr class="btn-danger_nav_list_group_tournaments_name" align="center ">
+          <td>Players: {{tournament.opponents|length}}</td>
+        </tr>
+        <tr class="btn-danger_nav_list_group_tournaments_name" align="center ">
+          <td>{{tournament.date}}</td>
+        </tr>
+        <tr class="btn-danger_nav_list_group_tournaments_name" align="center ">
+          <td>{{tournament.location}}</td>
+        </tr>
+      </tbody>
     </table>
-
-
-    <script>
-        // Get the modal
-        var modal = document.getElementById("myModal");
-
-        // Get the button that opens the modal
-        var btn = document.getElementById("myBtnSettings");
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close_settings")[0];
-
-        // When the user clicks the button, open the modal 
-        btn.onclick = function() {
-            modal.style.display = "block";
-        }
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
-
-
-    <!-- {% else %} -->
-    <!-- <h5 style="color: white;" align="center">Eventually your have no active tournaments.</h5> -->
-    <!-- {% endif %} -->
-
+    {% endfor %}
     <br />
-    <div align="center ">
-        <a href="/new-tournament ">
-            <button id="btn" type="button " class="btn-danger_nav_tournaments">
+  </table>
+
+  <script>
+    // Get the modals
+    const modalsSettings = document.querySelectorAll(".modal");
+
+    // Get the buttons that opens the modal
+
+    const iconSettingsButtons = document.querySelectorAll(".icon_settings");
+    iconSettingsButtons.forEach((button) => {
+      let buttonID = button.getAttribute("id").split("-")[1];
+      modalsSettings.forEach((modal) => {
+        let modalID = modal.getAttribute("id").split("-")[1];
+        if (buttonID === modalID) {
+          button.addEventListener("click", () => {
+            modal.classList.remove("hidden");
+
+            // If modal should close also after click button, use this:
+            // modal.classList.toggle("hidden")
+          });
+          modal
+            .querySelector(".close_settings")
+            .addEventListener("click", () => {
+              modal.classList.add("hidden");
+
+              // If modal should close also after click button, use this:
+              // modal.classList.toggle("hidden")
+            });
+        }
+      });
+    });
+  </script>
+
+  <!-- {% else %} -->
+  <!-- <h5 style="color: white;" align="center">Eventually your have no active tournaments.</h5> -->
+  <!-- {% endif %} -->
+
+  <br />
+  <div align="center ">
+    <a href="/new-tournament ">
+      <button id="btn" type="button " class="btn-danger_nav_tournaments">
         Generate new schedule
       </button>
-        </a>
-    </div>
-    <br />
+    </a>
+  </div>
+  <br />
 </section>
 
 {% endblock %}
