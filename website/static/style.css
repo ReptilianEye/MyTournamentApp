@@ -40,9 +40,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 
-/* LOAD HTML */
-
-
 /* Scroll up */
 
 #myBtn {
@@ -212,6 +209,37 @@ button.close_tournaments {
     transform: perspective(1px) scale(1.1);
     background-color: #5aa0ba;
     border: 1px solid #5aa0ba;
+    color: whitesmoke;
+}
+
+.btn-add-account_login {
+    background-color: #04AA6D;
+    border: 0;
+    width: 100px;
+    height: 40px;
+    border-radius: .55rem;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: whitesmoke;
+    font-size: 12px;
+    font-weight: bold;
+    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+    transition: 0.5s;
+    backface-visibility: hidden;
+    border: 1px solid #04AA6D;
+    outline: none;
+}
+
+.btn-add-account_login a {
+    width: 100%;
+    height: 100%;
+}
+
+.btn-add-account_login:hover {
+    transition: 0.5s;
+    cursor: pointer;
+    transform: perspective(1px) scale(1.1);
+    background-color: #04AA6D;
+    border: 1px solid #04AA6D;
     color: whitesmoke;
 }
 
@@ -387,6 +415,7 @@ nav .nav-items li a {
     font-size: 18px;
     font-weight: 500;
     text-decoration: none;
+    width: 0;
 }
 
 nav .nav-items li a:hover {
@@ -427,6 +456,198 @@ nav .nav-items li a:hover {
     box-shadow: 0 0.25em 0.25em rgb(0 0 0 / 30%);
     transition: all .3s ease-out;
     border: 3px solid #20242A;
+}
+
+.close_settings {
+    color: white;
+    float: right;
+    font-size: 33px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: -6px;
+}
+
+.close_settings:hover {
+    color: #a03636;
+}
+
+.icon_settings {
+    border-radius: 10px;
+    background-color: rgb(212, 212, 212);
+    box-shadow: 0 0.25em 0.25em rgb(0 0 0 / 30%);
+    transition: all .3s ease-out;
+    border: 3px solid #20242A;
+    margin-left: 270px;
+    margin-right: 5px;
+}
+
+.btn-add-settings {
+    background-color: #20242A;
+    border: 0;
+    width: 110px;
+    height: 40px;
+    border-radius: .55rem;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: whitesmoke;
+    font-size: 12px;
+    font-weight: bold;
+    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+    transition: 0.5s;
+    backface-visibility: hidden;
+    border: 1px solid rgb(212, 212, 212);
+    margin-left: 10px;
+    outline: none;
+}
+
+.btn-add-settings a {
+    width: 100%;
+    height: 100%;
+}
+
+.btn-add-settings:hover {
+    transition: 0.5s;
+    cursor: pointer;
+    transform: perspective(1px) scale(1.1);
+    background-color: #04AA6D;
+    border: 1px solid #04AA6D;
+    color: whitesmoke;
+}
+
+.btn-add-settings_delete {
+    background-color: #20242A;
+    border: 0;
+    width: 110px;
+    height: 40px;
+    border-radius: .55rem;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: whitesmoke;
+    font-size: 12px;
+    font-weight: bold;
+    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+    transition: 0.5s;
+    backface-visibility: hidden;
+    border: 1px solid rgb(212, 212, 212);
+    margin-left: 10px;
+    outline: none;
+}
+
+.btn-add-settings_delete a {
+    width: 100%;
+    height: 100%;
+}
+
+.btn-add-settings_delete:hover {
+    transition: 0.5s;
+    cursor: pointer;
+    transform: perspective(1px) scale(1.1);
+    background-color: #a03636;
+    border: 1px solid #a03636;
+    color: whitesmoke;
+}
+
+
+/* ----------- */
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: a;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 75%;
+    top: 20%;
+    width: 400px;
+    /* Full width */
+    height: 300px;
+    /* Full height */
+    overflow: auto;
+}
+
+
+/* Modal Content */
+
+.modal-content {
+    position: relative;
+    background-color: rgb(212, 212, 212);
+    margin: auto;
+    padding: 0;
+    border: 1px solid #20242A;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+
+/* Add Animation */
+
+@-webkit-keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+
+/* The Close Button */
+
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: whitesmoke;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #20242A;
+    color: white;
+}
+
+.modal-body {
+    padding: 2px 16px;
+}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+
+/* ----------- */
+
+.icon_settings:hover {
+    background-color: #5AA0BA;
+    transform: perspective(1px) scale(1.2);
+    box-shadow: 0 0.35em 0.35em rgb(0 0 0 / 50%);
 }
 
 .logo_social:hover {
@@ -519,6 +740,27 @@ hr {
     margin: 0 auto;
     margin-top: 5%;
 }
+
+
+/* Reklama BOX */
+
+
+/* .reklama_box_container {
+    background-image: url("../static/uid_1944ee9e7f71475226c3f19ea52cf7391460035500170_width_900_play_0_pos_0_gs_0_height_506.jpg");
+    background-size: 100%;
+    height: 250px;
+    width: 1600px;
+    box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 40px;
+}
+
+.container_reklama {
+    width: 300px;
+    height: 470px;
+    margin: 0 auto;
+    margin-top: -42%;
+    margin-left: -300px;
+} */
 
 
 /* Update dual BOX */

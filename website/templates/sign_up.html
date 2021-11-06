@@ -1,32 +1,59 @@
-{% extends "base.html" %} {% block title %}Sign Up{% endblock %} {% block content %}
-<section class="sign_box_container container_sign">
-    <form method="POST">
-        <br>
-        <h3 style="margin-bottom: 25px;" align="center">Sign up</h3>
-        <div class="form-group">
-            <label class="label_login" for="email">Email Address<a style="margin-left: 170px;" class="signup_label" title="Already have an account?" id="login" href="/login">Log in</a></label>
-            <input type="email" class="form_control" id="email" name="email" />
-        </div>
-        <div class="form-group">
-            <label class="label_login" for="firstName">First Name</label>
-            <input type="text" class="form_control" id="firstName" name="firstName" />
-        </div>
-        <div class="form-group">
-            <label class="label_login" for="password1">Password</label>
-            <input type="password" class="form_control" id="password1" name="password1" />
-        </div>
-        <div class="form-group">
-            <label class="label_login" for="password2">Password (Confirm)</label>
-            <input type="password" class="form_control" id="password2" name="password2" />
-        </div>
-        <br />
-        <center>
-            <button id="btn" type="submit" class="btn-danger_nav_login">Sign up for free</button>
-        </center>
-    </form>
+<!DOCTYPE html>
+<html lang="en">
 
-</section>
-<div align="center" style="margin-top: 15px;">
-    <label class="h4_signup_footer">By clicking the <strong style="font-weight: 700; color: #5aa0ba; ">"Sign up for free"</strong> button, you are creating an account, </br> and agree to Terms of Service and Privacy Policy.</label>
-</div>
-{% endblock %}
+<head>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
+    <script type="text/javascript " src="{{ url_for( 'static', filename='index.js' ) }} "></script>
+    <script src="../static/cookiepopup.js " async></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style-login.css') }}" />
+    <link rel="shortcut icon" href="../static/favicon.ico" type="image/x-icon" />
+    <title>Sign up</title>
+</head>
+
+<body>
+    <a href="/">
+        <img style="margin-left: 10px;" src="../static/logo 31lo.png" width="70px" height="70px">
+    </a>
+    <a href="/">
+        <button style="margin-top: -5px;" class="close_tournaments">
+            <span aria-hidden="true">&times;</span>
+            </button>
+    </a>
+    <section class="sign_box_container container_sign">
+        <form method="POST">
+            <br>
+            <h3 style="margin-bottom: 25px; margin-top: 10px;" align="center">Sign up</h3>
+            <div class="form-group">
+                <label class="label_login" for="email">Email Address<a style="margin-left: 190px;" class="signup_label" title="Already have an account?" id="login" href="/login-up">Log in</a></label>
+                <input type="email" class="form_control" id="email" name="email" />
+            </div>
+            <div class="form-group">
+                <label class="label_login" for="firstName">First Name</label>
+                <input type="text" class="form_control" id="firstName" name="firstName" />
+            </div>
+            <div class="form-group">
+                <label class="label_login" for="password1">Password</label>
+                <input type="password" class="form_control" id="password1" name="password1" />
+            </div>
+            <div class="form-group">
+                <label class="label_login" for="password2">Password (Confirm)</label>
+                <input type="password" class="form_control" id="password2" name="password2" />
+            </div>
+            <br />
+            <center>
+                <button id="btn" type="submit" class="btn-danger_nav_login">Sign up for free</button>
+            </center>
+        </form>
+
+    </section>
+    <div align="center" style="margin-top: 15px;">
+        <label class="h4_signup_footer">By clicking the <strong style="font-weight: 700; color: #5aa0ba; ">"Sign up for free"</strong> button, you are creating an account, </br> and agree to Terms of Service and Privacy Policy.</label>
+    </div>
+</body>
+
+</html>

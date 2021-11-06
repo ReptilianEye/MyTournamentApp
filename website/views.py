@@ -23,19 +23,27 @@ views = Blueprint('views', __name__)
 
 
 @views.route('/', methods=['GET', 'POST'])
-@login_required
+# @login_required
 def home():
     return render_template("home.html", user=current_user)
 
+
 @views.route('/video', methods=['GET', 'POST'])
-@login_required
+# @login_required
 def video():
-    return render_template("video.html", user=current_user)
+    if current_user.is_authenticated:
+        return render_template("video.html", user=current_user)
+    else:
+        return render_template("login.html", user=current_user)
 
 @views.route('/tournaments', methods=['GET', 'POST'])
-@login_required
+# @login_required
 def tournaments():
-    return render_template("tournaments.html", user=current_user)
+    if current_user.is_authenticated: 
+        return render_template("tournaments.html", user=current_user)
+    else:
+        return render_template("login.html", user=current_user)
+
 
 @views.route('/new-tournament', methods=['GET', 'POST'])
 @login_required
@@ -182,7 +190,7 @@ def reset_dual():
 
 # Functions to pubish schedule
 @views.route('public-schedule')
-@login_required
+# @login_required
 def public_schedule():
     tournament = Tournament.query.filter_by(is_public=True).first()
     if tournament:
@@ -220,7 +228,7 @@ def show_standings():
 
 
 @views.route('/public-standings')
-@login_required
+# @login_required
 def show_public_standings():
     tournamentDTO = ChessTournament()
     tournamentDTO.Load(current_user.current_tournament_id)
