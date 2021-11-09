@@ -10,8 +10,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style-login.css') }}" />
+    <!-- ------ LOGO ------  -->
     <link rel="shortcut icon" href="../static/favicon.ico" type="image/x-icon" />
+
+    <!-- ------ CSS ------  -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style-login.css') }}" />
     <title>Sign up</title>
 </head>
 
@@ -29,7 +32,7 @@
             <br>
             <h3 style="margin-bottom: 25px; margin-top: 10px;" align="center">Sign up</h3>
             <div class="form-group">
-                <label class="label_login" for="email">Email Address<a style="margin-left: 190px;" class="signup_label" title="Already have an account?" id="login" href="/login-up">Log in</a></label>
+                <label class="label_login" for="email">Email Address<a style="margin-left: 190px;" class="signup_label" title="Already have an account?" id="login" href="/login">Log in</a></label>
                 <input type="email" class="form_control" id="email" name="email" />
             </div>
             <div class="form-group">

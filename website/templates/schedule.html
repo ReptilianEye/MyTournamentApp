@@ -53,10 +53,9 @@
                     </h4>
                     <br>
                 </div>
-                <br />
             </tr>
     </tbody>
-    <br> {% endif %} {% endfor %} {% if tournament.current_round_number == 0 or tournament.current_round_number
+    {% endif %} {% endfor %} {% if tournament.current_round_number == 0 or tournament.current_round_number
     < tournament.max_rounds %} <br>
         <div align="center">
             <a href="/generate-new-round">

@@ -31,10 +31,14 @@ def home():
 @views.route('/video', methods=['GET', 'POST'])
 # @login_required
 def video():
-    if current_user.is_authenticated:
-        return render_template("video.html", user=current_user)
-    else:
-        return render_template("login.html", user=current_user)
+    return render_template("video.html", user=current_user)
+
+@views.route('/public-tournaments', methods=['GET', 'POST'])
+# @login_required
+def public_tournaments():
+    tournaments=Tournament.query.filter_by(is_public=True).all()
+    return render_template("public_tournaments.html", user=current_user, tournaments=tournaments)
+
 
 @views.route('/tournaments', methods=['GET', 'POST'])
 # @login_required
@@ -192,23 +196,21 @@ def reset_dual():
 @views.route('public-schedule')
 # @login_required
 def public_schedule():
-    tournament = Tournament.query.filter_by(is_public=True).first()
-    if tournament:
-        return render_template("public_schedule.html", tournament=tournament, user=current_user)
-    else:
-        flash('Unfortunately, there is no public schedule for now.', category='error')
-        return redirect(url_for("views.home"))
+    tournamentDTO = TournamentController()
+    tournamentDTO.Load(current_user.current_tournament_id)
+
+    return render_template("public_schedule.html", user=current_user, tournament=tournamentDTO.tournament)
 
 
 @views.route('publish-schedule')
 @login_required
 def publish_schedule():
 
-    prevPublicTournament = Tournament.query.filter_by(is_public=True).first()
+    # prevPublicTournament = Tournament.query.filter_by(is_public=True).first()
 
-    if prevPublicTournament:
-        prevPublicTournament.is_public = False
-        db.session.commit()
+    # if prevPublicTournament:
+    #     prevPublicTournament.is_public = False
+    #     db.session.commit()
         
     tournament = Tournament.query.filter_by(
         id=current_user.current_tournament_id).first()

@@ -1,6 +1,7 @@
 function goBack() {
     window.history.back()
 }
+
 function deleteUser(userId) {
     fetch(window.location.origin + '/delete-user', {
         method: 'POST',
@@ -9,6 +10,7 @@ function deleteUser(userId) {
         window.location.href = window.location.origin + "/login";
     });
 }
+
 function showDual(dualId) {
     fetch(window.location.origin + '/get-dual-id', {
         method: 'POST',
@@ -17,6 +19,7 @@ function showDual(dualId) {
         window.location.href = window.location.origin + "/update-dual";
     });
 }
+
 function showTournament(tournamentId) {
     fetch(window.location.origin + '/set-tournament-id', {
         method: 'POST',
@@ -25,6 +28,16 @@ function showTournament(tournamentId) {
         window.location.href = window.location.origin + "/schedule";
     });
 }
+
+function showPublicTournament(tournamentId) {
+    fetch(window.location.origin + '/set-tournament-id', {
+        method: 'POST',
+        body: JSON.stringify({ tournamentId: tournamentId }),
+    }).then((_res) => {
+        window.location.href = window.location.origin + "/public-schedule";
+    });
+}
+
 function deleteTournament(tournamentId) {
     fetch(window.location.origin + '/delete-tournament', {
         method: 'POST',
@@ -33,6 +46,7 @@ function deleteTournament(tournamentId) {
         window.location.href = window.location.origin + "/tournaments";
     });
 }
+
 function deletePlayer(playerId) {
     fetch(window.location.origin + '/delete-player', {
         method: 'POST',

@@ -9,7 +9,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Stick+No+Bills:wght@600&display=swap" rel="stylesheet" />
+
+    <!-- ------ LOGO ------  -->
     <link rel="shortcut icon" href="../static/favicon.ico" type="image/x-icon" />
+
+    <!-- ------ CSS ------  -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 
     <title>{% block title %}Home{% endblock %}</title>
@@ -30,7 +34,7 @@
             <div class="nav-items">
                 <li><a class="linkbutton link-active" id="home" href="/">Home</a></li>
                 <li><a class="linkbutton" href="/tournaments">My Tournaments</a></li>
-                <li><a class="linkbutton" href="/public-schedule">Public tournaments</a></li>
+                <li><a class="linkbutton" href="/public-tournaments">Public tournaments</a></li>
                 <li><a class="linkbutton not-active" title="Video Test 1.0 BETA" href="#">Video</a><span style="margin-left: 10px;" class="beta_version">SOON</span></li>
 
                 <!-- <li>
@@ -99,7 +103,7 @@
 
         <script>
             //Get the button
-            var mybutton = document.getElementById("myBtn ");
+            var mybutton = document.getElementById("myBtn");
 
             // When the user scrolls down 20px from the top of the document, show the button
             window.onscroll = function() {
@@ -124,11 +128,12 @@
             }
         </script>
 
+
+        <!-- ------ SCRIPT JS ------  -->
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
         <script type="text/javascript " src="{{ url_for( 'static', filename='index.js' ) }} "></script>
-        <script src="../static/cookiepopup.js " async></script>
 
     </section>
 </body>
