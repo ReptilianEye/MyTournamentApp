@@ -201,9 +201,9 @@ class TreeRS(RoundStrategy):
         potegaDwojki = pow(2, potegaWiekszej)
         liczbaGraczyWPierwszej = (len(opponents) - potegaDwojki) * 2
         if potegaWiekszej == 0:
-            self.tournament.max_rounds = potegaWiekszej + 1
+            self.tournament.max_rounds = potegaWiekszej
         else:
-            self.tournament.max_rounds = potegaWiekszej + 2
+            self.tournament.max_rounds = potegaWiekszej + 1
         return GenerateFirstRoundTree(opponents, liczbaGraczyWPierwszej)
 
     def getNewRound(self):

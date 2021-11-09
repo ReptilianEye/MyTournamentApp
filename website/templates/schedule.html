@@ -9,8 +9,26 @@
                 <button id="btn" type="button" class="btn-add">Standings</button>
             </a>
         </div>
-        {% for round in tournament.rounds %} {% if round.number
-        <=tournament.current_round_number %} <h4 align="center" class="h4_round">Round: {{round.number}}</h4>
+        {% for round in tournament.rounds %}
+        {% if round.number
+        <=tournament.current_round_number %} 
+        {% if tournament.type == "Tree" %}
+        {% if tournament.max_rounds - round.number == 0 %}
+        <h4 align="center" class="h4_round">FINAL</h4>
+
+        {% elif tournament.max_rounds - round.number == 1 %}
+        <h4 align="center" class="h4_round">SEMIFINALS</h4>
+        
+        {% elif tournament.max_rounds - round.number == 2 %}
+        <h4 align="center" class="h4_round">QUARTER-FINALS</h4>
+
+        {% else %}
+        <h4 align="center" class="h4_round">Round: {{round.number}}</h4>
+
+        {% endif %}
+        {% endif %}
+        
+
             {% for dual in round.duals %}
 
             <tr class="list-group list-group-flush" id="pary">
