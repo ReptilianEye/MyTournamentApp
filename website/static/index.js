@@ -29,6 +29,15 @@ function showTournament(tournamentId) {
     });
 }
 
+function editTournament(tournamentId) {
+    fetch(window.location.origin + '/set-tournament-id', {
+        method: 'POST',
+        body: JSON.stringify({ tournamentId: tournamentId }),
+    }).then((_res) => {
+        window.location.href = window.location.origin + "/edit-tournament";
+    });
+}
+
 function showPublicTournament(tournamentId) {
     fetch(window.location.origin + '/set-tournament-id', {
         method: 'POST',

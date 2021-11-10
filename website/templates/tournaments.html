@@ -30,7 +30,7 @@
         {% for tournament in user.tournaments %}
         <table style="margin: auto">
             <tbody class="btn_tournaments_list" onClick="showTournament({{tournament.id}}) " style="display: flex; margin-bottom: 15px">
-                <button title="Tournament Settings" style="float: right; margin-top: 35px; margin-bottom: -55px;" id="myBtnSettings-{{loop.index}}" class="icon_settings">
+                <button title="Tournament Settings" style="float: right; margin-top: 30px; margin-bottom: -55px;" id="myBtnSettings-{{loop.index}}" class="icon_settings">
           <img src="../static/pngegg.png" width="30" height="30" />
 
 
@@ -52,7 +52,7 @@
                             <span class="close_settings">&times;</span>
                         </div>
                         <div class="modal-body">
-                            <a href="#">
+                            <a href="/edit-tournament" onClick="editTournament({{tournament.id}})">
                                 <button style="float: right; margin-right: 10px; margin: 15px" id="btn" class="btn-add-settings">
                   Edit
                 </button>

@@ -83,6 +83,24 @@ def getScheduleInfo():
             return redirect(url_for('views.getPlayers'))
     return render_template("new_tournament.html", user=current_user)
 
+@views.route('/edit-tournament', methods=['GET', 'POST'])
+@login_required
+def editTournament():
+    tournamentDTO = TournamentController()
+    tournamentDTO.Load(current_user.current_tournament_id)
+    if request.method == 'POST':
+        name = request.form.get('name')
+        date = request.form.get('date')
+        location = request.form.get('location')
+        discipline = request.form.get('discipline')
+        status = request.form.get('status')
+
+        tournamentDTO.EditTournament(name, date, location, discipline, status)
+
+        return redirect(url_for('views.tournaments'))
+    return render_template("edit_tournament.html", user=current_user, tournament=tournamentDTO.tournament)
+
+
 
 @views.route('/new-players', methods=['GET', 'POST'])
 @login_required

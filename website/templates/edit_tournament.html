@@ -1,0 +1,49 @@
+{% extends "base.html" %} {% block title %}Edit Tournament{% endblock %} {% block content %}
+<section class="new_tournaments_box_container container_tournaments_new">
+    <br />
+    <form method="POST">
+        <h3 style="margin-bottom: 20px;" align="center">Edit Tournament</h3>
+
+        <div class="form-group">
+            <input type="text" class="form_control" name="name" placeholder="{{tournament.name}}" />
+        </div>
+        <br />
+        <div class="form-group">
+            <input type="date" class="form_control" name="date" placeholder="{{tournament.date}}" />
+        </div>
+        <br />
+        <div class="form-group ">
+            <input type="text " class="form_control " name="location" placeholder="{{tournament.location}}" />
+        </div>
+        <br />
+        <div>
+            <select name="discipline" class="form_control " placeholder="{{tournament.discipline}}">
+          <option value="Football" >Football</option>
+          <option value="Basketball">Basketball</option>
+          <option value="Volleyball">Volleyball</option>
+          <option value="Chess">Chess</option>
+          <option value="Other">Other</option>
+        </select>
+        </div>
+        <br />
+        <br />
+
+        <div>
+            <select name="status" class="form_control " placeholder="Select status">
+          <!-- <option label="Round Robin ">Kazdy z kazdym</option> -->
+          <option title="Each of all players play each other " value="active">Active</option>
+          <option title="Match players with most wins " value="notactive">Ended</option>
+          <option title="Classic tournament tree " value="upcoming">Upcoming</option>
+
+          </select>
+        </div>
+
+        <br />
+        <br />
+        <center>
+            <button id="btn " type="submit " class="btn-danger_nav_login ">Save</button>
+        </center>
+    </form>
+</section>
+
+{% endblock %}

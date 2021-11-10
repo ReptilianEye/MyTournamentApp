@@ -2,6 +2,7 @@ from .TournamentsFunctions import *
 from .import db
 from .models import Opponent, User, Tournament, Dual, Opponent, Standing, Round
 import math
+from datetime import datetime
 
 
 class TournamentController():
@@ -33,6 +34,22 @@ class TournamentController():
         dual = Dual.query.filter_by(id=self.tournament.edited_dual_id).first()
         dual.score1 = score1
         dual.score2 = score2
+
+    def EditTournament(self, name, date, location, discipline, status):
+        if name:
+            self.tournament.name=name
+        if date:
+            y, m, d = date.split('-')
+            date = datetime(int(y), int(m), int(d))
+            self.tournament.date=date
+        if location:
+            self.tournament.location=location
+        if discipline:
+            self.tournament.discipline=discipline
+        if status:
+            self.tournament.status=status
+        self.Save()
+
 
     def DeleteTournament(self):
 
