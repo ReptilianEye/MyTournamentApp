@@ -120,21 +120,6 @@ def GenerateFirstRoundTree(opponents, ileGraczy):
         i += 2
     return firstRound
 
-
-# def GenerateSecondRoundTree(opponents, firstRound):
-#     secondRound = []
-#     for duel in firstRound:
-#         whoIsOut = whoWins(duel, True)
-#         opponents.remove(whoIsOut)
-
-#     random.shuffle(opponents)
-#     i = 0
-#     while i < len(opponents):
-#         secondRound.append([opponents[i], opponents[i+1]])
-#         i += 1
-#     return secondRound
-
-
 def GenerateRoundTreeWithRest(prevRound, rest):
     winners = []
     for duel in prevRound:

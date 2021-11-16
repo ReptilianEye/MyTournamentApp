@@ -212,7 +212,7 @@ class TreeRS(RoundStrategy):
         elif checkIfScoresAreWritten(self.tournament.duals):
             if checkIfScoresAreDecided(self.tournament.duals):
                 prevRound = Dual.query.filter_by(
-                    round_number=self.tournament.current_round_number).all()
+                    round_number=self.tournament.current_round_number, tournament_id=self.tournament.id).all()
                 rest = []
                 if self.tournament.current_round_number == 1:
                     rest = checkIfEveryonePlayed(
@@ -225,6 +225,5 @@ class TreeRS(RoundStrategy):
                 return "None of the scores can be tied"
         else:
             return "Your have to fill all scores"
-        self.tournament.current_round_number += 1                
+        self.tournament.current_round_number += 1
         self.saveRound(newRound)
-
