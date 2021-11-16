@@ -128,13 +128,6 @@ class RoundStrategy():
         db.session.commit()
         return newRund.id
 
-    def saveRound(self, round):
-        newRundId = self.createNewRound(self.tournament.current_round_number)
-        for duel in round:
-            db.session.add(Dual(tournament_id=self.tournament.id, round_id=newRundId, opponent1_id=duel[0].id,
-                                opponent2_id=duel[1].id, round_number=self.tournament.current_round_number))
-        db.session.commit()
-
 
 class RoundRobinRS(RoundStrategy):
 
@@ -167,16 +160,16 @@ class RoundRobinRS(RoundStrategy):
 
 class SwissRS(RoundStrategy):
 
-    # def saveRound(self, round, round_number):
-    #     newRundId = self.createNewRound(round_number)
-    #     for duel in round:
-    #         db.session.add(Dual(tournament_id=self.tournament.id, round_id=newRundId, opponent1_id=duel[0].id,
-    #                             opponent2_id=duel[1].id, round_number=1))
-    #     db.session.commit()
+    def saveRound(self, round, round_number):
+        newRundId = self.createNewRound(round_number)
+        for duel in round:
+            db.session.add(Dual(tournament_id=self.tournament.id, round_id=newRundId, opponent1_id=duel[0].id,
+                                opponent2_id=duel[1].id, round_number=1))
+        db.session.commit()
 
     def generateFirstRound(self):
         firstRound = GenerateFirstRoundSwiss(self.tournament.opponents)
-        self.saveRound(firstRound)
+        self.saveRound(firstRound, 1)
 
     def getNewRound(self):
         self.tournament.current_round_number += 1
@@ -195,36 +188,24 @@ class SwissRS(RoundStrategy):
 
 class TreeRS(RoundStrategy):
 
-    def generateFirstRound(self):
-        opponents = self.tournament.opponents
-        potegaWiekszej = math.floor(math.log2(len(opponents)))
+    def generateFirstRound(self, players):
+        potegaWiekszej = math.floor(math.log2(len(players)))
         potegaDwojki = pow(2, potegaWiekszej)
-        liczbaGraczyWPierwszej = (len(opponents) - potegaDwojki) * 2
-        if potegaWiekszej == 0:
-            self.tournament.max_rounds = potegaWiekszej
-        else:
-            self.tournament.max_rounds = potegaWiekszej + 1
-        return GenerateFirstRoundTree(opponents, liczbaGraczyWPierwszej)
+        liczbaDuelsWPierwszej = len(players) - potegaDwojki
+        return self.getNewRound(players, liczbaDuelsWPierwszej)
 
     def getNewRound(self):
+        self.tournament.current_round_number += 1
+        db.session.commit()
         if len(self.tournament.duals) == 0:
-            newRound = self.generateFirstRound()
-        elif checkIfScoresAreWritten(self.tournament.duals):
-            if checkIfScoresAreDecided(self.tournament.duals):
-                prevRound = Dual.query.filter_by(
-                    round_number=self.tournament.current_round_number).all()
-                rest = []
-                if self.tournament.current_round_number == 1:
-                    rest = checkIfEveryonePlayed(
-                        self.tournament.opponents, self.tournament.duals)
-                if len(rest) != 0:
-                    newRound = GenerateRoundTreeWithRest(prevRound, rest)
-                else:
-                    newRound = GenerateRoundTreeWithoutRest(prevRound)
-            else:
-                return "None of the scores can be tied"
-        else:
-            return "Your have to fill all scores"
-        self.tournament.current_round_number += 1                
-        self.saveRound(newRound)
+            self.generateFirstRound(self.tournament.duals)
 
+            if checkIfScoresAreWritten(self.tournament.duals):
+                if checkIfScoresAreDecided(self.tournament.duals):
+                    newRound = GenerateRoundTree(self.tournament.duals)
+                    self.saveRound(
+                        newRound, self.tournament.current_round_number)
+                else:
+                    return "None of the scores can be tied"
+            else:
+                return "Your have to fill all scores"
