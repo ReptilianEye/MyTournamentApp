@@ -1656,7 +1656,7 @@ h4 :hover {
       height: 100%;
       display: block;
       padding-top: 5%;
-      overflow-x: scroll;
+      /* overflow-x: scroll; */
     }
 
     .standings_box_container tr {

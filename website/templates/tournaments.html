@@ -35,28 +35,11 @@ block content %}
     </thead>
 
     {% for tournament in user.tournaments %}
-    <!-- <table style="margin: auto"> -->
-
-    <!-- <button id="button_close" class="close_tournaments">
-        <span onClick="deleteTournament({{tournament.id}})" aria-hidden="true"
-          >&times;</span
-        >
-      </button> -->
-
     <tbody
       class="btn_tournaments_list"
       onClick="showTournament({{tournament.id}}) "
       style="display: flex; margin-bottom: 15px; position: relative"
     >
-      <tr>
-        <td>
-          <button id="button_close" class="close_tournaments">
-            <p onClick="deleteTournament({{tournament.id}})" aria-hidden="true">
-              &times;
-            </p>
-          </button>
-        </td>
-      </tr>
       <tr class="btn-danger_nav_list_group_tournaments_name" align="center ">
         <td>{{tournament.name}}</td>
       </tr>
@@ -68,6 +51,15 @@ block content %}
       </tr>
       <tr class="btn-danger_nav_list_group_tournaments_name" align="center ">
         <td>{{tournament.location}}</td>
+      </tr>
+      <tr>
+        <td>
+          <button id="button_close" class="close_tournaments">
+            <p onClick="deleteTournament({{tournament.id}})" aria-hidden="true">
+              &times;
+            </p>
+          </button>
+        </td>
       </tr>
     </tbody>
 
