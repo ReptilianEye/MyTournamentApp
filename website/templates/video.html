@@ -4,46 +4,20 @@
     <h3 align="center">Video</h3>
     <hr style="width: 20%;" />
     <section style="display: flex; flex-wrap: wrap; align-items: center; margin-left: 50px;" class="container_contact ">
-
+        {% for tournament in tournaments %} {% if tournament.movielink %}
         <div class="card ">
             <div align="center ">
-                <h4 class="h4_video">[nazwa live]</h4>
-                <a href="#">
-                    <button id="btn" class="btn-video">Live</button>
-                </a>
-            </div>
-        </div>
-
-        <div class="card ">
-            <div align="center ">
-                <h4 class="h4_video">[nazwa live]</h4>
-                <a href="#">
-                    <button id="btn" class="btn-video">Live</button>
-                </a>
-            </div>
-        </div>
-
-        <div class="card ">
-            <div align="center ">
-                <h4 class="h4_video">[nazwa live]</h4>
-                <a href="#">
-                    <button id="btn" class="btn-video">Live</button>
-                </a>
-            </div>
-        </div>
-
-        <div class="card ">
-            <div align="center ">
-                <h4 class="h4_video">[nazwa live]</h4>
-                <a href="#">
-                    <button id="btn" class="btn-video">Live</button>
+                <h4 class="h4_video">{{tournament.name}}</h4>
+                <h4 class="h4_date_video">{{tournament.date}}</h4>
+                <a target="_blank" href="{{tournament.movielink}}">
+                    <button id="btn" class="btn-video">Link</button>
                 </a>
             </div>
         </div>
 
 
 
+        {% endif %} {% endfor %}
     </section>
-
 </section>
 {% endblock %}

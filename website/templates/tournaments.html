@@ -36,7 +36,7 @@
 
         </button> {% if tournament.status == "active" %}<button style="margin-left: 30px; margin-right: -70px;" class="btn_activity active">
             
-          </button>{% endif %} {% if tournament.status == "notactive" %}<button style="margin-left: 30px; margin-right: -70px;" class="btn_activity not_active">
+        </button>{% endif %} {% if tournament.status == "notactive" %}<button style="margin-left: 30px; margin-right: -70px;" class="btn_activity not_active">
             
         </button>{% endif %} {% if tournament.status == "upcoming" %}<button style="margin-left: 30px; margin-right: -70px;" class="btn_activity up-comming">
             
@@ -85,6 +85,20 @@
         <br />
     </table>
 
+    <div class="box">
+        <div class="box__content">
+            <div class="box__title">Information</div>
+            <div style="font-size: 14px;" class="box__description modal-header">
+                Information about the status of the tournament.
+            </div>
+            <div style="margin-top: -20px;">
+                <button style="margin-left: 0px; margin-right: 0px;" class="btn_activity active"><p class="p_information">Active Tournament</p></button><br><br>
+                <button style="margin-left: 0px; margin-right: 0px;" class="btn_activity not_active"><p style="margin-left: 15px;" class="p_information">Not Active Tournament</p></button><br><br>
+                <button style="margin-left: 0px; margin-right: 0px;" class="btn_activity up-comming"><p style="margin-left: 25px;" class="p_information">Up Comming Tournament</p></button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Get the modals
         const modalsSettings = document.querySelectorAll(".modal");
@@ -115,7 +129,6 @@
             });
         });
     </script>
-
     {% else %}
     <h5 style="color: white;" align="center">Eventually your have no active tournaments.</h5>
     {% endif %}

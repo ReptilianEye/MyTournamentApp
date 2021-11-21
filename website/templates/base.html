@@ -20,6 +20,17 @@
 </head>
 
 <body>
+    <div class="preload">
+        <div class="circles-group">
+            <center><img src="../static/logo 31lo.png" width="200px" /></center>
+            <center>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </center>
+        </div>
+    </div>
     <section>
         <button onclick="topFunction()" id="myBtn" title="Go to top">
       <img src="../static/arrow.png" height="40px" />
@@ -35,7 +46,7 @@
                 <li><a class="linkbutton link-active" id="home" href="/">Home</a></li>
                 <li><a class="linkbutton" href="/tournaments">My Tournaments</a></li>
                 <li><a class="linkbutton" href="/public-tournaments">Public tournaments</a></li>
-                <li><a class="linkbutton not-active" title="Video Test 1.0 BETA" href="#">Video</a><span style="margin-left: 10px;" class="beta_version">SOON</span></li>
+                <li><a class="linkbutton not-active" href="/video">Video</a><span style="margin-left: 10px;" class="beta_version">SOON</span></li>
 
                 <!-- <li>
           <a class="linkbutton" href="/public-schedule">Public tournament</a>
@@ -126,6 +137,15 @@
                 document.body.scrollTop = 0;
                 document.documentElement.scrollTop = 0;
             }
+
+            const preload = document.querySelector('.preload');
+
+            preload.classList.add('show-preloader');
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    preload.classList.remove('show-preloader');
+                }, 900);
+            });
         </script>
 
 

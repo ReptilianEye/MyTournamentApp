@@ -607,12 +607,68 @@ nav .nav-items li a:hover {
 }
 
 
+/* Information_tournament */
+
+.box {
+    background: #202225;
+    border-radius: 0px 4px 4px 0px;
+    left: -304px;
+    padding: 4px 4px 4px 0px;
+    position: fixed;
+    top: 320px;
+    transition: transform 0.4s;
+    width: 300px;
+}
+
+.box:hover {
+    transform: translateX(304px);
+}
+
+.box .box__content {
+    background: rgb(212, 212, 212);
+    min-height: 200px;
+    padding: 5px;
+    position: relative;
+    color: #202225;
+    font-weight: 700;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.box .box__title {
+    background: #202225;
+    border: solid rgb(212, 212, 212);
+    border-radius: 0px 0px 4px 4px;
+    border-width: 0px 4px 4px;
+    cursor: default;
+    font-size: 14px;
+    height: 30px;
+    line-height: 25px;
+    position: absolute;
+    right: -74px;
+    text-align: center;
+    top: 70px;
+    transform: rotate(-90deg);
+    width: 106px;
+    color: whitesmoke;
+    font-weight: 500;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.p_information {
+    margin-left: 0px;
+    font-weight: 700;
+    padding: 4px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    width: 230px;
+}
+
+
 /* ----------- */
 
 .modal {
     display: block;
     /* Hidden by default */
-    position: a;
+    position: absolute;
     /* Stay in place */
     z-index: 1;
     /* Sit on top */
@@ -765,8 +821,16 @@ h4 {
     color: whitesmoke;
     font-size: 25px;
     font-weight: 700;
-    margin: 20px;
+    margin: 10px;
     text-align: center;
+}
+
+.h4_date_video {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #5aa0ba;
+    font-size: 15px;
+    font-weight: 600;
+    margin: 20px;
 }
 
 .h4_main {
@@ -943,7 +1007,7 @@ hr {
 
 .container_tournaments_new {
     width: 650px;
-    height: 640px;
+    height: 605px;
     margin: 0 auto;
     margin-top: 5%;
 }
@@ -963,6 +1027,22 @@ hr {
 .container_tournaments {
     width: 1100px;
     height: auto;
+    margin: 0 auto;
+    margin-top: 5%;
+}
+
+.edit_tournaments_box_container {
+    background-color: #20242a;
+    height: 300px;
+    width: 700px;
+    /* width: 600px; */
+    box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 40px;
+}
+
+.container_tournaments_edit {
+    width: 650px;
+    height: 660px;
     margin: 0 auto;
     margin-top: 5%;
 }
@@ -1171,11 +1251,11 @@ textarea {
 .btn-video:hover {
     transition: 0.5s;
     cursor: pointer;
-    transform: perspective(1px) scale(1.1);
+    /* transform: perspective(1px) scale(1.1); */
     background-color: #5aa0ba;
     border: 2px solid #5aa0ba;
     color: whitesmoke;
-    box-shadow: 0px 0px 10px #5aa0ba;
+    color: #fff
 }
 
 
@@ -1857,4 +1937,63 @@ h4 :hover {
     /* transform: perspective(1px) scale(1.1); */
     background-color: transparent;
     color: whitesmoke;
+}
+
+
+/* ---------- */
+
+.preload {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 10000;
+    visibility: hidden;
+    opacity: 0;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    background-color: #20242A;
+    transition: opacity 500ms ease-in-out, visibility 0s 500ms;
+}
+
+.show-preloader {
+    visibility: visible;
+    opacity: 1;
+}
+
+.circle {
+    background-color: #5aa0ba;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    animation: bounce-circles 0.7s infinite ease-in-out;
+}
+
+.preload .circle:nth-child(1) {
+    animation-delay: -0.6s;
+}
+
+.preload .circle:nth-child(2) {
+    animation-delay: -0.5s;
+}
+
+.preload .circle:nth-child(3) {
+    animation-delay: -0.4s;
+}
+
+.preload .circle:nth-child(4) {
+    animation-delay: -0.3s;
+}
+
+@keyframes bounce-circles {
+    0%,
+    40%,
+    100% {
+        transform: translateY(-10px);
+    }
+    20% {
+        transform: translateY(-20px);
+    }
 }

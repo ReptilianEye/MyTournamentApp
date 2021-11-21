@@ -35,7 +35,7 @@ class TournamentController():
         dual.score1 = score1
         dual.score2 = score2
 
-    def EditTournament(self, name, date, location, discipline, status):
+    def EditTournament(self, name, date, location, discipline, status, movielink):
         if name:
             self.tournament.name=name
         if date:
@@ -48,6 +48,8 @@ class TournamentController():
             self.tournament.discipline=discipline
         if status:
             self.tournament.status=status
+        if movielink:
+            self.tournament.movielink=movielink
         self.Save()
 
 

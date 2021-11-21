@@ -31,7 +31,8 @@ def home():
 @views.route('/video', methods=['GET', 'POST'])
 # @login_required
 def video():
-    return render_template("video.html", user=current_user)
+    tournaments=Tournament.query.filter_by(is_public=True).all()
+    return render_template("video.html", user=current_user, tournaments=tournaments)
 
 @views.route('/public-tournaments', methods=['GET', 'POST'])
 # @login_required
@@ -94,8 +95,9 @@ def editTournament():
         location = request.form.get('location')
         discipline = request.form.get('discipline')
         status = request.form.get('status')
+        movielink = request.form.get('movielink')
 
-        tournamentDTO.EditTournament(name, date, location, discipline, status)
+        tournamentDTO.EditTournament(name, date, location, discipline, status, movielink)
 
         return redirect(url_for('views.tournaments'))
     return render_template("edit_tournament.html", user=current_user, tournament=tournamentDTO.tournament)
