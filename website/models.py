@@ -28,7 +28,7 @@ class Tournament(db.Model):
     status = db.Column(db.String(150), default="upcoming")
     is_public = db.Column(db.Boolean(),default=False)
     current_round_number = db.Column(db.Integer(),default=0)
-    max_rounds = db.Column(db.Integer())
+    max_rounds = db.Column(db.Integer(),default = 100000000)
     
     edited_dual_id = db.Column(db.Integer())
 

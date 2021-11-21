@@ -233,11 +233,11 @@ def prepareListToSwiss(players,standings):
 
 
 
-def whoWins(opponent1, opponent2):
-    if opponent1.score_1 > opponent2.score_2:
-        return opponent1
+def whoWins(duel,reverse = False):
+    if duel.score_1 > duel.score_2 and not reverse:
+        return duel.opponent_1
     else:
-        return opponent2
+        return duel.opponent_2
 
 def checkIfScoresAreWritten(duels):
     for duel in duels:
@@ -250,3 +250,15 @@ def checkIfScoresAreDecided(duels):
         if duel.score_1 == duel.score_2:
             return False
     return True
+
+def checkIfEveryonePlayed(opponents,duels):
+    for duel in duels:
+        if duel.opponent_1 in opponents:
+            opponents.remove(duel.opponent_1)
+        if duel.opponent_2 in opponents:
+            opponents.remove(duel.opponent_2)
+    if len(opponents) == 0:
+        return []
+    else:
+        return opponents
+        

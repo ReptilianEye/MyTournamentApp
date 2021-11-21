@@ -75,8 +75,8 @@ def GenerateFirstRoundSwiss(T):
 
 
 def GenerateRoundSwiss(opponents, standings, duels):
-    PlayersList =  prepareListToSwiss(opponents, standings)
-    
+    PlayersList = prepareListToSwiss(opponents, standings)
+
     PlayersList = sorted(PlayersList, key=lambda opponent: (
         opponent.wins, opponent.draws), reverse=True)
 
@@ -105,20 +105,38 @@ def GenerateRoundSwiss(opponents, standings, duels):
     if len(PlayersList) != 0:
         i = 0
         while i < len(duels):
-            if PlayersList[i] != pauza and PlayersList[i+1] != pauza: 
-                Pary.append([PlayersList[i],PlayersList[i+1]])
-            i += 2            
+            if PlayersList[i] != pauza and PlayersList[i+1] != pauza:
+                Pary.append([PlayersList[i], PlayersList[i+1]])
+            i += 2
     return Pary
-    
 
-def GenerateRoundTree(duels, limit=10000):
+
+def GenerateFirstRoundTree(opponents, ileGraczy):
+    firstRound = []
+    i = 0
+    random.shuffle(opponents)
+    while i < ileGraczy:
+        firstRound.append([opponents[i], opponents[i+1]])
+        i += 2
+    return firstRound
+
+def GenerateRoundTreeWithRest(prevRound, rest):
+    winners = []
+    for duel in prevRound:
+        rest.append(whoWins(duel))
+    i = 0
+    while i < len(rest):
+        winners.append([rest[i], rest[i+1]])
+        i += 2
+    return winners
+
+
+def GenerateRoundTreeWithoutRest(prevRound):
     winners = []
     i = 0
-    while i < len(duels):
-        if len(winners) == limit:
-            return winners
-        firstInDual = whoWins(duels[i].opponent1, duels[i].opponent2)
-        secoundInDual = whoWins(duels[i + 1].opponent1, duels[i + 1].opponent2)
+    while i < len(prevRound):
+        firstInDual = whoWins(prevRound[i])
+        secoundInDual = whoWins(prevRound[i+1])
         winners.append([firstInDual, secoundInDual])
         i += 2
-    return winners  
+    return winners
