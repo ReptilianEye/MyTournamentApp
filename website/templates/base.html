@@ -51,6 +51,7 @@
                 <!-- <li>
           <a class="linkbutton" href="/public-schedule">Public tournament</a>
         </li> -->
+
             </div>
             <!-- <div class="nav-items">
             <li style="margin-left: 86%;"><a class="linkbutton" id="logout" href="/logout">Log out</a></li>
@@ -58,6 +59,7 @@
             {% if user.is_authenticated %}
 
             <ul id="account-btn">
+
                 <li>
                     <a href="#" id="account-btn-caption">Account</a>
                     <a href="#" id="account-btn-icon"><svg fill="none" viewBox="0 0 24 24" height="30" width="30" xmlns="http://www.w3.org/2000/svg">
@@ -91,99 +93,70 @@
                 </ul>
                 </li>
             </ul>
+        </nav>
 
-            <ul>
-                <li>
-                    <a href="#">Account</a>
-                    <ul>
-                        <h4 style="text-align: center" class="h4_main">
-                            {{user.first_name}}
-                        </h4>
-                        {% if user.is_admin %}
 
-                        <h4 style="text-align: center" class="h4_main_admin">
-                            Administrator
-                        </h4>
-
-                        {% endif %}
-                        <h4 style="text-align: center" class="h4_main_email">
-                            {{user.email}}
-                        </h4>
-                        <hr class="konto_hr" />
-                        <section>
-                            <a href="#" onClick="deleteUser({{user.id}})">
-                                <button style="float: left; margin-left: 10px; margin-bottom: 20px;" id="btn" class="btn-add-account_delete">Delete account</button>
-                            </a>
-                            <a href="/logout">
-                                <button style="float: right; margin-right: 10px; margin-bottom: 20px;" id="logout" class="btn-add-account">Log out</button>
-                            </a>
-                        </section>
-                </li>
-                </ul>
-                </li>
-            </ul>
-
-            {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %} {% if category == 'error' %}
-            <div class="alert-wrapper">
-                <div class="alert alert-danger alert-dismissable fade show" role="alert">
-                    <strong>Error!</strong> {{ message }}
-                    <button type="button" class="close" data-dismiss="alert">
+        {% endif %} {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %} {% if category == 'error' %}
+        <div class="alert-wrapper">
+            <div class="alert alert-danger alert-dismissable fade show" role="alert">
+                <strong>Error!</strong> {{ message }}
+                <button type="button" class="close" data-dismiss="alert">
         <span aria-hidden="true">&times;</span>
       </button>
-                </div>
             </div>
+        </div>
 
-            {% else %}
-            <div class="alert-wrapper">
-                <div class="alert alert-success alert-dismissable fade show" role="alert">
-                    {{ message }}
-                    <button type="button" class="close" data-dismiss="alert">
+        {% else %}
+        <div class="alert-wrapper">
+            <div class="alert alert-success alert-dismissable fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert">
         <span aria-hidden="true">&times;</span>
       </button>
-                </div>
             </div>
+        </div>
 
-            {% endif %} {% endfor %} {% endif %} {% endwith %}
+        {% endif %} {% endfor %} {% endif %} {% endwith %}
 
-            <div class="container" style="min-width: 100%;">{% block content %} {% endblock %}</div>
+        <div class="container" style="min-width: 100%;">{% block content %} {% endblock %}</div>
 
-            <script>
-                //Get the button
-                var mybutton = document.getElementById("myBtn");
+        <script>
+            //Get the button
+            var mybutton = document.getElementById("myBtn");
 
-                // When the user scrolls down 20px from the top of the document, show the button
-                window.onscroll = function() {
-                    scrollFunction();
-                };
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function() {
+                scrollFunction();
+            };
 
-                function scrollFunction() {
-                    if (
-                        document.body.scrollTop > 200 ||
-                        document.documentElement.scrollTop > 200
-                    ) {
-                        mybutton.style.display = "block";
-                    } else {
-                        mybutton.style.display = "none";
-                    }
+            function scrollFunction() {
+                if (
+                    document.body.scrollTop > 200 ||
+                    document.documentElement.scrollTop > 200
+                ) {
+                    mybutton.style.display = "block";
+                } else {
+                    mybutton.style.display = "none";
                 }
+            }
 
-                const preload = document.querySelector('.preload');
+            const preload = document.querySelector('.preload');
 
-                preload.classList.add('show-preloader');
-                window.addEventListener('load', () => {
-                    setTimeout(() => {
-                        preload.classList.remove('show-preloader');
-                    }, 900);
-                });
-            </script>
-
-
+            preload.classList.add('show-preloader');
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    preload.classList.remove('show-preloader');
+                }, 900);
+            });
+        </script>
 
 
-            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
-            <script type="text/javascript " src="{{ url_for( 'static', filename='index.js' ) }} "></script>
+
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
+        <script type="text/javascript " src="{{ url_for( 'static', filename='index.js' ) }} "></script>
 
     </section>
 </body>
