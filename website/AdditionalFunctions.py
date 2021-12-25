@@ -210,6 +210,16 @@ def getOpponentPoints(player_id, S):
             return S[i].match_points
     return 0
 
+def giveWinToBye(round):
+    for duel in round.duels:
+        if duel.opponent_1.name == 'Bye':
+            duel.score_2 = 1
+            duel.score_1 = 0
+            break
+        elif duel.opponent_2.name == 'Bye':
+            duel.score_2 = 0
+            duel.score_1 = 1
+            break
 
 def sprawdzankoGraczy(Wyniki,Gracz1,Gracz2):
     for el in Wyniki:
@@ -230,6 +240,25 @@ def prepareListToSwiss(players,standings):
             if result is None:
                 pointsTable.append(OpponentInStanding(player.id,draws=1))
     return pointsTable
+
+def prepareListsToSwiss(duels, standings):
+    bayed = []
+    visited = []
+    current_round_number = duels[0].round_number
+    for duel in duels:
+        if duel.round_number != current_round_number:
+            visited = []
+            current_round_number = duel.round_number
+        if duel.opponent_1 not in visited:
+            bayed.update({duel.opponent_1:False}) 
+            visited.append({duel.opponent_1})      
+        if duel.opponent_2 not in visited:
+            visited.append({duel.opponent_2})      
+            bayed.update({duel.opponent_2:False})
+
+
+
+
 
 
 

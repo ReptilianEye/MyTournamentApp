@@ -52,9 +52,9 @@ def generateStandings(duals):
     return Standings
 
 
-def GenerateFirstRoundSwiss(T):
+def GenerateFirstRoundSwiss(opponents,bye):
 
-    losowanie = copy.deepcopy(T)
+    losowanie = copy.deepcopy(opponents)
 
     random.shuffle(losowanie)
 
@@ -63,7 +63,7 @@ def GenerateFirstRoundSwiss(T):
     i = 0
     n = len(losowanie)
     if n % 2 == 1:
-        n -= 1
+        losowanie.append(bye)
     while i < n:
         para = []
         para.append(losowanie[i])

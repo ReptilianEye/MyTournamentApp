@@ -186,23 +186,23 @@ class RoundRobinRS(RoundStrategy):
 
 class SwissRS(RoundStrategy):
 
-    # def saveRound(self, round, round_number):
-    #     newRundId = self.createNewRound(round_number)
-    #     for duel in round:
-    #         db.session.add(Dual(tournament_id=self.tournament.id, round_id=newRundId, opponent1_id=duel[0].id,
-    #                             opponent2_id=duel[1].id, round_number=1))
-    #     db.session.commit()
+    def giveWinToBye(self):
+        current_round = Round.query.filter_by(tournament_id=self.tournament.id,number=self.tournament.current_round_number)
+        giveWinToBye(current_round)
+        self.saveRound()
 
     def generateFirstRound(self):
-        firstRound = GenerateFirstRoundSwiss(self.tournament.opponents)
+        self.tournament.max_rounds = len(self.tournament.opponents)//3
+        if len(self.tournament.opponents) % 2 == 1:      
+            self.tournament.max_rounds += 1
+            bye = Opponent(tournament_id=self.tournament.id, name='Bye')
+        firstRound = GenerateFirstRoundSwiss(self.tournament.opponents,bye)
         self.saveRound(firstRound)
-
+    
     def getNewRound(self):
         self.tournament.current_round_number += 1
-        db.session.commit()
-        if len(self.tournament.duals) == 0:
+        if self.tournament.current_round_number == 1:
             self.generateFirstRound()
-            self.tournament.max_rounds = 5
         else:
             if checkIfScoresAreWritten(self.tournament.duals):
                 newRound = GenerateRoundSwiss(
@@ -210,6 +210,8 @@ class SwissRS(RoundStrategy):
                 self.saveRound(newRound, self.tournament.current_round_number)
             else:
                 return "Your have to fill all scores"
+        self.giveWinToBye()
+        db.session.commit()
 
 
 class TreeRS(RoundStrategy):
