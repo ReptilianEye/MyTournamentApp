@@ -1,26 +1,26 @@
-{% extends "base.html" %} {% block title %}Update dual{% endblock %} {% block content %}
-<section class="update_dual_box_container container_update_dual">
+{% extends "base.html" %} {% block title %}Update duel{% endblock %} {% block content %}
+<section class="update_duel_box_container container_update_duel">
     <br>
 
     <section class="badge" align="center">
         <div class="btn-danger_nav_list_group_schedule_nick_one" style="display: inline-block">
             <h4>
-                {{dual.opponent_1.name}}
+                {{duel.opponent_1.name}}
                 <br />
             </h4>
         </div>
 
         <div class="btn-danger_nav_list_group_schedule_point" style="display: inline-block">
-            {% if dual.score_1 is none or dual.score_1 is none %}
+            {% if duel.score_1 is none or duel.score_1 is none %}
             <h4 style="color: #a03636; font-weight: 700;"> 0 : 0 </h4>
             {% else %}
-            <h4 style="color: #5aa0ba; font-weight: 700;">{{dual.score_1}} : {{dual.score_2}}</h4>
+            <h4 style="color: #5aa0ba; font-weight: 700;">{{duel.score_1}} : {{duel.score_2}}</h4>
             {% endif %}
 
         </div>
 
         <div class="btn-danger_nav_list_group_schedule_nick_two" style="display: inline-block">
-            <h4>{{dual.opponent_2.name}}
+            <h4>{{duel.opponent_2.name}}
                 <br />
             </h4>
 
@@ -32,13 +32,13 @@
 
             <div align="center">
                 <ol class="badge">
-                    <!-- <br> {% if dual.score_1 is none or dual.score_1 is none %} {% else %}
-                    <h3 style="color: #5AA0BA;" align="center">{{dual.score_1}}:{{dual.score_2}}</h3>
+                    <!-- <br> {% if duel.score_1 is none or duel.score_1 is none %} {% else %}
+                    <h3 style="color: #5AA0BA;" align="center">{{duel.score_1}}:{{duel.score_2}}</h3>
                     {% endif %} -->
                     <br>
 
-                    <input class="type_score" name="score1" type="number" placeholder=" {{dual.opponent_1.name}}" />
-                    <input class="type_score" name="score2" type="number" placeholder=" {{dual.opponent_2.name}}" />
+                    <input class="type_score" name="score1" type="number" placeholder=" {{duel.opponent_1.name}}" />
+                    <input class="type_score" name="score2" type="number" placeholder=" {{duel.opponent_2.name}}" />
                 </ol>
             </div>
             <br />
@@ -47,7 +47,7 @@
     <div align="center">
         <button style="background-color: #3a5c39;" type="submit" class="btn-danger_nav_schedule">Save</button>
 
-        <a href="/reset-dual">
+        <a href="/reset-duel">
             <button style="background-color: #a03636;" type="button" class="btn-danger_nav_schedule">Reset</button>
         </a>
         <button onclick="goBack()" style="background-color: #5AA0BA;" type="button" class="btn-danger_nav_schedule">Back</button>

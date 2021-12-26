@@ -1,6 +1,6 @@
 from .TournamentsFunctions import *
 from .import db
-from .models import Opponent, User, Tournament, Dual, Opponent, Standing, Round
+from .models import Opponent, User, Tournament, Duel, Opponent, Standing, Round
 import math
 from datetime import datetime
 
@@ -24,16 +24,16 @@ class TournamentController():
         db.session.add(
             Opponent(tournament_id=self.tournament.id, name=opponent))
 
-    def ChangeEditedDual(self, dual_id):
-        self.tournament.edited_dual_id = dual_id
+    def ChangeEditedDuel(self, duel_id):
+        self.tournament.edited_duel_id = duel_id
 
-    def GetChangedDual(self):
-        return Dual.query.filter_by(id=self.tournament.edited_dual_id).first()
+    def GetChangedDuel(self):
+        return Duel.query.filter_by(id=self.tournament.edited_duel_id).first()
 
     def UpdateScores(self, score1, score2):
-        dual = Dual.query.filter_by(id=self.tournament.edited_dual_id).first()
-        dual.score1 = score1
-        dual.score2 = score2
+        duel = Duel.query.filter_by(id=self.tournament.edited_duel_id).first()
+        duel.score1 = score1
+        duel.score2 = score2
 
     def EditTournament(self, name, date, location, discipline, status, movielink):
         if name:
@@ -58,8 +58,8 @@ class TournamentController():
         for round in self.tournament.rounds:
             db.session.delete(round)
 
-        for dual in self.tournament.duals:
-            db.session.delete(dual)
+        for duel in self.tournament.duels:
+            db.session.delete(duel)
 
         for opponent in self.tournament.opponents:
             db.session.delete(opponent)
@@ -80,7 +80,7 @@ class TournamentController():
             return TreeRS(self.tournament).getNewRound()
 
     def PrepareStanding(self):
-        standing = generateStandings(self.tournament.duals)
+        standing = generateStandings(self.tournament.duels)
         if self.tournament.discipline == self.disciplines[0]:
             Tournament = ChessTournament()
         elif self.tournament.discipline == self.disciplines[1]:
@@ -150,7 +150,7 @@ class RoundStrategy():
     def saveRound(self, round):
         newRundId = self.createNewRound(self.tournament.current_round_number)
         for duel in round:
-            db.session.add(Dual(tournament_id=self.tournament.id, round_id=newRundId, opponent1_id=duel[0].id,
+            db.session.add(Duel(tournament_id=self.tournament.id, round_id=newRundId, opponent1_id=duel[0].id,
                                 opponent2_id=duel[1].id, round_number=self.tournament.current_round_number))
         db.session.commit()
 
@@ -171,12 +171,12 @@ class RoundRobinRS(RoundStrategy):
                 opponent2 = Opponent.query.filter_by(
                     name=line[1], tournament_id=self.tournament.id).first()
 
-                db.session.add(Dual(tournament_id=self.tournament.id, round_id=newRundId, opponent1_id=opponent1.id,
+                db.session.add(Duel(tournament_id=self.tournament.id, round_id=newRundId, opponent1_id=opponent1.id,
                                     opponent2_id=opponent2.id, round_number=round_number))
         db.session.commit()
 
     def getNewRound(self):
-        if len(self.tournament.duals) == 0:
+        if len(self.tournament.duels) == 0:
             self.__generateSchedule()
             self.tournament.max_rounds = len(self.tournament.rounds)
 
@@ -187,7 +187,7 @@ class RoundRobinRS(RoundStrategy):
 class SwissRS(RoundStrategy):
 
     def giveWinToBye(self):
-        current_round = Round.query.filter_by(tournament_id=self.tournament.id,number=self.tournament.current_round_number)
+        current_round = Round.query.filter_by(tournament_id=self.tournament.id,number=self.tournament.current_round_number).first()
         giveWinToBye(current_round)
         self.saveRound()
 
@@ -195,7 +195,7 @@ class SwissRS(RoundStrategy):
         self.tournament.max_rounds = len(self.tournament.opponents)//3
         if len(self.tournament.opponents) % 2 == 1:      
             self.tournament.max_rounds += 1
-            bye = Opponent(tournament_id=self.tournament.id, name='Bye')
+        bye = Opponent(tournament_id=self.tournament.id, name='Bye')
         firstRound = GenerateFirstRoundSwiss(self.tournament.opponents,bye)
         self.saveRound(firstRound)
     
@@ -204,9 +204,9 @@ class SwissRS(RoundStrategy):
         if self.tournament.current_round_number == 1:
             self.generateFirstRound()
         else:
-            if checkIfScoresAreWritten(self.tournament.duals):
+            if checkIfScoresAreWritten(self.tournament.duels):
                 newRound = GenerateRoundSwiss(
-                    self.tournament.opponents, self.tournament.standings, self.tournament.duals)
+                    self.tournament.opponents, self.tournament.standings, self.tournament.duels)
                 self.saveRound(newRound, self.tournament.current_round_number)
             else:
                 return "Your have to fill all scores"
@@ -228,16 +228,16 @@ class TreeRS(RoundStrategy):
         return GenerateFirstRoundTree(opponents, liczbaGraczyWPierwszej)
 
     def getNewRound(self):
-        if len(self.tournament.duals) == 0:
+        if len(self.tournament.duels) == 0:
             newRound = self.generateFirstRound()
-        elif checkIfScoresAreWritten(self.tournament.duals):
-            if checkIfScoresAreDecided(self.tournament.duals):
-                prevRound = Dual.query.filter_by(
+        elif checkIfScoresAreWritten(self.tournament.duels):
+            if checkIfScoresAreDecided(self.tournament.duels):
+                prevRound = Duel.query.filter_by(
                     round_number=self.tournament.current_round_number, tournament_id=self.tournament.id).all()
                 rest = []
                 if self.tournament.current_round_number == 1:
                     rest = checkIfEveryonePlayed(
-                        self.tournament.opponents, self.tournament.duals)
+                        self.tournament.opponents, self.tournament.duels)
                 if len(rest) != 0:
                     newRound = GenerateRoundTreeWithRest(prevRound, rest)
                 else:
