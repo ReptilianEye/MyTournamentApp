@@ -11,12 +11,12 @@ function deleteUser(userId) {
   });
 }
 
-function showDual(dualId) {
-  fetch(window.location.origin + "/get-dual-id", {
+function showDuel(duelId) {
+  fetch(window.location.origin + "/get-duel-id", {
     method: "POST",
-    body: JSON.stringify({ dualId: dualId }),
+    body: JSON.stringify({ duelId: duelId }),
   }).then((_res) => {
-    window.location.href = window.location.origin + "/update-dual";
+    window.location.href = window.location.origin + "/update-duel";
   });
 }
 

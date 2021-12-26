@@ -25,36 +25,36 @@ def Generate2Teams(ListaZawodnikow):
     return Terminarz
 
 
-def generateStandings(duals):
+def generateStandings(duels):
     Standings = []
-    for dual in duals:
-        if not (dual.score_1 is None and dual.score_2 is None):
-            if findOpponentInList(dual.opponent1_id, Standings) == None:
-                Standings.append(OpponentInStanding(dual.opponent1_id))
-            if findOpponentInList(dual.opponent2_id, Standings) == None:
-                Standings.append(OpponentInStanding(dual.opponent2_id))
-            if dual.score_1 > dual.score_2:
+    for duel in duels:
+        if not (duel.score_1 is None and duel.score_2 is None):
+            if findOpponentInList(duel.opponent1_id, Standings) == None:
+                Standings.append(OpponentInStanding(duel.opponent1_id))
+            if findOpponentInList(duel.opponent2_id, Standings) == None:
+                Standings.append(OpponentInStanding(duel.opponent2_id))
+            if duel.score_1 > duel.score_2:
                 Standings[findOpponentInList(
-                    dual.opponent1_id, Standings)].wins += 1
+                    duel.opponent1_id, Standings)].wins += 1
                 Standings[findOpponentInList(
-                    dual.opponent2_id, Standings)].loses += 1
-            elif dual.score_1 < dual.score_2:
+                    duel.opponent2_id, Standings)].loses += 1
+            elif duel.score_1 < duel.score_2:
                 Standings[findOpponentInList(
-                    dual.opponent1_id, Standings)].loses += 1
+                    duel.opponent1_id, Standings)].loses += 1
                 Standings[findOpponentInList(
-                    dual.opponent2_id, Standings)].wins += 1
+                    duel.opponent2_id, Standings)].wins += 1
             else:
                 Standings[findOpponentInList(
-                    dual.opponent1_id, Standings)].draws += 1
+                    duel.opponent1_id, Standings)].draws += 1
                 Standings[findOpponentInList(
-                    dual.opponent2_id, Standings)].draws += 1
+                    duel.opponent2_id, Standings)].draws += 1
     #sorted(Standings,key=lambda team: team.wins, reverse=True)
     return Standings
 
 
-def GenerateFirstRoundSwiss(T):
+def GenerateFirstRoundSwiss(opponents,bye):
 
-    losowanie = copy.deepcopy(T)
+    losowanie = copy.deepcopy(opponents)
 
     random.shuffle(losowanie)
 
@@ -63,7 +63,7 @@ def GenerateFirstRoundSwiss(T):
     i = 0
     n = len(losowanie)
     if n % 2 == 1:
-        n -= 1
+        losowanie.append(bye)
     while i < n:
         para = []
         para.append(losowanie[i])
@@ -135,8 +135,8 @@ def GenerateRoundTreeWithoutRest(prevRound):
     winners = []
     i = 0
     while i < len(prevRound):
-        firstInDual = whoWins(prevRound[i])
-        secoundInDual = whoWins(prevRound[i+1])
-        winners.append([firstInDual, secoundInDual])
+        firstInDuel = whoWins(prevRound[i])
+        secoundInDuel = whoWins(prevRound[i+1])
+        winners.append([firstInDuel, secoundInDuel])
         i += 2
     return winners

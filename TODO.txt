@@ -40,7 +40,6 @@ dorobic strony do edycji tournamentu (dodac nowych graczy, zmienic ustawienia tu
 
 ----------------------------------------
 /update dual:
-dual -> rename duel
 
 tytul ten sam co wczesniej w tym samym miejscu (link)
 centracja nazw zawodnikow i pol do wpisywania wzgledem kolumny 

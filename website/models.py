@@ -30,12 +30,12 @@ class Tournament(db.Model):
     current_round_number = db.Column(db.Integer(),default=0)
     max_rounds = db.Column(db.Integer(),default = 100000000)
     
-    edited_dual_id = db.Column(db.Integer())
+    edited_duel_id = db.Column(db.Integer())
 
 
 
     rounds = db.relationship('Round')
-    duals = db.relationship('Dual')
+    duels = db.relationship('Duel')
     opponents = db.relationship('Opponent')
     standings = db.relationship('Standing')
 
@@ -67,9 +67,9 @@ class Round(db.Model):
     tournament_id = db.Column(db.Integer,db.ForeignKey('tournament.id'))
     number = db.Column(db.Integer)
     
-    duals = db.relationship('Dual')
+    duels = db.relationship('Duel')
     
-class Dual(db.Model):
+class Duel(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     tournament_id = db.Column(db.Integer,db.ForeignKey('tournament.id'))
     round_id = db.Column(db.Integer,db.ForeignKey('round.id'))

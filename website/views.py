@@ -6,7 +6,7 @@ from flask_login import login_user, login_required, logout_user, current_user
 from sqlalchemy.orm import query, session
 from sqlalchemy.sql.expression import true
 from werkzeug.utils import redirect
-from .models import Opponent, User, Tournament, Dual, Opponent, Standing
+from .models import Opponent, User, Tournament, Duel, Opponent, Standing
 from .import db
 import json
 from .TournamentsFunctions import *
@@ -157,27 +157,27 @@ def schedule():
 
     return render_template("schedule.html", user=current_user, tournament=tournamentDTO.tournament)
 
-@views.route('/get-dual-id',methods=['POST', 'GET'])
+@views.route('/get-duel-id',methods=['POST', 'GET'])
 @login_required
-def change_current_dual():
+def change_current_duel():
     tournamentDTO = TournamentController()
     tournamentDTO.Load(current_user.current_tournament_id)
 
-    dualId = json.loads(request.data)
-    dualId = dualId['dualId']
+    duelId = json.loads(request.data)
+    duelId = duelId['duelId']
     
-    if dualId:
-        tournamentDTO.ChangeEditedDual(dualId)
+    if duelId:
+        tournamentDTO.ChangeEditedDuel(duelId)
         tournamentDTO.Save()
     
     return jsonify({})
     
-@views.route('update-dual', methods=['POST', 'GET'])
+@views.route('update-duel', methods=['POST', 'GET'])
 @login_required
-def update_dual():
+def update_duel():
     tournamentDTO = TournamentController()
     tournamentDTO.Load(current_user.current_tournament_id)
-    dual = tournamentDTO.GetChangedDual()
+    duel = tournamentDTO.GetChangedDuel()
 
     if request.method == 'POST':
         score_1 = request.form.get('score1')
@@ -186,23 +186,23 @@ def update_dual():
             flash('Score cannot be empty',category='error')
  
         else:
-            dual.score_1, dual.score_2 = int(score_1),int(score_2)
+            duel.score_1, duel.score_2 = int(score_1),int(score_2)
             tournamentDTO.Save()
             tournamentDTO.DeleteStanding()
             tournamentDTO.PrepareStanding()
             tournamentDTO.Save()
             return redirect(url_for("views.schedule"))
-    return render_template("update_dual.html", user=current_user,dual=dual)
+    return render_template("update_duel.html", user=current_user,duel=duel)
 
-@views.route('reset-dual', methods=['POST', 'GET'])
+@views.route('reset-duel', methods=['POST', 'GET'])
 @login_required
-def reset_dual():
+def reset_duel():
     tournamentDTO = TournamentController()
     tournamentDTO.Load(current_user.current_tournament_id)
-    dual = tournamentDTO.GetChangedDual()
+    duel = tournamentDTO.GetChangedDuel()
 
-    dual.score_1 = None
-    dual.score_2 = None
+    duel.score_1 = None
+    duel.score_2 = None
 
     tournamentDTO.Save()
     tournamentDTO.DeleteStanding()

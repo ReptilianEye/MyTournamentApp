@@ -13,7 +13,7 @@
         <=tournament.current_round_number %} <h4 align="center" class="h4_round">Runda: {{round.number}}</h4>
 
             <ol class="list-group list-group-flush" id="pary">
-                {% for dual in round.duals %}
+                {% for duel in round.duels %}
                 <div align="center">
                     <li>
                         <button disabled class="btn_schedule_list badge">
@@ -22,7 +22,7 @@
               align="left"
               style="display: inline-block"
             >
-              <h4>{{dual.opponent_1.name}}</h4>
+              <h4>{{duel.opponent_1.name}}</h4>
             </div>
 
             <!-- wynik -->
@@ -30,24 +30,24 @@
               class="btn-danger_nav_list_group_schedule_point"
               style="display: inline-block"
             >
-              {% if dual.score_1 is none or dual.score_1 is none %}
+              {% if duel.score_1 is none or duel.score_1 is none %}
               <h4 style="color: #a03636; font-weight: 700">0 - 0</h4>
               {% else %}
               <h4 style="color: #5aa0ba; font-weight: 700">
-                {{dual.score_1}}:{{dual.score_2}}
+                {{duel.score_1}}:{{duel.score_2}}
               </h4>
               </div>
  
               <div class="btn-danger_nav_list_group_schedule_point" style="display: inline-block">
-                {% if dual.score_1 is none or dual.score_1 is none %} 
+                {% if duel.score_1 is none or duel.score_1 is none %} 
                 <h4 style="color: #a03636; font-weight: 700;"> 0 - 0 </h4>
                 {% else %}
-                <h4 style="color: #5aa0ba; font-weight: 700;">{{dual.score_1}}:{{dual.score_2}}</h4>
+                <h4 style="color: #5aa0ba; font-weight: 700;">{{duel.score_1}}:{{duel.score_2}}</h4>
                 {% endif %}
 
               </div>
               <div class="btn-danger_nav_list_group_schedule_nick_two" align="right" style="display: inline-block">
-                <h4>{{dual.opponent_2.name}}
+                <h4>{{duel.opponent_2.name}}
                 <br />
                 </h4>
 
