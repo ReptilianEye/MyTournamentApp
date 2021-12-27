@@ -22,7 +22,13 @@ class TournamentController():
         db.session.commit()
 
     def SignToTournament(self,user):
-        db.session.add(Opponent(tournament_id=self.tournament.id, name=user.name, email=user.email))
+        query = Tournament.query.filter_by(id=self.tournament.id,user_id=user.id)
+        if query is None:
+            db.session.add(Opponent(tournament_id=self.tournament.id, name=user.name, email=user.email))
+            db.session.add(Tournament(tournament_id=self.tournament.id,))
+            return True
+        else:
+            return False
 
     def UploadPlayer(self, opponent):
         db.session.add(

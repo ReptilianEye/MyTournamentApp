@@ -134,12 +134,12 @@ def SignToTournament():
     tournamentDTO.Load(current_user.current_tournament_id)
 
     result = tournamentDTO.SignToTournament(current_user)
-    if result == 'fail':
-        flash("You have already signed to that tournament")
-        return redirect(url_for("views.public"))
-    else:
+    if result:
         flash("You have sucessfully signed to the tournament")
         return redirect(url_for("views.public_schedule"))
+    else:
+        flash("You have already signed to that tournament")
+        return redirect(url_for("views.public"))
         
 @views.route('generate-new-round', methods=['GET', 'POST'])
 def generateNewRound():
