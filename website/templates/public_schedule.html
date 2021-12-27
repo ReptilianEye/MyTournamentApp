@@ -9,6 +9,11 @@
                 <button id="btn" type="button" class="btn-add">Standings</button>
             </a>
         </div>
+        <div style="margin-right: 30px" align="right">
+          <a href="/public-standings">
+              <button id="btn" type="button" class="btn-add">Sign for a tournament</button>
+          </a>
+      </div>
         {% for round in tournament.rounds %} {% if round.number
         <=tournament.current_round_number %} <h4 align="center" class="h4_round">Runda: {{round.number}}</h4>
 
@@ -37,7 +42,7 @@
                 {{duel.score_1}}:{{duel.score_2}}
               </h4>
               </div>
- 
+              {% endif %}
               <div class="btn-danger_nav_list_group_schedule_point" style="display: inline-block">
                 {% if duel.score_1 is none or duel.score_1 is none %} 
                 <h4 style="color: #a03636; font-weight: 700;"> 0 - 0 </h4>

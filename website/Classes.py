@@ -14,15 +14,19 @@ class TournamentController():
         db.session.commit()
         return self.tournament.id
 
+
     def Load(self, id):
         self.tournament = Tournament.query.get(id)
 
     def Save(self):  # self is always required as a argument
         db.session.commit()
 
+    def SignToTournament(self,user):
+        db.session.add(Opponent(tournament_id=self.tournament.id, name=user.name, email=user.email))
+
     def UploadPlayer(self, opponent):
         db.session.add(
-            Opponent(tournament_id=self.tournament.id, name=opponent))
+            Opponent(tournament_id=self.tournament.id, name=opponent, email=' - '))
 
     def ChangeEditedDuel(self, duel_id):
         self.tournament.edited_duel_id = duel_id
@@ -37,21 +41,20 @@ class TournamentController():
 
     def EditTournament(self, name, date, location, discipline, status, movielink):
         if name:
-            self.tournament.name=name
+            self.tournament.name = name
         if date:
             y, m, d = date.split('-')
             date = datetime(int(y), int(m), int(d))
-            self.tournament.date=date
+            self.tournament.date = date
         if location:
-            self.tournament.location=location
+            self.tournament.location = location
         if discipline:
-            self.tournament.discipline=discipline
+            self.tournament.discipline = discipline
         if status:
-            self.tournament.status=status
+            self.tournament.status = status
         if movielink:
-            self.tournament.movielink=movielink
+            self.tournament.movielink = movielink
         self.Save()
-
 
     def DeleteTournament(self):
 
@@ -187,18 +190,19 @@ class RoundRobinRS(RoundStrategy):
 class SwissRS(RoundStrategy):
 
     def giveWinToBye(self):
-        current_round = Round.query.filter_by(tournament_id=self.tournament.id,number=self.tournament.current_round_number).first()
+        current_round = Round.query.filter_by(
+            tournament_id=self.tournament.id, number=self.tournament.current_round_number).first()
         giveWinToBye(current_round)
         self.saveRound()
 
     def generateFirstRound(self):
         self.tournament.max_rounds = len(self.tournament.opponents)//3
-        if len(self.tournament.opponents) % 2 == 1:      
+        if len(self.tournament.opponents) % 2 == 1:
             self.tournament.max_rounds += 1
         bye = Opponent(tournament_id=self.tournament.id, name='Bye')
-        firstRound = GenerateFirstRoundSwiss(self.tournament.opponents,bye)
+        firstRound = GenerateFirstRoundSwiss(self.tournament.opponents, bye)
         self.saveRound(firstRound)
-    
+
     def getNewRound(self):
         self.tournament.current_round_number += 1
         if self.tournament.current_round_number == 1:
