@@ -22,10 +22,11 @@ class TournamentController():
         db.session.commit()
 
     def SignToTournament(self,user):
-        query = Tournament.query.filter_by(id=self.tournament.id,user_id=user.id)
+        query = Tournament.query.filter_by(id=self.tournament.id,user_id=user.id).first()
         if query is None:
-            db.session.add(Opponent(tournament_id=self.tournament.id, name=user.name, email=user.email))
-            db.session.add(Tournament(tournament_id=self.tournament.id,))
+            db.session.add(Opponent(tournament_id=self.tournament.id, name=user.first_name, email=user.email))
+            # db.session.add(Tournament(id=self.tournament.id,))
+            self.Save()
             return True
         else:
             return False

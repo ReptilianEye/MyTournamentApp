@@ -2,6 +2,11 @@
 <section class="tournaments_box_container container_tournaments">
     <br />
     <h3 align="center">Your Tournaments</h3>
+    <a href="/tournaments-signed">
+        <button id="btn" style="background-color: rgb(55, 134, 81)" type="button" class="btn-danger_nav_schedule">
+          Tournaments you signed for
+        </button>
+      </a>
     {% if user.tournaments|length > 0 %}
     <table style="margin: auto">
         <tbody style="display: flex; margin-top: 15px">

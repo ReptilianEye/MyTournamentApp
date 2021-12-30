@@ -4,7 +4,7 @@ from flask.helpers import url_for
 from flask.json import jsonify
 from flask_login import login_user, login_required, logout_user, current_user
 from sqlalchemy.orm import query, session
-from sqlalchemy.sql.expression import true
+# from sqlalchemy.sql.expression import true
 from werkzeug.utils import redirect
 from .models import Opponent, User, Tournament, Duel, Opponent, Standing
 from .import db
@@ -50,6 +50,22 @@ def tournaments():
     else:
         return render_template("login.html", user=current_user)
 
+@views.route('/tournaments-signed', methods=['GET', 'POST'])
+# @login_required
+def tournamentsSigned():
+    if current_user.is_authenticated:
+        tournaments = Tournament.query.filter_by(is_public=True).all()
+        i = 0
+        n = len(tournaments)
+        while i < n:
+            if checkIfUserInTournaments(current_user,tournaments[i]):
+                tournaments.remove(tournaments[i])
+                n-=1
+            else:
+                i += 1    
+        return render_template("my_public_tournaments.html", user=current_user,tournaments=tournaments)
+    else:
+        return render_template("login.html", user=current_user)
 
 @views.route('/new-tournament', methods=['GET', 'POST'])
 @login_required
@@ -128,7 +144,7 @@ def getPlayers():
             flash('Participant has been added! :)', category='success')
     return render_template("new_players.html", user=current_user, tournament=tournamentDTO.tournament)
 
-@views.route('sign-to-tournament', methods=['GET', 'POST'])
+@views.route('/sign-to-tournament', methods=['GET', 'POST'])
 def SignToTournament():
     tournamentDTO = TournamentController()
     tournamentDTO.Load(current_user.current_tournament_id)
@@ -139,9 +155,9 @@ def SignToTournament():
         return redirect(url_for("views.public_schedule"))
     else:
         flash("You have already signed to that tournament")
-        return redirect(url_for("views.public"))
+        return redirect(url_for("views.public_schedule"))
         
-@views.route('generate-new-round', methods=['GET', 'POST'])
+@views.route('/generate-new-round', methods=['GET', 'POST'])
 def generateNewRound():
     tournamentDTO = TournamentController()
     tournamentDTO.Load(current_user.current_tournament_id)

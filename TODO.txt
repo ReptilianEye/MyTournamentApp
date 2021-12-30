@@ -62,3 +62,6 @@ usunac 'back'
 
 
 3. algorytmy
+
+
+dodac wypisywanie sie z turnieju
