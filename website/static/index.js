@@ -48,6 +48,14 @@ function showPublicTournament(tournamentId) {
         window.location.href = window.location.origin + "/public-schedule";
     });
 }
+function showMyPublicTournament(tournamentId) {
+  fetch(window.location.origin + '/set-tournament-id', {
+      method: 'POST',
+      body: JSON.stringify({ tournamentId: tournamentId }),
+  }).then((_res) => {
+      window.location.href = window.location.origin + "/joined-tournament";
+  });
+}
 
 function deleteTournament(tournamentId) {
   fetch(window.location.origin + "/delete-tournament", {

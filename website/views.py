@@ -50,9 +50,9 @@ def tournaments():
     else:
         return render_template("login.html", user=current_user)
 
-@views.route('/tournaments-signed', methods=['GET', 'POST'])
-# @login_required
-def tournamentsSigned():
+@views.route('/joined-tournaments', methods=['GET', 'POST'])
+@login_required
+def joinedTournaments():
     if current_user.is_authenticated:
         tournaments = Tournament.query.filter_by(is_public=True).all()
         i = 0
@@ -66,6 +66,14 @@ def tournamentsSigned():
         return render_template("my_public_tournaments.html", user=current_user,tournaments=tournaments)
     else:
         return render_template("login.html", user=current_user)
+
+@views.route('/joined-tournament', methods=['GET', 'POST'])
+def joinedTournament():
+    if current_user.is_authenticated:
+        tournamentDTO = TournamentController()
+        tournamentDTO.Load(current_user.current_tournament_id)  
+        return render_template("my_public_schedule.html",user=current_user,tournament=tournamentDTO.tournament)
+
 
 @views.route('/new-tournament', methods=['GET', 'POST'])
 @login_required
@@ -144,17 +152,17 @@ def getPlayers():
             flash('Participant has been added! :)', category='success')
     return render_template("new_players.html", user=current_user, tournament=tournamentDTO.tournament)
 
-@views.route('/sign-to-tournament', methods=['GET', 'POST'])
-def SignToTournament():
+@views.route('/join-tournament', methods=['GET', 'POST'])
+def JoinTournament():
     tournamentDTO = TournamentController()
     tournamentDTO.Load(current_user.current_tournament_id)
 
-    result = tournamentDTO.SignToTournament(current_user)
+    result = tournamentDTO.JoinToTournament(current_user)
     if result:
-        flash("You have sucessfully signed to the tournament")
+        flash("You have sucessfully joined the tournament")
         return redirect(url_for("views.public_schedule"))
     else:
-        flash("You have already signed to that tournament")
+        flash("You have already joined that tournament")
         return redirect(url_for("views.public_schedule"))
         
 @views.route('/generate-new-round', methods=['GET', 'POST'])
@@ -297,6 +305,15 @@ def show_public_standings():
     return render_template("standing.html", user=current_user, standings=standings, tournament=tournamentDTO)
 
 
+@views.route('/quit-tournament', methods=['POST', 'GET'])
+@login_required
+def quit_tournament():
+    tournamentDTO = TournamentController()
+    tournamentDTO.Load(current_user.current_tournament_id)
+    tournamentDTO.Quit(current_user)
+    return redirect(url_for("views.joinedTournaments"))
+
+
 @views.route('/delete-tournament', methods=['POST', 'GET'])
 @login_required
 def delete_tournament():
@@ -312,7 +329,7 @@ def delete_tournament():
             tournamentDTO.DeleteTournament()
             tournamentDTO.Save()
 
-    # TODO tournament has been deleted
+    flash('Tournament has been deleted',category='success')
 
     return jsonify({})
 
