@@ -21,7 +21,7 @@ class TournamentController():
     def Save(self):  # self is always required as a argument
         db.session.commit()
 
-    def JoinToTournament(self,user):
+    def JoinToTheTournament(self,user):
         query = Tournament.query.filter_by(id=self.tournament.id,user_id=user.id).first()
         if query is None:
             db.session.add(Opponent(tournament_id=self.tournament.id, name=user.first_name, email=user.email))
@@ -61,6 +61,10 @@ class TournamentController():
             self.tournament.status = status
         if movielink:
             self.tournament.movielink = movielink
+        self.Save()
+
+    def Publish(self):
+        self.tournament.is_public = True
         self.Save()
 
     def Quit(self,user):

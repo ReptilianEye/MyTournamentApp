@@ -24,7 +24,6 @@ def login():
                 flash('Incorrect password, try again.', category='error')
         else:
             flash('Email not recognized', category='error')
-
     return render_template("login.html", user=current_user)
 
 
@@ -32,7 +31,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('auth.login'))
+    return redirect(url_for('views.home'))
 
 
 @auth.route("sign-up", methods=['GET', 'POST'])

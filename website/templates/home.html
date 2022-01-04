@@ -13,12 +13,22 @@
     <br />
     <form method="POST">
         <div align="center">
+            {% if user.is_authenticated %}
+
             <a href="/tournaments">
                 <button id="btn" type="button" class="btn-danger_nav_generate">
-          Your tournaments
-        </button>
+                    Your Tournaments
+                </button>
             </a>
+            {% else %}
+            <a href="/public-tournaments">
+                <button id="btn" type="button" class="btn-danger_nav_generate">
+                    Live Tournaments
+                </button>
+            </a>
+            {% endif %}
         </div>
+
     </form>
 </section>
 

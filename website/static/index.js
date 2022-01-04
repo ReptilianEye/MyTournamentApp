@@ -41,7 +41,7 @@ function editTournament(tournamentId) {
 }
 
 function showPublicTournament(tournamentId) {
-    fetch(window.location.origin + '/set-tournament-id', {
+    fetch(window.location.origin + '/set-temp-tournament-id', {
         method: 'POST',
         body: JSON.stringify({ tournamentId: tournamentId }),
     }).then((_res) => {

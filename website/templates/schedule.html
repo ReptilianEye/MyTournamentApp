@@ -8,7 +8,7 @@
           <h3> {{opponent.name}} {{opponent.email}} </h3>
         {% endfor %}
         <div align="center" style="margin-top: 20px;">
-          <a href="/generate-new-round">
+          <a href="/start-tournament">
             <button id="btn" style="background-color: rgb(55, 134, 81)" type="button" class="btn-danger_nav_schedule">
               Start Tournament
             </button>
@@ -85,7 +85,7 @@
         </a>
         {% endif %}
         {% if user.is_admin %}
-        <a href="/publish-schedule ">
+        <a href="/publish-tournament">
             <button id="btn" style="background-color: rgb(55, 65, 95) " type="button " class="btn-danger_nav_schedule">
         Publish
       </button>

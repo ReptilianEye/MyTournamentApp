@@ -89,10 +89,22 @@
                                 <button style="float: right; margin-right: 10px; margin-bottom: 20px;" id="logout" class="btn-add-account">Log out</button>
                             </a>
                         </section>
+                    </ul>
                 </li>
                 </ul>
                 </li>
             </ul>
+            {% else %}
+            <li>
+                <a href="/sign-up">
+                    <button style="float: right; margin: top 20px right 10px bottom 20px;" id="logout" class="btn-add-account">Sign Up</button>
+                </a>
+                <a href="/login">
+                    <button style="float: right; margin: top 20px right 10px bottom 20px;" id="logout" class="btn-add-account">Login</button>
+                </a>
+                
+            </li>
+            
             {% endif %}
         </nav>
 
@@ -141,7 +153,7 @@
                 }
             }
 
-            const preload = document.querySelector('.preload');
+/*            const preload = document.querySelector('.preload');
 
             preload.classList.add('show-preloader');
             window.addEventListener('load', () => {
@@ -149,6 +161,7 @@
                     preload.classList.remove('show-preloader');
                 }, 900);
             });
+            */
         </script>
 
 
