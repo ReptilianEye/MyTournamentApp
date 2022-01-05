@@ -31,10 +31,10 @@ class TournamentController():
         db.session.commit()
 
     def JoinToTheTournament(self,user):
-        query = Tournament.query.filter_by(id=self.tournament.id,user_id=user.id).first()
-        if query is None:
+        # query = Tournament.query.filter_by(id=self.tournament.id,user_id=user.id).first()
+        # if query is None:
+        if not checkIfUserInTournaments(user,self.tournament):  
             db.session.add(Opponent(tournament_id=self.tournament.id, name=user.first_name, email=user.email))
-            # db.session.add(Tournament(id=self.tournament.id,))
             self.Save()
             return True
         else:

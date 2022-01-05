@@ -5,9 +5,14 @@
     <h3 align="center">{{tournament.name}}</h3>
       
     {% if tournament.status == 'upcoming' %}
-        {% for opponent in tournament.opponents %}
-          <h3> {{opponent.name}} {{opponent.email}} </h3>
-        {% endfor %}
+    {% for opponent in tournament.opponents %}
+    <li align="center" class="list-group-item">
+        {{opponent.name}} {{opponent.email}}
+        <button type="button" class="close" onClick="deletePlayer({{opponent.id}})">
+    <span aria-hidden="true">&times;</span>
+  </button>
+    </li>
+    {% endfor %}
         <div align="center" style="margin-top: 20px;">
           <a href="/start-tournament">
             <button id="btn" style="background-color: rgb(55, 134, 81)" type="button" class="btn-danger_nav_schedule">
@@ -95,7 +100,7 @@
       </button>
       </a>
       {% endif %}
-        {% if user.is_admin %}
+        {% if user.is_admin and not tournament.is_public %}
         <a href="/publish-tournament">
             <button id="btn" style="background-color: rgb(55, 65, 95) " type="button " class="btn-danger_nav_schedule">
             Publish

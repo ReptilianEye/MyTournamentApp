@@ -287,5 +287,5 @@ def checkIfEveryonePlayed(opponents,duels):
 def checkIfUserInTournaments(user,tournament):
     for opponent in tournament.opponents:
         if user.first_name == opponent.name and user.email == opponent.email:
-            return False
-    return True
+            return True
+    return False

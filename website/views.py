@@ -141,7 +141,7 @@ def show_joined_tournaments():
     i = 0
     n = len(tournaments)
     while i < n:
-        if checkIfUserInTournaments(current_user, tournaments[i]):
+        if not checkIfUserInTournaments(current_user, tournaments[i]):
             tournaments.remove(tournaments[i])
             n -= 1
         else:
@@ -149,7 +149,7 @@ def show_joined_tournaments():
     return render_template("my_public_tournaments.html", user=current_user, tournaments=tournaments)
 
 
-@views.route('/joined-tournament-schedule', methods=['GET', 'POST'])
+@views.route('/joined-schedule', methods=['GET', 'POST'])
 @login_required
 def show_joined_schedule():
     tournamentDTO = TournamentController()
@@ -191,22 +191,6 @@ def public_schedule():
 
     return render_template("public_schedule.html", user=current_user, tournament=tournamentDTO.tournament)
 
-
-@views.route('/join-tournament', methods=['GET', 'POST'])
-@login_required
-def join_tournament():
-    tournamentDTO = TournamentController()
-    tournamentDTO.Load(current_user.current_tournament_id)
-
-    result = tournamentDTO.JoinToTheTournament(current_user)
-    if result:
-        flash("You have sucessfully joined the tournament")
-        return redirect(url_for("views.public_schedule"))
-    else:
-        flash("You have already joined that tournament")
-        return redirect(url_for("views.public_schedule"))
-
-
 @views.route('/publish-tournament')
 @login_required
 def publish_tournament():
@@ -214,9 +198,27 @@ def publish_tournament():
         tournamentDTO = TournamentController()
         tournamentDTO.Load(current_user.current_tournament_id)
         tournamentDTO.Publish()
+        flash('You successfully published tournament! You can find it now in Public Tournaments',category='success')    
     else:
         flash('You do not have permission to publish tournament. You have to be an admin. Ask another admin how you can get a permission.')
     return redirect(url_for("views.public_schedule"))
+
+
+
+@views.route('/join-tournament', methods=['GET', 'POST'])
+@login_required
+def join_tournament():
+    tournamentDTO = TournamentController()
+    tournamentDTO.Load(temporatyId)
+
+    result = tournamentDTO.JoinToTheTournament(current_user)
+    if result:
+        flash("You have sucessfully joined to the tournament")
+        return redirect(url_for("views.show_joined_tournaments"))
+    else:
+        flash("You have already joined that tournament")
+        return redirect(url_for("views.public_schedule"))
+
 
 
 @views.route('/set-tournament-id', methods=['POST', 'GET'])
@@ -250,7 +252,7 @@ def quit_tournament():
     tournamentDTO = TournamentController()
     tournamentDTO.Load(current_user.current_tournament_id)
     tournamentDTO.Quit(current_user)
-    return redirect(url_for("views.joinedTournaments"))
+    return redirect(url_for("views.show_joined_tournaments"))
 
 
 @views.route('/delete-tournament', methods=['POST', 'GET'])

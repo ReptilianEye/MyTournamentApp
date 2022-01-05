@@ -53,7 +53,7 @@ function showMyPublicTournament(tournamentId) {
       method: 'POST',
       body: JSON.stringify({ tournamentId: tournamentId }),
   }).then((_res) => {
-      window.location.href = window.location.origin + "/joined-tournament";
+      window.location.href = window.location.origin + "/joined-schedule";
   });
 }
 
@@ -71,6 +71,6 @@ function deletePlayer(playerId) {
     method: "POST",
     body: JSON.stringify({ playerId: playerId }),
   }).then((_res) => {
-    window.location.href = window.location.origin + "/new-players";
+    window.location.reload();
   });
 }
