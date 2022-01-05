@@ -4,16 +4,20 @@
     <br />
     <h3 align="center">{{tournament.name}}</h3>
     <ol class="list-group list-group-flush" id="pary">
-        <div style="margin-right: 30px" align="right">
-            <a href="/public-standings">
-                <button id="btn" type="button" class="btn-add">Standings</button>
-            </a>
-        </div>
-        <div style="margin-right: 30px" align="right">
-          <a href="/join-tournament">
-              <button id="btn" type="button" class="btn-add">Join the tournament</button>
-          </a>
+      {% if tournament.status == 'upcoming' %}  
+      <div style="margin-right: 30px" align="right">
+        <a href="/join-tournament">
+            <button id="btn" type="button" class="btn-add">Join the tournament</button>
+        </a>
       </div>
+      
+      {% else %}  
+      <div style="margin-right: 30px" align="right">
+        <a href="/public-standings">
+            <button id="btn" type="button" class="btn-add">Standings</button>
+        </a>
+    </div>  
+      {% endif %}
         {% for round in tournament.rounds %} {% if round.number
         <=tournament.current_round_number %} <h4 align="center" class="h4_round">Runda: {{round.number}}</h4>
 

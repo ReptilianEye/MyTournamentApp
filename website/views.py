@@ -45,7 +45,7 @@ def public_tournaments():
 
 @views.route('/new-tournament', methods=['GET', 'POST'])
 @login_required
-def getScheduleInfo():
+def get_tournament_info():
     if request.method == 'POST':
         name = request.form.get('name')
         date = request.form.get('date')
@@ -80,7 +80,7 @@ def getScheduleInfo():
 
 @views.route('/edit-tournament', methods=['GET', 'POST'])
 @login_required
-def editTournament():
+def edit_tournament():
     tournamentDTO = TournamentController()
     tournamentDTO.Load(current_user.current_tournament_id)
     if request.method == 'POST':
@@ -100,7 +100,7 @@ def editTournament():
 
 @views.route('/new-players', methods=['GET', 'POST'])
 @login_required
-def getPlayers():
+def get_players_manually():
     tournamentDTO = TournamentController()
     tournamentDTO.Load(current_user.current_tournament_id)
     partizipantsNumberLimit = 100
@@ -136,7 +136,7 @@ def delete_player():
 
 @views.route('/joined-tournaments', methods=['GET', 'POST'])
 @login_required
-def joinedTournaments():
+def show_joined_tournaments():
     tournaments = Tournament.query.filter_by(is_public=True).all()
     i = 0
     n = len(tournaments)
@@ -151,7 +151,7 @@ def joinedTournaments():
 
 @views.route('/joined-tournament-schedule', methods=['GET', 'POST'])
 @login_required
-def joinedTournament():
+def show_joined_schedule():
     tournamentDTO = TournamentController()
     tournamentDTO.Load(current_user.current_tournament_id)
     return render_template("my_public_schedule.html", user=current_user, tournament=tournamentDTO.tournament)
@@ -164,6 +164,25 @@ def schedule():
     tournamentDTO.Load(current_user.current_tournament_id)
     return render_template("schedule.html", user=current_user, tournament=tournamentDTO.tournament)
 
+@views.route('/start-tournament')
+@login_required
+def start_tournament():
+    tournamentDTO = TournamentController()
+    tournamentDTO.Load(current_user.current_tournament_id)
+    if len(tournamentDTO.tournament.opponents) < 2:
+        flash('You cannot start tournament that have less than 2 players',category='error')
+    else:
+        tournamentDTO.Start()
+    return redirect(url_for('views.schedule'))
+
+@views.route('/end-tournament')
+@login_required
+def end_tournament():
+    tournamentDTO = TournamentController()
+    tournamentDTO.Load(current_user.current_tournament_id)
+    tournamentDTO.End()
+    return redirect(url_for('views.schedule'))
+
 
 @views.route('public-schedule')
 def public_schedule():
@@ -175,7 +194,7 @@ def public_schedule():
 
 @views.route('/join-tournament', methods=['GET', 'POST'])
 @login_required
-def joinTournament():
+def join_tournament():
     tournamentDTO = TournamentController()
     tournamentDTO.Load(current_user.current_tournament_id)
 
@@ -202,7 +221,7 @@ def publish_tournament():
 
 @views.route('/set-tournament-id', methods=['POST', 'GET'])
 @login_required
-def setTournamentId():
+def set_tournament_ID():
     tournament = json.loads(request.data)
     tournamentId = tournament['tournamentId']
     if tournamentId:
@@ -216,7 +235,7 @@ temporatyId = -1
 
 @views.route('/set-temp-tournament-id', methods=['POST', 'GET'])
 # @login_required
-def setTempTournamentId():
+def set_temp_tournament_ID():
     global temporatyId
     tournament = json.loads(request.data)
     tournamentId = tournament['tournamentId']
@@ -257,7 +276,7 @@ def delete_tournament():
 
 @views.route('/generate-new-round', methods=['GET', 'POST'])
 @login_required
-def generateNewRound():
+def generate_new_round():
     tournamentDTO = TournamentController()
     tournamentDTO.Load(current_user.current_tournament_id)
 

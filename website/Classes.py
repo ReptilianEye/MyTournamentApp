@@ -7,6 +7,8 @@ from datetime import datetime
 
 class TournamentController():
 
+    statuses = ['upcoming','active','ended']
+
     def CreateNew(self, user_Id, name, date, location, discipline, type):
         self.tournament = Tournament(user_id=user_Id, name=name,
                                      date=date, location=location, discipline=discipline, type=type)
@@ -14,6 +16,13 @@ class TournamentController():
         db.session.commit()
         return self.tournament.id
 
+    def Start(self):
+        self.tournament.status = self.statuses[1]
+        self.Save()
+    
+    def End(self):
+        self.tournament.status = self.statuses[2]
+        self.Save()
 
     def Load(self, id):
         self.tournament = Tournament.query.get(id)
@@ -70,8 +79,6 @@ class TournamentController():
     def Quit(self,user):
         userInTournament = Opponent.query.filter_by(tournament_id=self.tournament.id,email=user.email,name=user.first_name).first()
         self.tournament.opponents.remove(userInTournament)
-        # db.session.add(Opponent(tournament_id=self.tournament.id, name=user.first_name, email=user.email))
-            # db.session.add(Tournament(id=self.tournament.id,))
         self.Save()
 
     def DeleteTournament(self):
@@ -99,6 +106,8 @@ class TournamentController():
             return SwissRS(self.tournament).getNewRound()
         if self.tournament.type == self.tournamentTypes[2]:
             return TreeRS(self.tournament).getNewRound()
+    
+    disciplines = ['Chess', 'Basketball', 'Football']
 
     def PrepareStanding(self):
         standing = generateStandings(self.tournament.duels)
@@ -114,7 +123,6 @@ class TournamentController():
             db.session.add(Standing(tournament_id=Tournament.tournament.id, opponent_id=opponent.id,
                                     wins=opponent.wins, loses=opponent.loses, draws=opponent.draws, match_points=opponent.wins*Tournament.multipleForWin+opponent.loses*Tournament.multipleForLose+opponent.draws*Tournament.multipleForDraw))
 
-    disciplines = ['Chess', 'Basketball', 'Football']
 
     def ShowStanding(self):
         if len(self.tournament.standings) == 0:
@@ -133,7 +141,7 @@ class ChessTournament(TournamentController):
     multipleForDraw = 0.5
 
     def PrepareStanding(self):
-        pass
+        return super().PrepareStanding()
 
 
 class BasketballTournament(TournamentController):

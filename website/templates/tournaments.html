@@ -39,11 +39,11 @@
           <img src="../static/pngegg.png" width="30" height="30" />
 
 
-        </button> {% if tournament.status == "active" %}<button style="margin-left: 30px; margin-right: -70px;" class="btn_activity active">
+        </button> {% if tournament.status == 'active' %}<button style="margin-left: 30px; margin-right: -70px;" class="btn_activity active">
             
-        </button>{% endif %} {% if tournament.status == "notactive" %}<button style="margin-left: 30px; margin-right: -70px;" class="btn_activity not_active">
+        </button>{% endif %} {% if tournament.status == 'ended' %}<button style="margin-left: 30px; margin-right: -70px;" class="btn_activity not_active">
             
-        </button>{% endif %} {% if tournament.status == "upcoming" %}<button style="margin-left: 30px; margin-right: -70px;" class="btn_activity up-comming">
+        </button>{% endif %} {% if tournament.status == 'upcoming' %}<button style="margin-left: 30px; margin-right: -70px;" class="btn_activity up-comming">
             
         </button>{% endif %}
 
