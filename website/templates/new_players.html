@@ -1,29 +1,30 @@
 {% extends "base.html" %} {% block title %}Schedule Generator{% endblock %} {% block content %}
 <section class="newplayers_box_container container_newplayer">
-    <br />
-    <h3 align="center">Add Participants</h3>
-    <h4 class="h4_main" align="center">Type in each of them one by one :)</h4>
-    <ol class="list-group list-group-flush" id="notes">
-        {% for opponent in tournament.opponents %}
-        <li align="center" class="list-group-item">
-            {{opponent.name}}
-            <button type="button" class="close" onClick="deletePlayer({{opponent.id}})">
+  <br />
+  <h3 align="center">Add Participants</h3>
+  <h4 class="h4_main" align="center">Type in each of them one by one :)</h4>
+  <ol class="list-group list-group-flush" id="notes">
+    {% for opponent in tournament.opponents %}
+    <li align="center" class="list-group-item">
+      {{opponent.name}}
+      <button type="button" class="close" onClick="deletePlayer({{opponent.id}})">
         <span aria-hidden="true">&times;</span>
       </button>
-        </li>
-        {% endfor %}
-    </ol>
-    <br />
+    </li>
+    {% endfor %}
+  </ol>
+  <br />
 
-    <form method="POST">
-        <div align="left">
-            <input style="display: inline-block" name="player" class="form_control" placeholder="Type name and click 'Add participant'" type="text" />
-            <button id="btn" type="submit" class="btn-add">
+  <form method="POST">
+    <div align="left">
+      <input style="display: inline-block" name="player" class="form_control"
+        placeholder="Type name and click 'Add participant'" type="text" />
+      <button id="btn" type="submit" class="btn-add">
         Add participant
       </button>
-        </div>
+    </div>
 
-        <!-- <form method="POST">
+    <!-- <form method="POST">
     <div align="center">
     <div><input name="player"  class="form_control"> type="text"/></div>
     <div><button type="submit" class="btn-danger_nav_generator_home_white">
@@ -32,16 +33,16 @@
   </div>
     <br />
     -->
-        <br />
-        <div align="center">
-            <a href="/schedule">
+    <br />
+    <div align="center">
+      <a href="/schedule">
 
-                <button id="btn" type="button" onclick="return clicked();" class="btn-danger_nav_generator_home">
+        <button id="btn" type="button" onclick="return clicked();" class="btn-danger_nav_generator_home">
           Save
         </button>
-            </a>
-    </form>
-    </div>
-    <!-- </form> -->
+      </a>
+  </form>
+  </div>
+  <!-- </form> -->
 </section>
 {% endblock %}

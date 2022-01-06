@@ -21,8 +21,13 @@ class TournamentController():
         self.Save()
     
     def End(self):
-        self.tournament.status = self.statuses[2]
-        self.Save()
+        if checkIfScoresAreWritten(self.tournament.duels):
+            self.tournament.status = self.statuses[2]
+            self.Save()
+            return True
+        else:
+            return Exception("Cannot end tournament that have no filled scores")
+    
 
     def Load(self, id):
         self.tournament = Tournament.query.get(id)
@@ -48,7 +53,11 @@ class TournamentController():
         self.tournament.edited_duel_id = duel_id
 
     def GetChangedDuel(self):
+        checkIfScoresAreWritten
         return Duel.query.filter_by(id=self.tournament.edited_duel_id).first()
+
+    def CheckIfScoresAreWritten(self):
+        return checkIfScoresAreWritten(self.tournament.duels)
 
     def UpdateScores(self, score1, score2):
         duel = Duel.query.filter_by(id=self.tournament.edited_duel_id).first()
@@ -81,6 +90,21 @@ class TournamentController():
         self.tournament.opponents.remove(userInTournament)
         self.Save()
 
+    def Reset(self):
+        self.tournament.current_round_number = 0
+        self.tournament.status = self.statuses[0]
+
+        for duel in self.tournament.duels:
+            db.session.delete(duel)
+
+        for round in self.tournament.rounds:
+            db.session.delete(round)
+        
+        for standing in self.tournament.standings:
+            db.session.delete(standing)
+
+        self.Save()
+
     def DeleteTournament(self):
 
         for round in self.tournament.rounds:
@@ -107,6 +131,10 @@ class TournamentController():
         if self.tournament.type == self.tournamentTypes[2]:
             return TreeRS(self.tournament).getNewRound()
     
+    def PrepareAllRound(self):
+        if self.tournament.type == self.tournamentTypes[0]:
+            return RoundRobinRS(self.tournament).getAllRounds()
+
     disciplines = ['Chess', 'Basketball', 'Football']
 
     def PrepareStanding(self):
@@ -204,6 +232,7 @@ class RoundRobinRS(RoundStrategy):
                                     opponent2_id=opponent2.id, round_number=round_number))
         db.session.commit()
 
+
     def getNewRound(self):
         if len(self.tournament.duels) == 0:
             self.__generateSchedule()
@@ -212,6 +241,11 @@ class RoundRobinRS(RoundStrategy):
         self.tournament.current_round_number += 1
         db.session.commit()
 
+    def getAllRounds(self):
+        if len(self.tournament.duels) == 0:
+            self.getNewRound()
+        self.tournament.current_round_number = self.tournament.max_rounds
+        db.session.commit()
 
 class SwissRS(RoundStrategy):
 
@@ -251,6 +285,10 @@ class TreeRS(RoundStrategy):
         potegaWiekszej = math.floor(math.log2(len(opponents)))
         potegaDwojki = pow(2, potegaWiekszej)
         liczbaGraczyWPierwszej = (len(opponents) - potegaDwojki) * 2
+        if liczbaGraczyWPierwszej == 0:
+            self.tournament.max_rounds = potegaWiekszej
+            return GenerateFirstRoundTree(opponents,len(opponents))
+       
         if potegaWiekszej == 0:
             self.tournament.max_rounds = potegaWiekszej
         else:
@@ -258,7 +296,7 @@ class TreeRS(RoundStrategy):
         return GenerateFirstRoundTree(opponents, liczbaGraczyWPierwszej)
 
     def getNewRound(self):
-        if len(self.tournament.duels) == 0:
+        if self.tournament.current_round_number == 0:
             newRound = self.generateFirstRound()
         elif checkIfScoresAreWritten(self.tournament.duels):
             if checkIfScoresAreDecided(self.tournament.duels):

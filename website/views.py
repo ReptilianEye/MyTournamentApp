@@ -61,7 +61,7 @@ def get_tournament_info():
         elif not location:
             flash(f"Type in tournament's location.", category='error')
         elif not discipline:
-            flash(f"Type in tournament's discypline.", category='error')
+            flash(f"Type in tournament's discipline.", category='error')
         elif not type:
             flash(f'Select type.', category='error')
         else:
@@ -180,9 +180,19 @@ def start_tournament():
 def end_tournament():
     tournamentDTO = TournamentController()
     tournamentDTO.Load(current_user.current_tournament_id)
-    tournamentDTO.End()
-    return redirect(url_for('views.schedule'))
+    if tournamentDTO.CheckIfScoresAreWritten():
+        tournamentDTO.End()
+        flash('You successfully ended your tournament',category='success')
+        return redirect(url_for('views.show_standings'))
+    else:
+        flash('You have to fill all the scores, first',category='error')
+        return redirect(url_for('views.schedule'))
 
+def reset_tournament():
+    tournamentDTO = TournamentController()
+    tournamentDTO.Load(current_user.current_tournament_id)
+    tournamentDTO.Reset()
+    
 
 @views.route('public-schedule')
 def public_schedule():
@@ -201,8 +211,7 @@ def publish_tournament():
         flash('You successfully published tournament! You can find it now in Public Tournaments',category='success')    
     else:
         flash('You do not have permission to publish tournament. You have to be an admin. Ask another admin how you can get a permission.')
-    return redirect(url_for("views.public_schedule"))
-
+    return redirect(url_for("views.schedule"))
 
 
 @views.route('/join-tournament', methods=['GET', 'POST'])
@@ -218,7 +227,6 @@ def join_tournament():
     else:
         flash("You have already joined that tournament")
         return redirect(url_for("views.public_schedule"))
-
 
 
 @views.route('/set-tournament-id', methods=['POST', 'GET'])
@@ -291,6 +299,14 @@ def generate_new_round():
     return redirect(url_for("views.schedule"))
 
 
+@views.route('/generate-all-rounds', methods=['GET', 'POST'])
+@login_required
+def generate_all_rounds():
+    tournamentDTO = TournamentController()
+    tournamentDTO.Load(current_user.current_tournament_id)
+    if tournamentDTO.tournament.type == 'RoundRobin':
+        tournamentDTO.PrepareAllRound()
+    return redirect(url_for("views.schedule"))
 ### DUELS ###
 
 @views.route('/get-duel-id', methods=['POST', 'GET'])

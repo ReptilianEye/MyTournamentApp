@@ -2,9 +2,15 @@
 <html lang="en">
 
 <head>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js "
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN "
+        crossorigin="anonymous "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js "
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q "
+        crossorigin="anonymous "></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js "
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl "
+        crossorigin="anonymous "></script>
     <script type="text/javascript " src="{{ url_for( 'static', filename='index.js' ) }} "></script>
     <script src="../static/cookiepopup.js " async></script>
     <meta charset="UTF-8">
@@ -36,14 +42,15 @@
     <a href="/">
         <button style="margin-top: -5px;" class="close_tournaments">
             <span aria-hidden="true">&times;</span>
-            </button>
+        </button>
     </a>
     <section class="sign_box_container container_sign">
         <form method="POST">
             <br>
             <h3 style="margin-bottom: 25px; margin-top: 10px;" align="center">Sign up</h3>
             <div class="form-group">
-                <label class="label_login" for="email">Email Address<a style="margin-left: 190px;" class="signup_label" title="Already have an account?" id="login" href="/login">Log in</a></label>
+                <label class="label_login" for="email">Email Address<a style="margin-left: 190px;" class="signup_label"
+                        title="Already have an account?" id="login" href="/login">Log in</a></label>
                 <input type="email" class="form_control" id="email" name="email" />
             </div>
             <div class="form-group">
