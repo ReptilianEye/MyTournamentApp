@@ -537,19 +537,15 @@ nav .nav-items li a:hover {
     pointer-events: none;
     cursor: default;
 }
-
-.active {
+.upcoming {
+    background-color: #f3e521;
+}
+.conduct {
     background-color: #3BA55D;
 }
-
-.not_active {
+.ended {
     background-color: #a03636;
 }
-
-.up-comming {
-    background-color: #ece031;
-}
-
 .close_settings {
     color: white;
     float: right;

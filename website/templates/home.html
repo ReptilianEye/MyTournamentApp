@@ -6,19 +6,31 @@
         <h1 align="center">Welcome at the home page!</h1>
         <div style="margin-right: 5%; margin-left:5%">
             <h5 align="center" style="color: white; ">
-                You can use that website to create your own tournaments, generate rounds using various algorithms and track public tournament made by other students. Have fun!</div>
+                You can use that website to create your own tournaments, generate rounds using various algorithms and
+                track public tournament made by other students. Have fun!
+        </div>
         </h5>
     </div>
 
     <br />
     <form method="POST">
         <div align="center">
+            {% if user.is_authenticated %}
+
             <a href="/tournaments">
                 <button id="btn" type="button" class="btn-danger_nav_generate">
-          Your tournaments
-        </button>
+                    Your Tournaments
+                </button>
             </a>
+            {% else %}
+            <a href="/public-tournaments">
+                <button id="btn" type="button" class="btn-danger_nav_generate">
+                    Live Tournaments
+                </button>
+            </a>
+            {% endif %}
         </div>
+
     </form>
 </section>
 
@@ -44,11 +56,13 @@
 
     <div style="padding: 0;">
         <a style="margin: 8px;" href="https://www.instagram.com/31lokrakow/" target="_blank" rel="noopener noreferrer">
-            <img class="logo_social" src="../static/instragram-icon.png" width="40" height="40" alt="Instagram logo" /></a>
+            <img class="logo_social" src="../static/instragram-icon.png" width="40" height="40"
+                alt="Instagram logo" /></a>
         <a style="margin: 8px;" href="https://www.facebook.com/31LOKrakow" target="_blank" rel="noopener noreferrer">
             <img class="logo_social" src="../static/facebook-icon.png" width="40" height="40" alt="Facebook logo" /></a>
         <a style="margin: 8px;" href="https://www.lo31.krakow.pl/" target="_blank" rel="noopener noreferrer">
-            <img class="logo_social" src="../static/logo 31lo.png" width="40" height="40" alt="Oficjalna strona 31LO" /></a>
+            <img class="logo_social" src="../static/logo 31lo.png" width="40" height="40"
+                alt="Oficjalna strona 31LO" /></a>
     </div>
 </footer>
 

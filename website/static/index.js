@@ -41,12 +41,20 @@ function editTournament(tournamentId) {
 }
 
 function showPublicTournament(tournamentId) {
-    fetch(window.location.origin + '/set-tournament-id', {
+    fetch(window.location.origin + '/set-temp-tournament-id', {
         method: 'POST',
         body: JSON.stringify({ tournamentId: tournamentId }),
     }).then((_res) => {
         window.location.href = window.location.origin + "/public-schedule";
     });
+}
+function showMyPublicTournament(tournamentId) {
+  fetch(window.location.origin + '/set-tournament-id', {
+      method: 'POST',
+      body: JSON.stringify({ tournamentId: tournamentId }),
+  }).then((_res) => {
+      window.location.href = window.location.origin + "/joined-schedule";
+  });
 }
 
 function deleteTournament(tournamentId) {
@@ -63,6 +71,6 @@ function deletePlayer(playerId) {
     method: "POST",
     body: JSON.stringify({ playerId: playerId }),
   }).then((_res) => {
-    window.location.href = window.location.origin + "/new-players";
+    window.location.reload();
   });
 }

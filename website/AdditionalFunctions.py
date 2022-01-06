@@ -3,7 +3,6 @@ from .models import Tournament
 
 pauza = "pauza"
 
-
 def PrzygotowujeTerminarzDoWyswietlenia(terminarz):
     global pauza
 
@@ -256,12 +255,6 @@ def prepareListsToSwiss(duels, standings):
             visited.append({duel.opponent_2})      
             bayed.update({duel.opponent_2:False})
 
-
-
-
-
-
-
 def whoWins(duel,reverse = False):
     if duel.score_1 > duel.score_2 and not reverse:
         return duel.opponent_1
@@ -291,3 +284,8 @@ def checkIfEveryonePlayed(opponents,duels):
     else:
         return opponents
         
+def checkIfUserInTournaments(user,tournament):
+    for opponent in tournament.opponents:
+        if user.first_name == opponent.name and user.email == opponent.email:
+            return True
+    return False

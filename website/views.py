@@ -4,7 +4,6 @@ from flask.helpers import url_for
 from flask.json import jsonify
 from flask_login import login_user, login_required, logout_user, current_user
 from sqlalchemy.orm import query, session
-from sqlalchemy.sql.expression import true
 from werkzeug.utils import redirect
 from .models import Opponent, User, Tournament, Duel, Opponent, Standing
 from .import db
@@ -13,46 +12,40 @@ from .TournamentsFunctions import *
 from .Classes import *
 from datetime import datetime
 
-from website import TournamentsFunctions
-
-from website import Classes
-
 # blueprint - miejsce gdzie jest wiele stron
-
 views = Blueprint('views', __name__)
+
+### main pages ###
 
 
 @views.route('/', methods=['GET', 'POST'])
-# @login_required
 def home():
     return render_template("home.html", user=current_user)
 
 
 @views.route('/video', methods=['GET', 'POST'])
-# @login_required
 def video():
-    tournaments=Tournament.query.filter_by(is_public=True).all()
+    tournaments = Tournament.query.filter_by(is_public=True).all()
     return render_template("video.html", user=current_user, tournaments=tournaments)
-
-@views.route('/public-tournaments', methods=['GET', 'POST'])
-# @login_required
-def public_tournaments():
-    tournaments=Tournament.query.filter_by(is_public=True).all()
-    return render_template("public_tournaments.html", user=current_user, tournaments=tournaments)
 
 
 @views.route('/tournaments', methods=['GET', 'POST'])
-# @login_required
+@login_required
 def tournaments():
-    if current_user.is_authenticated: 
-        return render_template("tournaments.html", user=current_user)
-    else:
-        return render_template("login.html", user=current_user)
+    return render_template("tournaments.html", user=current_user)
 
+
+@views.route('/public-tournaments', methods=['GET', 'POST'])
+def public_tournaments():
+    tournaments = Tournament.query.filter_by(is_public=True).all()
+    return render_template("public_tournaments.html", user=current_user, tournaments=tournaments)
+
+
+### tournament pages ###
 
 @views.route('/new-tournament', methods=['GET', 'POST'])
 @login_required
-def getScheduleInfo():
+def get_tournament_info():
     if request.method == 'POST':
         name = request.form.get('name')
         date = request.form.get('date')
@@ -68,7 +61,7 @@ def getScheduleInfo():
         elif not location:
             flash(f"Type in tournament's location.", category='error')
         elif not discipline:
-            flash(f"Type in tournament's discypline.", category='error')
+            flash(f"Type in tournament's discipline.", category='error')
         elif not type:
             flash(f'Select type.', category='error')
         else:
@@ -81,12 +74,13 @@ def getScheduleInfo():
             current_user.current_tournament_id = id
             newTournament.Save()
 
-            return redirect(url_for('views.getPlayers'))
+            return redirect(url_for('views.schedule'))
     return render_template("new_tournament.html", user=current_user)
+
 
 @views.route('/edit-tournament', methods=['GET', 'POST'])
 @login_required
-def editTournament():
+def edit_tournament():
     tournamentDTO = TournamentController()
     tournamentDTO.Load(current_user.current_tournament_id)
     if request.method == 'POST':
@@ -97,16 +91,16 @@ def editTournament():
         status = request.form.get('status')
         movielink = request.form.get('movielink')
 
-        tournamentDTO.EditTournament(name, date, location, discipline, status, movielink)
+        tournamentDTO.EditTournament(
+            name, date, location, discipline, status, movielink)
 
         return redirect(url_for('views.tournaments'))
     return render_template("edit_tournament.html", user=current_user, tournament=tournamentDTO.tournament)
 
 
-
 @views.route('/new-players', methods=['GET', 'POST'])
 @login_required
-def getPlayers():
+def get_players_manually():
     tournamentDTO = TournamentController()
     tournamentDTO.Load(current_user.current_tournament_id)
     partizipantsNumberLimit = 100
@@ -126,38 +120,196 @@ def getPlayers():
             flash('Participant has been added! :)', category='success')
     return render_template("new_players.html", user=current_user, tournament=tournamentDTO.tournament)
 
-@views.route('generate-new-round', methods=['GET', 'POST'])
-def generateNewRound():
+
+@views.route('/delete-player', methods=['POST'])
+@login_required
+def delete_player():
+    player = json.loads(request.data)
+    playerId = player['playerId']
+    player = Opponent.query.get(playerId)
+    if player:
+        if player.tournament_id == current_user.current_tournament_id:
+            db.session.delete(player)
+            db.session.commit()
+    return jsonify({})
+
+
+@views.route('/joined-tournaments', methods=['GET', 'POST'])
+@login_required
+def show_joined_tournaments():
+    tournaments = Tournament.query.filter_by(is_public=True).all()
+    i = 0
+    n = len(tournaments)
+    while i < n:
+        if not checkIfUserInTournaments(current_user, tournaments[i]):
+            tournaments.remove(tournaments[i])
+            n -= 1
+        else:
+            i += 1
+    return render_template("my_public_tournaments.html", user=current_user, tournaments=tournaments)
+
+
+@views.route('/joined-schedule', methods=['GET', 'POST'])
+@login_required
+def show_joined_schedule():
     tournamentDTO = TournamentController()
     tournamentDTO.Load(current_user.current_tournament_id)
+    return render_template("my_public_schedule.html", user=current_user, tournament=tournamentDTO.tournament)
 
-    result = tournamentDTO.PrepareNewRound()
-    if result is not None:
-        flash(result,category="error")
-    else:
-        tournamentDTO.Save()
-
-    return redirect(url_for("views.schedule"))
-
-@views.route('/set-tournament-id', methods=['POST', 'GET'])      
-@login_required
-def setTournamentId():
-    tournament = json.loads(request.data)
-    tournamentId = tournament['tournamentId']
-    if tournamentId:
-        current_user.current_tournament_id = tournamentId      
-        db.session.commit()
-        return jsonify({})
 
 @views.route('/schedule')
 @login_required
 def schedule():
     tournamentDTO = TournamentController()
     tournamentDTO.Load(current_user.current_tournament_id)
-
     return render_template("schedule.html", user=current_user, tournament=tournamentDTO.tournament)
 
-@views.route('/get-duel-id',methods=['POST', 'GET'])
+@views.route('/start-tournament')
+@login_required
+def start_tournament():
+    tournamentDTO = TournamentController()
+    tournamentDTO.Load(current_user.current_tournament_id)
+    if len(tournamentDTO.tournament.opponents) < 2:
+        flash('You cannot start tournament that have less than 2 players',category='error')
+    else:
+        tournamentDTO.Start()
+    return redirect(url_for('views.schedule'))
+
+@views.route('/end-tournament')
+@login_required
+def end_tournament():
+    tournamentDTO = TournamentController()
+    tournamentDTO.Load(current_user.current_tournament_id)
+    if tournamentDTO.CheckIfScoresAreWritten():
+        tournamentDTO.End()
+        flash('You successfully ended your tournament',category='success')
+        return redirect(url_for('views.show_standings'))
+    else:
+        flash('You have to fill all the scores, first',category='error')
+        return redirect(url_for('views.schedule'))
+
+def reset_tournament():
+    tournamentDTO = TournamentController()
+    tournamentDTO.Load(current_user.current_tournament_id)
+    tournamentDTO.Reset()
+    
+
+@views.route('public-schedule')
+def public_schedule():
+    tournamentDTO = TournamentController()
+    tournamentDTO.Load(temporatyId)
+
+    return render_template("public_schedule.html", user=current_user, tournament=tournamentDTO.tournament)
+
+@views.route('/publish-tournament')
+@login_required
+def publish_tournament():
+    if current_user.is_admin:
+        tournamentDTO = TournamentController()
+        tournamentDTO.Load(current_user.current_tournament_id)
+        tournamentDTO.Publish()
+        flash('You successfully published tournament! You can find it now in Public Tournaments',category='success')    
+    else:
+        flash('You do not have permission to publish tournament. You have to be an admin. Ask another admin how you can get a permission.')
+    return redirect(url_for("views.schedule"))
+
+
+@views.route('/join-tournament', methods=['GET', 'POST'])
+@login_required
+def join_tournament():
+    tournamentDTO = TournamentController()
+    tournamentDTO.Load(temporatyId)
+
+    result = tournamentDTO.JoinToTheTournament(current_user)
+    if result:
+        flash("You have sucessfully joined to the tournament")
+        return redirect(url_for("views.show_joined_tournaments"))
+    else:
+        flash("You have already joined that tournament")
+        return redirect(url_for("views.public_schedule"))
+
+
+@views.route('/set-tournament-id', methods=['POST', 'GET'])
+@login_required
+def set_tournament_ID():
+    tournament = json.loads(request.data)
+    tournamentId = tournament['tournamentId']
+    if tournamentId:
+        current_user.current_tournament_id = tournamentId
+        db.session.commit()
+        return jsonify({})
+
+
+temporatyId = -1
+
+
+@views.route('/set-temp-tournament-id', methods=['POST', 'GET'])
+# @login_required
+def set_temp_tournament_ID():
+    global temporatyId
+    tournament = json.loads(request.data)
+    tournamentId = tournament['tournamentId']
+    if tournamentId:
+        temporatyId = tournamentId
+        return jsonify({})
+
+
+@views.route('/quit-tournament', methods=['POST', 'GET'])
+@login_required
+def quit_tournament():
+    tournamentDTO = TournamentController()
+    tournamentDTO.Load(current_user.current_tournament_id)
+    tournamentDTO.Quit(current_user)
+    return redirect(url_for("views.show_joined_tournaments"))
+
+
+@views.route('/delete-tournament', methods=['POST', 'GET'])
+@login_required
+def delete_tournament():
+    tournament = json.loads(request.data)
+    tournamentId = tournament['tournamentId']
+
+    tournamentDTO = TournamentController()
+    tournamentDTO.Load(tournamentId)
+
+    if tournamentDTO.tournament:
+        if tournamentDTO.tournament.user_id == current_user.id:
+            current_user.current_tournament_id = current_user.tournaments[0].id
+            tournamentDTO.DeleteTournament()
+            tournamentDTO.Save()
+
+    flash('Tournament has been deleted', category='success')
+    return jsonify({})
+
+
+### ROUNDS ###
+
+@views.route('/generate-new-round', methods=['GET', 'POST'])
+@login_required
+def generate_new_round():
+    tournamentDTO = TournamentController()
+    tournamentDTO.Load(current_user.current_tournament_id)
+
+    result = tournamentDTO.PrepareNewRound()
+    if result:
+        flash(result, category="error")
+    else:
+        tournamentDTO.Save()
+
+    return redirect(url_for("views.schedule"))
+
+
+@views.route('/generate-all-rounds', methods=['GET', 'POST'])
+@login_required
+def generate_all_rounds():
+    tournamentDTO = TournamentController()
+    tournamentDTO.Load(current_user.current_tournament_id)
+    if tournamentDTO.tournament.type == 'RoundRobin':
+        tournamentDTO.PrepareAllRound()
+    return redirect(url_for("views.schedule"))
+### DUELS ###
+
+@views.route('/get-duel-id', methods=['POST', 'GET'])
 @login_required
 def change_current_duel():
     tournamentDTO = TournamentController()
@@ -165,13 +317,14 @@ def change_current_duel():
 
     duelId = json.loads(request.data)
     duelId = duelId['duelId']
-    
+
     if duelId:
         tournamentDTO.ChangeEditedDuel(duelId)
         tournamentDTO.Save()
-    
+
     return jsonify({})
-    
+
+
 @views.route('update-duel', methods=['POST', 'GET'])
 @login_required
 def update_duel():
@@ -183,16 +336,17 @@ def update_duel():
         score_1 = request.form.get('score1')
         score_2 = request.form.get('score2')
         if score_1 == '' or score_2 == '':
-            flash('Score cannot be empty',category='error')
- 
+            flash('Score cannot be empty', category='error')
+
         else:
-            duel.score_1, duel.score_2 = int(score_1),int(score_2)
+            duel.score_1, duel.score_2 = int(score_1), int(score_2)
             tournamentDTO.Save()
             tournamentDTO.DeleteStanding()
             tournamentDTO.PrepareStanding()
             tournamentDTO.Save()
             return redirect(url_for("views.schedule"))
-    return render_template("update_duel.html", user=current_user,duel=duel)
+    return render_template("update_duel.html", user=current_user, duel=duel)
+
 
 @views.route('reset-duel', methods=['POST', 'GET'])
 @login_required
@@ -212,34 +366,8 @@ def reset_duel():
     return redirect(url_for("views.schedule"))
 
 
-# Functions to pubish schedule
-@views.route('public-schedule')
-# @login_required
-def public_schedule():
-    tournamentDTO = TournamentController()
-    tournamentDTO.Load(current_user.current_tournament_id)
+### STANDING ###
 
-    return render_template("public_schedule.html", user=current_user, tournament=tournamentDTO.tournament)
-
-
-@views.route('publish-schedule')
-@login_required
-def publish_schedule():
-
-    # prevPublicTournament = Tournament.query.filter_by(is_public=True).first()
-
-    # if prevPublicTournament:
-    #     prevPublicTournament.is_public = False
-    #     db.session.commit()
-        
-    tournament = Tournament.query.filter_by(
-        id=current_user.current_tournament_id).first()
-    tournament.is_public = True
-    db.session.commit()
-
-    return redirect(url_for("views.public_schedule"))
-
-# Standings Functions
 @views.route('/standings')
 @login_required
 def show_standings():
@@ -248,97 +376,9 @@ def show_standings():
     return render_template("standing.html", user=current_user, standings=tournamentDTO.ShowStanding(), tournament=tournamentDTO)
 
 
-
 @views.route('/public-standings')
 # @login_required
 def show_public_standings():
-    tournamentDTO = ChessTournament()
-    tournamentDTO.Load(current_user.current_tournament_id)
-    tournament = Tournament.query.filter_by(is_public=True).first()
-    standings = sorted(tournament.standings, key=lambda standing: (standing.match_points, standing.wins, standing.draws), reverse=True)
-    return render_template("standing.html", user=current_user, standings=standings, tournament=tournamentDTO)
-
-@views.route('/delete-tournament', methods=['POST', 'GET'])
-@login_required
-def delete_tournament():
-    tournament = json.loads(request.data)
-    tournamentId = tournament['tournamentId']
-    
     tournamentDTO = TournamentController()
-    tournamentDTO.Load(tournamentId)
-    
-    if tournamentDTO.tournament:
-        if tournamentDTO.tournament.user_id == current_user.id:
-            current_user.actual_tournament_id = current_user.tournaments[0].id
-            tournamentDTO.DeleteTournament()
-            tournamentDTO.Save()
-            
-    #TODO tournament has been deleted
- 
-    return jsonify({})
-
-@views.route('/delete-player', methods=['POST'])
-@login_required
-def delete_player():
-    player = json.loads(request.data)
-    playerId = player['playerId']
-    player = Opponent.query.get(playerId)
-    if player:
-        if player.tournament_id == current_user.current_tournament_id:
-            db.session.delete(player)
-            db.session.commit()
-    return jsonify({})
-
-
-#archived functions - maybe used someday
-
-
-# @views.route('/new-schedule',methods = ['POST','GET'])
-# @login_required
-# def newSchedule():
-#     newTournament = getScheduleInfo()
-#     db.session.add(newTournament)
-#     db.session.commit()
-#     current_user.current_tournament_id = newTournament.id
-#     db.session.commit()
-#     return redirect(url_for("views.GetPlayers"))
-
-# @views.route('/edit-schedule',methods = ['POST','GET'])
-# @login_required
-# def editSchedule():
-#     tournament = Tournament.query.filter_by(id=current_user.current_tournament_id).first()
-#     newTournament = redirect(url_for('views.getScheduleInfo'))
-#     tournament.name = newTournament.name
-#     tournament.date = newTournament.date
-#     tournament.location = newTournament.location
-#     tournament.discipline = newTournament.discipline
-#     tournament.type = newTournament.type
-#     db.session.commit()
-#     return redirect(url_for('views.schedule'))
-
-
-# @views.route('/top-scorers')
-# @login_required
-# def show_top_scorers():
-#     tournament = Tournament.query.filter_by(
-#         id=current_user.current_tournament_id).first()
-#     opponents = db.session.query(Opponent).filter(Opponent.tournament_id.like(tournament.id),Opponent.points_scored > 0).order_by(Standing.match_points.desc())
-#     return render_template("top_scorers.html", user=current_user, opponents=opponents)
-
-# @views.route('/get-scorers',methods = ['GET','POST'])
-# @login_required
-# def get_scorers():
-#     if request.method == ['POST']:
-#         name = request.form.get('name')
-#         goals = request.form.get('goals')
-#         player = Opponent.query.filter_by(tournament_id=current_user.current_tournament_id,name=name).first()
-#         if not player:
-#             flash('Player not found',category='error')
-#         else:
-#             player.goals_scored += goals
-#             db.session.commit()
-#             flash("Player's goals updated",category='success')
-#             return redirect(url_for("views.show_top_scorers"))
-#     return render_template("get-scorers.html",user=current_user)
-
-# Delete Functions
+    tournamentDTO.Load(temporatyId)
+    return render_template("standing.html", user=current_user, standings=tournamentDTO.ShowStanding(), tournament=tournamentDTO)

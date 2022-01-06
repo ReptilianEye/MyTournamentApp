@@ -39,23 +39,11 @@ class Tournament(db.Model):
     opponents = db.relationship('Opponent')
     standings = db.relationship('Standing')
 
-
-# class Team(db.Model):
-#     id = db.Column(db.Integer,primary_key=True)
-#     tournament_id = db.Column(db.Integer,db.ForeignKey('tournament.id'))
-    
-#     name = db.Column(db.String(100000))
-    
-#     players = db.relationship('Player')
-#     standing = db.relationship('Standing') 
-
-
-
 class Opponent(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     tournament_id = db.Column(db.Integer,db.ForeignKey('tournament.id'))
     # team_id = db.Column(db.Integer,db.ForeignKey('team.id'))
-    
+    email = db.Column(db.String(150))       
 
     standing = db.relationship('Standing') 
     name = db.Column(db.String(100000))
