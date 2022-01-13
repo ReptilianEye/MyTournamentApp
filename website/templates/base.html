@@ -4,10 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-        crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Stick+No+Bills:wght@600&display=swap" rel="stylesheet" />
@@ -22,6 +20,7 @@
 </head>
 
 <body>
+
     <!-- <div class="preload">
         <div class="circles-group">
             <center><img src="../static/logo 31lo.png" width="200px" /></center>
@@ -34,13 +33,18 @@
         </div>
     </div> -->
     <section>
+
+        <!-- ------ SNOW ------  -->
+        <div id="snow">
+
+        </div>
         <button onclick="topFunction()" id="myBtn" title="Go to top">
             <img src="../static/arrow.png" height="40px" />
         </button>
         <nav>
-            <div class="menu-icon">
+            <!-- <div class="menu-icon">
                 <span class="fas fa-bars"></span>
-            </div>
+            </div> -->
             <a id="home" href="/">
                 <div class="logo" style="color: #5aa0ba; font-weight: 700">Liceum 31</div>
             </a>
@@ -48,8 +52,7 @@
                 <li><a class="linkbutton link-active" id="home" href="/">Home</a></li>
                 <li><a class="linkbutton" href="/tournaments">My Tournaments</a></li>
                 <li><a class="linkbutton" href="/public-tournaments">Public tournaments</a></li>
-                <li><a class="linkbutton not-active" href="/video">Video</a><span style="margin-left: 10px;"
-                        class="beta_version">SOON</span></li>
+                <li><a class="linkbutton" href="/video">Video</a></li>
             </div>
             {% if user.is_authenticated %}
             <ul id="account-btn">
@@ -77,15 +80,15 @@
                         <h4 style="text-align: center" class="h4_main_email">
                             {{user.email}}
                         </h4>
-                        <hr class="konto_hr" />
+                        <div align="center">
+                            <hr class="konto_hr" />
+                        </div>
                         <section>
                             <a href="#" onClick="deleteUser({{user.id}})">
-                                <button style="float: left; margin-left: 10px; margin-bottom: 20px;" id="btn"
-                                    class="btn-add-account_delete">Delete account</button>
+                                <button style="float: left; margin-left: 10px; margin-bottom: 20px;" id="btn" class="btn-add-account_delete"><i class="fas fa-trash-alt"></i> Delete account</button>
                             </a>
                             <a href="/logout">
-                                <button style="float: right; margin-right: 10px; margin-bottom: 20px;" id="logout"
-                                    class="btn-add-account">Log out</button>
+                                <button style="float: right; margin-right: 10px; margin-bottom: 20px;" id="logout" class="btn-add-account"><i class="fas fa-sign-out-alt"></i> Log out</button>
                             </a>
                         </section>
                     </ul>
@@ -95,13 +98,11 @@
             </ul>
             {% else %}
             <li>
-                <a href="/sign-up">
-                    <button style="float: right; margin: top 20px right 10px bottom 20px;" id="logout"
-                        class="btn-add-account">Sign Up</button>
-                </a>
+                <!-- <a href="/sign-up">
+                    <button style="float: right; margin: top 20px right 10px bottom 20px;" id="logout" class="btn-add-account"><i class="far fa-registered"></i> Sign Up</button>
+                </a> -->
                 <a href="/login">
-                    <button style="float: right; margin: top 20px right 10px bottom 20px;" id="logout"
-                        class="btn-add-account">Login</button>
+                    <button style="float: right; margin: top 20px right 10px bottom 20px;" id="logout" class="btn-add-account"><i class="fas fa-sign-in-alt"></i> Login</button>
                 </a>
 
             </li>
@@ -110,11 +111,10 @@
         </nav>
 
 
-        {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in
-        messages %} {% if category == 'error' %}
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %} {% if category == 'error' %}
         <div class="alert-wrapper">
             <div class="alert alert-danger alert-dismissable fade show" role="alert">
-                <strong>Error!</strong> {{ message }}
+                <strong><i class="fa fa-exclamation-circle"></i> Error!</strong> {{ message }}
                 <button type="button" class="close" data-dismiss="alert">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -124,7 +124,7 @@
         {% else %}
         <div class="alert-wrapper">
             <div class="alert alert-success alert-dismissable fade show" role="alert">
-                {{ message }}
+                <i class="fa fa-check-circle"></i> {{ message }}
                 <button type="button" class="close" data-dismiss="alert">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -140,7 +140,7 @@
             var mybutton = document.getElementById("myBtn");
 
             // When the user scrolls down 20px from the top of the document, show the button
-            window.onscroll = function () {
+            window.onscroll = function() {
                 scrollFunction();
             };
 
@@ -154,33 +154,95 @@
                     mybutton.style.display = "none";
                 }
             }
-            setTimeout(function () {
+            setTimeout(function() {
                 $('#successMessage').fadeOut('fast');
             }, 30); // <-- time in milliseconds
-/*            const preload = document.querySelector('.preload');
-            
-                        preload.classList.add('show-preloader');
-                        window.addEventListener('load', () => {
-                            setTimeout(() => {
-                                preload.classList.remove('show-preloader');
-                            }, 900);
-                        });
-                        */
+            // const preload = document.querySelector('.preload');
+
+            // preload.classList.add('show-preloader');
+            // window.addEventListener('load', () => {
+            //     setTimeout(() => {
+            //         preload.classList.remove('show-preloader');
+            //     }, 900);
+            // });
+
+            // SNOW ANIMATED
+            document.addEventListener('DOMContentLoaded', function() {
+                var script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
+                script.onload = function() {
+                    particlesJS("snow", {
+                        "particles": {
+                            "number": {
+                                "value": 50, // ilość śniegu
+                                "density": {
+                                    "enable": true,
+                                    "value_area": 2000 // area
+                                }
+                            },
+                            "color": {
+                                "value": "#ffffff"
+                            },
+                            "opacity": {
+                                "value": 1.0, // przezroczystość
+                                "random": false,
+                                "anim": {
+                                    "enable": false
+                                }
+                            },
+                            "size": {
+                                "value": 8, // wielkość
+                                "random": true, // random ( wielkość ) ( true )
+                                "anim": {
+                                    "enable": false
+                                }
+                            },
+                            "line_linked": {
+                                "enable": false
+                            },
+                            "move": {
+                                "enable": true,
+                                "speed": 2, // szybkośc opadania
+                                "direction": "bottom",
+                                "random": false,
+                                "straight": false,
+                                "out_mode": "out",
+                                "bounce": false,
+                                "attract": {
+                                    "enable": true,
+                                    "rotateX": 300,
+                                    "rotateY": 1200
+                                }
+                            }
+                        },
+                        "interactivity": {
+                            "events": {
+                                "onhover": {
+                                    "enable": false
+                                },
+                                "onclick": {
+                                    "enable": false
+                                },
+                                "resize": false
+                            }
+                        },
+                        "retina_detect": true
+                    });
+                }
+                document.head.append(script);
+            });
         </script>
 
 
 
 
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js "
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN "
-            crossorigin="anonymous "></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js "
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q "
-            crossorigin="anonymous "></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js "
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl "
-            crossorigin="anonymous "></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
         <script type="text/javascript " src="{{ url_for( 'static', filename='index.js' ) }} "></script>
+        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+        <script src="https://kit.fontawesome.com/2cdeb7e939.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/balloon-css/balloon.min.css">
 
     </section>
 </body>

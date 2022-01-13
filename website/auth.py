@@ -34,7 +34,7 @@ def logout():
     return redirect(url_for('views.home'))
 
 
-@auth.route("sign-up", methods=['GET', 'POST'])
+@auth.route("/sign-up", methods=['GET', 'POST'])
 def sign_up():
     if request.method == 'POST':
         email = request.form.get('email')

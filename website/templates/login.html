@@ -1,86 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %} {% block title %}Login{% endblock %} {% block content %}
+<section class="login_box_container container_login">
 
-<head>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js "
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN "
-        crossorigin="anonymous "></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js "
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q "
-        crossorigin="anonymous "></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js "
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl "
-        crossorigin="anonymous "></script>
-    <script type="text/javascript " src="{{ url_for( 'static', filename='index.js' ) }} "></script>
-    <script src="../static/cookiepopup.js " async></script>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- ------ LOGO ------  -->
-    <link rel="shortcut icon" href="../static/favicon.ico" type="image/x-icon" />
-
-    <!-- ------ CSS ------  -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style-login.css') }}" />
-
-    <title>Log in</title>
-</head>
-
-<body>
-    <div class="preload">
-        <div class="circles-group">
-            <center><img src="../static/logo 31lo.png" width="200px" /></center>
-            <center>
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="circle"></div>
-            </center>
-        </div>
-    </div>
-    <a href="/">
-        <img style="margin-left: 10px;" src="../static/logo 31lo.png" width="70px" height="70px">
-    </a>
-    <a href="/">
-        <button style="margin-top: -5px;" class="close_tournaments">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </a>
-    <section class="login_box_container container_login">
-        <form method="POST">
-            <br>
-            <h3 style="margin-bottom: 25px; margin-top: 10px;" align="center">Log in</h3>
-            <div class="form-group">
-                <label class="label_login" for="email">Email Address<a class="signup_label" title="Need an account?"
+    <form method="POST">
+        <br>
+        <h3 style="margin-bottom: 25px; margin-top: 10px;" align="center">Log in</h3>
+        <div class="form-group">
+            <label class="label_login" for="email">Email Address<a class="signup_label" title="Need an account?"
                         id="signUp" href="/sign-up">Sign up</a></label>
-                <input type="email" class="form_control" id="email" name="email" />
-            </div>
-            <div class="form-group">
-                <label class="label_login" for="password">Password</label>
-                <input type="password" class="form_control" id="password" name="password" />
-            </div>
-            <br>
-            <center>
-                <button id="btn" type="submit" class="btn-danger_nav_login">Log in</button>
-            </center>
-        </form>
-    </section>
-    <br>
-    <section align="center">
-        <label class="h4_signup_footer">© 2021 Patronat <a
+            <input type="email" class="form_control" id="email" name="email" />
+        </div>
+        <div class="form-group">
+            <label class="label_login" for="password">Password</label>
+            <input type="password" class="form_control" id="password" name="password" />
+        </div>
+        <br>
+        <center>
+            <button id="btn" type="submit" class="btn-danger_nav_login"><i class="fas fa-sign-in-alt"></i> Log in</button>
+        </center>
+    </form>
+
+</section>
+<br>
+<section align="center">
+    <label class="h4_signup_footer">© 2021 Patronat <a
                 style="font-size: 15px; text-decoration: underline; font-weight: 700;"
                 href="https://www.lo31.krakow.pl/">31 Liceum Ogólnokształcące</a>. All rights reserved.</label>
-    </section>
-    <script>
-        const preload = document.querySelector('.preload');
-
-        preload.classList.add('show-preloader');
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                preload.classList.remove('show-preloader');
-            }, 900);
-        });
-    </script>
-</body>
-
-</html>
+</section>
+{% endblock %}

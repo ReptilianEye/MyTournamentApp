@@ -1,59 +1,54 @@
 {% extends "base.html" %} {% block title %}Schedule{% endblock %} {% block content %}
 
 <section class="schedule_box_container container_schedule">
-  <br />
-  <h3 align="center">{{tournament.name}}</h3>
+    <br />
+    <h3 align="center">{{tournament.name}}</h3>
 
-  {% if tournament.status == 'upcoming' %}
-  {% for opponent in tournament.opponents %}
-  <li align="center" class="list-group-item">
-    {{opponent.name}} {{opponent.email}}
-    <button type="button" class="close" onClick="deletePlayer({{opponent.id}})">
+    {% if tournament.status == 'upcoming' %} {% for opponent in tournament.opponents %}
+    <li align="center" class="list-group-item">
+        {{opponent.name}} {{opponent.email}}
+        <button type="button" class="close" onClick="deletePlayer({{opponent.id}})">
       <span aria-hidden="true">&times;</span>
     </button>
-  </li>
-  {% endfor %}
-  <div align="center" style="margin-top: 20px;">
-    <a href="/start-tournament">
-      <button id="btn" style="background-color: rgb(55, 134, 81)" type="button" class="btn-danger_nav_schedule">
+    </li>
+    {% endfor %}
+    <div align="center" style="margin-top: 20px;">
+        <a href="/start-tournament">
+            <button id="btn" style="background-color: rgb(55, 134, 81)" type="button" class="btn-danger_nav_schedule">
         Start Tournament
       </button>
-    </a>
-    <a href="/new-players">
-      <button id="btn" style="background-color: rgb(55, 134, 81)" type="button" class="btn-danger_nav_schedule">
+        </a>
+        <a href="/new-players">
+            <button id="btn" style="background-color: rgb(55, 134, 81)" type="button" class="btn-danger_nav_schedule">
         Add Players Manually
       </button>
-    </a>
-  </div>
-
-  {% else %}
-  <tbody class="list-group list-group-flush" id="pary">
-    <div style="margin-right: 30px;" align="right">
-
-      <a href="/standings">
-        <button id="btn" type="button" class="btn-add">Standings</button>
-      </a>
-
+        </a>
     </div>
-    {% for round in tournament.rounds %}
-    {% if round.number <= tournament.current_round_number %} {% if tournament.type=="Tree" %} {% if
-      tournament.max_rounds - round.number==0 %} <h4 align="center" class="h4_round">FINAL</h4>
-      {% elif tournament.max_rounds - round.number == 1 %}
-      <h4 align="center" class="h4_round">SEMIFINALS</h4>
-      {% elif tournament.max_rounds - round.number == 2 %}
-      <h4 align="center" class="h4_round">QUARTER-FINALS</h4>
-      {% else %}
-      <h4 align="center" class="h4_round">Round: {{round.number}}</h4>
-      {% endif %}
-      {% else %}
-      <h4 align="center" class="h4_round">Round: {{round.number}}</h4>
-      {% endif %}
 
-      {% for duel in round.duels %}
-      <tr class="list-group list-group-flush" id="pary">
-        <div align="center">
-          <td class="badge">
-            <button id="btn" class="btn_schedule_list badge" onClick="showDuel({{duel.id}})">
+    {% else %}
+    <tbody class="list-group list-group-flush" id="pary">
+        <div style="margin-right: 30px;" align="right">
+
+            <a href="/standings">
+                <button id="btn" type="button" class="btn-add">Standings</button>
+            </a>
+
+        </div>
+        {% for round in tournament.rounds %} {% if round.number = tournament.current_round_number %} {% if tournament.type=="Tree" %} {% if tournament.max_rounds - round.number==0 %}
+        <h4 align="center" class="h4_round">FINAL</h4>
+        {% elif tournament.max_rounds - round.number == 1 %}
+        <h4 align="center" class="h4_round">SEMIFINALS</h4>
+        {% elif tournament.max_rounds - round.number == 2 %}
+        <h4 align="center" class="h4_round">QUARTER-FINALS</h4>
+        {% else %}
+        <h4 align="center" class="h4_round">Round: {{round.number}}</h4>
+        {% endif %} {% else %}
+        <h4 align="center" class="h4_round">Round: {{round.number}}</h4>
+        {% endif %} {% for duel in round.duels %}
+        <tr class="list-group list-group-flush" id="pary">
+            <div align="center">
+                <td class="badge">
+                    <button id="btn" class="btn_schedule_list badge" onClick="showDuel({{duel.id}})">
               <div class="btn-danger_nav_list_group_schedule_nick_one" align="left" style="display: inline-block">
                 <h4>
                   {{duel.opponent_1.name}}
@@ -72,49 +67,43 @@
               <div class="btn-danger_nav_list_group_schedule_nick_two" align="right" style="display: inline-block">
                 <h4>{{duel.opponent_2.name}}</h4>
               </div>
-            </button>
-            {% endfor %}
-          </td>
-          </h4>
-        </div>
-      </tr>
-  </tbody>
+            </button> {% endfor %}
+                </td>
+                </h4>
+            </div>
+        </tr>
+    </tbody>
 
-  {% endif %} {% endfor %} {% endif %}
-  {% if tournament.status == 'active' %}
-  {% if tournament.current_round_number == 0 or tournament.current_round_number < tournament.max_rounds %} <div
-    align="center" style="margin-top: 20px;">
-    <a href="/generate-new-round">
-      <button id="btn" style="background-color: rgb(55, 134, 81)" type="button" class="btn-danger_nav_schedule">
+    {% endif %} {% endfor %} {% endif %} {% if tournament.status == 'active' %} {% if tournament.current_round_number == 0 or tournament.current_round_number tournament.max_rounds %}
+    <div align="center" style="margin-top: 20px;">
+        <a href="/generate-new-round">
+            <button id="btn" style="background-color: rgb(55, 134, 81)" type="button" class="btn-danger_nav_schedule">
         New Round
       </button>
-    </a>
-    {% if tournament.type == 'RoundRobin' %}
+        </a>
+        {% if tournament.type == 'RoundRobin' %}
 
-    <a href="/generate-all-rounds">
-      <button id="btn" style="background-color: rgb(55, 65, 95) " type="button " class="btn-danger_nav_schedule">
+        <a href="/generate-all-rounds">
+            <button id="btn" style="background-color: rgb(55, 65, 95) " type="button " class="btn-danger_nav_schedule">
         Generate all rounds
       </button>
-    </a>
-    {% endif %}
-    {% endif %}
-    {% endif %}
-    </a>
-    {% if tournament.status == 'active' %}
-    <a href="/end-tournament">
-      <button id="btn" style="background-color: rgb(55, 65, 95) " type="button " class="btn-danger_nav_schedule">
+        </a>
+        {% endif %} {% endif %} {% endif %}
+        </a>
+        {% if tournament.status == 'active' %}
+        <a href="/end-tournament">
+            <button id="btn" style="background-color: rgb(55, 65, 95) " type="button " class="btn-danger_nav_schedule">
         End Tournament
       </button>
-    </a>
+        </a>
 
-    {% endif %}
-    {% if user.is_admin and not tournament.is_public %}
-    <a href="/publish-tournament">
-      <button id="btn" style="background-color: rgb(55, 65, 95) " type="button " class="btn-danger_nav_schedule">
+        {% endif %} {% if user.is_admin and not tournament.is_public %}
+        <a href="/publish-tournament">
+            <button id="btn" style="background-color: rgb(55, 65, 95) " type="button " class="btn-danger_nav_schedule">
         Publish
       </button>
-    </a>
-    {% endif %}
+        </a>
+        {% endif %}
 
     </div>
     <br>
