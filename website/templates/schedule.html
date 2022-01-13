@@ -6,7 +6,7 @@
 
     {% if tournament.status == 'upcoming' %} {% for opponent in tournament.opponents %}
     <li align="center" class="list-group-item">
-        {{opponent.name}} {{opponent.email}}
+        <i class="fas fa-user-alt"></i> {{opponent.name}} {{opponent.email}}
         <button type="button" class="close" onClick="deletePlayer({{opponent.id}})">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -15,11 +15,13 @@
     <div align="center" style="margin-top: 20px;">
         <a href="/start-tournament">
             <button id="btn" style="background-color: rgb(55, 134, 81)" type="button" class="btn-danger_nav_schedule">
+        <i class="fas fa-play-circle"></i>
         Start Tournament
       </button>
         </a>
         <a href="/new-players">
             <button id="btn" style="background-color: rgb(55, 134, 81)" type="button" class="btn-danger_nav_schedule">
+              <i class="fas fa-user-plus"></i>
         Add Players Manually
       </button>
         </a>
@@ -30,11 +32,11 @@
         <div style="margin-right: 30px;" align="right">
 
             <a href="/standings">
-                <button id="btn" type="button" class="btn-add">Standings</button>
+                <button id="btn" type="button" class="btn-add"><i class="fas fa-list-alt"></i> Standings</button>
             </a>
 
         </div>
-        {% for round in tournament.rounds %} {% if round.number = tournament.current_round_number %} {% if tournament.type=="Tree" %} {% if tournament.max_rounds - round.number==0 %}
+        {% for round in tournament.rounds %} {% if round.number == tournament.current_round_number %} {% if tournament.type=="Tree" %} {% if tournament.max_rounds - round.number==0 %}
         <h4 align="center" class="h4_round">FINAL</h4>
         {% elif tournament.max_rounds - round.number == 1 %}
         <h4 align="center" class="h4_round">SEMIFINALS</h4>
@@ -49,35 +51,36 @@
             <div align="center">
                 <td class="badge">
                     <button id="btn" class="btn_schedule_list badge" onClick="showDuel({{duel.id}})">
-              <div class="btn-danger_nav_list_group_schedule_nick_one" align="left" style="display: inline-block">
-                <h4>
-                  {{duel.opponent_1.name}}
-                </h4>
-              </div>
+            <div class="btn-danger_nav_list_group_schedule_nick_one" align="left" style="display: inline-block">
+              <h4>
+                {{duel.opponent_1.name}}
+              </h4>
+            </div>
 
-              <!-- wynik -->
-              <div class="btn-danger_nav_list_group_schedule_point" style="display: inline-block">
-                {% if duel.score_1 is none or duel.score_1 is none %}
-                <h4 style="color: #a03636; font-weight: 700;"> 0 : 0 </h4>
-                {% else %}
-                <h4 style="color: #5aa0ba; font-weight: 700;">{{duel.score_1}} : {{duel.score_2}}</h4>
-                {% endif %}
-              </div>
+            <!-- wynik -->
+            <div class="btn-danger_nav_list_group_schedule_point" style="display: inline-block">
+              {% if duel.score_1 is none or duel.score_1 is none %}
+              <h4 style="color: #a03636; font-weight: 700;"> 0 : 0 </h4>
+              {% else %}
+              <h4 style="color: #5aa0ba; font-weight: 700;">{{duel.score_1}} : {{duel.score_2}}</h4>
+              {% endif %}
+            </div>
 
-              <div class="btn-danger_nav_list_group_schedule_nick_two" align="right" style="display: inline-block">
-                <h4>{{duel.opponent_2.name}}</h4>
-              </div>
-            </button> {% endfor %}
+            <div class="btn-danger_nav_list_group_schedule_nick_two" align="right" style="display: inline-block">
+              <h4>{{duel.opponent_2.name}}</h4>
+            </div>
+          </button> {% endfor %}
                 </td>
                 </h4>
             </div>
         </tr>
     </tbody>
 
-    {% endif %} {% endfor %} {% endif %} {% if tournament.status == 'active' %} {% if tournament.current_round_number == 0 or tournament.current_round_number tournament.max_rounds %}
-    <div align="center" style="margin-top: 20px;">
+    {% endif %} {% endfor %} {% endif %} {% if tournament.status == 'active' %} {% if tournament.current_round_number == 0 or tournament.current_round_number
+    <tournament.max_rounds %} <div align="center" style="margin-top: 20px;">
         <a href="/generate-new-round">
             <button id="btn" style="background-color: rgb(55, 134, 81)" type="button" class="btn-danger_nav_schedule">
+        <i class="fas fa-plus-circle"></i>
         New Round
       </button>
         </a>
@@ -85,6 +88,7 @@
 
         <a href="/generate-all-rounds">
             <button id="btn" style="background-color: rgb(55, 65, 95) " type="button " class="btn-danger_nav_schedule">
+        <i class="fas fa-folder-plus"></i>
         Generate all rounds
       </button>
         </a>
@@ -93,6 +97,7 @@
         {% if tournament.status == 'active' %}
         <a href="/end-tournament">
             <button id="btn" style="background-color: rgb(55, 65, 95) " type="button " class="btn-danger_nav_schedule">
+        <i class="fas fa-calendar-times"></i>
         End Tournament
       </button>
         </a>
@@ -100,12 +105,13 @@
         {% endif %} {% if user.is_admin and not tournament.is_public %}
         <a href="/publish-tournament">
             <button id="btn" style="background-color: rgb(55, 65, 95) " type="button " class="btn-danger_nav_schedule">
+              <i class="fas fa-upload"></i>
         Publish
       </button>
         </a>
         {% endif %}
 
-    </div>
-    <br>
+        </div>
+        <br>
 </section>
 {% endblock %}
