@@ -2,7 +2,7 @@
 <section class="update_duel_box_container container_update_duel">
     <br>
 
-    <section class="badge" align="center">
+    <section class="badge_update_dual" align="center">
         <div class="btn-danger_nav_list_group_schedule_nick_one" style="display: inline-block">
             <h4>
                 {{duel.opponent_1.name}}
@@ -31,27 +31,28 @@
         <form method="POST">
 
             <div align="center">
-                <ol class="badge">
+                <ol class="badge_update_dual">
                     <!-- <br> {% if duel.score_1 is none or duel.score_1 is none %} {% else %}
                     <h3 style="color: #5AA0BA;" align="center">{{duel.score_1}}:{{duel.score_2}}</h3>
                     {% endif %} -->
-                    <br>
 
-                    <input class="type_score" name="score1" type="number" placeholder=" {{duel.opponent_1.name}}" />
-                    <input class="type_score" name="score2" type="number" placeholder=" {{duel.opponent_2.name}}" />
+                    <input class="type_score" name="score1" type="number" />
+                    <input class="type_score" name="score2" type="number" />
                 </ol>
             </div>
             <br />
 
     </ol>
     <div align="center">
-        <button style="background-color: #3a5c39;" type="submit" class="btn-danger_nav_schedule">Save</button>
+        <button style="background-color: #3a5c39;" type="submit" class="btn-danger_nav_schedule"><i
+                class="fas fa-save"></i> Save</button>
 
         <a href="/reset-duel">
-            <button style="background-color: #a03636;" type="button" class="btn-danger_nav_schedule">Reset</button>
+            <button style="background-color: #a03636;" type="button" class="btn-danger_nav_schedule"><i
+                    class="fas fa-trash-restore"></i> Reset</button>
         </a>
-        <button onclick="goBack()" style="background-color: #5AA0BA;" type="button"
-            class="btn-danger_nav_schedule">Back</button>
+        <button onclick="goBack()" style="background-color: #5AA0BA;" type="button" class="btn-danger_nav_schedule"><i
+                class="fas fa-backward"></i> Back</button>
     </div>
 </section>
 {% endblock %}

@@ -4,8 +4,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        crossorigin="anonymous" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Stick+No+Bills:wght@600&display=swap" rel="stylesheet" />
@@ -17,6 +19,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 
     <title>{% block title %}Home{% endblock %}</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tippy.js/2.5.3/tippy.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tippy.js/2.5.3/themes/light.css" />
 </head>
 
 <body>
@@ -39,7 +44,7 @@
 
         </div>
         <button onclick="topFunction()" id="myBtn" title="Go to top">
-            <img src="../static/arrow.png" height="40px" />
+            <i style="margin-top: 10px;" class="fas fa-sort-up fa-2x"></i>
         </button>
         <nav>
             <!-- <div class="menu-icon">
@@ -48,12 +53,31 @@
             <a id="home" href="/">
                 <div class="logo" style="color: #5aa0ba; font-weight: 700">Liceum 31</div>
             </a>
-            <div class="nav-items">
-                <li><a class="linkbutton link-active" id="home" href="/">Home</a></li>
-                <li><a class="linkbutton" href="/tournaments">My Tournaments</a></li>
-                <li><a class="linkbutton" href="/public-tournaments">Public tournaments</a></li>
-                <li><a class="linkbutton" href="/video">Video</a></li>
+            <div id="btn" class="nav-items">
+                <li>
+                    <a class="tooltip" title="Home Page" id="home" href="/"><i style="margin-bottom: 20px;" class="fas fa-home"></i></a>
+                </li>
+                <li>
+                    <a class="tooltip" title="My Tournaments" href="/tournaments"><i style="margin-bottom: 20px;" class="fas fa-trophy"></i></a>
+                </li>
+                <li>
+                    <a class="tooltip" title="Global Tournament" href="/public-tournaments"><i style="margin-bottom: 20px;" class="fas fa-globe-europe"></i></a>
+                <li>
+                    <a class="tooltip tippy-arrow" title="Video" href="/video"><i style="margin-bottom: 20px;" class="fas fa-video"></i></a>
+                    <div class="tooltip__arrow"></div>
+                </li>
             </div>
+
+            <script>
+                tippy('.tooltip', {
+                // default
+                arrow: true,
+                animation: 'shift-away',
+                duration: 400,
+                allowTitleHTML: true,
+                zIndex: 9999
+            });
+            </script>
             {% if user.is_authenticated %}
             <ul id="account-btn">
                 <li>
@@ -69,26 +93,39 @@
                         </svg>
                     </a>
                     <ul>
-                        <h4 style="text-align: center" class="h4_main">
-                            {{user.first_name}}
-                        </h4>
-                        {% if user.is_admin %}
-                        <h4 style="text-align: center" class="h4_main_admin">
-                            Administrator
-                        </h4>
-                        {% endif %}
-                        <h4 style="text-align: center" class="h4_main_email">
+
+                        <div style="margin: 15px;">
+                            <div style="float: left; margin-left: 40px; margin-top: 5px;" class="profileThumb"><i
+                                    style="color: #20242a;" class="fas fa-headset fa-3x"></i>
+                            </div>
+                            <h4 style="float: right; margin-top: 11px; margin-right: 45px;" class=" h4_main">
+                                {{user.first_name}}</h4>
+
+                        </div>
+                        <h4 style="text-align: center; margin-bottom: -80px; margin-top: 20px;" class="h4_main_email">
                             {{user.email}}
                         </h4>
-                        <div align="center">
+
+                        <div style="margin-top: 100px;" align="center">
                             <hr class="konto_hr" />
                         </div>
+
                         <section>
+                            {% if user.is_admin %}
+                            <div style="margin-right: 25px;">
+                                <button style="float: right; margin-right: 10px; margin-bottom: 20px;" id="logout"
+                                    class="btn-add-account_admin"><i class="fas fa-shield-alt"></i>
+                                    Administrator</button>
+                            </div>
+                            {% endif %}
                             <a href="#" onClick="deleteUser({{user.id}})">
-                                <button style="float: left; margin-left: 10px; margin-bottom: 20px;" id="btn" class="btn-add-account_delete"><i class="fas fa-trash-alt"></i> Delete account</button>
+                                <button style="float: left; margin-left: 10px; margin-bottom: 20px;" id="btn"
+                                    class="btn-add-account_delete"><i class="fas fa-trash-alt"></i> Delete
+                                    account</button>
                             </a>
                             <a href="/logout">
-                                <button style="float: right; margin-right: 10px; margin-bottom: 20px;" id="logout" class="btn-add-account"><i class="fas fa-sign-out-alt"></i> Log out</button>
+                                <button style="float: right; margin-right: 10px; margin-bottom: 20px;" id="logout"
+                                    class="btn-add-account_logout"><i class="fas fa-sign-out-alt"></i> Log out</button>
                             </a>
                         </section>
                     </ul>
@@ -102,7 +139,8 @@
                     <button style="float: right; margin: top 20px right 10px bottom 20px;" id="logout" class="btn-add-account"><i class="far fa-registered"></i> Sign Up</button>
                 </a> -->
                 <a href="/login">
-                    <button style="float: right; margin: top 20px right 10px bottom 20px;" id="logout" class="btn-add-account"><i class="fas fa-sign-in-alt"></i> Login</button>
+                    <button style="float: right; margin: top 20px right 10px bottom 20px;" id="logout"
+                        class="btn-add-account"><i class="fas fa-sign-in-alt"></i> Login</button>
                 </a>
 
             </li>
@@ -110,8 +148,8 @@
             {% endif %}
         </nav>
 
-
-        {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %} {% if category == 'error' %}
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in
+        messages %} {% if category == 'error' %}
         <div class="alert-wrapper">
             <div class="alert alert-danger alert-dismissable fade show" role="alert">
                 <strong><i class="fa fa-exclamation-circle"></i> Error!</strong> {{ message }}
@@ -136,9 +174,9 @@
         <div class="container" style="min-width: 100%;">{% block content %} {% endblock %}</div>
 
         <script>
+            // <!-- ------ Scrool Top ------  -->
             //Get the button
             var mybutton = document.getElementById("myBtn");
-
             // When the user scrolls down 20px from the top of the document, show the button
             window.onscroll = function() {
                 scrollFunction();
@@ -154,19 +192,29 @@
                     mybutton.style.display = "none";
                 }
             }
-            setTimeout(function() {
-                $('#successMessage').fadeOut('fast');
-            }, 30); // <-- time in milliseconds
-            // const preload = document.querySelector('.preload');
+            
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
 
-            // preload.classList.add('show-preloader');
-            // window.addEventListener('load', () => {
-            //     setTimeout(() => {
-            //         preload.classList.remove('show-preloader');
-            //     }, 900);
-            // });
 
-            // SNOW ANIMATED
+            // <!-- ------ Preload ------  -->
+            // setTimeout(function () {
+            //     $('#successMessage').fadeOut('fast');
+            // }, 30);  time in milliseconds
+            //  const preload = document.querySelector('.preload');
+            //  preload.classList.add('show-preloader');
+            //  window.addEventListener('load', () => {
+            //      setTimeout(() => {
+            //          preload.classList.remove('show-preloader');
+            //      }, 900);
+            //  });
+
+
+
+            // <!-- ------ SNOW ------  -->
             document.addEventListener('DOMContentLoaded', function() {
                 var script = document.createElement('script');
                 script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
@@ -233,14 +281,17 @@
             });
         </script>
 
-
-
-
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js "
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN "
+            crossorigin="anonymous "></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js "
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q "
+            crossorigin="anonymous "></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js "
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl "
+            crossorigin="anonymous "></script>
         <script type="text/javascript " src="{{ url_for( 'static', filename='index.js' ) }} "></script>
-        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+        <link rel="preconnect" href="/your-path-to-fontawesome/css/fontawesome.css" rel="stylesheet">
         <script src="https://kit.fontawesome.com/2cdeb7e939.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/balloon-css/balloon.min.css">
 

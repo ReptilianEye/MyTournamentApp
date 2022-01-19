@@ -6,12 +6,14 @@
   <ol class="list-group list-group-flush" id="pary">
     <div style="margin-right: 30px" align="right">
       <a href="/public-standings">
-        <button id="btn" type="button" class="btn-add">Standings</button>
+        <button id="btn" type="button" class="btn-add"><i class="fas fa-list-alt"></i> Standings</button>
       </a>
     </div>
+    <br>
     <div style="margin-right: 30px" align="right">
       <a href="/quit-tournament">
-        <button id="btn" type="button" class="btn-add">Quit the tournament</button>
+        <button id="btn" type="button" class="btn-add"><i class="fas fa-arrow-alt-circle-right"></i> Quit the
+          tournament</button>
       </a>
     </div>
     {% for round in tournament.rounds %} {% if round.number
