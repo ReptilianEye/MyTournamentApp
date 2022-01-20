@@ -37,6 +37,35 @@
             </center>
         </div>
     </div> -->
+
+    <div class="wrapper">
+        <i class="fas fa-cookie-bite fa-4x"></i>
+        <div class="content">
+          <header>Cookies Consent</header>
+          <p>This website use cookies to ensure you get the best experience on our website.</p>
+          <div class="buttons">
+            <button class="item"><i class="fas fa-check-circle"></i> I understand</button>
+          </div>
+        </div>
+    </div>
+
+      <script>
+        const cookieBox = document.querySelector(".wrapper"),
+        acceptBtn = cookieBox.querySelector("button");
+        acceptBtn.onclick = ()=>{
+          //setting cookie for 1 month, after one month it'll be expired automatically
+          document.cookie = "CookieBy=CodingNepal; max-age="+60*60*24*30;
+          if(document.cookie){ //if cookie is set
+            cookieBox.classList.add("hide"); //hide cookie box
+          }else{ //if cookie not set then alert an error
+            alert("Cookie can't be set! Please unblock this site from the cookie setting of your browser.");
+          }
+        }
+        let checkCookie = document.cookie.indexOf("CookieBy=CodingNepal"); //checking our cookie
+        //if cookie is set then hide the cookie box else show it
+        checkCookie != -1 ? cookieBox.classList.add("hide") : cookieBox.classList.remove("hide");
+      </script>
+
     <section>
 
         <!-- ------ SNOW ------  -->
@@ -68,6 +97,7 @@
                 </li>
             </div>
 
+             <!-- ------ NAV ------  -->
             <script>
                 tippy('.tooltip', {
                 // default
@@ -78,6 +108,7 @@
                 zIndex: 9999
             });
             </script>
+
             {% if user.is_authenticated %}
             <ul id="account-btn">
                 <li>
