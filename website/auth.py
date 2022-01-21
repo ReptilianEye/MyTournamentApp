@@ -103,3 +103,4 @@ def add_admin():
             flash('Email not recognized', category='error')
 
     return render_template("add_admin.html", user=current_user)
+

@@ -1,10 +1,15 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
 
+
 db = SQLAlchemy()
 DB_NAME = "database.db"  # nazwa bazy danych
+
+def page_not_found(e):
+    # note that we set the 404 status explicitly
+    return render_template('404.html'), 404
 
 def create_app():
     app = Flask(__name__)
@@ -12,6 +17,8 @@ def create_app():
     app.config['SECRET_KEY'] = 'kjabwdlajbal'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    
+    app.config['TRAP_HTTP_EXCEPTIONS']=True
 
     db.init_app(app)  # inicjowanie bazy danych dla aplikacji
 
@@ -35,6 +42,9 @@ def create_app():
         return User.query.get(int(id))
 
     return app
+
+
+
 
 
 def create_datebase(app):

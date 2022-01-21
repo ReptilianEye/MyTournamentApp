@@ -2,21 +2,21 @@
 <section class="new_tournaments_box_container container_tournaments_new">
     <br />
     <form method="POST">
-        <h3 style="margin-bottom: 20px;" align="center">New Tournament</h3>
-
+        <h3 style="margin-bottom: 10px;" align="center">New Tournament</h3>
         <div class="form-group">
+            <label class="label_login" for="email">Name</label>
             <input type="text" class="form_control" name="name" placeholder="Enter New Tournament Name" />
         </div>
-        <br />
         <div class="form-group">
+            <label class="label_login" for="email">Date</label>
             <input type="date" class="form_control" name="date" placeholder="Enter Date" />
         </div>
-        <br />
         <div class="form-group">
+            <label class="label_login" for="email">Location</label>
             <input type="text" class="form_control" name="location" placeholder="Enter Location" />
         </div>
-        <br />
         <div>
+            <label class="label_login" for="email">Discipline</label>
             <select name="discipline" class="form_control" placeholder="Select discipline">
                 <option value="Football">Football</option>
                 <option value="Basketball">Basketball</option>
@@ -26,9 +26,8 @@
             </select>
         </div>
         <br />
-        <br />
-
         <div>
+            <label class="label_login" for="email">Type</label>
             <select name="type" class="form_control" placeholder="Select type">
                 <!-- <option label="Round Robin">Kazdy z kazdym</option> -->
                 <option title="Each of all players play each other" value="RoundRobin">Round Robin</option>
@@ -37,11 +36,15 @@
 
             </select>
         </div>
-
         <br />
-        <br />
+        <div class="form-group">
+            <label class="label_login" style="width: 80%; margin-left: 10%" for="email">Description</label>
+            <textarea class="form_control" style="width: 80%; margin-left: 10%" maxlength=200 name="description"
+                placeholder="Description to your tournament... (optional)"></textarea>
+        </div>
         <center>
-            <button id="btn" type="submit" class="btn-danger_nav_login"><i class="fa fa-plus-circle"></i> Create</button>
+            <button id="btn" type="submit" class="btn-danger_nav_login"><i class="fa fa-plus-circle"></i>
+                Create</button>
         </center>
     </form>
 </section>

@@ -23,6 +23,7 @@ class Tournament(db.Model):
     location = db.Column(db.String(150))
     discipline = db.Column(db.String(150))    
     type = db.Column(db.String(150))
+    description = db.Column(db.String(250))
     movielink = db.Column(db.String(150))
 
     status = db.Column(db.String(150), default="upcoming")

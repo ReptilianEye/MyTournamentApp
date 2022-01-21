@@ -9,9 +9,9 @@ class TournamentController():
 
     statuses = ['upcoming','active','ended']
 
-    def CreateNew(self, user_Id, name, date, location, discipline, type):
+    def CreateNew(self, user_Id, name, date, location, discipline, type, description):
         self.tournament = Tournament(user_id=user_Id, name=name,
-                                     date=date, location=location, discipline=discipline, type=type)
+                                     date=date, location=location, discipline=discipline, type=type, description=description)
         db.session.add(self.tournament)
         db.session.commit()
         return self.tournament.id
@@ -26,7 +26,7 @@ class TournamentController():
             self.Save()
             return True
         else:
-            return Exception("Cannot end tournament that have no filled scores")
+            return Exception("Cannot end tournament that have not filled scores")
     
 
     def Load(self, id):

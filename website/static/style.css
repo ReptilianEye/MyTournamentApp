@@ -1322,12 +1322,12 @@ hr {
 }
 
 .container_tournaments_new {
-  width: 650px;
-  height: 605px;
-  margin: 0 auto;
-  margin-top: 5%;
+    width: 45%;
+    height: fit-content;
+    margin: 0 auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
-
 /* TOURNAMENTS BOX */
 
 .tournaments_box_container {

@@ -18,6 +18,8 @@ views = Blueprint('views', __name__)
 ### main pages ###
 
 
+
+
 @views.route('/', methods=['GET', 'POST'])
 def home():
     return render_template("home.html", user=current_user)
@@ -52,6 +54,7 @@ def get_tournament_info():
         location = request.form.get('location')
         discipline = request.form.get('discipline')
         type = request.form.get('type')
+        description = request.form.get('description')
 
         if len(name) < 3:
             flash(f"Tournament's name is too short (at least 3 characters).",
@@ -70,7 +73,7 @@ def get_tournament_info():
 
             newTournament = TournamentController()
             id = newTournament.CreateNew(
-                current_user.id, name, date, location, discipline, type)
+                current_user.id, name, date, location, discipline, type, description)
             current_user.current_tournament_id = id
             newTournament.Save()
 
@@ -181,17 +184,24 @@ def end_tournament():
     tournamentDTO = TournamentController()
     tournamentDTO.Load(current_user.current_tournament_id)
     if tournamentDTO.CheckIfScoresAreWritten():
-        tournamentDTO.End()
-        flash('You successfully ended your tournament',category='success')
-        return redirect(url_for('views.show_standings'))
+        if tournamentDTO.tournament.current_round_number > 0:
+            tournamentDTO.End()
+            flash('You successfully ended your tournament',category='success')
+            return redirect(url_for('views.show_standings'))
+        else:
+            return redirect(url_for('views.reset_tournament'))
     else:
         flash('You have to fill all the scores, first',category='error')
         return redirect(url_for('views.schedule'))
 
+
+@views.route('/reset-tournament')
+@login_required
 def reset_tournament():
     tournamentDTO = TournamentController()
     tournamentDTO.Load(current_user.current_tournament_id)
     tournamentDTO.Reset()
+    return redirect(url_for("views.schedule"))
     
 
 @views.route('public-schedule')
@@ -226,7 +236,7 @@ def join_tournament():
         return redirect(url_for("views.show_joined_tournaments"))
     else:
         flash("You have already joined that tournament")
-        return redirect(url_for("views.public_schedule"))
+        return redirect(url_for("views.show_joined_schedule"))
 
 
 @views.route('/set-tournament-id', methods=['POST', 'GET'])

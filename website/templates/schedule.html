@@ -7,7 +7,11 @@
     <button id="btn" type="button" class="btn-add"><i class="fas fa-table"></i> Standings</button>
   </a>
 
-  {% if tournament.status == 'upcoming' %} {% for opponent in tournament.opponents %}
+  {% if tournament.status == 'upcoming' %}
+  <div class="form_control">
+    {{tournament.description}}
+  </div>
+  {% for opponent in tournament.opponents %}
   <section>
     <li align="center" class="list-group-item">
       <i class="fas fa-user-alt"></i> {{opponent.name}} {{opponent.email}}
@@ -36,42 +40,42 @@
   <ol class="list-group list-group-flush" id="pary">
     <br> {% for round in tournament.rounds %} {% if round.number
     <=tournament.current_round_number %} <h4 align="center" class="h4_round">Runda: {{round.number}}</h4>
-    {% for duel in round.duels %}
+      {% for duel in round.duels %}
 
-    <ol class="list-group list-group-flush" id="pary">
-      <div align="center">
+      <ol class="list-group list-group-flush" id="pary">
+        <div align="center">
 
-        <ol class="badge">
-          <br>
-          <button class="btn_schedule_list" onClick="showDuel({{duel.id}})">
-            <div class="btn-danger_nav_list_group_schedule_nick_one" align="left" style="display: inline-block">
-              <h4>
-                {{duel.opponent_1.name}}
-                <br />
-              </h4>
-            </div>
-            <!-- wynik -->
-            <div class="btn-danger_nav_list_group_schedule_point" style="display: inline-block;">
-              {% if duel.score_1 is none or duel.score_1 is none %}
-              <h4> - </h4>
-              {% else %}
-              <h4>{{duel.score_1}}:{{duel.score_2}}</h4>
-              {% endif %}
+          <ol class="badge">
+            <br>
+            <button class="btn_schedule_list" onClick="showDuel({{duel.id}})">
+              <div class="btn-danger_nav_list_group_schedule_nick_one" align="left" style="display: inline-block">
+                <h4>
+                  {{duel.opponent_1.name}}
+                  <br />
+                </h4>
+              </div>
+              <!-- wynik -->
+              <div class="btn-danger_nav_list_group_schedule_point" style="display: inline-block;">
+                {% if duel.score_1 is none or duel.score_1 is none %}
+                <h4> - </h4>
+                {% else %}
+                <h4>{{duel.score_1}}:{{duel.score_2}}</h4>
+                {% endif %}
 
-            </div>
-            <div class="btn-danger_nav_list_group_schedule_nick_two" align="right" style="display: inline-block">
-              <h4> {{duel.opponent_2.name}}
-                <br />
-              </h4>
+              </div>
+              <div class="btn-danger_nav_list_group_schedule_nick_two" align="right" style="display: inline-block">
+                <h4> {{duel.opponent_2.name}}
+                  <br />
+                </h4>
 
-            </div>
-          </button> {% endfor %}
+              </div>
+            </button> {% endfor %}
 
-        </ol>
-        </h4>
-      </div>
-      <br />
-    </ol>
+          </ol>
+          </h4>
+        </div>
+        <br />
+      </ol>
   </ol>
 
   {% endif %} {% endfor %} {% endif %} {% if tournament.status == 'active' %} {% if tournament.current_round_number == 0
@@ -100,7 +104,7 @@
         End Tournament
       </button>
     </a>
-
+    
     {% endif %} {% if user.is_admin and not tournament.is_public %}
     <a align="center" href="/publish-tournament">
       <button id="btn" style="background-color: rgb(55, 65, 95) " type="button " class="btn-danger_nav_schedule">
@@ -109,8 +113,14 @@
       </button>
     </a>
     {% endif %}
-
-  </div>
-  <br>
+    {% if tournament.status != 'upcoming' %}
+    <a href="/reset-tournament">
+      <button id="btn" style="background-color: rgb(230, 61, 39) " type="button " class="btn-danger_nav_schedule">
+        Start Over
+      </button>
+    </a>
+    {% endif %}
+    </div>
+    <br>
 </section>
 {% endblock %}
