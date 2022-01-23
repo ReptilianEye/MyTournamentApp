@@ -85,9 +85,10 @@ class TournamentController():
         opponents = self.tournament.opponents
         for i in range(len(opponents)):
             opponentsName = request.form.get(f'opponent{i+1}')
-            if opponentsName > 1:
-                if opponents[i].name != opponentsName:
-                    opponents[i].name  = opponentsName
+            if opponentsName:
+                if len(opponentsName) > 1:
+                    if opponents[i].name != opponentsName:
+                        opponents[i].name  = opponentsName
         self.Save()
 
     def Publish(self):

@@ -43,7 +43,8 @@ usunac 'back'
 2. grafika
 
 
-
+/new-opponents - zmiana wygladu nowych graczy
+/schedule - zmiana 3 kropek i opcji z nia zwiazanych
 
 
 3. algorytmy

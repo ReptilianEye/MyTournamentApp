@@ -109,7 +109,6 @@ def get_opponents_manually():
     tournamentDTO = TournamentController()
     tournamentDTO.Load(current_user.current_tournament_id)
     partizipantsNumberLimit = tournamentDTO.tournament.max_opponents
-
     tournamentDTO.ApplyChangesInOpponentsNames(request)
     if request.method == 'POST':
         if len(tournamentDTO.tournament.opponents) > partizipantsNumberLimit:
