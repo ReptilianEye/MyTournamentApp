@@ -103,3 +103,23 @@ def add_admin():
             flash('Email not recognized', category='error')
 
     return render_template("add_admin.html", user=current_user)
+
+@auth.app_errorhandler(400)
+def page_not_found(e):
+    return render_template("400.html"), 400
+
+@auth.app_errorhandler(401)
+def page_not_found(e):
+    return render_template("401.html"), 401
+
+@auth.app_errorhandler(403)
+def page_not_found(e):
+    return render_template("403.html"), 403
+
+@auth.app_errorhandler(404)
+def page_not_found(e):
+    return render_template("404.html"), 404
+
+@auth.app_errorhandler(500)
+def page_not_found(e):
+    return render_template("500.html"), 500

@@ -15,6 +15,10 @@ body {
   background: #5aa0ba;
 }
 
+.container {
+  width: 1800px;
+}
+
 #snow {
   position: fixed;
   top: 0;
@@ -23,6 +27,183 @@ body {
   bottom: 0;
   pointer-events: none;
   z-index: 1000;
+}
+
+/* <!-- ------ H4,H2,P,HR ------  --> */
+
+.p_video {
+  color: whitesmoke;
+  font-family: "Gluten", cursive;
+  text-align: center;
+  font-weight: 700;
+}
+
+h1 {
+  color: whitesmoke;
+  font-family: "Gluten", cursive;
+}
+
+h2 {
+  color: whitesmoke;
+  font-family: "Gluten", cursive;
+}
+
+h4 {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.h4_video {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #20242a;
+  font-size: 25px;
+  font-weight: bold;
+  margin: 10px;
+  text-align: center;
+}
+
+.h4_date_video {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #20242a;
+  font-size: 15px;
+  font-weight: bold;
+  margin: 20px;
+}
+
+.h4_main {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #20242a;
+  font-size: 28px;
+  font-weight: 800;
+  margin: 20px;
+}
+
+.h4_main_email {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #20242a;
+  font-size: 13px;
+  font-weight: 900;
+  margin: 20px;
+}
+
+.h4_main_admin {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #a03636;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.h4_konto {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 15px;
+}
+
+.h4_round {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #5aa0ba;
+  font-size: 25px;
+  font-weight: bold;
+  margin: 20px;
+}
+
+.h4_signup_footer {
+  font-family: inherit;
+  color: whitesmoke;
+  font-size: 15px;
+  font-weight: 500;
+  text-align: center;
+  line-height: 20px;
+}
+
+h3 {
+  color: whitesmoke;
+  font-family: "Stick No Bills", sans-serif;
+  font-size: 60px;
+}
+
+hr {
+  background-color: rgb(212, 212, 212);
+  height: 2px;
+  width: 20%;
+}
+
+.konto_hr {
+  background-color: #20242a;
+  height: 3px;
+  margin: 1rem 0.4rem;
+  width: 50%;
+}
+
+
+/* <!-- ------ Alert CSS ------  --> */
+
+.alert {
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 3px solid #20242a;
+  border-radius: 8px;
+  width: 600px;
+  margin: auto;
+  font-weight: 500;
+  box-shadow: 0 8px 30px 0 rgb(0 0 0 / 20%);
+}
+
+.badge {
+  /* display: flex; */
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding: 0;
+}
+
+.badge_update_dual {
+  display: flex;
+  justify-content: center;
+  /* flex-direction: column; */
+  align-items: center;
+  flex-wrap: nowrap;
+  padding: initial;
+}
+
+.alert-success {
+  color: #20242a;
+  background-color: rgb(212, 212, 212);
+  border-color: #20242a;
+  border-left: 5px solid #178344;
+}
+
+
+.alert-danger {
+  color: #202225;
+  background-color: #f7a7a3;
+  border-color: #f7a7a3;
+  border: 3px solid #20242a;
+  border-left: 5px solid #8f130c;
+}
+
+/* <!-- ------ CLOSE BTN CSS ------  --> */
+
+.close {
+  color: #171c24;
+  float: right;
+  font-size: 33px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: -8px;
+  text-shadow: 0 1px 0 #171c24;
+  opacity: 100%;
+}
+
+.close:active,
+.close:focus {
+  -moz-outline: none;
+  outline: none;
+}
+
+.close_tournaments_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* <!-- ------ Cookie CSS ------  --> */
@@ -82,7 +263,7 @@ body {
   color: rgb(212, 212, 212);
 }
 
-/* <!-- ------ scrollbar ------  --> */
+/* <!-- ------ Scrollbar ------  --> */
 
 body::-webkit-scrollbar {
   width: 10px;
@@ -102,6 +283,8 @@ body::-webkit-scrollbar-thumb {
 .hidden {
   display: none !important;
 }
+
+/* <!-- ------ BTN [ACTIVE,FOCUS] CSS ------  --> */
 
 #button_close:active,
 #button_close:focus {
@@ -126,6 +309,7 @@ body::-webkit-scrollbar-thumb {
   outline: none;
 }
 
+/* <!-- ------ NAV Tooltip CSS ------  --> */
 
 .tooltip {
   position: absolute;
@@ -164,297 +348,7 @@ body::-webkit-scrollbar-thumb {
   box-shadow: 0px 5px 12px rgb(0 0 0 / 80%);
 }
 
-
-/* <!-- ------ LOGIN ------  --> */
-
-/* SIGNUP BOX */
-
-.sign_box_container {
-  background-color: #20242a;
-  height: 250px;
-  width: 700px;
-  /* width: 600px; */
-  box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
-  border-radius: 40px;
-}
-
-.container_sign {
-  width: 650px;
-  height: 605px;
-  margin: 0 auto;
-  margin-top: 5%;
-}
-
-/* LOGIN BOX */
-
-.login_box_container {
-  background-color: #20242a;
-  height: 250px;
-  width: 700px;
-  /* width: 600px; */
-  box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
-  border-radius: 40px;
-}
-
-.container_login {
-  width: 650px;
-  height: 428px;
-  margin: 0 auto;
-  margin-top: 5%;
-  box-sizing: border-box;
-}
-
-/* LOGIN FORM */
-
-.signup_label {
-  margin-left: 180px;
-  font-size: 17px;
-}
-
-.signup_label:hover {
-  border-bottom: 2px solid #5aa0ba;
-}
-
-.form_control {
-  display: block;
-  width: 50%;
-  height: calc(1.5em + 0.75rem +2 px);
-  padding: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.5;
-  color: whitesmoke;
-  background-color: #20242a;
-  background-clip: padding-box;
-  border: 1px solid #ced4da;
-  border-radius: 0.15rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  margin-left: 25%;
-}
-
-.form-group {
-  margin-bottom: 1rem;
-}
-
-/* <!-- ------ ------  --> */
-
-/* Scroll up */
-
-#myBtn {
-  display: none;
-  position: fixed;
-  bottom: 15px;
-  right: 30px;
-  z-index: 99;
-  border: none;
-  outline: none;
-  background-color: #20242a;
-  color: rgb(212, 212, 212);
-  cursor: pointer;
-  padding: 2px;
-  border-radius: 10px;
-  height: 45px;
-  width: 50px;
-  box-shadow: 0px 10px 22px rgb(0 0 0 / 60%);
-  border-bottom: 5px solid rgb(212, 212, 212);
-  -webkit-animation: bounce 2s infinite 2s;
-  animation: bounce 2s infinite 2s;
-}
-
-@keyframes bounce {
-  0%,
-  100%,
-  20%,
-  50%,
-  80% {
-    -webkit-transform: translateY(0);
-    -ms-transform: translateY(0);
-    transform: translateY(0);
-  }
-  40% {
-    -webkit-transform: translateY(-10px);
-    -ms-transform: translateY(-10px);
-    transform: translateY(-10px);
-  }
-  60% {
-    -webkit-transform: translateY(-5px);
-    -ms-transform: translateY(-5px);
-    transform: translateY(-5px);
-  }
-}
-
-#myBtn:hover {
-  box-shadow: 0px 5px 32px rgb(0 0 0 / 80%);
-}
-
-footer {
-  width: 100%;
-  background-color: transparent;
-  color: #fff;
-  place-items: center;
-  padding: 30px;
-  font-size: 1.2rem;
-}
-
-.author {
-  color: whitesmoke;
-}
-
-.alert-wrapper {
-  width: 100%;
-  margin-top: 10px;
-  position: absolute;
-}
-
-/* ALERT */
-
-.alert {
-  padding: 0.75rem 1.25rem;
-  margin-bottom: 1rem;
-  border: 3px solid #20242a;
-  border-radius: 8px;
-  width: 600px;
-  margin: auto;
-  font-weight: 500;
-  box-shadow: 0 8px 30px 0 rgb(0 0 0 / 20%);
-}
-
-.badge {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  flex-wrap: nowrap;
-}
-
-.badge_update_dual {
-  display: flex;
-  justify-content: center;
-  /* flex-direction: column; */
-  align-items: center;
-  flex-wrap: nowrap;
-  padding: initial;
-}
-
-.alert-success {
-  color: #20242a;
-  background-color: rgb(212, 212, 212);
-  border-color: #20242a;
-  border-left: 5px solid #178344;
-}
-
-.close_tournaments_wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Close Tournaments */
-
-button.close_tournaments {
-  border-color: transparent;
-  background-color: #5aa0ba;
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  right: -10px;
-  top: -10px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-button.close_tournaments p {
-  width: 30px;
-  height: 33px;
-  text-align: center;
-}
-
-.td_helper {
-  width: 2.5rem;
-}
-
-.close_tournaments {
-  float: right;
-  font-size: 2.5rem;
-  font-weight: 900;
-  line-height: 1;
-  color: rgb(212, 212, 212);
-  opacity: 90%;
-  text-shadow: 0 1px 0 #171c24;
-  margin-right: auto;
-}
-
-.close_tournaments:hover {
-  color: #a03636;
-}
-
-.alert-danger {
-  color: #202225;
-  background-color: #f7a7a3;
-  border-color: #f7a7a3;
-  border: 3px solid #20242a;
-  border-left: 5px solid #8f130c;
-}
-
-.close {
-  color: #171c24;
-  float: right;
-  font-size: 33px;
-  font-weight: bold;
-  cursor: pointer;
-  margin-top: -8px;
-  text-shadow: 0 1px 0 #171c24;
-  opacity: 100%;
-}
-
-.close:active,
-.close:focus {
-  -moz-outline: none;
-  outline: none;
-}
-
-.list-group {
-  display: flex;
-  flex-direction: column;
-  padding-left: 0;
-  margin-bottom: 0;
-  font-weight: 700;
-}
-
-.list-group-flush .list-group-item:first-child {
-  border-top-width: 0;
-}
-
-.list-group-flush .list-group-item {
-  border-right-width: 0;
-  border-left-width: 0;
-  border-radius: 8px;
-  width: 50%;
-  margin-left: 25%;
-  margin-top: 6px;
-}
-
-.type_score {
-  background-color: #20242a;
-  border: none;
-  font-size: 22px;
-  box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.2);
-  border: 2px solid rgb(212, 212, 212);
-  opacity: 95%;
-  border-color: rgb(212, 212, 212);
-  border-radius: 15px;
-  color: rgb(212, 212, 212);
-  text-align: center;
-  font-weight: 800;
-  width: 200px;
-  height: 50px;
-  margin: 10px;
-}
-
-/* Dropdown menu */
+/* <!-- ------ Dropdown menu Login CSS ------  --> */
 
 .btn-add-account {
   background-color: rgb(212, 212, 212);
@@ -531,7 +425,278 @@ button.close_tournaments p {
   border: 1px solid #03744a;
   color: whitesmoke;
 }
-/* ACCOUNT Log out */
+
+
+/* <!-- ------ LOGIN ------  --> */
+
+/* Przycisk LOGIN */
+
+.btn-danger_nav_login {
+  background-color: rgb(212, 212, 212);
+  border: 0;
+  width: 200px;
+  height: 50px;
+  border-radius: 0.55rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #202225;
+  font-size: 15px;
+  font-weight: bold;
+  outline: none;
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+  transition: 0.5s;
+  backface-visibility: hidden;
+  border: 1px solid rgb(212, 212, 212);
+}
+
+.btn-danger_nav_login a {
+  width: 100%;
+  height: 100%;
+}
+
+.btn-danger_nav_login:hover {
+  transition: 0.5s;
+  cursor: pointer;
+  background-color: transparent;
+  color: whitesmoke;
+}
+
+.label_login {
+  display: block;
+  color: #5aa0ba;
+  margin-bottom: 10px;
+  margin-left: 165px;
+  font-weight: bold;
+}
+
+.footer_login {
+  display: block;
+  color: whitesmoke;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 15px;
+}
+
+/* SIGNUP BOX */
+
+.sign_box_container {
+  background-color: #20242a;
+  height: 250px;
+  width: 700px;
+  /* width: 600px; */
+  box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 40px;
+}
+
+.container_sign {
+  width: 650px;
+  height: 605px;
+  margin: 0 auto;
+  margin-top: 5%;
+}
+
+/* LOGIN BOX */
+
+.login_box_container {
+  background-color: #20242a;
+  height: 250px;
+  width: 700px;
+  /* width: 600px; */
+  box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 40px;
+}
+
+.container_login {
+  width: 650px;
+  height: 428px;
+  margin: 0 auto;
+  margin-top: 5%;
+  box-sizing: border-box;
+}
+
+/* LOGIN FORM */
+
+.signup_label {
+  margin-left: 180px;
+  font-size: 17px;
+}
+
+.signup_label:hover {
+  border-bottom: 2px solid #5aa0ba;
+}
+
+.form_control {
+  display: block;
+  width: 50%;
+  height: calc(1.5em + 0.75rem +2 px);
+  padding: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: whitesmoke;
+  background-color: #20242a;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.15rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  margin-left: 25%;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+/* <!-- ------ Scroll up BTN ------  --> */
+
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 15px;
+  right: 30px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: #20242a;
+  color: rgb(212, 212, 212);
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 10px;
+  height: 45px;
+  width: 50px;
+  box-shadow: 0px 10px 22px rgb(0 0 0 / 60%);
+  border-bottom: 5px solid rgb(212, 212, 212);
+  -webkit-animation: bounce 2s infinite 2s;
+  animation: bounce 2s infinite 2s;
+}
+
+@keyframes bounce {
+  0%,
+  100%,
+  20%,
+  50%,
+  80% {
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+  }
+  40% {
+    -webkit-transform: translateY(-10px);
+    -ms-transform: translateY(-10px);
+    transform: translateY(-10px);
+  }
+  60% {
+    -webkit-transform: translateY(-5px);
+    -ms-transform: translateY(-5px);
+    transform: translateY(-5px);
+  }
+}
+
+#myBtn:hover {
+  box-shadow: 0px 5px 32px rgb(0 0 0 / 80%);
+}
+
+/* <!-- ------ Footer ------  --> */
+
+footer {
+  width: 100%;
+  background-color: transparent;
+  color: #fff;
+  place-items: center;
+  padding: 30px;
+  font-size: 1.2rem;
+}
+
+.author {
+  color: whitesmoke;
+}
+
+.alert-wrapper {
+  width: 100%;
+  margin-top: 10px;
+  position: absolute;
+}
+
+/* <!-- ------ Close Tournaments CSS ------  --> */
+
+
+button.close_tournaments {
+  border-color: transparent;
+  background-color: #5aa0ba;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  right: -10px;
+  top: -10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+button.close_tournaments p {
+  width: 30px;
+  height: 33px;
+  text-align: center;
+}
+
+.td_helper {
+  width: 2.5rem;
+}
+
+.close_tournaments {
+  float: right;
+  font-size: 2.5rem;
+  font-weight: 900;
+  line-height: 1;
+  color: rgb(212, 212, 212);
+  opacity: 90%;
+  text-shadow: 0 1px 0 #171c24;
+  margin-right: auto;
+}
+
+.close_tournaments:hover {
+  color: #a03636;
+}
+
+.list-group {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: 0;
+  font-weight: 700;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-width: 0;
+}
+
+.list-group-flush .list-group-item {
+  border-right-width: 0;
+  border-left-width: 0;
+  border-radius: 8px;
+  width: 50%;
+  margin-left: 25%;
+  margin-top: 6px;
+}
+
+.type_score {
+  background-color: #20242a;
+  border: none;
+  font-size: 22px;
+  box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.2);
+  border: 2px solid rgb(212, 212, 212);
+  opacity: 95%;
+  border-color: rgb(212, 212, 212);
+  border-radius: 15px;
+  color: rgb(212, 212, 212);
+  text-align: center;
+  font-weight: 800;
+  width: 200px;
+  height: 50px;
+  margin: 10px;
+}
+
+/* <!-- ------ Account Log out CSS ------  --> */
 
 .btn-add-account_logout {
   background-color: #20242a;
@@ -566,7 +731,7 @@ button.close_tournaments p {
   color: whitesmoke;
 }
 
-/* ACCOUNT ADMIN */
+/* <!-- ------ Account Admin CSS ------  --> */
 
 .btn-add-account_admin {
   background-color: #a03636;
@@ -594,7 +759,7 @@ button.close_tournaments p {
   height: 100%;
 }
 
-/* ACCOUNT DELETE */
+/* <!-- ------ Account Delete CSS ------  --> */
 
 .btn-add-account_delete {
   background-color: #20242a;
@@ -629,7 +794,7 @@ button.close_tournaments p {
   color: whitesmoke;
 }
 
-/* UL DROPDOWN MENU */
+/* <!-- ------ UL DROPDOWN MENU Tournaments CSS ------  --> */
 
 ul {
   list-style: none;
@@ -730,7 +895,7 @@ a:hover {
   color: rgb(223, 223, 223);
 }
 
-/* nawigacja */
+/* <!-- ------ NAV CSS ------  --> */
 
 nav {
   background: #171c24;
@@ -775,6 +940,8 @@ nav .nav-items li a:hover {
   color: rgb(223, 223, 223);
 }
 
+/* <!-- ------ BTN BETA / Social home CSS ------  --> */
+
 .beta_version {
   pointer-events: none;
   cursor: default;
@@ -803,15 +970,25 @@ nav .nav-items li a:hover {
   background-color: #20242a;
 }
 
-.logo_social {
-  border-radius: 10px;
-  background-color: rgb(212, 212, 212);
-  box-shadow: 0 0.25em 0.25em rgb(0 0 0 / 30%);
-  transition: all 0.3s ease-out;
-  border: 3px solid #20242a;
+.icon_settings:hover {
+  background-color: #5aa0ba;
+  transform: perspective(1px) scale(1.2);
+  box-shadow: 0 0.35em 0.35em rgb(0 0 0 / 50%);
 }
 
-/* ICON Settings Tournaments */
+.icon_home {
+  padding: 15px;
+  font-size: 25px;
+  border-radius: 0.4rem;
+}
+
+.icon_home:hover {
+  background-color: whitesmoke;
+  color: #20242a;
+}
+
+
+/* <!-- ------ ICON Settings Tournaments CSS ------  --> */
 
 .btn_activity {
   float: left;
@@ -933,7 +1110,7 @@ nav .nav-items li a:hover {
   color: whitesmoke;
 }
 
-/* Information_tournament */
+/* <!-- ------ Information_tournament CSS ------  --> */
 
 .box {
   background: #202225;
@@ -1088,20 +1265,6 @@ nav .nav-items li a:hover {
   color: white;
 }
 
-/* ICON */
-
-.icon_settings:hover {
-  background-color: #5aa0ba;
-  transform: perspective(1px) scale(1.2);
-  box-shadow: 0 0.35em 0.35em rgb(0 0 0 / 50%);
-}
-
-.logo_social:hover {
-  background-color: #5aa0ba;
-  transform: perspective(1px) scale(1.2);
-  box-shadow: 0 0.35em 0.35em rgb(0 0 0 / 50%);
-}
-
 .home_box_container h1 {
   color: #5aa0ba;
   font-family: "Stick No Bills", sans-serif;
@@ -1113,129 +1276,7 @@ nav .nav-items li a:hover {
   font-family: "Stick No Bills", sans-serif;
 }
 
-/* INNE */
-
-.p_video {
-  color: whitesmoke;
-  font-family: "Gluten", cursive;
-  text-align: center;
-  font-weight: 700;
-}
-
-h1 {
-  color: whitesmoke;
-  font-family: "Gluten", cursive;
-}
-
-h2 {
-  color: whitesmoke;
-  font-family: "Gluten", cursive;
-}
-
-h4 {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.h4_video {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: #20242a;
-  font-size: 25px;
-  font-weight: bold;
-  margin: 10px;
-  text-align: center;
-}
-
-.h4_date_video {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: #20242a;
-  font-size: 15px;
-  font-weight: bold;
-  margin: 20px;
-}
-
-.h4_main {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: #20242a;
-  font-size: 28px;
-  font-weight: 800;
-  margin: 20px;
-}
-
-.h4_main_email {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: #20242a;
-  font-size: 13px;
-  font-weight: 900;
-  margin: 20px;
-}
-
-.h4_main_admin {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: #a03636;
-  font-size: 15px;
-  font-weight: 800;
-}
-
-.h4_konto {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 15px;
-}
-
-.h4_round {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: #5aa0ba;
-  font-size: 25px;
-  font-weight: 700;
-  margin: 20px;
-}
-
-.h4_signup_footer {
-  font-family: inherit;
-  color: whitesmoke;
-  font-size: 15px;
-  font-weight: 500;
-  text-align: center;
-  line-height: 20px;
-}
-
-h3 {
-  color: whitesmoke;
-  font-family: "Stick No Bills", sans-serif;
-  font-size: 60px;
-}
-
-hr {
-  background-color: rgb(212, 212, 212);
-  height: 2px;
-  width: 20%;
-}
-
-.konto_hr {
-  background-color: #20242a;
-  height: 3px;
-  margin: 1rem 0.4rem;
-  width: 50%;
-}
-
-.container {
-  width: 1800px;
-}
-
-.label_login {
-  display: block;
-  color: #5aa0ba;
-  margin-bottom: 10px;
-  margin-left: 165px;
-  font-weight: bold;
-}
-
-.footer_login {
-  display: block;
-  color: whitesmoke;
-  margin-bottom: 10px;
-  text-align: center;
-  font-size: 15px;
-}
+/* <!-- ------ BOX CSS ------  --> */
 
 /* ADMIN BOX */
 
@@ -1323,7 +1364,7 @@ hr {
 
 .container_tournaments_new {
   width: 650px;
-  height: 605px;
+  height: fit-content;
   margin: 0 auto;
   margin-top: 5%;
 }
@@ -1449,7 +1490,7 @@ hr {
 }
 
 .container_standings {
-  width: auto;
+  width: 1180px;
   height: auto;
   margin: 0 auto;
   margin-top: 5%;
@@ -1473,7 +1514,7 @@ hr {
   margin-top: 4%;
 }
 
-/* LOGIN FORM */
+/* <!-- ------ LOGIN FORM CSS ------  --> */
 
 .signup_label {
   margin-left: 160px;
@@ -1515,7 +1556,7 @@ textarea {
   resize: none;
 }
 
-/* CARD VIDEO */
+/* <!-- ------ CARD VIDEO CSS ------  --> */
 
 .card {
   box-shadow: 0px 5px 0px rgba(0, 0, 0, 0.4);
@@ -1537,6 +1578,8 @@ textarea {
 .card p:hover {
   color: #20242a;
 }
+
+/* <!-- ------ BTN VIDEO CSS ------  --> */
 
 .btn-video {
   background-color: #20242a;
@@ -1616,7 +1659,7 @@ textarea {
   padding: 0.5rem 1rem;
 }
 
-/* Przycisk NAV */
+/* <!-- ------ NAV BTN CSS ------  --> */
 
 .btn-add {
   background-color: transparent;
@@ -1642,7 +1685,7 @@ textarea {
   color: #2b2e32;
 }
 
-/* Przycisk tournaments horizontal  */
+/* <!-- ------ Tournaments BTN CSS ------  --> */
 
 .list-group-horizontal_tournaments {
   background-color: whitesmoke;
@@ -1733,6 +1776,12 @@ h4 :hover {
   padding: 25px;
 }
 
+
+
+/* <!-- ------ Tournaments DIV CSS ------  --> */
+
+
+
 /* PUBLIC Schedule */
 
 .btn-danger_nav_list_group_schedule_public {
@@ -1761,7 +1810,7 @@ h4 :hover {
 .btn-danger_nav_list_group_schedule_point {
   background-color: #20242a;
   border: 0;
-  width: 150px;
+  width: 100px;
   height: 50px;
   border-radius: 15px;
   outline: none;
@@ -1769,6 +1818,7 @@ h4 :hover {
   transition: 0.5s;
   backface-visibility: hidden;
   margin: 8px;
+  border-bottom: 5px solid rgb(212, 212, 212);
 }
 
 .btn-danger_nav_list_group_schedule_point h4 {
@@ -1782,7 +1832,7 @@ h4 :hover {
 /* Schedule Nick 1 */
 
 .btn-danger_nav_list_group_schedule_nick_one {
-  background-color: #20242a;
+  background-color: rgb(212, 212, 212);
   border: 0;
   width: 200px;
   height: 50px;
@@ -1792,10 +1842,11 @@ h4 :hover {
   transition: 0.5s;
   backface-visibility: hidden;
   margin: 8px;
+  border-left: 5px solid #20242a;
 }
 
 .btn-danger_nav_list_group_schedule_nick_one h4 {
-  color: whitesmoke;
+  color: #20242a;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bold;
   padding: 9px;
@@ -1805,7 +1856,7 @@ h4 :hover {
 /* Schedule Nick 2 */
 
 .btn-danger_nav_list_group_schedule_nick_two {
-  background-color: #20242a;
+  background-color: rgb(212, 212, 212);
   border: 0;
   width: 200px;
   height: 50px;
@@ -1815,10 +1866,11 @@ h4 :hover {
   transition: 0.5s;
   backface-visibility: hidden;
   margin: 8px;
+  border-right: 5px solid #20242a;
 }
 
 .btn-danger_nav_list_group_schedule_nick_two h4 {
-  color: whitesmoke;
+  color: #20242a;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bold;
   padding: 9px;
@@ -1841,33 +1893,53 @@ h4 :hover {
   box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
 }
 
-/* Schedule */
+/* Standing Heading */
 
-/* .btn-danger_nav_list_group_schedule {
-    background-color: #20242A;
-    border: 0;
-    width: 50px;
-    height: 50px;
-    border-radius: 15px;
-    outline: none;
-    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
-    transition: 0.5s;
-    backface-visibility: hidden;
-    margin: 8px;
+.standing_box_heading {
+  background-color: rgb(212, 212, 212);
+  border: 0;
+  width: 200px;
+  height: 50px;
+  border-radius: 5px;
+  outline: none;
+  transition: 0.5s;
+  backface-visibility: hidden;
+  margin: 10px;
+  border-left: 5px solid rgb(212, 212, 212);
+  border-right: 5px solid rgb(212, 212, 212);
 }
 
-.btn-danger_nav_list_group_schedule h4 {
-    color: whitesmoke;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: bold;
-    padding: 5px;
-    text-align: center;
+.standing_box_heading h4 {
+  color: #20242a;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  padding: 9px;
+  text-align: center;
 }
 
-.btn-danger_nav_list_group_schedule:hover {
-    transition: 0.7s;
-    transform: perspective(1px) scale(1.1);
-} */
+/* Standing box */
+
+.standing_box_transparent {
+  background-color: transparent;
+  border: 0;
+  width: 200px;
+  height: 50px;
+  border-radius: 5px;
+  outline: none;
+  transition: 0.5s;
+  backface-visibility: hidden;
+  margin: 10px;
+  border-left: 5px solid rgb(212, 212, 212);
+  border-right: 5px solid rgb(212, 212, 212);
+}
+
+.standing_box_transparent h4 {
+  color: rgb(212, 212, 212);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  padding: 9px;
+  text-align: center;
+}
 
 /* Standing list */
 
@@ -1913,6 +1985,23 @@ h4 :hover {
   font-weight: bold;
   padding: 13px;
   text-align: center;
+}
+
+/* Lista osób */
+
+.list-group-item {
+  width: 50%;
+  position: relative;
+  display: block;
+  padding: 0.75rem 1.25rem;
+  background-color: rgb(212, 212, 212);
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+  color: #20242a;
+  font-weight: bold;
+  font-size: 15px;
+  margin-left: 25%;
+  margin-bottom: 20px;
 }
 
 /* Tournaments list */
@@ -1974,6 +2063,14 @@ h4 :hover {
   transition: 0.3s;
   box-shadow: 0px 5px 12px rgba(0, 0, 0, 2.5);
 }
+
+/* <!-- ------ ---------------  ------  --> */
+
+
+
+
+
+/* <!-- ------ BTN TOURNAMENTS  ------  --> */
 
 /* Przycisk tournaments  */
 
@@ -2067,92 +2164,6 @@ h4 :hover {
 .btn-danger_join_tournaments a {
   width: 100%;
   height: 100%;
-}
-
-/* Schedule Box */
-
-.btn_schedule_list {
-  background-color: transparent;
-  border: 0;
-  margin: 9px;
-  border-radius: 20px;
-}
-
-/* Schedule Nick 1 */
-
-.btn-danger_nav_list_group_schedule_nick_one {
-  background-color: rgb(212, 212, 212);
-  border: 0;
-  width: 200px;
-  height: 50px;
-  border-radius: 15px;
-  outline: none;
-  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
-  transition: 0.5s;
-  backface-visibility: hidden;
-  margin: 8px;
-  border-left: 5px solid #20242A;
-}
-
-.btn-danger_nav_list_group_schedule_nick_one h4 {
-  color: #20242A;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-weight: bold;
-  padding: 9px;
-  text-align: center;
-  /* font-size: 1.5vw; */
-}
-
-/* Schedule Nick 2 */
-
-.btn-danger_nav_list_group_schedule_nick_two {
-  background-color: rgb(212, 212, 212);
-  border: 0;
-  width: 200px;
-  height: 50px;
-  border-radius: 15px;
-  outline: none;
-  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
-  transition: 0.5s;
-  backface-visibility: hidden;
-  margin: 8px;
-  border-right: 5px solid #20242A;
-}
-
-.btn-danger_nav_list_group_schedule_nick_two h4 {
-  color: #20242A;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-weight: bold;
-  padding: 9px;
-  text-align: center;
-  /* font-size: 1.5vw; */
-}
-
-
-/* Schedule Point */
-
-.btn-danger_nav_list_group_schedule_point {
-  background-color: #20242A;
-  border: 0;
-  width: 100px;
-  height: 50px;
-  border-radius: 15px;
-  outline: none;
-  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
-  transition: 0.5s;
-  backface-visibility: hidden;
-  margin: 8px;
-  border-left: 5px solid whitesmoke;
-  border-right: 5px solid whitesmoke;
-}
-
-.btn-danger_nav_list_group_schedule_point h4 {
-  color: whitesmoke;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-weight: bold;
-  padding: 9px;
-  text-align: center;
-  /* font-size: 1.5vw; */
 }
 
 
@@ -2259,24 +2270,11 @@ h4 :hover {
   height: 100%;
 }
 
-/* Lista osób */
 
-.list-group-item {
-  width: 50%;
-  position: relative;
-  display: block;
-  padding: 0.75rem 1.25rem;
-  background-color: rgb(212, 212, 212);
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
-  color: #20242a;
-  font-weight: bold;
-  font-size: 15px;
-  margin-left: 25%;
-  margin-bottom: 20px;
-}
+/* <!-- ------ ---------------  ------  --> */
 
-/* Przycisk HOME GENERATOR */
+
+/* Przycisk HOME */
 
 .btn-danger_nav_generator_home_white {
   background-color: whitesmoke;
@@ -2371,39 +2369,7 @@ h4 :hover {
   color: #202225;
 }
 
-/* Przycisk LOGIN */
-
-.btn-danger_nav_login {
-  background-color: rgb(212, 212, 212);
-  border: 0;
-  width: 200px;
-  height: 50px;
-  border-radius: 0.55rem;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: #202225;
-  font-size: 15px;
-  font-weight: bold;
-  outline: none;
-  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
-  transition: 0.5s;
-  backface-visibility: hidden;
-  border: 1px solid rgb(212, 212, 212);
-}
-
-.btn-danger_nav_login a {
-  width: 100%;
-  height: 100%;
-}
-
-.btn-danger_nav_login:hover {
-  transition: 0.5s;
-  cursor: pointer;
-  /* transform: perspective(1px) scale(1.1); */
-  background-color: transparent;
-  color: whitesmoke;
-}
-
-/* ---------- */
+/* <!-- ------ PRELOAD CSS ------  --> */
 
 .preload {
   display: flex;
@@ -2461,7 +2427,8 @@ h4 :hover {
   }
 }
 
-/* Responsivity */
+
+/* <!-- ------ Responsivity ------  --> */
 
 /* -----> Tablet <------ */
 

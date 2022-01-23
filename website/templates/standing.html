@@ -1,75 +1,79 @@
 {% extends "base.html" %} {% block title %}Standing{% endblock %} {% block
 content %}
 <section class="standings_box_container container_standings">
-  <br />
+  <br>
   <h3 align="center">Standings</h3>
-  <!-- <ol class="list-group list-group-flush" id="pary">
-        {% for standing in standings %}
+  <ol class="list-group list-group-flush" id="pary">
+    <div style="flex-direction: row;" class="badge">
+      <div class="standing_box_heading"  style="display: inline-block">
+        <h4>
+          NAME
+        </h4>
+      </div>
+      <div class="standing_box_heading"  style="display: inline-block">
+        <h4>
+          WYGRANE
+        </h4>
+      </div>
 
-        <div align="center">
-            <ol class="badge">
-                <h2><span style="color: #ffffff; font-weight: 700;">{{standing.opponent.name}}</span> | <span style="color: #099204; font-weight: 600;">Wygrane: {{standing.wins}}</span> | <span style="color: #fc5858; font-weight: 600;">Przegrane: {{standing.loses}}</span>                    | <span style="color: #5AA0BA; font-weight: 600;">  Remisy: {{standing.draws}}</span> | <span style="color: #a6a8a8; font-weight: 600;">Punkty: {{standing.match_points}}</span></h2>
-            </ol>
-        </div>
-        <br /> {% endfor %}
-    </ol> -->
+      <div class="standing_box_heading"  style="display: inline-block">
+        <h4>
+          PRZEGRANE
+        </h4>
+      </div>
+      <div class="standing_box_heading"  style="display: inline-block">
+        <h4>
+          REMISY
+        </h4>
+      </div>
+      <div class="standing_box_heading" style="display: inline-block">
+        <h4>
+          PUNKTY
+        </h4>
+      </div>
+      <br>
+    </div>
+  </ol>
 
-  <table style="margin: auto">
-    <tbody style="display: flex; margin-bottom: 15px; margin-top: 15px">
-      <tr class="btn-danger_nav_list_group_standings">
-        <div align="center ">
-          <td>Imie</td>
-        </div>
-      </tr>
-      <tr class="btn-danger_nav_list_group_standings">
-        <div align="center ">
-          <td>Wygrane</td>
-        </div>
-      </tr>
-      <tr class="btn-danger_nav_list_group_standings">
-        <div align="center ">
-          <td>Przegrane</td>
-        </div>
-      </tr>
-      <tr class="btn-danger_nav_list_group_standings">
-        <div align="center ">
-          <td>Remisy</td>
-        </div>
-      </tr>
-      <tr class="btn-danger_nav_list_group_standings">
-        <div align="center ">
-          <td>Punkty</td>
-        </div>
-      </tr>
-    </tbody>
-  </table>
-  {% for standing in standings %}
-  <table style="margin: auto">
-    <tbody style="display: flex; margin-bottom: 15px">
-      <tr class="btn-danger_nav_list_group_standings_name" align="center ">
-        <td>{{standing.opponent.name}}</td>
-      </tr>
-      <tr class="btn-danger_nav_list_group_standings_name" align="center ">
-        <td>{{standing.wins}}</td>
-      </tr>
-      <tr class="btn-danger_nav_list_group_standings_name" align="center ">
-        <td>{{standing.loses}}</td>
-      </tr>
-      <tr class="btn-danger_nav_list_group_standings_name" align="center ">
-        <td>{{standing.draws}}</td>
-      </tr>
-      <tr class="btn-danger_nav_list_group_standings_name" align="center ">
-        <td>{{standing.match_points}}</td>
-      </tr>
-    </tbody>
-  </table>
-  {% endfor %}
+  <ol class="list-group list-group-flush" id="pary">
+    {% for standing in standings %}
+    <div style="flex-direction: row;" class="badge">
+      <div class="standing_box_transparent"  style="display: inline-block;">
+        <h4 style="text-align: left;">
+          {{standing.opponent.name}}
+        </h4>
+      </div>
+      <div class="standing_box_transparent"  style="display: inline-block">
+        <h4>
+          {{standing.wins}}
+        </h4>
+      </div>
+
+      <div class="standing_box_transparent"  style="display: inline-block">
+        <h4>
+          {{standing.loses}}
+        </h4>
+      </div>
+      <div class="standing_box_transparent"  style="display: inline-block">
+        <h4>
+          {{standing.draws}}
+        </h4>
+      </div>
+      <div class="standing_box_transparent" style="display: inline-block">
+        <h4>
+          {{standing.match_points}}
+        </h4>
+      </div>
+      <br>
+      {% endfor %}
+    </div>
+  </ol>
 
   <br />
 
-  <!-- <div align="center">
-        <button id="btn" onclick="goBack()" style="background-color: #5AA0BA;" type="button" class="btn-danger_nav_schedule">Back</button>
-    </div> -->
-  <br />
+  <div align="center">
+          <button onclick="goBack()" style="width: 210px; background-color: #5AA0BA;" type="button" class="btn-danger_nav_schedule">Back</button>
+  </div>
+  <br>
 </section>
 {% endblock %}
