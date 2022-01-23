@@ -195,17 +195,17 @@ class OpponentInStanding:
         self.loses = loses
         self.draws = draws
 
-# return index of player in a list
+# return index of opponent in a list
 
 
-def findOpponentInList(player_id, L):
+def findOpponentInList(opponent_id, L):
     for i in range(len(L)):
-        if L[i].id == player_id:
+        if L[i].id == opponent_id:
             return i
 
-def getOpponentPoints(player_id, S):
+def getOpponentPoints(opponent_id, S):
     for i in range(len(S)):
-        if S[i].opponent_id == player_id:
+        if S[i].opponent_id == opponent_id:
             return S[i].match_points
     return 0
 
@@ -227,17 +227,17 @@ def sprawdzankoGraczy(Wyniki,Gracz1,Gracz2):
            return False
     return True
 
-def prepareListToSwiss(players,standings):
+def prepareListToSwiss(opponents,standings):
     pointsTable = []
     visited = {}
     for el in standings:
         pointsTable.append(OpponentInStanding(el.opponent_id,el.wins,el.loses,el.draws))
         visited.update({el.opponent_id:True})
-    if len(players) != len(standings):
-        for player in players:
-            result = visited.get(player.id)
+    if len(opponents) != len(standings):
+        for opponent in opponents:
+            result = visited.get(opponent.id)
             if result is None:
-                pointsTable.append(OpponentInStanding(player.id,draws=1))
+                pointsTable.append(OpponentInStanding(opponent.id,draws=1))
     return pointsTable
 
 def prepareListsToSwiss(duels, standings):

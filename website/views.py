@@ -10,12 +10,14 @@ from .import db
 import json
 from .TournamentsFunctions import *
 from .Classes import *
-from datetime import datetime
+from datetime import datetime, date
 
 # blueprint - miejsce gdzie jest wiele stron
 views = Blueprint('views', __name__)
 
 ### main pages ###
+
+today = date.today()
 
 @views.route('/', methods=['GET', 'POST'])
 def home():
@@ -44,14 +46,17 @@ def public_tournaments():
 
 @views.route('/new-tournament', methods=['GET', 'POST'])
 @login_required
-def get_tournament_info():
+def new_tournament():
+    global today
     if request.method == 'POST':
         name = request.form.get('name')
         date = request.form.get('date')
         location = request.form.get('location')
         discipline = request.form.get('discipline')
+        max_opponents = request.form.get('max_opponents')
         type = request.form.get('type')
         description = request.form.get('description')
+
 
         if len(name) < 3:
             flash(f"Tournament's name is too short (at least 3 characters).",
@@ -70,12 +75,12 @@ def get_tournament_info():
 
             newTournament = TournamentController()
             id = newTournament.CreateNew(
-                current_user.id, name, date, location, discipline, type, description)
+                current_user.id, name, date, location, max_opponents, discipline, type, description)
             current_user.current_tournament_id = id
             newTournament.Save()
 
             return redirect(url_for('views.schedule'))
-    return render_template("new_tournament.html", user=current_user)
+    return render_template("new_tournament.html", user=current_user, today=today)
 
 
 @views.route('/edit-tournament', methods=['GET', 'POST'])
@@ -98,38 +103,41 @@ def edit_tournament():
     return render_template("edit_tournament.html", user=current_user, tournament=tournamentDTO.tournament)
 
 
-@views.route('/new-players', methods=['GET', 'POST'])
+@views.route('/new-opponents', methods=['GET', 'POST'])
 @login_required
-def get_players_manually():
+def get_opponents_manually():
     tournamentDTO = TournamentController()
     tournamentDTO.Load(current_user.current_tournament_id)
-    partizipantsNumberLimit = 100
+    partizipantsNumberLimit = tournamentDTO.tournament.max_opponents
+
+    tournamentDTO.ApplyChangesInOpponentsNames(request)
     if request.method == 'POST':
         if len(tournamentDTO.tournament.opponents) > partizipantsNumberLimit:
             flash(
                 f'Too many participants. Max: {partizipantsNumberLimit}', category='error')
-        newPlayerName = request.form.get('player')
-        if len(newPlayerName) < 1:
-            flash('The name is too short! D:', category='error')
-        elif Opponent.query.filter_by(name=newPlayerName, tournament_id=current_user.current_tournament_id).first():
-            flash('Participant has been already added', category='error')
-        else:
-            tournamentDTO.UploadPlayer(newPlayerName)
+        newOpponentName = request.form.get('opponent')
+        if newOpponentName:
+            if len(newOpponentName) < 1:
+                flash('The name is too short! D:', category='error')
+            elif Opponent.query.filter_by(name=newOpponentName, tournament_id=current_user.current_tournament_id).first():
+                flash('Participant has been already added', category='error')
+            else:
+                tournamentDTO.UploadOpponent(newOpponentName)
             tournamentDTO.Save()
 
             flash('Participant has been added! :)', category='success')
-    return render_template("new_players.html", user=current_user, tournament=tournamentDTO.tournament)
+    return render_template("new_opponents.html", user=current_user, tournament=tournamentDTO.tournament)
 
 
-@views.route('/delete-player', methods=['POST'])
+@views.route('/delete-opponent', methods=['POST'])
 @login_required
-def delete_player():
-    player = json.loads(request.data)
-    playerId = player['playerId']
-    player = Opponent.query.get(playerId)
-    if player:
-        if player.tournament_id == current_user.current_tournament_id:
-            db.session.delete(player)
+def delete_opponent():
+    opponent = json.loads(request.data)
+    opponentId = opponent['opponentId']
+    opponent = Opponent.query.get(opponentId)
+    if opponent:
+        if opponent.tournament_id == current_user.current_tournament_id:
+            db.session.delete(opponent)
             db.session.commit()
     return jsonify({})
 

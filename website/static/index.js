@@ -66,11 +66,13 @@ function deleteTournament(tournamentId) {
   });
 }
 
-function deletePlayer(playerId) {
-  fetch(window.location.origin + "/delete-player", {
+function deleteOpponent(opponentId) {
+  fetch(window.location.origin + "/delete-opponent", {
     method: "POST",
-    body: JSON.stringify({ playerId: playerId }),
+    body: JSON.stringify({ opponentId: opponentId }),
   }).then((_res) => {
-    window.location.reload();
+    window.location.href = window.location.origin + "/new-opponents";
+
   });
 }
+

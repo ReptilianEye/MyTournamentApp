@@ -75,38 +75,38 @@ def GenerateFirstRoundSwiss(opponents,bye):
 
 
 def GenerateRoundSwiss(opponents, standings, duels):
-    PlayersList = prepareListToSwiss(opponents, standings)
+    OpponentsList = prepareListToSwiss(opponents, standings)
 
-    PlayersList = sorted(PlayersList, key=lambda opponent: (
+    OpponentsList = sorted(OpponentsList, key=lambda opponent: (
         opponent.wins, opponent.draws), reverse=True)
 
     # idzie po kolei xd
 
     Pary = []
     pauza = 'Bye'
-    if len(PlayersList) % 2 == 1:
-        PlayersList.append(pauza)
-    while len(PlayersList) > 0:
-        opponent1 = PlayersList[0]
+    if len(OpponentsList) % 2 == 1:
+        OpponentsList.append(pauza)
+    while len(OpponentsList) > 0:
+        opponent1 = OpponentsList[0]
         pairFound = False
         i = 1
-        while i <= len(PlayersList):
-            opponent2 = PlayersList[i]
+        while i <= len(OpponentsList):
+            opponent2 = OpponentsList[i]
             if sprawdzankoGraczy(duels, opponent1, opponent2):
                 if opponent1 != pauza and opponent2 != pauza:
                     Pary.append([opponent1, opponent2])
                     pairFound = True
-                PlayersList.remove(opponent1)
-                PlayersList.remove(opponent2)
+                OpponentsList.remove(opponent1)
+                OpponentsList.remove(opponent2)
                 break
             i += 1
         if not pairFound:
             break
-    if len(PlayersList) != 0:
+    if len(OpponentsList) != 0:
         i = 0
         while i < len(duels):
-            if PlayersList[i] != pauza and PlayersList[i+1] != pauza:
-                Pary.append([PlayersList[i], PlayersList[i+1]])
+            if OpponentsList[i] != pauza and OpponentsList[i+1] != pauza:
+                Pary.append([OpponentsList[i], OpponentsList[i+1]])
             i += 2
     return Pary
 

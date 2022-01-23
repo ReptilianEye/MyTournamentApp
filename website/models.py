@@ -24,13 +24,14 @@ class Tournament(db.Model):
     discipline = db.Column(db.String(150))    
     type = db.Column(db.String(150))
     description = db.Column(db.String(250))
-    movielink = db.Column(db.String(150))
+    movielink = db.Column(db.String(150),default="")
 
     status = db.Column(db.String(150), default="upcoming")
     is_public = db.Column(db.Boolean(),default=False)
     current_round_number = db.Column(db.Integer(),default=0)
     max_rounds = db.Column(db.Integer(),default = 100000000)
-    
+    max_opponents = db.Column(db.Integer(),default = 100)
+
     edited_duel_id = db.Column(db.Integer())
 
 

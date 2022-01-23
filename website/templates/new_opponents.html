@@ -1,0 +1,38 @@
+{% extends "base.html" %} {% block title %}Schedule Generator{% endblock %} {% block content %}
+<section class="newplayers_box_container container_newplayer">
+  <br />
+  <h3 align="center">Add Participants</h3>
+  <h4 class="h4_main" style="color: #5aa0ba;" align="center">Type in each of them one by one :)</h4>
+  <form method="POST">
+    <ol class="list-group list-group-flush" id="notes">
+      {% for opponent in tournament.opponents %}
+      <li align="center" class="list-group-item">
+        <input type="text " name="opponent{{loop.index}}" value="{{opponent.name}}" />
+        <button type="button" class="close" onClick="deleteOpponent({{opponent.id}})">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </li>
+      {% endfor %}
+    </ol>
+    <br />
+
+    <div align="left">
+      <input style="display: inline-block" name="opponent" class="form_control"
+        placeholder="Type name and click 'Add participant'" type="text" />
+      <button id="btn" type="submit" class="btn-add">
+        <i class="fas fa-user-plus"></i>
+        Add participant
+      </button>
+    </div>
+
+    <br />
+    <div align="center">
+      <a href="/schedule"><button id="btn" type="button" class="btn-danger_nav_generator_home">
+          <i class="fas fa-save"></i>
+          Save
+        </button>
+      </a>
+  </form>
+  </div>
+</section>
+{% endblock %}

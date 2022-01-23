@@ -1,13 +1,18 @@
 {% extends "base.html" %} {% block title %}Schedule{% endblock %} {% block content %}
 
 <section class="schedule_box_container container_schedule">
+  {% if tournament.status == 'upcoming' %}
   <button align="right" title="Tournament Settings" id="myBtnSettings-1" class="icon_settings">
-    <i class="fas fa-pen"></i>
+    <!-- <img src="../static/pngegg.png" width="30" height="30" /> -->
+    <i class="fas fa-ellipsis-v"></i>
   </button>
+  {% endif %}
   <h3 align="center">{{tournament.name}}</h3>
+  {% if tournament.status != 'upcoming' %}
   <a style="margin-right: 10px;" align="right" href="/standings">
     <button id="btn" type="button" class="btn-add"><i class="fas fa-table"></i> Standings</button>
   </a>
+  {% endif %}
   <div style="float: right" id="settings_modal-1" class="modal hidden">
     <div class="modal-content">
       <div class="modal-header">
@@ -37,14 +42,16 @@
 
 
   {% if tournament.status == 'upcoming' %}
+  {% if tournament.description %}
   <div class="form_control">
     {{tournament.description}}
   </div>
+  {% endif %}
   {% for opponent in tournament.opponents %}
   <section>
     <li align="center" class="list-group-item">
       <i class="fas fa-user-alt"></i> {{opponent.name}} {{opponent.email}}
-      <button type="button" class="close" onClick="deletePlayer({{opponent.id}})">
+      <button type="button" class="close" onClick="deleteOpponent({{opponent.id}})">
         <span aria-hidden="true">&times;</span>
       </button>
     </li>
@@ -57,10 +64,10 @@
         Start Tournament
       </button>
     </a>
-    <a href="/new-players">
+    <a href="/new-opponents">
       <button id="btn" style="background-color: rgb(55, 134, 134)" type="button" class="btn-danger_nav_schedule">
         <i class="fas fa-user-plus"></i>
-        Add Players Manually
+        Add players Manually
       </button>
     </a>
   </div>

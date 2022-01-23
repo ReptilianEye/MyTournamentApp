@@ -39,51 +39,13 @@
         <table style="margin: auto">
             <tbody class="btn_tournaments_list" onClick="showTournament({{tournament.id}}) "
                 style="display: flex; margin-bottom: 15px">
-                <button title="Tournament Settings" style="float: right; margin-top: 30px; margin-bottom: -55px"
-                    id="myBtnSettings-{{loop.index}}" class="icon_settings">
-                    <img src="../static/pngegg.png" width="30" height="30" />
-                </button> {% if tournament.status == 'upcoming' %}
+                {% if tournament.status == 'upcoming' %}
                 <button style="margin-left: 30px; margin-right: -70px" class="btn_activity upcoming"></button> {% endif
                 %} {% if tournament.status == 'active' %}
                 <button style="margin-left: 30px; margin-right: -70px" class="btn_activity live"></button> {% endif
                 %} {% if tournament.status == 'ended' %}
                 <button style="margin-left: 30px; margin-right: -70px" class="btn_activity ended"></button> {% endif %}
 
-                <div style="float: right" id="settings_modal-{{loop.index}}" class="modal hidden">
-                    <!-- Modal content -->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h2>
-                                Settings
-                                <h4 style="
-                    font-size: 13px;
-                    font-weight: 700;
-                    margin-top: 15px;
-                    color: #5aa0ba;
-                  ">
-                                    {{tournament.name}}
-                                </h4>
-                            </h2>
-                            <span class="close_settings">&times;</span>
-                        </div>
-                        <div class="modal-body">
-                            <a href="/edit-tournament" onClick="editTournament({{tournament.id}})">
-                                <button style="float: right; margin-right: 10px; margin: 15px" id="btn"
-                                    class="btn-add-settings">
-                                    <i class="fa fa-edit"></i>
-                                    Edit
-                                </button>
-                            </a>
-                            <a href="#" onClick="deleteTournament({{tournament.id}})">
-                                <button style="float: left; margin-left: 10px; margin: 15px" id="btn"
-                                    class="btn-add-settings_delete">
-                                    <i class="fa fa-trash"></i>
-                                    Delete
-                                </button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
                 <tr class="btn-danger_nav_list_group_tournaments_name" align="center ">
                     <td>{{tournament.name}}</td>
                 </tr>
@@ -122,36 +84,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        // Get the modals
-        const modalsSettings = document.querySelectorAll(".modal");
-
-        // Get the buttons that opens the modal
-
-        const iconSettingsButtons = document.querySelectorAll(".icon_settings");
-        iconSettingsButtons.forEach((button) => {
-            let buttonID = button.getAttribute("id").split("-")[1];
-            modalsSettings.forEach((modal) => {
-                let modalID = modal.getAttribute("id").split("-")[1];
-                if (buttonID === modalID) {
-                    button.addEventListener("click", () => {
-                        modal.classList.remove("hidden");
-
-                        // If modal should close also after click button, use this:
-                        // modal.classList.toggle("hidden")
-                    });
-                    modal
-                        .querySelector(".close_settings")
-                        .addEventListener("click", () => {
-                            modal.classList.add("hidden");
-                            // If modal should close also after click button, use this:
-                            // modal.classList.toggle("hidden")
-                        });
-                }
-            });
-        });
-    </script>
     {% else %}
     <h5 style="color: white" align="center">
         <i class="fa fa-info-circle"></i> Eventually your have no created tournaments.
