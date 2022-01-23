@@ -17,9 +17,6 @@ views = Blueprint('views', __name__)
 
 ### main pages ###
 
-
-
-
 @views.route('/', methods=['GET', 'POST'])
 def home():
     return render_template("home.html", user=current_user)
@@ -97,7 +94,7 @@ def edit_tournament():
         tournamentDTO.EditTournament(
             name, date, location, discipline, status, movielink)
 
-        return redirect(url_for('views.tournaments'))
+        return redirect(url_for('views.schedule'))
     return render_template("edit_tournament.html", user=current_user, tournament=tournamentDTO.tournament)
 
 

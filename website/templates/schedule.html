@@ -1,11 +1,40 @@
 {% extends "base.html" %} {% block title %}Schedule{% endblock %} {% block content %}
 
 <section class="schedule_box_container container_schedule">
-  <br />
+  <button align="right" title="Tournament Settings" id="myBtnSettings-1" class="icon_settings">
+    <i class="fas fa-pen"></i>
+  </button>
   <h3 align="center">{{tournament.name}}</h3>
   <a style="margin-right: 10px;" align="right" href="/standings">
     <button id="btn" type="button" class="btn-add"><i class="fas fa-table"></i> Standings</button>
   </a>
+  <div style="float: right" id="settings_modal-1" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>
+          Settings
+        </h2>
+        <span class="close_settings">&times;</span>
+      </div>
+      <div class="modal-body">
+        <a href="/edit-tournament" onClick="editTournament({{tournament.id}})">
+          <button style="float: right; margin-right: 10px; margin: 15px" id="btn" class="btn-add-settings">
+            <i class="fa fa-edit"></i>
+            Edit
+          </button>
+        </a>
+
+        <a href="#" onClick="deleteTournament({{tournament.id}})">
+          <button style="float: left; margin-left: 10px; margin: 15px" id="btn" class="btn-add-settings_delete">
+            <i class="fa fa-trash"></i>
+            Delete
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
 
   {% if tournament.status == 'upcoming' %}
   <div class="form_control">
@@ -78,7 +107,8 @@
       </ol>
   </ol>
 
-  {% endif %} {% endfor %} {% endif %} {% if tournament.status == 'active' %} {% if tournament.current_round_number == 0
+  {% endif %} {% endfor %} {% endif %} {% if tournament.status == 'active' %} {% if tournament.current_round_number ==
+  0
   or tournament.current_round_number
   <tournament.max_rounds %} <div align="center" style="margin-top: 20px;">
     <a href="/generate-new-round">
@@ -104,7 +134,7 @@
         End Tournament
       </button>
     </a>
-    
+
     {% endif %} {% if user.is_admin and not tournament.is_public %}
     <a align="center" href="/publish-tournament">
       <button id="btn" style="background-color: rgb(55, 65, 95) " type="button " class="btn-danger_nav_schedule">
@@ -123,4 +153,35 @@
     </div>
     <br>
 </section>
+
+
+<script>
+  // Get the modals
+  const modalsSettings = document.querySelectorAll(".modal");
+
+  // Get the buttons that opens the modal
+
+  const iconSettingsButtons = document.querySelectorAll(".icon_settings");
+  iconSettingsButtons.forEach((button) => {
+    let buttonID = button.getAttribute("id").split("-")[1];
+    modalsSettings.forEach((modal) => {
+      let modalID = modal.getAttribute("id").split("-")[1];
+      if (buttonID === modalID) {
+        button.addEventListener("click", () => {
+          modal.classList.remove("hidden");
+
+          // If modal should close also after click button, use this:
+          // modal.classList.toggle("hidden")
+        });
+        modal
+          .querySelector(".close_settings")
+          .addEventListener("click", () => {
+            modal.classList.add("hidden");
+            // If modal should close also after click button, use this:
+            // modal.classList.toggle("hidden")
+          });
+      }
+    });
+  });
+</script>
 {% endblock %}

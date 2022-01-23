@@ -6,8 +6,7 @@
   <ol class="list-group list-group-flush" id="notes">
     {% for opponent in tournament.opponents %}
     <li align="center" class="list-group-item">
-      {{opponent.name}}
-      <i class="fas fa-user-alt"></i>
+      <input type="text " name="movielink" value="{{opponent.name}}" />
       <button type="button" class="close" onClick="deletePlayer({{opponent.id}})">
         <span aria-hidden="true">&times;</span>
       </button>
