@@ -41,30 +41,30 @@
     <div class="wrapper">
         <i class="fas fa-cookie-bite fa-4x"></i>
         <div class="content">
-          <header>Cookies Consent</header>
-          <p>This website use cookies to ensure you get the best experience on our website.</p>
-          <div class="buttons">
-            <button class="item"><i class="fas fa-check-circle"></i> I understand</button>
-          </div>
+            <header>Cookies Consent</header>
+            <p>This website use cookies to ensure you get the best experience on our website.</p>
+            <div class="buttons">
+                <button class="item"><i class="fas fa-check-circle"></i> I understand</button>
+            </div>
         </div>
     </div>
 
-      <script>
+    <script>
         const cookieBox = document.querySelector(".wrapper"),
-        acceptBtn = cookieBox.querySelector("button");
-        acceptBtn.onclick = ()=>{
-          //setting cookie for 1 month, after one month it'll be expired automatically
-          document.cookie = "CookieBy=CodingNepal; max-age="+60*60*24*30;
-          if(document.cookie){ //if cookie is set
-            cookieBox.classList.add("hide"); //hide cookie box
-          }else{ //if cookie not set then alert an error
-            alert("Cookie can't be set! Please unblock this site from the cookie setting of your browser.");
-          }
+            acceptBtn = cookieBox.querySelector("button");
+        acceptBtn.onclick = () => {
+            //setting cookie for 1 month, after one month it'll be expired automatically
+            document.cookie = "Cookie; max-age=" + 60 * 60 * 24 * 30;
+            if (document.cookie) { //if cookie is set
+                cookieBox.classList.add("hide"); //hide cookie box
+            } else { //if cookie not set then alert an error
+                alert("Cookie can't be set! Please unblock this site from the cookie setting of your browser.");
+            }
         }
-        let checkCookie = document.cookie.indexOf("CookieBy=CodingNepal"); //checking our cookie
+        let checkCookie = document.cookie.indexOf("Cookie"); //checking our cookie
         //if cookie is set then hide the cookie box else show it
         checkCookie != -1 ? cookieBox.classList.add("hide") : cookieBox.classList.remove("hide");
-      </script>
+    </script>
 
     <section>
 
@@ -84,29 +84,33 @@
             </a>
             <div id="btn" class="nav-items">
                 <li>
-                    <a class="tooltip" title="Home Page" id="home" href="/"><i style="margin-bottom: 20px;" class="fas fa-home"></i></a>
+                    <a class="tooltip" title="Home Page" id="home" href="/"><i style="margin-bottom: 20px;"
+                            class="fas fa-home"></i></a>
                 </li>
                 <li>
-                    <a class="tooltip" title="My Tournaments" href="/tournaments"><i style="margin-bottom: 20px;" class="fas fa-trophy"></i></a>
+                    <a class="tooltip" title="My Tournaments" href="/tournaments"><i style="margin-bottom: 20px;"
+                            class="fas fa-trophy"></i></a>
                 </li>
                 <li>
-                    <a class="tooltip" title="Global Tournament" href="/public-tournaments"><i style="margin-bottom: 20px;" class="fas fa-globe-europe"></i></a>
+                    <a class="tooltip" title="Global Tournament" href="/public-tournaments"><i
+                            style="margin-bottom: 20px;" class="fas fa-globe-europe"></i></a>
                 <li>
-                    <a class="tooltip tippy-arrow" title="Video" href="/video"><i style="margin-bottom: 20px;" class="fas fa-video"></i></a>
+                    <a class="tooltip tippy-arrow" title="Video" href="/video"><i style="margin-bottom: 20px;"
+                            class="fas fa-video"></i></a>
                     <div class="tooltip__arrow"></div>
                 </li>
             </div>
 
-             <!-- ------ NAV ------  -->
+            <!-- ------ NAV ------  -->
             <script>
                 tippy('.tooltip', {
-                // default
-                arrow: true,
-                animation: 'shift-away',
-                duration: 400,
-                allowTitleHTML: true,
-                zIndex: 9999
-            });
+                    // default
+                    arrow: true,
+                    animation: 'shift-away',
+                    duration: 400,
+                    allowTitleHTML: true,
+                    zIndex: 9999
+                });
             </script>
 
             {% if user.is_authenticated %}
@@ -127,11 +131,10 @@
 
                         <div style="margin: 15px;">
                             <div style="float: left; margin-left: 40px; margin-top: 5px;" class="profileThumb"><i
-                                    style="color: #20242a;" class="fas fa-headset fa-3x"></i>
+                                    style="color: #20242a; border-radius: 20px;" class="fas fa-headset fa-3x"></i>
                             </div>
                             <h4 style="float: right; margin-top: 11px; margin-right: 45px;" class=" h4_main">
                                 {{user.first_name}}</h4>
-
                         </div>
                         <h4 style="text-align: center; margin-bottom: -80px; margin-top: 20px;" class="h4_main_email">
                             {{user.email}}
@@ -149,13 +152,17 @@
                                     Administrator</button>
                             </div>
                             {% endif %}
-                            <a href="#" onClick="deleteUser({{user.id}})">
+                            <!-- <a href="#" onClick="deleteUser({{user.id}})">
                                 <button style="float: left; margin-left: 10px; margin-bottom: 20px;" id="btn"
                                     class="btn-add-account_delete"><i class="fas fa-trash-alt"></i> Delete
                                     account</button>
+                            </a> -->
+                            <a href="/edit_user">
+                                <button style="float: left; margin-right: 0px; margin-bottom: 20px;"
+                                    class="btn-add-account_settings"><i class="fas fa-cog"></i> Settings</button>
                             </a>
                             <a href="/logout">
-                                <button style="float: right; margin-right: 10px; margin-bottom: 20px;" id="logout"
+                                <button style="float: right; margin-right: 9px; margin-bottom: 20px;" id="logout"
                                     class="btn-add-account_logout"><i class="fas fa-sign-out-alt"></i> Log out</button>
                             </a>
                         </section>
@@ -165,6 +172,7 @@
             </li>
             </ul>
             {% else %}
+
             <li>
                 <!-- <a href="/sign-up">
                     <button style="float: right; margin: top 20px right 10px bottom 20px;" id="logout" class="btn-add-account"><i class="far fa-registered"></i> Sign Up</button>
@@ -183,7 +191,7 @@
         messages %} {% if category == 'error' %}
         <div class="alert-wrapper">
             <div class="alert alert-danger alert-dismissable fade show" role="alert">
-                <strong><i class="fa fa-exclamation-circle"></i> Error!</strong> {{ message }}
+                <strong><i class="fa fa-exclamation-circle"></i></strong> {{ message }}
                 <button type="button" class="close" data-dismiss="alert">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -223,14 +231,11 @@
                     mybutton.style.display = "none";
                 }
             }
-            
             // When the user clicks on the button, scroll to the top of the document
             function topFunction() {
                 document.body.scrollTop = 0;
                 document.documentElement.scrollTop = 0;
             }
-
-
             // <!-- ------ Preload ------  -->
             // setTimeout(function () {
             //     $('#successMessage').fadeOut('fast');
@@ -242,9 +247,6 @@
             //          preload.classList.remove('show-preloader');
             //      }, 900);
             //  });
-
-
-
             // <!-- ------ SNOW ------  -->
             document.addEventListener('DOMContentLoaded', function() {
                 var script = document.createElement('script');

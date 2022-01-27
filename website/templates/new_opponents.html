@@ -7,7 +7,7 @@
     <ol class="list-group list-group-flush" id="notes">
       {% for opponent in tournament.opponents %}
       <li align="center" class="list-group-item">
-        <input type="text " name="opponent{{loop.index}}" value="{{opponent.name}}" />
+        <input style="text-align: center;" type="text " name="opponent{{loop.index}}" value="{{opponent.name}}" />
         <button type="button" class="close" onClick="deleteOpponent({{opponent.id}})">
           <span aria-hidden="true">&times;</span>
         </button>

@@ -40,11 +40,11 @@
             <tbody class="btn_tournaments_list" onClick="showTournament({{tournament.id}}) "
                 style="display: flex; margin-bottom: 15px">
                 {% if tournament.status == 'upcoming' %}
-                <button style="margin-left: 30px; margin-right: -70px" class="btn_activity upcoming"></button> {% endif
+                <button style="margin-left: 30px; margin-right: -70px;" class="btn_activity upcoming"></button> {% endif
                 %} {% if tournament.status == 'active' %}
-                <button style="margin-left: 30px; margin-right: -70px" class="btn_activity live"></button> {% endif
+                <button style="margin-left: 30px; margin-right: -70px;" class="btn_activity live"></button> {% endif
                 %} {% if tournament.status == 'ended' %}
-                <button style="margin-left: 30px; margin-right: -70px" class="btn_activity ended"></button> {% endif %}
+                <button style="margin-left: 30px; margin-right: -70px;" class="btn_activity ended"></button> {% endif %}
 
                 <tr class="btn-danger_nav_list_group_tournaments_name" align="center ">
                     <td>{{tournament.name}}</td>
@@ -71,7 +71,7 @@
             <div style="font-size: 14px" class="box__description modal-header">
                 Information about status of the tournament:
             </div>
-            <div style="margin-top: -20px">
+            <div style="margin-top: -10px">
                 <button style="margin-left: 0px; margin-right: 0px" class="btn_activity upcoming">
                     <p class="p_information">Upcoming</p>
                 </button><br /><br />
