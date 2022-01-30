@@ -1,17 +1,20 @@
-from . import db    #importuje zmienna 'db'
+from . import db  # importuje zmienna 'db'
 from flask_login import UserMixin
 
-class User(db.Model,UserMixin):
-    id = db.Column(db.Integer,primary_key=True)
-    first_name = db.Column(db.String(150))
-    email = db.Column(db.String(150),unique=True)       #150 is maxLenght of string
-    password = db.Column(db.String(150))
 
-    is_admin = db.Column(db.Boolean,default=False) 
-    
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(150))
+    # 150 is maxLenght of string
+    email = db.Column(db.String(150), unique=True)
+    password = db.Column(db.String(150))
+    # picture = db.Column(db.Text, nullable=False)
+
+    is_admin = db.Column(db.Boolean, default=False)
+
     current_tournament_id = db.Column(db.Integer)
 
-    tournaments = db.relationship('Tournament')  
+    tournaments = db.relationship('Tournament')
 
 
 class Tournament(db.Model):
@@ -33,8 +36,6 @@ class Tournament(db.Model):
     max_opponents = db.Column(db.Integer(),default = 100)
 
     edited_duel_id = db.Column(db.Integer())
-
-
 
     rounds = db.relationship('Round')
     duels = db.relationship('Duel')

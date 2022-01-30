@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block title %}Account settings{% endblock %} {% block content %}
 <section class="edit_box_container container_edit">
-	<form method="POST">
+	<form method="POST" enctype=multipart/form-data>
 		<br>
 		<h3 style="margin-bottom: 30px; margin-top: 10px;" align="center">Account settings</h3>
 		<section style="margin-top: -20px;">
@@ -13,26 +13,28 @@
 				<input name='firstName' value="{{user.first_name}}" type="text" class="form_control" id="firstName"
 					name="firstName" />
 			</div>
-			<label class="label_login" for="firstName">Avatar</label>
+			<label class="label_login">Avatar</label>
 			<center>
-				<input name='avatar'
-					style="background-color: transparent;border: 2px solid rgb(212, 212, 212);color: rgb(212, 212, 212);border-radius: 5px;padding: 8px;width: 50%;"
-					type="file" id="file" aria-label="File browser example">
+				<input type="file" name="avatar" accept="image/*" style="background-color: transparent;border: 2px solid rgb(212, 212, 212);color: rgb(212, 212, 212);border-radius:
+					5px;padding: 8px;width: 50%;"  aria-label="File browser example">
 				<span class="file-custom"></span>
 			</center>
 			<br>
 			<hr>
-			<button style="margin-left: 111px; margin-right: 20px;" id="btn" type="submit"
-				class="btn-danger_nav_login"><i class="fas fa-pen-square"></i> Update
-				profile</button>
+			<button style="margin-left: 111px; margin-right: 20px;" id="btn" type="submit" class="btn-danger_nav_login">
+				<i class="fas fa-pen-square"></i>
+				Update profile
+			</button>
+
+
+		</section>
 	</form>
 	<a href="/change-password">
-		<button class="btn-danger_nav_login"><i class="fas fa-key"></i> Change
-			password</button>
+		<button class="btn-danger_nav_login">
+			<i class="fas fa-key"></i>
+			Change password
+		</button>
 	</a>
-
-</section>
-
 </section>
 <br>
 <section>

@@ -1,9 +1,11 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
-from . import db
+from werkzeug.utils import secure_filename
+from . import db, ALLOWED_EXTENSIONS
 from flask_login import login_user, login_required, logout_user, current_user
 import json
+import os
 
 auth = Blueprint('auth', __name__)
 
@@ -68,12 +70,31 @@ def sign_up():
     return render_template("sign_up.html", user=current_user)
 
 
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
 @auth.route('/edit-user', methods=['GET', 'POST'])
 def edit_user():
     if request.method == 'POST':
         email = request.form.get('email')
         first_name = request.form.get('firstName')
-        # avatar = request.form.get('avatar')
+
+        avatar = request.files['avatar']
+
+        # if avatar and allowed_file(avatar.filename):
+        #     url_prev = url_for(,current_user.picture)
+        #     if prev:
+        #         db.session.remove(prev)
+        #     fileName = secure_filename(avatar.filename)
+        #     mimetype = avatar.mimetype
+        #     img = Img(user_id=current_user.id, img=avatar.read(),
+        #               mimetype=mimetype, name=fileName)
+        #     db.session.add(img)
+        #     db.session.commit()
+        #     flash("Account has been successfully modified", category='success')
+
         user = User.query.filter_by(email=email).first()
         if user and user != current_user:
             flash('Email is assigned to another account', category='error')
@@ -87,6 +108,8 @@ def edit_user():
             current_user.email = email
             current_user.first_name = first_name
             db.session.commit()
+            flash("Account has been successfully modified", category='success')
+
         return redirect(url_for('views.home'))
     return render_template("edit_user.html", user=current_user)
 
@@ -102,6 +125,7 @@ def change_password():
                 current_user.password = generate_password_hash(
                     new_password, method='sha256')
                 db.session.commit()
+                flash("Password has been successfully changed", category='success')
                 return redirect(url_for('views.home'))
             else:
                 flash("Passwords don't match", category='error')
@@ -146,3 +170,28 @@ def add_admin():
             flash('Email not recognized', category='error')
 
     return render_template("add_admin.html", user=current_user)
+
+
+@auth.app_errorhandler(400)
+def page_not_found(e):
+    return render_template("400.html"), 400
+
+
+@auth.app_errorhandler(401)
+def page_not_found(e):
+    return render_template("401.html"), 401
+
+
+@auth.app_errorhandler(403)
+def page_not_found(e):
+    return render_template("403.html"), 403
+
+
+@auth.app_errorhandler(404)
+def page_not_found(e):
+    return render_template("404.html"), 404
+
+
+@auth.app_errorhandler(500)
+def page_not_found(e):
+    return render_template("500.html"), 500
