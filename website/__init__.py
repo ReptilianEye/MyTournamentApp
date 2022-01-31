@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, url_for
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
@@ -8,24 +8,17 @@ db = SQLAlchemy()
 DB_NAME = "database.db"  # nazwa bazy danych
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
-
-def page_not_found(e):
-    # note that we set the 404 status explicitly
-    return render_template('404.html'), 404
-
 def create_app():
     app = Flask(__name__)
-
-    UPLOAD_FOLDER = '/path/to/the/uploads'
-
 
     # secret key to things like cookie etc
     app.config['SECRET_KEY'] = 'kjabwdlajbal'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     
-
-    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+    # UPLOAD_FOLDER = "/Users/piotr/Programowanie/Github/FlaskWebApp/website/static/uploads"
+    # UPLOAD_FOLDER = url_for('uploads')
+    # app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
     app.config['TRAP_HTTP_EXCEPTIONS']=True
 

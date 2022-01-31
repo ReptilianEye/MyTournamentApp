@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import Blueprint, render_template, request, flash, redirect, url_for, current_app
 from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
@@ -81,18 +81,13 @@ def edit_user():
         email = request.form.get('email')
         first_name = request.form.get('firstName')
 
-        avatar = request.files['avatar']
-
+        # avatar = request.files['avatar']
         # if avatar and allowed_file(avatar.filename):
-        #     url_prev = url_for(,current_user.picture)
-        #     if prev:
-        #         db.session.remove(prev)
-        #     fileName = secure_filename(avatar.filename)
-        #     mimetype = avatar.mimetype
-        #     img = Img(user_id=current_user.id, img=avatar.read(),
-        #               mimetype=mimetype, name=fileName)
-        #     db.session.add(img)
-        #     db.session.commit()
+        #     # url_prev = url_for(,current_user.picture)
+        #     # if prev:
+        #     #     db.session.remove(prev)
+        #     # filename = secure_filename(avatar.filename)
+        #     avatar.save(os.path.join(current_app.config['UPLOAD_FOLDER'],avatar.filename))
         #     flash("Account has been successfully modified", category='success')
 
         user = User.query.filter_by(email=email).first()
