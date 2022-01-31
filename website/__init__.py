@@ -17,8 +17,9 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     
     # UPLOAD_FOLDER = "/Users/piotr/Programowanie/Github/FlaskWebApp/website/static/uploads"
-    # UPLOAD_FOLDER = url_for('uploads')
-    # app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+    UPLOAD_FOLDER = app.instance_path 
+
+    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
     app.config['TRAP_HTTP_EXCEPTIONS']=True
 

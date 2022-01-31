@@ -81,14 +81,14 @@ def edit_user():
         email = request.form.get('email')
         first_name = request.form.get('firstName')
 
-        # avatar = request.files['avatar']
-        # if avatar and allowed_file(avatar.filename):
-        #     # url_prev = url_for(,current_user.picture)
-        #     # if prev:
-        #     #     db.session.remove(prev)
-        #     # filename = secure_filename(avatar.filename)
-        #     avatar.save(os.path.join(current_app.config['UPLOAD_FOLDER'],avatar.filename))
-        #     flash("Account has been successfully modified", category='success')
+        avatar = request.files['avatar']
+        if avatar and allowed_file(avatar.filename):
+            # url_prev = url_for(,current_user.picture)
+            # if prev:
+            #     db.session.remove(prev)
+            # filename = secure_filename(avatar.filename)
+            avatar.save(os.path.join(current_app.config['UPLOAD_FOLDER'],avatar.filename))
+            flash("Account has been successfully modified", category='success')
 
         user = User.query.filter_by(email=email).first()
         if user and user != current_user:
