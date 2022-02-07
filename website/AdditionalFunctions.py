@@ -1,4 +1,5 @@
 import random
+import os
 from .models import Tournament
 
 pauza = "pauza"
@@ -289,3 +290,7 @@ def checkIfUserInTournaments(user,tournament):
         if user.first_name == opponent.name and user.email == opponent.email:
             return True
     return False
+
+
+def getAvatar(user):
+    return os.open(user.avatar)

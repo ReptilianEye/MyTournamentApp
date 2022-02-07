@@ -8,7 +8,8 @@ class User(db.Model, UserMixin):
     # 150 is maxLenght of string
     email = db.Column(db.String(150), unique=True)
     password = db.Column(db.String(150))
-    # picture = db.Column(db.Text, nullable=False)
+
+    avatar = db.Column(db.String(150))
 
     is_admin = db.Column(db.Boolean, default=False)
 

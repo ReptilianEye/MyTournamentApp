@@ -6,6 +6,7 @@ from . import db, ALLOWED_EXTENSIONS
 from flask_login import login_user, login_required, logout_user, current_user
 import json
 import os
+from .AdditionalFunctions import getAvatar
 
 auth = Blueprint('auth', __name__)
 
@@ -83,10 +84,17 @@ def edit_user():
 
         avatar = request.files['avatar']
         if avatar and allowed_file(avatar.filename):
-            # url_prev = url_for(,current_user.picture)
-            # if prev:
-            #     db.session.remove(prev)
-            # filename = secure_filename(avatar.filename)
+            prev = current_user.avatar
+            if prev:
+                os.remove(prev)
+            a = getAvatar(current_user) #TODO poprawić funkcje get avatar i znalezc funkcje która otwiera plik po nazwie z danego folderu
+            
+            filename = secure_filename(avatar.filename)
+            # ext = list(avatar.filename.split('.'))[-1]
+            
+            current_user.avatar = filename
+            db.session.commit()
+
             avatar.save(os.path.join(current_app.config['UPLOAD_FOLDER'],avatar.filename))
             flash("Account has been successfully modified", category='success')
 
