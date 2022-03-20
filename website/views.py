@@ -23,13 +23,8 @@ today = date.today()
 def home():
     return render_template("home.html", user=current_user)
 
-@views.route('/edit_user', methods=['GET', 'POST'])
-def edit_user():
-    return render_template("edit_user.html", user=current_user)
 
-@views.route('/change_password', methods=['GET', 'POST'])
-def change_password():
-    return render_template("change_password.html", user=current_user)
+
 
 
 @views.route('/video', methods=['GET', 'POST'])
