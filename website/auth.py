@@ -78,25 +78,31 @@ def allowed_file(filename):
 
 @auth.route('/edit-user', methods=['GET', 'POST'])
 def edit_user():
+
+
+    location = current_app.config['UPLOAD_FOLDER']
+    
     if request.method == 'POST':
         email = request.form.get('email')
         first_name = request.form.get('firstName')
 
         avatar = request.files['avatar']
         if avatar and allowed_file(avatar.filename):
-            prev = current_user.avatar
-            if prev:
+            prev = os.path.join(location, current_user.avatar)
+            if os.path.isfile(prev):
                 os.remove(prev)
-            a = getAvatar(current_user) #TODO poprawić funkcje get avatar i znalezc funkcje która otwiera plik po nazwie z danego folderu
             
             filename = secure_filename(avatar.filename)
             # ext = list(avatar.filename.split('.'))[-1]
             
-            current_user.avatar = filename
+            current_user.avatar = os.path.join(location,filename)
             db.session.commit()
 
-            avatar.save(os.path.join(current_app.config['UPLOAD_FOLDER'],avatar.filename))
+            avatar.save(os.path.join(location,avatar.filename))
             flash("Account has been successfully modified", category='success')
+            # TODO poprawić funkcje get avatar i znalezc funkcje która otwiera plik po nazwie z danego folderu
+            a = open(current_user.avatar)
+            # a = getAvatar(current_user)
 
         user = User.query.filter_by(email=email).first()
         if user and user != current_user:

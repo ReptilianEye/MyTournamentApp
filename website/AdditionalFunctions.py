@@ -293,4 +293,5 @@ def checkIfUserInTournaments(user,tournament):
 
 
 def getAvatar(user):
-    return os.open(user.avatar)
+    if user.avatar:
+        return os.open(user.avatar,os.O_RDWR)
