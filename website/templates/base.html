@@ -26,18 +26,6 @@
 
 <body>
 
-    <!-- <div class="preload">
-        <div class="circles-group">
-            <center><img src="../static/logo 31lo.png" width="200px" /></center>
-            <center>
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="circle"></div>
-            </center>
-        </div>
-    </div> -->
-
     <div class="wrapper">
         <i class="fas fa-cookie-bite fa-4x"></i>
         <div class="content">
@@ -67,10 +55,6 @@
     </script>
 
     <section>
-
-        <!-- ------ SNOW ------  -->
-        <div id="snow">
-
         </div>
         <button onclick="topFunction()" id="myBtn" title="Go to top">
             <i style="margin-top: 10px;" class="fas fa-sort-up fa-2x"></i>
@@ -130,10 +114,10 @@
                     <ul>
 
                         <div style="margin: 15px;">
-                            <div style="float: left; margin-left: 40px; margin-top: 5px;" class="profileThumb"><i
+                            <!-- <div style="float: left; margin-left: 40px; margin-top: 5px;" class="profileThumb"><i
                                     style="color: #20242a; border-radius: 20px;" class="fas fa-headset fa-3x"></i>
-                            </div>
-                            <h4 style="float: right; margin-top: 11px; margin-right: 45px;" class=" h4_main">
+                            </div> -->
+                            <h4 align="center" class=" h4_main">
                                 {{user.first_name}}</h4>
                         </div>
                         <h4 style="text-align: center; margin-bottom: -80px; margin-top: 20px;" class="h4_main_email">
@@ -236,84 +220,7 @@
                 document.body.scrollTop = 0;
                 document.documentElement.scrollTop = 0;
             }
-            // <!-- ------ Preload ------  -->
-            // setTimeout(function () {
-            //     $('#successMessage').fadeOut('fast');
-            // }, 30);  time in milliseconds
-            //  const preload = document.querySelector('.preload');
-            //  preload.classList.add('show-preloader');
-            //  window.addEventListener('load', () => {
-            //      setTimeout(() => {
-            //          preload.classList.remove('show-preloader');
-            //      }, 900);
-            //  });
-            // <!-- ------ SNOW ------  -->
-            document.addEventListener('DOMContentLoaded', function() {
-                var script = document.createElement('script');
-                script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
-                script.onload = function() {
-                    particlesJS("snow", {
-                        "particles": {
-                            "number": {
-                                "value": 50, // ilość śniegu
-                                "density": {
-                                    "enable": true,
-                                    "value_area": 2000 // area
-                                }
-                            },
-                            "color": {
-                                "value": "#ffffff"
-                            },
-                            "opacity": {
-                                "value": 1.0, // przezroczystość
-                                "random": false,
-                                "anim": {
-                                    "enable": false
-                                }
-                            },
-                            "size": {
-                                "value": 8, // wielkość
-                                "random": true, // random ( wielkość ) ( true )
-                                "anim": {
-                                    "enable": false
-                                }
-                            },
-                            "line_linked": {
-                                "enable": false
-                            },
-                            "move": {
-                                "enable": true,
-                                "speed": 2, // szybkośc opadania
-                                "direction": "bottom",
-                                "random": false,
-                                "straight": false,
-                                "out_mode": "out",
-                                "bounce": false,
-                                "attract": {
-                                    "enable": true,
-                                    "rotateX": 300,
-                                    "rotateY": 1200
-                                }
-                            }
-                        },
-                        "interactivity": {
-                            "events": {
-                                "onhover": {
-                                    "enable": false
-                                },
-                                "onclick": {
-                                    "enable": false
-                                },
-                                "resize": false
-                            }
-                        },
-                        "retina_detect": true
-                    });
-                }
-                document.head.append(script);
-            });
         </script>
-
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js "
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN "
             crossorigin="anonymous "></script>
