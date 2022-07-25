@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: '31LOTournmanets'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4DC4EB4C16CE47C2884C429AADE4BB37 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F9476F8D352A4DE4BE72B5168943E276 }}
