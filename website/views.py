@@ -24,9 +24,6 @@ def home():
     return render_template("home.html", user=current_user)
 
 
-
-
-
 @views.route('/video', methods=['GET', 'POST'])
 def video():
     tournaments = Tournament.query.filter_by(is_public=True).all()
